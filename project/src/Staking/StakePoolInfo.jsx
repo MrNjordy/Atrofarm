@@ -1,7 +1,7 @@
-import { Flex, HStack, Box, Center, Button, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, FormControl, FormLabel, Input, useNumberInput, Spinner, Skeleton } from "@chakra-ui/react"
-import { useAccount, useWaitForTransaction, useContractRead } from "wagmi";
+import { Flex, HStack, Box, Center, Button, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, FormControl, FormLabel, Input, useNumberInput, Spinner } from "@chakra-ui/react"
+import { useAccount, useWaitForTransaction } from "wagmi";
 import { writeContract, prepareWriteContract } from "wagmi/actions";
-import { masterContract } from "../../../data";
+import { masterContract, tokenAbi } from "../data";
 import { useState } from "react";
 
 export default function StakePoolInfo({
@@ -15,6 +15,9 @@ export default function StakePoolInfo({
     rewardsUsd,
     deposit,
     userBalance,
+    depositFee,
+    allowance,
+    address,
 }) {
 
 // ============================ HOOKS =============================================
@@ -24,6 +27,7 @@ export default function StakePoolInfo({
     const [withdrawInput, setWithdrawInput] = useState();
     const [depositTxData, setDepositTxData] = useState();
     const [withdrawTxData, setWithdrawTxData] = useState();
+    const [approvalTxData, setApprovalTxData] = useState();
     const [waitingApproval, setWaitingApproval] = useState(false)
 
             //============ MODAL HOOKS ================
@@ -49,7 +53,7 @@ export default function StakePoolInfo({
     const { getInputProps: withdrawInputProps, getIncrementButtonProps: withdrawIncrementButtonProps } = useNumberInput({
         step: userStaked,
         min:0,
-        precision: 2,
+        precision: 4,
         onChange: (e) => setWithdrawInput(e * 10**18),
     })
     const maxWithdraw = withdrawIncrementButtonProps();
@@ -90,6 +94,22 @@ export default function StakePoolInfo({
     const { data: withdrawWaitTx, isError: withdrawError, isLoading: withdrawLoading, isSuccess: withdrawSuccess } = useWaitForTransaction({
         hash: withdrawTxData,
     })
+
+    async function approval() {
+        setApprovalTxData('');
+        const config = await prepareWriteContract({
+            address: address,
+            abi: tokenAbi,
+            functionName: 'approve',
+            args: [import.meta.env.VITE_MASTER, 999999999999999*(10**18)],
+        })
+        const { hash } = await writeContract(config);
+        setApprovalTxData(hash); 
+    }
+    const { data: approvalWaitTx, isError: approvalError, isLoading: approvalLoading, isSuccess: approvalSuccess } = useWaitForTransaction({
+        hash: approvalTxData,
+    })
+
     async function claim() {
         await writeContract({
            ...masterContract,
@@ -99,12 +119,20 @@ export default function StakePoolInfo({
    }
 
     return(
-            <Box mt={5} border='2px'padding={2} width='full' borderRadius='2xl'>
-                <Center>
-                    <Flex mb="3">
+            <Box fontFamily='heading' mt={5} border='2px'padding={2} width='full' borderRadius='2xl' bgGradient='linear(to-bl, yellow.400, yellow.600)' fontWeight='semibold'>
+                <Center borderBottom='2px'>
+                    <Flex mb="3" fontSize='larger'>
                         {name}
                     </Flex>
                 </Center>
+                <HStack mb='3' mt={3}> 
+                    <Flex ml={1} mr='auto'>
+                        Deposit Fee: 
+                    </Flex>
+                    <Flex ml='auto' mr={1}>
+                        {depositFee}%
+                    </Flex>
+                </HStack>
                 <HStack mb='3'> 
                     <Flex ml={1} mr='auto'>
                         APR: 
@@ -118,14 +146,14 @@ export default function StakePoolInfo({
                         Deposited: 
                     </Flex>
                     <Flex ml='auto' mr={1} fontSize='large'>
-                        {userStaked}   
+                        {parseFloat(userStaked).toFixed(2)}   
                     </Flex>
                 </HStack> 
                 <Flex justify='right' mr={1} mb={3} mt={-2} fontSize='smaller' fontWeight='light'>
                     ${userStakedUsd}
                 </Flex>
                 <Center mb={3}>
-                    <Button mr={2} ml={2} isDisabled={!isConnected} onClick={onDepositOpen}>Deposit</Button>
+                    <Button mr={2} ml={2} bgColor='blackAlpha.800' color='wheat' _hover={{ bgColor: 'gray.600'}} isDisabled={!isConnected} onClick={onDepositOpen}>Deposit</Button>
                         <Modal isOpen={isDepositOpen} onClose={onDepositClose} isCentered>
                             <ModalOverlay />
                                 <ModalContent>
@@ -146,9 +174,12 @@ export default function StakePoolInfo({
                                     </ModalBody>
                                     <Center>
                                     <ModalFooter>
-                                            <Button isDisabled={userBalance==0 || depositInput==0} isLoading={depositLoading} onClick={deposit}>                                                                                                                  
-                                                {"Deposit" }                            
-                                            </Button>
+                                        {allowance == 0 || allowance < depositInput ? <Button mr={5} isLoading={approvalLoading} onClick={approval}>                                                                                                                  
+                                                                        {"Approve"} 
+                                                                    </Button> 
+                                                                  : <Button mr={5} isDisabled={userBalance==0 || depositInput==0} isLoading={depositLoading} onClick={deposit}>                                                                                                                  
+                                                                        {"Deposit" }                           
+                                                                    </Button> }
                                             <Modal isOpen={isProcessingOpen} onClose={onProcessingClose} isCentered>
                                                 <ModalOverlay>
                                                     <ModalContent border='1px'>
@@ -194,7 +225,7 @@ export default function StakePoolInfo({
                                     </Center>
                                 </ModalContent>
                         </Modal>
-                    <Button mr={2} ml={2} isDisabled={!isConnected} onClick={onWithdrawOpen}>Withdraw</Button>
+                    <Button mr={2} ml={2} bgColor='blackAlpha.800' color='wheat' _hover={{ bgColor: 'gray.600'}} isDisabled={!isConnected} onClick={onWithdrawOpen}>Withdraw</Button>
                         <Modal isOpen={isWithdrawOpen} onClose={onWithdrawClose} isCentered>
                             <ModalOverlay />
                                 <ModalContent>
@@ -254,7 +285,7 @@ export default function StakePoolInfo({
                 <Flex justify='right' mr={1} mb={3} mt={-2} fontSize='smaller' fontWeight='light'>
                     ${rewardsUsd}
                 </Flex>
-                <Button width='full' mb={5} onClick={claim}>Claim</Button>
+                <Button width='full' mb={5} bgColor='blackAlpha.800' color='wheat' _hover={{ bgColor: 'gray.600'}} isDisabled={!isConnected} onClick={claim}>Claim</Button>
                 <HStack>
                     <Flex ml={1} mr='auto'>
                         Pool TVL:

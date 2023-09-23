@@ -1,29 +1,41 @@
 import { useAccount } from "wagmi";
 import { useEffect, useState } from "react";
-import { Flex, Wrap, WrapItem, Spinner, Box, Center} from "@chakra-ui/react";
+import { Flex, Spinner, Box, Center, SimpleGrid} from "@chakra-ui/react";
 import StakePoolInfo from "./StakePoolInfo";
-import { fetchData } from "../FetchData";
+import { useContext } from "react";
+import { InfoContext } from "../App";
 
 function Staking() {
+    const allPools = useContext(InfoContext);
     const [isLoading, setIsLoading] =useState(true)
     const [poolsInfo, setPools] = useState([]);
     const { address } = useAccount();
 
     useEffect(() => {
-        async function getToken() {
-            const allPools = await fetchData();
-            const stakingPools = allPools.stakingPools;
+        function wait() {
+            if (!allPools) {
+              setTimeout(wait, 100)
+            } else {
+                const stakingPools = allPools.stakingPools;
+                setPools(stakingPools);
+                setIsLoading(false);
+            }
+          }
+          wait();
+        // async function getToken() {
+        //     const allPools = await fetchData();
+        //     const stakingPools = allPools.stakingPools;
 
-            setIsLoading(false)
-            setPools(stakingPools)
-        }   
-        getToken();
-    }, [address, poolsInfo]);
+        //     setIsLoading(false)
+        //     setPools(stakingPools)
+        // }   
+        // getToken();
+    }, [address, allPools]);
 
     return(
-        <Box>
-            <Center borderBottom='2px' borderBottomStyle='groove' ml={40} mr={40}>
-                <Flex fontSize='3xl' mt={5} paddingBottom={5}>
+        <Box minHeight='100vh'>
+            <Center fontWeight='bold' borderBottom='6px' borderBottomStyle='groove' borderColor='black' ml={40} mr={40}>
+                <Flex fontFamily='heading' fontSize={[17, 24, 30, 40]} mt={5} paddingBottom={5} bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text'>
                     Staking Pools
                 </Flex>
             </Center>
@@ -36,15 +48,13 @@ function Staking() {
                                 size='xl'
                                 ml='auto' mr='auto' mt={20} />
                             
-                            :   <Wrap ml='auto' mr='auto' mt={10}>
-                                    <WrapItem>          
+                            :   <SimpleGrid columns={[1, null, 3]} spacing={[null, 15, 20]} ml='auto' mr='auto' mt= {5} mb={10}>       
                                         {poolsInfo.map((item) => {
                                             return (
                                                 <StakePoolInfo key={item.name} {...item} />
                                             )
                                         })}
-                                    </WrapItem>
-                                </Wrap>
+                                </SimpleGrid>
                 }
             </Flex>
         </Box>       

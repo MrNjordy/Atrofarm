@@ -1,9 +1,6 @@
-import { fetchBlockNumber, fetchToken, readContract, writeContract, readContracts } from 'wagmi/actions'
+import { fetchBlockNumber, fetchToken, readContract, readContracts } from 'wagmi/actions'
 import { getAccount } from "wagmi/actions";
-import { tokenAbi, masterAbi, masterContract, lpAbi } from "../../data";
-import { etherPrice } from "./priceData";
-import { useAccount, useConnect } from "wagmi";
-import { useEffect, useState } from "react";
+import { tokenAbi, masterContract, lpAbi } from "./data";
 import axios from 'axios';
 
 export const fetchData = async () => {
@@ -13,7 +10,7 @@ export const fetchData = async () => {
 
     const currentBlock = await fetchBlockNumber();
     const currentBlockInt = parseInt(currentBlock.toString());
-    const blockPerYear = 5 * 60 * 24 * 365;
+    const blockPerYear = 5 * 60 * 24 * 365; //block per minute, hour, day, year
 //===========================================
 const data = await readContracts({
     contracts: [
@@ -38,45 +35,41 @@ const data = await readContracts({
      {
         ...masterContract,
         functionName: 'totalAllocPoint',
+     },
+     {//Getting wPLS / tDAI reserves to calculate Pulse price
+        address: import.meta.env.VITE_PULSE_LP,
+        abi: lpAbi,
+        functionName: 'getReserves',
      }
     ]
 });
-const nativeTokenPriceUsd = (parseInt(data[0].result[1].toString())/parseInt(data[0].result[0].toString()) * etherPrice).toString();
+
+const pulsePrice = parseInt(data[5].result[1].toString())/parseInt(data[5].result[0].toString())
+
+const nativeTokenPriceUsd = (parseInt(data[0].result[1].toString())/parseInt(data[0].result[0].toString()) * pulsePrice).toString();
+const nativeToken = await fetchToken({ address: import.meta.env.VITE_TOKEN })
+const nativeTokenSupply = nativeToken.totalSupply.formatted;
+
 const numberOfPool = parseInt((data[1].result).toString());
 const tokenMintedPerBlock = data[2].result;
 const multiplier = data[3].result;
 const totalAllocPoint = data[4].result;
-//============================================
-    // const nativeTokenPriceEth = await readContract({
-    //     address: import.meta.env.VITE_LP,
-    //     abi: lpAbi,
-    //     functionName: 'getReserves',
-    // })
-    // const nativeTokenPriceUsd = (parseInt(nativeTokenPriceEth[1].toString())/parseInt(nativeTokenPriceEth[0].toString()) * etherPrice).toString();
-    // const farmNumber = await readContract({
-    //     ...masterContract,
-    //     functionName: 'poolLength',
-    // })
-    // const numberOfPool = parseInt(farmNumber.toString());
 
-    // const tokenMintedPerBlock = await readContract({
-    //     ...masterContract,
-    //     functionName: 'rewardsPerBlock',
-    // })
-    // const multiplier = await readContract({
-    //     ...masterContract,
-    //     functionName: 'getMultiplier',
-    //     args: [currentBlockInt-1, currentBlockInt]
-    // })
-    // const totalAllocPoint = await readContract({
-    //     ...masterContract,
-    //     functionName: 'totalAllocPoint',
-    // })
+let generalInfo = {};
+generalInfo.pulsePrice = pulsePrice;
+generalInfo.nativeTokenPriceUsd = nativeTokenPriceUsd;
+generalInfo.nativeTokenSupply = nativeTokenSupply;
+
 
 //========================= Fill all pools with the data collected ========================
+    
     let allPools = {}
+    let general = [];
     let farmingPools = [];
     let stakingPools = [];
+
+    general.push(generalInfo);
+
     for( let i=0; i<numberOfPool; i++) {
         const allInfo = {}; //object which will contain all data for each pool
 
@@ -85,27 +78,26 @@ const totalAllocPoint = data[4].result;
             functionName: 'poolInfo',
             args: [i]
         })
-        //Get the number of tokens staked in pool
-        // const totalStaked = await readContract({
-        //     address: poolInfo[0],
-        //     abi: tokenAbi,
-        //     functionName: 'balanceOf',
-        //     args: [import.meta.env.VITE_MASTER]
-        // })
 
         const tokenInfo = await fetchToken({ address: poolInfo[0]})
+        const depositFee = parseInt(poolInfo[4].toString()) /100;
 
         const poolRewardPerBlock = parseInt(tokenMintedPerBlock.toString()) * parseInt(multiplier.toString()) * parseInt(poolInfo[1].toString()) / parseInt(totalAllocPoint.toString());
         const poolRewardPerYear = poolRewardPerBlock * blockPerYear;
         const poolRewardPerYearUsd = (poolRewardPerYear / 10**18) * nativeTokenPriceUsd;
 
-        if(tokenInfo.name == 'Uniswap V2') {    //farm token is LP token
+        if(tokenInfo.symbol == 'PLP') {    //farm token is LP token
             const data = await readContracts({
                 contracts: [
                     {
                         address: poolInfo[0],
                         abi: lpAbi,
                         functionName:'token0',
+                    },
+                    {
+                        address: poolInfo[0],
+                        abi: lpAbi,
+                        functionName:'token1',
                     },
                     {
                         address: import.meta.env.VITE_LP,
@@ -122,19 +114,28 @@ const totalAllocPoint = data[4].result;
                         abi: tokenAbi,
                         functionName: 'balanceOf',
                         args: [import.meta.env.VITE_MASTER]
-                    }
+                    },
+                    {
+                        address: poolInfo[0],
+                        abi: lpAbi,
+                        functionName:'allowance',
+                        args: [address, import.meta.env.VITE_MASTER],
+                    },
                 ]
             });
-            const lpTokensName = data[0].result
-            const lpTotalSupply = data[1].result;
-            const getLpReserves = data[2].result;
-            const totalStaked = data[3].result;
+            const lpToken0Name = data[0].result
+            const lpToken1Name = data[1].result
+            const lpTotalSupply = data[2].result;
+            const getLpReserves = data[3].result;
+            const totalStaked = data[4].result;
+            const allowance = data[5].result;
             
-            const token1Name = await fetchToken({ address: lpTokensName })
-            const lpName = token1Name.symbol + '-wETH LP'
+            const token0Name = await fetchToken({ address: lpToken0Name })
+            const token1Name = await fetchToken({ address: lpToken1Name })
+            const lpName = token0Name.symbol + "-" + token1Name.symbol + " LP"
 
             const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
-            const lpPriceUsd = (lpPriceEth * etherPrice).toString();
+            const lpPriceUsd = (lpPriceEth * pulsePrice).toString();
 
             const totalStakedUsd = (parseInt(totalStaked.toString()) / 10**18) * lpPriceUsd;
 
@@ -171,21 +172,23 @@ const totalAllocPoint = data[4].result;
                 const userStaked = parseInt(userInfo[0].toString()) / 10**18;
                 const userStakedUsd = userStaked * lpPriceUsd;
                 const rewardPerShare = poolRewardPerYear / parseInt(totalStaked.toString());
-                const rewardPerShareUsd = rewardPerShare * etherPrice;
+                const rewardPerShareUsd = rewardPerShare * pulsePrice;
 
                 const userShare = parseInt(userStaked.toString()) / (parseInt(totalStaked.toString())/10**18);
                 const userShareUsdPerYear = rewardPerShareUsd * userShare;
 
                 allInfo.id = i;
                 allInfo.name = lpName;
-                allInfo.userStaked = userStaked.toFixed(2);
+                allInfo.userStaked = userStaked;
                 allInfo.userStakedUsd = userStakedUsd.toFixed(2);
                 allInfo.totalStakedUsd = totalStakedUsd.toFixed(2);
                 allInfo.apr = parseInt(Apr);
                 allInfo.rewards = pendingRewards;
                 allInfo.rewardsUsd = pendingRewardsUsd;
                 allInfo.userBalance = (parseInt(userBalance.toString()) / 10**18);
-
+                allInfo.allowance = allowance;
+                allInfo.address = poolInfo[0];
+                allInfo.depositFee = depositFee;
             } else {    //user is not connected
                 allInfo.name = lpName;
                 allInfo.userStaked = '0';
@@ -194,6 +197,7 @@ const totalAllocPoint = data[4].result;
                 allInfo.apr = parseInt(Apr);
                 allInfo.rewards = '0';
                 allInfo.rewardsUsd = '0';
+                allInfo.depositFee = depositFee;
             }
             farmingPools.push(allInfo) 
 
@@ -211,11 +215,18 @@ const totalAllocPoint = data[4].result;
                         abi: tokenAbi,
                         functionName: 'balanceOf',
                         args: [import.meta.env.VITE_MASTER]
-                    }
+                    },
+                    {
+                        address: poolInfo[0],
+                        abi: lpAbi,
+                        functionName:'allowance',
+                        args: [address, import.meta.env.VITE_MASTER],
+                    },
                 ]
             })
             const tokenPriceEth = data[0].result;
             const totalStaked = data[1].result;
+            const allowance = data[2].result;
             //This one would be more generic as long as tokens are paired with the same token eg:wETH
             //Should find a way to find a pair reliably
             // const tokenPair = await readContract({
@@ -224,9 +235,9 @@ const totalAllocPoint = data[4].result;
             //     functionName: 'getPair',
             //     args: [poolInfo[0], import.meta.env.VITE_WETH]
             // });
-            const apiCall = await axios.get(`https://api.dexscreener.com/latest/dex/tokens/${poolInfo[0]}`)
+            //const apiCall = await axios.get(`https://api.dexscreener.com/latest/dex/tokens/${poolInfo[0]}`)
 
-            const tokenPriceUsd = (parseInt(tokenPriceEth[1].toString())/parseInt(tokenPriceEth[0].toString()) * etherPrice).toString();
+            const tokenPriceUsd = (parseInt(tokenPriceEth[1].toString())/parseInt(tokenPriceEth[0].toString()) * pulsePrice).toString();
             const totalStakedUsd = (parseInt(totalStaked.toString()) / 10**18) * tokenPriceUsd;
 
             const Apr = poolRewardPerYearUsd / totalStakedUsd * 100
@@ -264,19 +275,24 @@ const totalAllocPoint = data[4].result;
                 const userStakedUsd = userStaked * parseFloat(tokenPriceUsd);
 
                 const rewardPerShare = poolRewardPerYear / parseInt(totalStaked.toString());
-                const rewardPerShareUsd = rewardPerShare * etherPrice;
+                const rewardPerShareUsd = rewardPerShare * pulsePrice;
                 const userShare = parseInt(userStaked.toString()) / (parseInt(totalStaked.toString())/ 10**18);
                 const userShareUsdPerYear = rewardPerShareUsd * userShare;
         
                 allInfo.id = i;
                 allInfo.name = tokenInfo.symbol
-                allInfo.userStaked = userStaked.toFixed(2)
+                allInfo.userStaked = userStaked;
                 allInfo.userStakedUsd = userStakedUsd.toFixed(2)
                 allInfo.totalStakedUsd = totalStakedUsd.toFixed(2)
                 allInfo.apr = parseInt(Apr);
                 allInfo.rewards = pendingRewards.toFixed(2);
                 allInfo.rewardsUsd = pendingRewardsUsd.toFixed(2);
                 allInfo.userBalance = (parseInt(userBalance.toString()) / 10**18)
+                allInfo.allowance = allowance;
+                allInfo.address = poolInfo[0];
+                allInfo.depositFee = depositFee;
+                allInfo.pulsePrice = pulsePrice;
+                allInfo.nativeTokenPriceUsd = nativeTokenPriceUsd;
 
             } else {    //user not connected
                 allInfo.name = tokenInfo.symbol;
@@ -286,13 +302,16 @@ const totalAllocPoint = data[4].result;
                 allInfo.apr = parseInt(Apr);
                 allInfo.rewards = '0';
                 allInfo.rewardsUsd = '0';
+                allInfo.depositFee = depositFee;
+                allInfo.pulsePrice = pulsePrice;
+                allInfo.nativeTokenPriceUsd = nativeTokenPriceUsd;
             }
             stakingPools.push(allInfo);
         } 
     }   
+    allPools.generalInfo = general;
     allPools.farmingPools = farmingPools;
     allPools.stakingPools = stakingPools;
-    console.log("ALL DONE")
 
     return allPools
 }

@@ -97,7 +97,7 @@ function Home() {
                         Where degens get rewarded for supporting the Atropa ecosystem
                     </Text>
                 </VStack>
-                <Box  bgGradient='linear(to-bl, yellow.400, yellow.600)' ml='auto' mr='auto' mt='40px' border='2px' padding={3} width={[150, 250, 350, 450]} borderRadius='2xl' fontSize={[11, 14, 17, 20]} fontWeight='bold'>
+                <Box  bgGradient='linear(to-bl, yellow.400, yellow.600)' ml='auto' mr='auto' mt='40px' border='2px' padding={3} width={[150, 250, 350, 450]} borderRadius='2xl' fontSize={[7, 15, 20, 25]} fontWeight='bold'>
                         <HStack mb={10}>
                             <Flex fontFamily='heading' ml={1} mr='auto'>
                                 $Atrofa:
@@ -125,7 +125,7 @@ function Home() {
                         </Flex>
                     </VStack>
                 </Box>
-                <Box ml='auto' mr='auto' mt={10} bgGradient='linear(to-bl, yellow.400, yellow.600)' border='2px'padding={3} width={[150, 250, 350, 450]} borderRadius='2xl' fontSize={[11, 14, 17, 20]} fontWeight='bold'>
+                <Box ml='auto' mr='auto' mt={10} bgGradient='linear(to-bl, yellow.400, yellow.600)' border='2px'padding={3} width={[150, 250, 350, 450]} borderRadius='2xl' fontSize={[7, 15, 20, 25]} fontWeight='bold'>
                     <HStack >
                         <Flex fontFamily='heading' ml={1} mr='auto'>
                             Your rewards: 
@@ -140,7 +140,7 @@ function Home() {
                         </Flex>
                     </HStack>
                         <Center>
-                            <Button width={[35, 75, 100, 150]} fontSize={[9, 11, 13, 15]} bgColor='blackAlpha.800' color='wheat' _hover={{ bgColor: 'gray.600'}}>
+                            <Button width={[35, 75, 100, 150]} fontSize={[7, 11, 13, 15]} bgColor='blackAlpha.800' color='wheat' _hover={{ bgColor: 'gray.600'}}>
                                 Claim All
                             </Button>
                         </Center> 

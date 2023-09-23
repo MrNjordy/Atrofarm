@@ -97,38 +97,7 @@ function Home() {
                         Where degens get rewarded for supporting the Atropa ecosystem
                     </Text>
                 </VStack>
-             <Box fontFamily='heading' ml='auto' mr='auto' mt={20} border='2px' padding={2} width={[300, 500, 700, 900]} borderRadius='2xl' bgGradient='linear(to-bl, yellow.400, yellow.600)'>
-                <VStack fontSize={[7, 15, 20, 25]} fontWeight='bold'>
-                    <Flex fontFamily='heading' ml='auto' mr='auto'>
-                        Total Value Locked accross the protocol:
-                    </Flex>
-                    <Flex ml='auto' mr='auto'>
-                     ${tvl}
-                    </Flex>
-                </VStack>
-             </Box>
-                <HStack fontFamily='heading' mt={20}>
-                    <Box ml='auto' bgGradient='linear(to-bl, yellow.400, yellow.600)' border='2px'padding={3} width={[150, 250, 350, 450]} borderRadius='2xl' fontSize={[11, 14, 17, 20]} fontWeight='bold'>
-                        <HStack >
-                            <Flex fontFamily='heading' ml={1} mr='auto'>
-                                Your rewards: 
-                            </Flex>
-                            <Flex ml='auto' mr={1}>
-                                {totalRewards}
-                            </Flex>
-                        </HStack>
-                        <HStack mb={2}>
-                            <Flex ml='auto' mr={1} fontSize='smaller' fontWeight='light'>
-                                ${totalRewardsUsd}
-                            </Flex>
-                        </HStack>
-                            <Center>
-                                <Button width={[35, 75, 100, 150]} fontSize={[9, 11, 13, 15]} bgColor='blackAlpha.800' color='wheat' _hover={{ bgColor: 'gray.600'}}>
-                                    Claim All
-                                </Button>
-                            </Center> 
-                    </Box>
-                    <Box  bgGradient='linear(to-bl, yellow.400, yellow.600)' mr='auto' border='2px' padding={3} width={[150, 250, 350, 450]} borderRadius='2xl' fontSize={[11, 14, 17, 20]} fontWeight='bold'>
+                <Box  bgGradient='linear(to-bl, yellow.400, yellow.600)' ml='auto' mr='auto' mt='40px' border='2px' padding={3} width={[150, 250, 350, 450]} borderRadius='2xl' fontSize={[11, 14, 17, 20]} fontWeight='bold'>
                         <HStack mb={10}>
                             <Flex fontFamily='heading' ml={1} mr='auto'>
                                 $Atrofa:
@@ -145,8 +114,37 @@ function Home() {
                                 ${marketCap}
                             </Flex>
                         </HStack>
-                    </Box>
-                </HStack>     
+                </Box>
+                <Box fontFamily='heading' ml='auto' mr='auto' mt={10} border='2px' padding={2} width={[300, 500, 700, 900]} borderRadius='2xl' bgGradient='linear(to-bl, yellow.400, yellow.600)'>
+                    <VStack fontSize={[7, 15, 20, 25]} fontWeight='bold'>
+                        <Flex fontFamily='heading' ml='auto' mr='auto'>
+                            Total Value Locked accross the protocol:
+                        </Flex>
+                        <Flex ml='auto' mr='auto'>
+                        ${tvl}
+                        </Flex>
+                    </VStack>
+                </Box>
+                <Box ml='auto' mr='auto' mt={10} bgGradient='linear(to-bl, yellow.400, yellow.600)' border='2px'padding={3} width={[150, 250, 350, 450]} borderRadius='2xl' fontSize={[11, 14, 17, 20]} fontWeight='bold'>
+                    <HStack >
+                        <Flex fontFamily='heading' ml={1} mr='auto'>
+                            Your rewards: 
+                        </Flex>
+                        <Flex ml='auto' mr={1}>
+                            {totalRewards}
+                        </Flex>
+                    </HStack>
+                    <HStack mb={2}>
+                        <Flex ml='auto' mr={1} fontSize='smaller' fontWeight='light'>
+                            ${totalRewardsUsd}
+                        </Flex>
+                    </HStack>
+                        <Center>
+                            <Button width={[35, 75, 100, 150]} fontSize={[9, 11, 13, 15]} bgColor='blackAlpha.800' color='wheat' _hover={{ bgColor: 'gray.600'}}>
+                                Claim All
+                            </Button>
+                        </Center> 
+                </Box>  
              </Box>
         ) 
 }

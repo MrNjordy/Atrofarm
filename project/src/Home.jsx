@@ -140,7 +140,7 @@ function Home() {
                         </Flex>
                     </HStack>
                         <Center>
-                            <Button width={[35, 75, 100, 150]} fontSize={[7, 11, 13, 15]} bgColor='blackAlpha.800' color='wheat' _hover={{ bgColor: 'gray.600'}}>
+                            <Button width={[35, 75, 100, 150]} height={[21,25,29,34]} fontSize={[7, 11, 13, 15]} bgColor='blackAlpha.800' color='wheat' _hover={{ bgColor: 'gray.600'}}>
                                 Claim All
                             </Button>
                         </Center> 

@@ -93,7 +93,7 @@ function Home() {
                         Welcome to Atrofarm
                         </Text>
                     </Flex >
-                    <Text ml='auto' mr='auto' fontSize={[7, 15, 20, 25]} fontFamily='fantasy' fontWeight='semibold' bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text'>
+                    <Text ml='auto' mr='auto' fontSize={[null, 15, 20, 25]} fontFamily='fantasy' fontWeight='semibold' bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text'>
                         Where degens get rewarded for supporting the Atropa ecosystem
                     </Text>
                 </VStack>
@@ -115,7 +115,7 @@ function Home() {
                             </Flex>
                         </HStack>
                 </Box>
-                <Box fontFamily='heading' ml='auto' mr='auto' mt={10} border='2px' padding={2} width={[300, 500, 700, 900]} borderRadius='2xl' bgGradient='linear(to-bl, yellow.400, yellow.600)'>
+                <Box fontFamily='heading' ml='auto' mr='auto' mt={10} border='2px' padding={2} width={[null, 500, 700, 900]} borderRadius='2xl' bgGradient='linear(to-bl, yellow.400, yellow.600)'>
                     <VStack fontSize={[7, 15, 20, 25]} fontWeight='bold'>
                         <Flex fontFamily='heading' ml='auto' mr='auto'>
                             Total Value Locked accross the protocol:

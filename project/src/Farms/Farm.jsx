@@ -34,9 +34,9 @@ function Farm() {
 
 return(
     <Box minHeight='100vh'>
-        <Center fontWeight='bold' borderBottom='6px' borderBottomStyle='groove' borderColor='black' ml={40} mr={40}>
+        <Center fontWeight='bold' borderBottom='6px' borderBottomStyle='groove' borderColor='black' ml={[20, null, null, 40]} mr={[20, null, null, 40]}>
             <Flex fontSize={[17, 24, 30, 40]} mt={5} paddingBottom={5}>
-                <Text ml='auto' mr='auto' bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text' fontFamily='heading' >
+                <Text bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text' fontFamily='heading' >
                 Farming Pools
                 </Text>
             </Flex>

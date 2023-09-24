@@ -89,10 +89,13 @@ function Home() {
             <Box minHeight='100vh'>
                 <VStack>
                     <Box width={[null, 250, 350, 700]} mt={[5, null, null, 10]} padding={5} fontWeight='bold' border='4px' borderRadius='2xl' bgGradient='linear(to-bl, yellow.400, yellow.600)' >
-                        <Text ml='auto' mr='auto' fontFamily='heading' fontSize={[null, 20, 30, 40]}>
-                        Welcome to Atrofarm
-                        </Text>
+                        <Center>
+                            <Text fontFamily='heading' fontSize={[null, 20, 30, 40]}>
+                                Welcome to Atrofarm
+                            </Text>
+                        </Center>
                     </Box >
+                    
                     <Text ml='auto' mr='auto' fontSize={[11, 15, 20, 25]} fontFamily='fantasy' fontWeight='semibold' bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text'>
                         Where degens get rewarded for supporting the Atropa ecosystem
                     </Text>

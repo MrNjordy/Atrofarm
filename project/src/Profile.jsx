@@ -40,7 +40,7 @@ function Profile() {
     // }, [address, allPools])
     // console.log(allPools)
     return (
-        <Flex paddingBottom={3} bgGradient='linear(to-b, gray.400, gray.700)' color='gray.800' fontWeight='bold' fontSize={[null, 14, 17, 20]}>
+        <Flex paddingBottom={3} bgGradient='linear(to-b, gray.400, gray.700)' color='gray.800' fontWeight='bold' fontSize={[11, 14, 17, 20]}>
             <HStack ml={[5, null, null, 10]} spacing={[5, null, null, 20]} height={45} mr={2}>
                 <Flex>
                     <RouteLink to='/' >Home</RouteLink>

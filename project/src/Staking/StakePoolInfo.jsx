@@ -1,4 +1,4 @@
-import { Flex, HStack, Box, Center, Button, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, FormControl, FormLabel, Input, useNumberInput, Spinner } from "@chakra-ui/react"
+import { Flex, HStack, Box, Center, Button, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, FormControl, FormLabel, Input, useNumberInput, Spinner, Text} from "@chakra-ui/react"
 import { useAccount, useWaitForTransaction } from "wagmi";
 import { writeContract, prepareWriteContract } from "wagmi/actions";
 import { masterContract, tokenAbi } from "../data";
@@ -37,10 +37,10 @@ export default function StakePoolInfo({
     
             //============ DEPOSIT FORM HOOK (INPUT NUMBER AND MAX BUTTON) ==========
     const { getInputProps: depositInputProps, getIncrementButtonProps: depositIncrementButtonProps } = useNumberInput({
+        defaultValue:0,
         step: userBalance,
         min:0,
         max: userBalance,
-        precision: 4,
         onChange: (e) => setDepositInput(e * 10**18),
     })
     const maxDeposit = depositIncrementButtonProps();
@@ -51,9 +51,10 @@ export default function StakePoolInfo({
 
         //============ WITHDRAWAL FORM HOOK (INPUT NUMBER AND MAX BUTTON) ==========
     const { getInputProps: withdrawInputProps, getIncrementButtonProps: withdrawIncrementButtonProps } = useNumberInput({
+        defaultValue:0,
         step: userStaked,
         min:0,
-        precision: 4,
+        max: userStaked,
         onChange: (e) => setWithdrawInput(e * 10**18),
     })
     const maxWithdraw = withdrawIncrementButtonProps();
@@ -156,22 +157,28 @@ export default function StakePoolInfo({
                     <Button mr={2} ml={2} bgColor='blackAlpha.800' color='wheat' _hover={{ bgColor: 'gray.600'}} isDisabled={!isConnected} onClick={onDepositOpen}>Deposit</Button>
                         <Modal isOpen={isDepositOpen} onClose={onDepositClose} isCentered>
                             <ModalOverlay />
-                                <ModalContent>
-                                    <ModalHeader mb={1} borderBottom='1px'>
-                                        Deposit {name}
+                                <ModalContent bgGradient='linear(to-b, gray.700, gray.900)'>
+                                    <ModalHeader mb={1} borderBottom='1px' borderColor='yellow.600'>
+                                        <Text bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text' >
+                                            Deposit {name}
+                                        </Text>
                                     </ModalHeader>
                                         <ModalCloseButton />
-                                    <ModalBody>
-                                        <FormControl>
-                                            <FormLabel fontSize='small' mt={2}>
-                                                <HStack>
-                                                    <Flex ml={1} mr='auto'>Balance: {userBalance} {name}</Flex>
-                                                    <Button {...maxDeposit} onClick={setMaxDeposit} size='xs'>MAX</Button>
-                                                </HStack>
-                                            </FormLabel>
-                                            <Input {...inputDeposit} />
-                                        </FormControl>
-                                    </ModalBody>
+                                        <ModalBody>
+                                            <FormControl>
+                                                <FormLabel fontSize='small' mt={2}>
+                                                    <HStack>
+                                                        <Flex ml={1} mr='auto'>
+                                                            <Text bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text' >
+                                                                Balance: {userBalance} {name}
+                                                            </Text>
+                                                        </Flex>
+                                                        <Button {...maxDeposit} onClick={setMaxDeposit} size='xs'>MAX</Button>
+                                                    </HStack>
+                                                </FormLabel>
+                                                <Input {...inputDeposit} bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text' focusBorderColor='yellow.600' color='yellow.500' />
+                                            </FormControl>
+                                        </ModalBody>
                                     <Center>
                                     <ModalFooter>
                                         {allowance == 0 || allowance < depositInput ? <Button mr={5} isLoading={approvalLoading} onClick={approval}>                                                                                                                  
@@ -228,20 +235,26 @@ export default function StakePoolInfo({
                     <Button mr={2} ml={2} bgColor='blackAlpha.800' color='wheat' _hover={{ bgColor: 'gray.600'}} isDisabled={!isConnected} onClick={onWithdrawOpen}>Withdraw</Button>
                         <Modal isOpen={isWithdrawOpen} onClose={onWithdrawClose} isCentered>
                             <ModalOverlay />
-                                <ModalContent>
-                                    <ModalHeader mb={1} borderBottom='1px'>
-                                        Withdraw {name}
+                                <ModalContent bgGradient='linear(to-b, gray.700, gray.900)'>
+                                    <ModalHeader mb={1} borderBottom='1px' borderColor='yellow.600'>
+                                        <Text bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text' >
+                                            Withdraw {name}
+                                        </Text>
                                     </ModalHeader>
                                     <ModalCloseButton />
                                     <ModalBody>
                                         <FormControl>
                                             <FormLabel fontSize='small' mt={2}>
                                                 <HStack>
-                                                    <Flex ml={1} mr='auto'>Total Staked: {userStaked} {name}</Flex>
+                                                    <Flex ml={1} mr='auto'>
+                                                        <Text bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text' >
+                                                            Total Staked: {userStaked} {name}
+                                                        </Text>
+                                                    </Flex>
                                                     <Button {...maxWithdraw} onClick={setMaxWithdraw} size='xs'>MAX</Button>
                                                 </HStack>
                                             </FormLabel>
-                                            <Input {...inputWithdraw} />
+                                            <Input {...inputWithdraw} bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text' focusBorderColor='yellow.600' color='yellow.500' />
                                         </FormControl>
                                     </ModalBody>
                                     <Center>

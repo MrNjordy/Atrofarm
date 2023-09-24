@@ -175,7 +175,7 @@ export default function FarmPoolInfo({
                                                     <Button {...maxDeposit} onClick={setMaxDeposit} size='xs'>MAX</Button>
                                                 </HStack>
                                             </FormLabel>
-                                            <Input {...inputDeposit} bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text'  />
+                                            <Input {...inputDeposit} bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text' focusBorderColor='yellow.600' color='yellow.500' />
                                         </FormControl>
                                     </ModalBody>
                                     <Center>
@@ -253,7 +253,7 @@ export default function FarmPoolInfo({
                                                     <Button {...maxWithdraw} onClick={setMaxWithdraw} size='xs'>MAX</Button>
                                                 </HStack>
                                             </FormLabel>
-                                            <Input {...inputWithdraw} bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text' />
+                                            <Input {...inputWithdraw} bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text' focusBorderColor='yellow.600' color='yellow.500' />
                                         </FormControl>
                                     </ModalBody>
                                     <Center>

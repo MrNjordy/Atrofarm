@@ -98,7 +98,7 @@ function Home() {
                     </Text>
                 </VStack>
                 <Box  bgGradient='linear(to-bl, yellow.400, yellow.600)' ml='auto' mr='auto' mt='40px' border='2px' padding={3} width={[150, 250, 350, 450]} borderRadius='2xl' fontSize={[7, 15, 20, 25]} fontWeight='bold'>
-                        <HStack mb={10}>
+                        <HStack mb={5}>
                             <Flex fontFamily='heading' ml={1} mr='auto'>
                                 $Atrofa:
                             </Flex>

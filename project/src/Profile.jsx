@@ -65,7 +65,7 @@ function Profile() {
                     ${pulsePrice}
                     </Flex>
                 </Flex>
-                <Button fontSize={[8, 11, 14, 17]} mt={2} bgGradient='linear(to-b, gray.700, gray.900)' color='wheat' onClick={() => open()}> 
+                <Button fontSize={[8, 11, 14, 17]} height={[null,31,null,42]} paddingTop={2} paddingBottom={2} mt={2} bgGradient='linear(to-b, gray.700, gray.900)' color='wheat' onClick={() => open()}> 
                     {isConnected ? address.substring(0,7) + '...' : "Connect" }
                 </Button>
             </HStack>

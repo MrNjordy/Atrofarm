@@ -93,11 +93,11 @@ function Home() {
                         Welcome to Atrofarm
                         </Text>
                     </Flex >
-                    <Text ml='auto' mr='auto' fontSize={[null, 15, 20, 25]} fontFamily='fantasy' fontWeight='semibold' bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text'>
+                    <Text ml='auto' mr='auto' fontSize={[9, 15, 20, 25]} fontFamily='fantasy' fontWeight='semibold' bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text'>
                         Where degens get rewarded for supporting the Atropa ecosystem
                     </Text>
                 </VStack>
-                <Box  bgGradient='linear(to-bl, yellow.400, yellow.600)' ml='auto' mr='auto' mt='40px' border='2px' padding={3} width={[null, 250, 350, 450]} borderRadius='2xl' fontSize={[7, 15, 20, 25]} fontWeight='bold'>
+                <Box  bgGradient='linear(to-bl, yellow.400, yellow.600)' ml='auto' mr='auto' mt='40px' border='2px' padding={3} width={[null, 250, 350, 450]} borderRadius='2xl' fontSize={[null, 15, 20, 25]} fontWeight='bold'>
                         <HStack mb={5}>
                             <Flex fontFamily='heading' ml={1} mr='auto'>
                                 $Atrofa:
@@ -116,7 +116,7 @@ function Home() {
                         </HStack>
                 </Box>
                 <Box fontFamily='heading' ml='auto' mr='auto' mt={10} border='2px' padding={2} width={[null, 500, 700, 900]} borderRadius='2xl' bgGradient='linear(to-bl, yellow.400, yellow.600)'>
-                    <VStack fontSize={[7, 15, 20, 25]} fontWeight='bold'>
+                    <VStack fontSize={[null, 15, 20, 25]} fontWeight='bold'>
                         <Flex fontFamily='heading' ml='auto' mr='auto'>
                             Total Value Locked accross the protocol:
                         </Flex>

@@ -88,7 +88,7 @@ function Home() {
          return(
             <Box minHeight='100vh'>
                 <VStack>
-                    <Flex width={[null, 400, 600, 700]} mt={10} padding={5} fontWeight='bold' border='4px' borderRadius='2xl' bgGradient='linear(to-bl, yellow.400, yellow.600)' >
+                    <Flex width={[null, 500, 600, 700]} mt={10} padding={5} fontWeight='bold' border='4px' borderRadius='2xl' bgGradient='linear(to-bl, yellow.400, yellow.600)' >
                         <Text ml='auto' mr='auto' fontFamily='heading' fontSize={[null, 20, 30, 40]}>
                         Welcome to Atrofarm
                         </Text>
@@ -140,7 +140,7 @@ function Home() {
                         </Flex>
                     </HStack>
                         <Center>
-                            <Button width={[null, 75, 100, 150]} height={[null,25,29,34]} fontSize={[null, 11, 13, 15]} bgColor='blackAlpha.800' color='wheat' _hover={{ bgColor: 'gray.600'}}>
+                            <Button width={[null, 75, 100, 150]} height={[null,null,29,34]} fontSize={[null, 11, 13, 15]} bgColor='blackAlpha.800' color='wheat' _hover={{ bgColor: 'gray.600'}}>
                                 Claim All
                             </Button>
                         </Center> 

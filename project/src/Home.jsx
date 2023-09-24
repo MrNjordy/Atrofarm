@@ -86,7 +86,7 @@ function Home() {
     // }, [address, allPools])
      
          return(
-            <Box minHeight='100vh' padding={2}>
+            <Box minHeight='100vh'>
                 <VStack>
                     <Box width={[null, 250, 350, 700]} mt={[5, null, null, 10]} padding={5} fontWeight='bold' border='4px' borderRadius='2xl' bgGradient='linear(to-bl, yellow.400, yellow.600)' >
                         <Text ml='auto' mr='auto' fontFamily='heading' fontSize={[null, 20, 30, 40]}>

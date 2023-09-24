@@ -88,7 +88,7 @@ function Home() {
          return(
             <Box minHeight='100vh'>
                 <VStack>
-                    <Box width={[null, 250, 350, 700]} mt={[5, null, null, 10]} padding={5} fontWeight='bold' border='4px' borderRadius='2xl' bgGradient='linear(to-bl, yellow.400, yellow.600)' >
+                    <Box width={[null, 250, 350, 700]} mt={[2, null, null, 10]} padding={5} fontWeight='bold' border='4px' borderRadius='2xl' bgGradient='linear(to-bl, yellow.400, yellow.600)' >
                         <Center>
                             <Text fontFamily='heading' fontSize={[null, 20, 30, 40]}>
                                 Welcome to Atrofarm

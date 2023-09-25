@@ -3,6 +3,7 @@ import { useAccount, useWaitForTransaction } from "wagmi";
 import { writeContract, prepareWriteContract } from "wagmi/actions";
 import { masterContract, tokenAbi } from "../data";
 import { useState } from "react";
+import { redirect } from "react-router-dom";
 
 export default function FarmPoolInfo({
     id,
@@ -188,10 +189,10 @@ export default function FarmPoolInfo({
                                                                     </Button> }
                                             <Modal isOpen={isProcessingOpen} onClose={onProcessingClose} isCentered>
                                                 <ModalOverlay>
-                                                    <ModalContent border='1px'>
-                                                        <ModalHeader borderTopRadius='md' borderBottom='1px' bgColor={depositSuccess ? 'green.200' 
-                                                                                          : depositError ? 'red.200'
-                                                                                          : 'blue.200'}>
+                                                    <ModalContent border='4px' borderColor={depositSuccess ? 'green.200'
+                                                                                                           : depositError ? 'red.200'
+                                                                                                           : 'yellow.700'}>
+                                                        <ModalHeader borderTopRadius='md' borderBottom='1px' bgGradient='linear(to-b, gray.700, gray.900)'>
                                                             { depositLoading ? "Processing Transaction..."
                                                                         : depositSuccess ? 'Transaction Successful'
                                                                         : depositError ? 'Transaction Reverted'
@@ -207,7 +208,7 @@ export default function FarmPoolInfo({
                                                                                size='xl'
                                                                                ml='auto' mr='auto' mt={5}
                                                                              /></Flex>
-                                                                           : depositSuccess? depositTxData
+                                                                           : depositSuccess? `Deposited ${depositInput, ' ', name}: ${depositTxData}`
                                                                            : depositError? depositTxData
                                                                            :<Flex><Spinner
                                                                            thickness='4px'

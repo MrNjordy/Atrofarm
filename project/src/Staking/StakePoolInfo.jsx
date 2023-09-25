@@ -262,19 +262,37 @@ export default function StakePoolInfo({
                                             </Button>
                                                 <Modal isOpen={isProcessingOpen} onClose={onProcessingClose} isCentered>
                                                     <ModalOverlay>
-                                                        <ModalContent>
-                                                            <ModalHeader>
-                                                                <ModalCloseButton />
-                                                            </ModalHeader>
-                                                            <ModalBody>
-                                                                {withdrawLoading ? 'Processing Transaction...'
-                                                                            : withdrawSuccess ? `Transaction Successful ${depositTxData}`
-                                                                            : withdrawError ? `Transaction Reverted ${depositTxData}`
-                                                                            : "Waiting Approval..."}
-                                                            </ModalBody>
-                                                            <ModalFooter>                                  
-                                                            </ModalFooter>
-                                                        </ModalContent>
+                                                    <ModalContent border='4px' borderColor={withdrawSuccess ? 'green.600'
+                                                                                                           : withdrawError ? 'red.500'
+                                                                                                           : 'yellow.700'}>
+                                                        <ModalHeader borderTopRadius='md' borderBottom='1px' color='yellow.600' bgGradient='linear(to-b, gray.700, gray.900)'>
+                                                            { withdrawLoading ? "Processing Transaction..."
+                                                                        : withdrawSuccess ? 'Transaction Successful'
+                                                                        : withdrawError ? 'Transaction Reverted'
+                                                                        : "Waiting Approval"}
+                                                            <ModalCloseButton />
+                                                        </ModalHeader>
+                                                        <ModalBody bgGradient='linear(to-b, gray.700, gray.900)' color= 'yellow.600'>
+                                                            {withdrawLoading? <Flex ><Spinner
+                                                                               thickness='4px'
+                                                                               speed='0.65s'
+                                                                               emptyColor='gray.200'
+                                                                               color='blue.500'
+                                                                               size='xl'
+                                                                               ml='auto' mr='auto' mt={5} mb={5}
+                                                                             /></Flex>
+                                                                           : withdrawSuccess? `Withdrew ${name}: ${withdrawTxData}`
+                                                                           : withdrawError? withdrawTxData
+                                                                           :<Flex><Spinner
+                                                                           thickness='4px'
+                                                                           speed='0.65s'
+                                                                           emptyColor='gray.200'
+                                                                           color='blue.500'
+                                                                           size='xl'
+                                                                           ml='auto' mr='auto' mt={5} mb={5}
+                                                                         /></Flex>}       
+                                                        </ModalBody>
+                                                    </ModalContent>
                                                     </ModalOverlay>
                                                 </Modal>
                                             <Button onClick={onWithdrawClose}>

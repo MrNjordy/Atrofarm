@@ -33,8 +33,8 @@ export default function FarmPoolInfo({
             //============ MODAL HOOKS ================
     const { isOpen: isDepositOpen, onOpen: onDepositOpen, onClose: onDepositClose } = useDisclosure();
     const { isOpen: isWithdrawOpen, onOpen: onWithdrawOpen, onClose: onWithdrawClose } = useDisclosure();
-    const {isOpen: isProcessingOpen, onOpen: onProcessingOpen, onClose: onProcessingClose } = useDisclosure();
-    
+    const {isOpen: isDepositProcessingOpen, onOpen: onDepositProcessingOpen, onClose: onDepositProcessingClose } = useDisclosure();
+    const {isOpen: isWithdrawProcessingOpen, onOpen: onWithdrawProcessingOpen, onClose: onWithdrawProcessingClose } = useDisclosure();
             //============ DEPOSIT FORM HOOK (INPUT NUMBER AND MAX BUTTON) ==========
     const { getInputProps: depositInputProps, getIncrementButtonProps: depositIncrementButtonProps } = useNumberInput({
         defaultValue: 0,
@@ -67,7 +67,7 @@ export default function FarmPoolInfo({
 //============================== CONTRACTS FUNCTIONS =====================
     async function deposit() {
         setDepositTxData('');
-        onProcessingOpen();
+        onDepositProcessingOpen();
         const config = await prepareWriteContract({
             address: masterContract.address,
             abi: masterContract.abi,
@@ -83,7 +83,7 @@ export default function FarmPoolInfo({
 
     async function withdraw() {
         setWithdrawTxData('');
-        onProcessingOpen();
+        onWithdrawProcessingOpen();
         const config = await prepareWriteContract({
             address: masterContract.address,
             abi: masterContract.abi,
@@ -187,7 +187,7 @@ export default function FarmPoolInfo({
                                                                   : <Button mr={5} isDisabled={userBalance==0 || depositInput==0} isLoading={depositLoading} onClick={deposit}>                                                                                                                  
                                                                         {"Deposit" }                           
                                                                     </Button> }
-                                            <Modal isOpen={isProcessingOpen} onClose={onProcessingClose} isCentered>
+                                            <Modal isOpen={isDepositProcessingOpen} onClose={onDepositProcessingClose} isCentered>
                                                 <ModalOverlay>
                                                     <ModalContent border='4px' borderColor={depositSuccess ? 'green.600'
                                                                                                            : depositError ? 'red.200'
@@ -260,21 +260,40 @@ export default function FarmPoolInfo({
                                             <Button isDisabled={userStaked==0 || withdrawInput==0} isLoading={withdrawLoading} onClick={withdraw}>
                                                 {"Withdraw"}
                                             </Button>
-                                                <Modal isOpen={isProcessingOpen} onClose={onProcessingClose} isCentered>
+                                                <Modal isOpen={isWithdrawProcessingOpen} onClose={onWithdrawProcessingClose} isCentered>
                                                     <ModalOverlay>
-                                                        <ModalContent>
-                                                            <ModalHeader>
-                                                                <ModalCloseButton />
-                                                            </ModalHeader>
-                                                            <ModalBody>
-                                                                {withdrawLoading ? 'Processing Transaction...'
-                                                                            : withdrawSuccess ? `Transaction Successful ${depositTxData}`
-                                                                            : withdrawError ? `Transaction Reverted ${depositTxData}`
-                                                                            : "Waiting Approval..."}
-                                                            </ModalBody>
-                                                            <ModalFooter>                                  
-                                                            </ModalFooter>
-                                                        </ModalContent>
+                                                    <ModalContent border='4px' borderColor={withdrawSuccess ? 'green.600'
+                                                                                                           : withdrawError ? 'red.500'
+                                                                                                           : 'yellow.700'}>
+                                                        <ModalHeader borderTopRadius='md' borderBottom='1px' color='yellow.600' bgGradient='linear(to-b, gray.700, gray.900)'>
+                                                            { withdrawLoading ? "Processing Transaction..."
+                                                                        : withdrawSuccess ? 'Transaction Successful'
+                                                                        : withdrawError ? 'Transaction Reverted'
+                                                                        : "Waiting Approval"}
+                                                            <ModalCloseButton />
+                                                        </ModalHeader>
+                                                        <ModalBody bgGradient='linear(to-b, gray.700, gray.900)' color= 'yellow.600'>
+                                                            {withdrawLoading? <Flex ><Spinner
+                                                                               thickness='4px'
+                                                                               speed='0.65s'
+                                                                               emptyColor='gray.200'
+                                                                               color='blue.500'
+                                                                               size='xl'
+                                                                               ml='auto' mr='auto' mt={5} mb={5}
+                                                                             /></Flex>
+                                                                           : withdrawSuccess? `Withdrew ${name}: ${withdrawTxData}`
+                                                                           : withdrawError? withdrawTxData
+                                                                           :<Flex><Spinner
+                                                                           thickness='4px'
+                                                                           speed='0.65s'
+                                                                           emptyColor='gray.200'
+                                                                           color='blue.500'
+                                                                           size='xl'
+                                                                           ml='auto' mr='auto' mt={5} mb={5}
+                                                                         /></Flex>}
+                                                                            
+                                                        </ModalBody>
+                                                    </ModalContent>
                                                     </ModalOverlay>
                                                 </Modal>
                                             <Button onClick={onWithdrawClose}>

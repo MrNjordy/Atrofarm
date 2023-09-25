@@ -45,8 +45,8 @@ const data = await readContracts({
 });
 
 const pulsePrice = parseInt(data[5].result[1].toString())/parseInt(data[5].result[0].toString())
-
-const nativeTokenPriceUsd = (parseInt(data[0].result[1].toString())/parseInt(data[0].result[0].toString()) * pulsePrice).toString();
+console.log(pulsePrice);
+const nativeTokenPriceUsd = (parseInt(data[0].result[0].toString())/parseInt(data[0].result[1].toString()) * pulsePrice).toString();
 const nativeToken = await fetchToken({ address: import.meta.env.VITE_TOKEN })
 const nativeTokenSupply = nativeToken.totalSupply.formatted;
 

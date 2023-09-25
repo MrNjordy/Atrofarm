@@ -10,8 +10,8 @@ import Profile from './Profile'
 import Home from './Home'
 import Farm from './Farms/Farm'
 import Staking from './Staking/Staking'
-import { BrowserRouter, Route, Routes, Link } from 'react-router-dom'
-import { useState, useEffect, createContext } from 'react'
+import { BrowserRouter, Route, Routes} from 'react-router-dom'
+import { useState, useEffect, createContext, useCallback } from 'react'
 import { fetchData } from './FetchData'
 
 export const InfoContext = createContext();
@@ -45,12 +45,12 @@ function App() {
 
   useEffect(() => {
     async function getData() {
-      const allPools = await fetchData();
-      setAllPools(allPools);
+      const allPools = await fetchData()
+      setTimeout(() => { setAllPools(allPools) }, 5000);
+      
     }
     getData();
   },[allPools])
-
 
   return (
     <WagmiConfig config={wagmiConfig}>

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { InfoContext } from "./App";
 import { masterAbi } from "./data";
+import { usePublicClient } from "wagmi";
 
 function Home() {
     const allPools = useContext(InfoContext);
@@ -21,7 +22,6 @@ function Home() {
         abi: masterAbi,
         functionName: 'claimAll',
       })
-
     useEffect(() => {
         let protocolPools = [];
         let tvl = 0;

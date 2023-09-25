@@ -45,7 +45,6 @@ const data = await readContracts({
 });
 
 const pulsePrice = parseInt(data[5].result[1].toString())/parseInt(data[5].result[0].toString())
-console.log(pulsePrice);
 const nativeTokenPriceUsd = (parseInt(data[0].result[0].toString())/parseInt(data[0].result[1].toString()) * pulsePrice).toString();
 const nativeToken = await fetchToken({ address: import.meta.env.VITE_TOKEN })
 const nativeTokenSupply = nativeToken.totalSupply.formatted;
@@ -134,7 +133,7 @@ generalInfo.nativeTokenSupply = nativeTokenSupply;
             const token1Name = await fetchToken({ address: lpToken1Name })
             const lpName = token0Name.symbol + "-" + token1Name.symbol + " LP"
 
-            const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
+            const lpPriceEth = parseInt(getLpReserves[0].toString()) * 2 / parseInt(lpTotalSupply.toString());
             const lpPriceUsd = (lpPriceEth * pulsePrice).toString();
 
             const totalStakedUsd = (parseInt(totalStaked.toString()) / 10**18) * lpPriceUsd;
@@ -237,7 +236,7 @@ generalInfo.nativeTokenSupply = nativeTokenSupply;
             // });
             //const apiCall = await axios.get(`https://api.dexscreener.com/latest/dex/tokens/${poolInfo[0]}`)
 
-            const tokenPriceUsd = (parseInt(tokenPriceEth[1].toString())/parseInt(tokenPriceEth[0].toString()) * pulsePrice).toString();
+            const tokenPriceUsd = (parseInt(tokenPriceEth[0].toString())/parseInt(tokenPriceEth[1].toString()) * pulsePrice).toString();
             const totalStakedUsd = (parseInt(totalStaked.toString()) / 10**18) * tokenPriceUsd;
 
             const Apr = poolRewardPerYearUsd / totalStakedUsd * 100

@@ -189,26 +189,26 @@ export default function StakePoolInfo({
                                                                     </Button> }
                                             <Modal isOpen={isProcessingOpen} onClose={onProcessingClose} isCentered>
                                                 <ModalOverlay>
-                                                    <ModalContent border='1px'>
-                                                        <ModalHeader borderTopRadius='md' borderBottom='1px' bgColor={depositSuccess ? 'green.200' 
-                                                                                          : depositError ? 'red.200'
-                                                                                          : 'blue.200'}>
+                                                    <ModalContent border='4px' borderColor={depositSuccess ? 'green.600'
+                                                                                                           : depositError ? 'red.200'
+                                                                                                           : 'yellow.700'}>
+                                                        <ModalHeader borderTopRadius='md' borderBottom='1px' color='yellow.600' bgGradient='linear(to-b, gray.700, gray.900)'>
                                                             { depositLoading ? "Processing Transaction..."
                                                                         : depositSuccess ? 'Transaction Successful'
                                                                         : depositError ? 'Transaction Reverted'
                                                                         : "Waiting Approval"}
                                                             <ModalCloseButton />
                                                         </ModalHeader>
-                                                        <ModalBody>
+                                                        <ModalBody bgGradient='linear(to-b, gray.700, gray.900)' color= 'yellow.600'>
                                                             {depositLoading? <Flex ><Spinner
                                                                                thickness='4px'
                                                                                speed='0.65s'
                                                                                emptyColor='gray.200'
                                                                                color='blue.500'
                                                                                size='xl'
-                                                                               ml='auto' mr='auto' mt={5}
+                                                                               ml='auto' mr='auto' mt={5} mb={5}
                                                                              /></Flex>
-                                                                           : depositSuccess? depositTxData
+                                                                           : depositSuccess? `Deposited ${name}: ${depositTxData}`
                                                                            : depositError? depositTxData
                                                                            :<Flex><Spinner
                                                                            thickness='4px'
@@ -216,12 +216,10 @@ export default function StakePoolInfo({
                                                                            emptyColor='gray.200'
                                                                            color='blue.500'
                                                                            size='xl'
-                                                                           ml='auto' mr='auto' mt={5}
+                                                                           ml='auto' mr='auto' mt={5} mb={5}
                                                                          /></Flex>}
                                                                             
                                                         </ModalBody>
-                                                        <ModalFooter>                                  
-                                                        </ModalFooter>
                                                     </ModalContent>
                                                 </ModalOverlay>
                                             </Modal>

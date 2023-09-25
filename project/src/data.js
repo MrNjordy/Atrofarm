@@ -169,6 +169,13 @@ export const masterAbi = [
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "claimAll",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",

@@ -1,8 +1,10 @@
+import { useContractWrite } from "wagmi";
 import { Box, Button, Center, Flex, HStack, VStack, Text } from "@chakra-ui/react";
 import { useAccount } from "wagmi";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { InfoContext } from "./App";
+import { masterAbi } from "./data";
 
 function Home() {
     const allPools = useContext(InfoContext);
@@ -14,6 +16,11 @@ function Home() {
     const [marketCap, setMarketCap] = useState();
 
     const { address } = useAccount();
+    const { data, isLoading, isSuccess, write } = useContractWrite({
+        address: import.meta.env.VITE_MASTER,
+        abi: masterAbi,
+        functionName: 'claimAll',
+      })
 
     useEffect(() => {
         let protocolPools = [];
@@ -143,7 +150,7 @@ function Home() {
                         </Flex>
                     </HStack>
                         <Center>
-                            <Button width={[null, 75, 100, 150]} height={[null,31,null,34]} paddingBottom={2} paddingTop={2} fontSize={[null, 11, 13, 15]} bgColor='blackAlpha.800' color='wheat' _hover={{ bgColor: 'gray.600'}}>
+                            <Button onClick={write} isLoading={isLoading} width={[null, 75, 100, 150]} height={[null,31,null,34]} paddingBottom={2} paddingTop={2} fontSize={[null, 11, 13, 15]} bgColor='blackAlpha.800' color='wheat' _hover={{ bgColor: 'gray.600'}}>
                                 Claim All
                             </Button>
                         </Center> 

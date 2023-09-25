@@ -42,15 +42,20 @@ createWeb3Modal({ wagmiConfig, projectId, chains, defaultChain: pulsechainV4 });
 
 function App() {
   const [allPools, setAllPools] = useState();
+  const [counter, setCounter] = useState(0);
 
   useEffect(() => {
     async function getData() {
       const allPools = await fetchData()
-      setTimeout(() => { setAllPools(allPools) }, 5000);
-      
+      // setTimeout(() => { setAllPools(allPools) }, 5000);
+      setAllPools(allPools)
+    }
+    function timeInterval() {
+      setTimeout(()=> {setCounter(counter+1)}, 10000);
     }
     getData();
-  },[allPools])
+    timeInterval();
+  },[counter])
 
   return (
     <WagmiConfig config={wagmiConfig}>

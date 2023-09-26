@@ -40,11 +40,20 @@ const data = await readContracts({
         address: import.meta.env.VITE_PULSE_LP,
         abi: lpAbi,
         functionName: 'getReserves',
-     }
+     },
+    // {//Getting Atropa/wPLS reserves to calculate Atropa price
+    //     address: import.meta.env.VITE_ATROPA_LP,
+    //     abi: lpAbi,
+    //     functionName: 'getReserves',
+    // }
     ]
 });
 
+//token 0/1 might need swapped
 const pulsePrice = parseInt(data[5].result[1].toString())/parseInt(data[5].result[0].toString())
+// const atropaPrice = parseInt(data[6].result[1].toString())/parseInt(data[6].result[0].toString())
+
+
 const nativeTokenPriceUsd = (parseInt(data[0].result[0].toString())/parseInt(data[0].result[1].toString()) * pulsePrice).toString();
 const nativeToken = await fetchToken({ address: import.meta.env.VITE_TOKEN })
 const nativeTokenSupply = nativeToken.totalSupply.formatted;

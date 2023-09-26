@@ -1,7 +1,7 @@
 import { createWeb3Modal } from '@web3modal/wagmi/react'
 import {walletConnectProvider} from '@web3modal/wagmi'
 import { WagmiConfig, createConfig, configureChains, mainnet } from 'wagmi'
-import { goerli, pulsechainV4 } from 'wagmi/chains'
+import { goerli, pulsechainV4, pulsechain } from 'wagmi/chains'
 import { InjectedConnector } from 'wagmi/connectors/injected'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 import { alchemyProvider } from 'wagmi/providers/alchemy'

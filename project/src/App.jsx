@@ -19,7 +19,7 @@ export const InfoContext = createContext();
 const projectId = import.meta.env.VITE_WALLET_CONNECT;
 
 const { chains, publicClient, webSocketPublicCLient } = configureChains(
-    [pulsechain],
+    [pulsechainV4],
     [alchemyProvider( {apiKey: import.meta.env.VITE_ALCHEMY}), publicProvider()],
     [walletConnectProvider({ projectId })],
 )
@@ -38,7 +38,7 @@ const wagmiConfig = createConfig({
     webSocketPublicCLient,
 })
 
-createWeb3Modal({ wagmiConfig, projectId, chains, defaultChain: pulsechain });
+createWeb3Modal({ wagmiConfig, projectId, chains, defaultChain: pulsechainV4 });
 
 function App() {
   const [allPools, setAllPools] = useState();

@@ -85,7 +85,6 @@ generalInfo.nativeTokenSupply = nativeTokenSupply;
             functionName: 'poolInfo',
             args: [i]
         })
-        console.log(poolInfo)
         if(poolInfo[1] == 0) {
             continue
         }
@@ -162,7 +161,6 @@ generalInfo.nativeTokenSupply = nativeTokenSupply;
             const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
             lpPriceUsd = (lpPriceEth * atropaPrice).toString();
             }
-            console.log('lp price: ', lpPriceUsd)
             const totalStakedUsd = (parseInt(totalStaked.toString()) / 10**18) * lpPriceUsd;
 
             const Apr = poolRewardPerYearUsd / totalStakedUsd * 100

@@ -1,4 +1,4 @@
-import { Button, Flex, HStack, Image } from "@chakra-ui/react";
+import { Button, Flex, HStack, Image, Link } from "@chakra-ui/react";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import {  useAccount } from "wagmi";
 import { Link as RouteLink } from "react-router-dom";
@@ -55,15 +55,19 @@ function Profile() {
             <HStack ml='auto' spacing={[5, null, null, 20]} height={45} mr={10} mb={2}>
                 <Flex fontSize={[8, 11, 14, 17]}>
                     <Image src={atrofaIcon} alt='Atrofa' boxSize={[3,4,5,6]} mr={1}></Image>
+                    <Link href="https://dexscreener.com/pulsechain/0x772d497bcdeb51fdf38bd7d097a4cb38cf7420a7">
                     <Flex>
                     ${nativeTokenPrice}
                     </Flex>
+                    </Link>
                 </Flex>
                 <Flex fontSize={[8, 11, 14, 17]}>
                     <Image src={atropaIcon} alt='Atropa' boxSize={[3,4,5,6]} mr={1}></Image>
+                    <Link href="https://dexscreener.com/pulsechain/0xf892d93199b4de0ab1cdf35799ccf9d5a425581b">
                     <Flex>
                     ${atropaPrice}
                     </Flex>
+                    </Link>
                 </Flex>
                 <Button fontSize={[null, 11, 14, 17]} height={[null,31,null,42]} paddingTop={2} paddingBottom={2} mt={2} bgGradient='linear(to-b, gray.700, gray.900)' color='wheat' onClick={() => open()}> 
                     {isConnected ? address.substring(0,7) + '...' : "Connect" }

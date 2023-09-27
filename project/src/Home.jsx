@@ -145,7 +145,7 @@ function Home() {
                             {totalRewards}
                         </Flex>
                     </HStack>
-                    <HStack mb={2}>
+                    <HStack>
                         <Flex ml='auto' mr={1} fontSize='smaller' fontWeight='light'>
                             ${totalRewardsUsd}
                         </Flex>

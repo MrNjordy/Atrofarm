@@ -10,6 +10,7 @@ import Profile from './Profile'
 import Home from './Home'
 import Farm from './Farms/Farm'
 import Staking from './Staking/Staking'
+import Footer from './Footer'
 import { BrowserRouter, Route, Routes} from 'react-router-dom'
 import { useState, useEffect, createContext, useCallback } from 'react'
 import { fetchData } from './FetchData'
@@ -67,6 +68,7 @@ function App() {
           <Route path ='/Farms' Component={Farm} />
           <Route path ='/Staking' Component={Staking} />
         </Routes>
+        <Footer />
       </BrowserRouter>
       </InfoContext.Provider>
     </WagmiConfig>

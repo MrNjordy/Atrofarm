@@ -110,12 +110,12 @@ generalInfo.nativeTokenSupply = nativeTokenSupply;
                         functionName:'token1',
                     },
                     {
-                        address: import.meta.env.VITE_LP,
+                        address: poolInfo[0],
                         abi: lpAbi,
                         functionName: 'totalSupply',
                     },
                     {
-                        address: import.meta.env.VITE_LP,
+                        address: poolInfo[0],
                         abi: lpAbi,
                         functionName: 'getReserves',
                     },
@@ -144,10 +144,25 @@ generalInfo.nativeTokenSupply = nativeTokenSupply;
             const token0Name = await fetchToken({ address: lpToken0Name })
             const token1Name = await fetchToken({ address: lpToken1Name })
             const lpName = token0Name.symbol + "-" + token1Name.symbol + " LP"
-
+            
+            let lpPriceUsd;
+            if(token0Name.name == 'Wrapped Pulse'){
             const lpPriceEth = parseInt(getLpReserves[0].toString()) * 2 / parseInt(lpTotalSupply.toString());
-            const lpPriceUsd = (lpPriceEth * pulsePrice).toString();
-
+            lpPriceUsd = (lpPriceEth * pulsePrice).toString();
+            }
+            else if (token1Name.name == 'Wrapped Pulse'){
+            const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
+            lpPriceUsd = (lpPriceEth * pulsePrice).toString();
+            }
+            else if (token0Name.name == 'Atropa') {
+            const lpPriceEth = parseInt(getLpReserves[0].toString()) * 2 / parseInt(lpTotalSupply.toString());
+            lpPriceUsd = (lpPriceEth * atropaPrice).toString();
+            }
+            else if (token1Name.name == 'Atropa') {
+            const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
+            lpPriceUsd = (lpPriceEth * atropaPrice).toString();
+            }
+            console.log('lp price: ', lpPriceUsd)
             const totalStakedUsd = (parseInt(totalStaked.toString()) / 10**18) * lpPriceUsd;
 
             const Apr = poolRewardPerYearUsd / totalStakedUsd * 100

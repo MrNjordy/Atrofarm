@@ -176,9 +176,13 @@ generalInfo.nativeTokenSupply = nativeTokenSupply;
                 const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
                 lpPriceUsd = (lpPriceEth * wBtcPrice).toString();
             }
-            const totalStakedUsd = (parseInt(totalStaked.toString()) / 10**18) * lpPriceUsd;
 
-            const Apr = poolRewardPerYearUsd / totalStakedUsd * 100
+            const totalStakedUsd = (parseInt(totalStaked.toString()) / 10**18) * lpPriceUsd;
+            let Apr
+            if (totalStakedUsd == 0) {
+             Apr = poolRewardPerYearUsd / 1 * 100
+            }
+            else {Apr = poolRewardPerYearUsd / totalStakedUsd * 100 }
 
             if(isConnected) {
                 const data = await readContracts({

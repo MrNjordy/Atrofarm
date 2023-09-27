@@ -10,7 +10,7 @@ export const fetchData = async () => {
 
     const currentBlock = await fetchBlockNumber();
     const currentBlockInt = parseInt(currentBlock.toString());
-    const blockPerYear = 5 * 60 * 24 * 365; //block per minute, hour, day, year
+    const blockPerYear = 6 * 60 * 24 * 365; //block per minute, hour, day, year
 //===========================================
 const data = await readContracts({
     contracts: [

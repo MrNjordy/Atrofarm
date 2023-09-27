@@ -14,14 +14,14 @@ function Profile() {
     const { open } = useWeb3Modal()
     const { address, isConnected } = useAccount()
     // const [allPools, setAllPools] = useState();
-    const [pulsePrice, setPulsePrice] = useState(0);
+    const [atropaPrice, setAtropaPrice] = useState(0);
     const [nativeTokenPrice, setNativeTokenPrice] = useState(0);
     useEffect(() => {
         function wait() {
             if (!allPools) {
               setTimeout(wait, 100)
             } else {
-              setPulsePrice((allPools.generalInfo[0].pulsePrice).toFixed(4));
+              setAtropaPrice((allPools.generalInfo[0].atropaPrice).toFixed(4));
               setNativeTokenPrice(parseFloat(allPools.generalInfo[0].nativeTokenPriceUsd).toFixed(4));
             }
           }
@@ -62,7 +62,7 @@ function Profile() {
                 <Flex fontSize={[8, 11, 14, 17]}>
                     <Image src={atropaIcon} alt='Atropa' boxSize={[3,4,5,6]} mr={1}></Image>
                     <Flex>
-                    ${pulsePrice}
+                    ${atropaPrice}
                     </Flex>
                 </Flex>
                 <Button fontSize={[null, 11, 14, 17]} height={[null,31,null,42]} paddingTop={2} paddingBottom={2} mt={2} bgGradient='linear(to-b, gray.700, gray.900)' color='wheat' onClick={() => open()}> 

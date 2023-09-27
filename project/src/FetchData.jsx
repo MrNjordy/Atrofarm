@@ -36,25 +36,25 @@ const data = await readContracts({
         ...masterContract,
         functionName: 'totalAllocPoint',
      },
-     {//Getting wPLS / tDAI reserves to calculate Pulse price
+     {//Getting wPLS / DAI reserves to calculate Pulse price
         address: import.meta.env.VITE_PULSE_LP,
         abi: lpAbi,
         functionName: 'getReserves',
      },
-    // {//Getting Atropa/wPLS reserves to calculate Atropa price
-    //     address: import.meta.env.VITE_ATROPA_LP,
-    //     abi: lpAbi,
-    //     functionName: 'getReserves',
-    // }
+    {//Getting Atropa/wPLS reserves to calculate Atropa price
+        address: import.meta.env.VITE_ATROPA_LP,
+        abi: lpAbi,
+        functionName: 'getReserves',
+    }
     ]
 });
 
 //token 0/1 might need swapped
 const pulsePrice = parseInt(data[5].result[1].toString())/parseInt(data[5].result[0].toString())
-// const atropaPrice = parseInt(data[6].result[1].toString())/parseInt(data[6].result[0].toString())
+const atropaPrice = parseInt(data[6].result[0].toString())/parseInt(data[6].result[1].toString()) * pulsePrice
 
 
-const nativeTokenPriceUsd = (parseInt(data[0].result[0].toString())/parseInt(data[0].result[1].toString()) * pulsePrice).toString();
+const nativeTokenPriceUsd = (parseInt(data[0].result[1].toString())/parseInt(data[0].result[0].toString()) * pulsePrice).toString();
 const nativeToken = await fetchToken({ address: import.meta.env.VITE_TOKEN })
 const nativeTokenSupply = nativeToken.totalSupply.formatted;
 
@@ -64,7 +64,7 @@ const multiplier = data[3].result;
 const totalAllocPoint = data[4].result;
 
 let generalInfo = {};
-generalInfo.pulsePrice = pulsePrice;
+generalInfo.atropaPrice = atropaPrice;
 generalInfo.nativeTokenPriceUsd = nativeTokenPriceUsd;
 generalInfo.nativeTokenSupply = nativeTokenSupply;
 
@@ -77,7 +77,6 @@ generalInfo.nativeTokenSupply = nativeTokenSupply;
     let stakingPools = [];
 
     general.push(generalInfo);
-
     for( let i=0; i<numberOfPool; i++) {
         const allInfo = {}; //object which will contain all data for each pool
 
@@ -86,7 +85,10 @@ generalInfo.nativeTokenSupply = nativeTokenSupply;
             functionName: 'poolInfo',
             args: [i]
         })
-
+        console.log(poolInfo)
+        if(poolInfo[1] == 0) {
+            continue
+        }
         const tokenInfo = await fetchToken({ address: poolInfo[0]})
         const depositFee = parseInt(poolInfo[4].toString()) /100;
 
@@ -131,6 +133,7 @@ generalInfo.nativeTokenSupply = nativeTokenSupply;
                     },
                 ]
             });
+
             const lpToken0Name = data[0].result
             const lpToken1Name = data[1].result
             const lpTotalSupply = data[2].result;
@@ -226,7 +229,7 @@ generalInfo.nativeTokenSupply = nativeTokenSupply;
                     },
                     {
                         address: poolInfo[0],
-                        abi: lpAbi,
+                        abi: tokenAbi,
                         functionName:'allowance',
                         args: [address, import.meta.env.VITE_MASTER],
                     },
@@ -235,6 +238,7 @@ generalInfo.nativeTokenSupply = nativeTokenSupply;
             const tokenPriceEth = data[0].result;
             const totalStaked = data[1].result;
             const allowance = data[2].result;
+
             //This one would be more generic as long as tokens are paired with the same token eg:wETH
             //Should find a way to find a pair reliably
             // const tokenPair = await readContract({

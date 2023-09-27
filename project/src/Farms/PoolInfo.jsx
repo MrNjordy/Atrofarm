@@ -290,8 +290,7 @@ export default function FarmPoolInfo({
                                                                            color='blue.500'
                                                                            size='xl'
                                                                            ml='auto' mr='auto' mt={5} mb={5}
-                                                                         /></Flex>}
-                                                                            
+                                                                         /></Flex>}       
                                                         </ModalBody>
                                                     </ModalContent>
                                                     </ModalOverlay>

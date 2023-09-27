@@ -262,7 +262,7 @@ generalInfo.nativeTokenSupply = nativeTokenSupply;
             // });
             //const apiCall = await axios.get(`https://api.dexscreener.com/latest/dex/tokens/${poolInfo[0]}`)
 
-            const tokenPriceUsd = (parseInt(tokenPriceEth[0].toString())/parseInt(tokenPriceEth[1].toString()) * pulsePrice).toString();
+            const tokenPriceUsd = (parseInt(tokenPriceEth[1].toString())/parseInt(tokenPriceEth[0].toString()) * pulsePrice).toString();
             const totalStakedUsd = (parseInt(totalStaked.toString()) / 10**18) * tokenPriceUsd;
 
             const Apr = poolRewardPerYearUsd / totalStakedUsd * 100

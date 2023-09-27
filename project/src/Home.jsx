@@ -47,6 +47,7 @@ function Home() {
                 }
                 for(let i=0; i<protocolPools.length; i++) {
                     tvl += parseFloat(protocolPools[i].totalStakedUsd);
+                    console.log(i, protocolPools[i].totalStakedUsd);
                     totalRewards += parseFloat(protocolPools[i].rewards);
                     totalRewardsUsd += parseFloat((protocolPools[i].rewardsUsd));
                 }

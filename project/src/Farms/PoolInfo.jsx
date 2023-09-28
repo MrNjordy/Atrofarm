@@ -41,7 +41,6 @@ export default function FarmPoolInfo({
         step: userBalance,
         min:0,
         max: userBalance,
-        precision: depositInput == 0 ? 0 : depositInput == userBalance * 10**18 ? null : 4,
         onChange: (e) => setDepositInput(e * 10**18),
     })
     const maxDeposit = depositIncrementButtonProps();

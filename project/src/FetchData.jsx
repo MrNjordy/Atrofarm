@@ -59,7 +59,6 @@ const data = await readContracts({
 const pulsePrice = parseInt(data[5].result[1].toString())/parseInt(data[5].result[0].toString())
 const atropaPrice = parseInt(data[6].result[0].toString())/parseInt(data[6].result[1].toString()) * pulsePrice
 const wBtcPrice = parseInt(data[7].result[1].toString())/parseInt(data[7].result[0].toString()) * pulsePrice / 10**10
-console.log(wBtcPrice)
 
 const nativeTokenPriceUsd = (parseInt(data[0].result[1].toString())/parseInt(data[0].result[0].toString()) * pulsePrice).toString();
 const nativeToken = await fetchToken({ address: import.meta.env.VITE_TOKEN })
@@ -171,20 +170,20 @@ generalInfo.nativeTokenSupply = nativeTokenSupply;
             else if (token0Name.name == 'Wrapped BTC') {
                 const lpPriceEth = (parseInt(getLpReserves[0].toString()) * 2 / 10**8) / (parseInt(lpTotalSupply.toString()) /10**18);
                 lpPriceUsd = (lpPriceEth * wBtcPrice).toString();
-                console.log(lpPriceUsd)
                 }
             else if (token1Name.name == 'Wrapped BTC') {
                 const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
                 lpPriceUsd = (lpPriceEth * wBtcPrice).toString();
-                console.log("here", lpPriceUsd)
             }
 
             const totalStakedUsd = (parseInt(totalStaked.toString()) / 10**18) * lpPriceUsd;
+            
             let Apr
             if (totalStakedUsd == 0) {
-             Apr = poolRewardPerYearUsd / 1 * 100
+                Apr = poolRewardPerYearUsd / 1 * 100
             }
             else {Apr = poolRewardPerYearUsd / totalStakedUsd * 100 }
+            if (Apr > 10000000) {Apr = 1000000}
 
             if(isConnected) {
                 const data = await readContracts({

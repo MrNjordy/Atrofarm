@@ -15,6 +15,7 @@ function Home() {
     // const [allPools, setAllPools] = useState();
     const [nativeTokenPrice, setNativeTokenPrice] = useState();
     const [marketCap, setMarketCap] = useState();
+    const [totalSupply, setTotalSupply] = useState();
 
     const { address } = useAccount();
     const { data, isLoading, isSuccess, write } = useContractWrite({
@@ -35,9 +36,12 @@ function Home() {
                 const pulsePrice = allPools.generalInfo[0].pulsePrice;
                 const nativeTokenPrice = allPools.generalInfo[0].nativeTokenPriceUsd;
                 const marketCap = (allPools.generalInfo[0].nativeTokenSupply) * nativeTokenPrice;
+                const totalSupply = parseInt(allPools.generalInfo[0].nativeTokenSupply);
+                console.log(totalSupply)
 
                 setNativeTokenPrice(parseFloat(nativeTokenPrice).toFixed(4));
                 setMarketCap(marketCap.toFixed(0));
+                setTotalSupply(totalSupply);
 
                 for(let i=0; i<(allPools.farmingPools).length; i++) { 
                     protocolPools.push(allPools.farmingPools[i])
@@ -116,12 +120,20 @@ function Home() {
                                 ${nativeTokenPrice}
                             </Flex>
                         </HStack>
-                        <HStack>
+                        <HStack mb={5}>
                             <Flex fontFamily='heading' ml={1} mr='auto'>
                                 Market Cap:
                             </Flex>
                             <Flex ml='auto' mr={1}>
                                 ${marketCap}
+                            </Flex>
+                        </HStack>
+                        <HStack>
+                            <Flex fontFamily='heading' ml={1} mr='auto'>
+                                Total Supply:
+                            </Flex>
+                            <Flex ml='auto' mr={1}>
+                                {totalSupply}
                             </Flex>
                         </HStack>
                 </Box>

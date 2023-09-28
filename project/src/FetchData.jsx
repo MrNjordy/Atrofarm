@@ -148,7 +148,12 @@ generalInfo.nativeTokenSupply = nativeTokenSupply;
             
             const token0Name = await fetchToken({ address: lpToken0Name })
             const token1Name = await fetchToken({ address: lpToken1Name })
-            const lpName = token0Name.symbol + "-" + token1Name.symbol + " LP"
+
+            let lpName = '';
+            if(poolInfo[0] == '0x5EF7AaC0DE4F2012CB36730Da140025B113FAdA4') {
+                lpName = 'p' + token0Name.symbol + "-" + token1Name.symbol + " LP V1"
+            }
+            else {lpName = token0Name.symbol + "-" + token1Name.symbol + " LP"}
             
             let lpPriceUsd;
             if(token0Name.name == 'Wrapped Pulse'){
@@ -177,7 +182,7 @@ generalInfo.nativeTokenSupply = nativeTokenSupply;
             }
 
             const totalStakedUsd = (parseInt(totalStaked.toString()) / 10**18) * lpPriceUsd;
-            
+
             let Apr
             if (totalStakedUsd == 0) {
                 Apr = poolRewardPerYearUsd / 1 * 100

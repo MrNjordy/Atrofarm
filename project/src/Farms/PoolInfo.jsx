@@ -124,7 +124,7 @@ export default function FarmPoolInfo({
                 
                 <Center borderBottom='2px'>
                 <VStack spacing='1px'>
-                    <Flex fontSize={[13, null, null, 17]}>
+                    <Flex fontSize={[10, null, null, 17]}>
                         {name}
                     </Flex>
                     <Flex mb="3" fontSize='small' fontWeight='light'>

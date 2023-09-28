@@ -6,12 +6,12 @@ function Footer() {
 
     return(
         <Flex ml={5}>
-        <Link href="https://twitter.com/Atrofarm17023" mr={5}>
+        <Link href="https://twitter.com/Atrofarm17023" isExternal mr={5}>
         <IconButton
             icon={<RiTwitterXFill/>}>
         </IconButton>
         </Link>
-        <Link href="https://t.me/+xBSQP3AYGXs3OWEx">
+        <Link href="https://t.me/+xBSQP3AYGXs3OWEx" isExternal>
         <IconButton
             icon={<BsTelegram/>}>
         </IconButton>

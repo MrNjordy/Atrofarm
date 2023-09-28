@@ -1,4 +1,4 @@
-import { Flex, HStack, Box, Center, Button, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, FormControl, FormLabel, Input, useNumberInput, Spinner, Text} from "@chakra-ui/react"
+import { Flex, HStack, Box, Center, Button, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, FormControl, FormLabel, Input, useNumberInput, Spinner, Text, VStack, Link} from "@chakra-ui/react"
 import { useAccount, useWaitForTransaction } from "wagmi";
 import { writeContract, prepareWriteContract } from "wagmi/actions";
 import { masterContract, tokenAbi } from "../data";
@@ -121,10 +121,18 @@ export default function FarmPoolInfo({
    }
     return(
             <Box fontFamily='heading' mt={5} padding={2} width='full' borderRadius='2xl' bgGradient='linear(to-bl, yellow.400, yellow.600)' fontWeight='semibold'>
+                
                 <Center borderBottom='2px'>
-                    <Flex mb="3" fontSize='larger'>
+                <VStack spacing='1px'>
+                    <Flex fontSize='larger'>
                         {name}
                     </Flex>
+                    <Flex mb="3" fontSize='small' fontWeight='light'>
+                        <Link href={`https://dexscreener.com/pulsechain/${address}`}>
+                        {address.substring(0,12) + '...'}
+                        </Link>
+                    </Flex>
+                    </VStack>
                 </Center>
                 <HStack mb='3' mt={3}> 
                     <Flex ml={1} mr='auto'>

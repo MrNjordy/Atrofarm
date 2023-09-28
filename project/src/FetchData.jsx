@@ -169,12 +169,14 @@ generalInfo.nativeTokenSupply = nativeTokenSupply;
             lpPriceUsd = (lpPriceEth * atropaPrice).toString();
             }
             else if (token0Name.name == 'Wrapped BTC') {
-                const lpPriceEth = parseInt(getLpReserves[0].toString()) * 2 / parseInt(lpTotalSupply.toString());
+                const lpPriceEth = (parseInt(getLpReserves[0].toString()) * 2 / 10**8) / (parseInt(lpTotalSupply.toString()) /10**18);
                 lpPriceUsd = (lpPriceEth * wBtcPrice).toString();
+                console.log(lpPriceUsd)
                 }
             else if (token1Name.name == 'Wrapped BTC') {
                 const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
                 lpPriceUsd = (lpPriceEth * wBtcPrice).toString();
+                console.log("here", lpPriceUsd)
             }
 
             const totalStakedUsd = (parseInt(totalStaked.toString()) / 10**18) * lpPriceUsd;

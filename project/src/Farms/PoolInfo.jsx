@@ -128,9 +128,9 @@ export default function FarmPoolInfo({
                         {name}
                     </Flex>
                     <Flex mb="3" fontSize='small' fontWeight='light'>
-                        <Link href={`https://dexscreener.com/pulsechain/${address}`}>
+                        {/* <Link href={`https://dexscreener.com/pulsechain/${address}`}>
                         {address.substring(0,12) + '...'}
-                        </Link>
+                        </Link> */}
                     </Flex>
                     </VStack>
                 </Center>

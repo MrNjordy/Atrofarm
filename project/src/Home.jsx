@@ -37,7 +37,6 @@ function Home() {
                 const nativeTokenPrice = allPools.generalInfo[0].nativeTokenPriceUsd;
                 const marketCap = (allPools.generalInfo[0].nativeTokenSupply) * nativeTokenPrice;
                 const totalSupply = parseInt(allPools.generalInfo[0].nativeTokenSupply);
-                console.log(totalSupply)
 
                 setNativeTokenPrice(parseFloat(nativeTokenPrice).toFixed(4));
                 setMarketCap(marketCap.toFixed(0));

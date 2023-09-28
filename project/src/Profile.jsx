@@ -55,7 +55,7 @@ function Profile() {
             <HStack ml='auto' spacing={[5, null, null, 20]} height={45} mr={10} mb={2}>
                 <Flex fontSize={[8, 11, 14, 17]}>
                     <Image src={atrofaIcon} alt='Atrofa' boxSize={[3,4,5,6]} mr={1}></Image>
-                    <Link href="https://dexscreener.com/pulsechain/0x772d497bcdeb51fdf38bd7d097a4cb38cf7420a7">
+                    <Link href="https://dexscreener.com/pulsechain/0x772d497bcdeb51fdf38bd7d097a4cb38cf7420a7" isExternal>
                     <Flex>
                     ${nativeTokenPrice}
                     </Flex>
@@ -63,7 +63,7 @@ function Profile() {
                 </Flex>
                 <Flex fontSize={[8, 11, 14, 17]}>
                     <Image src={atropaIcon} alt='Atropa' boxSize={[3,4,5,6]} mr={1}></Image>
-                    <Link href="https://dexscreener.com/pulsechain/0xf892d93199b4de0ab1cdf35799ccf9d5a425581b">
+                    <Link href="https://dexscreener.com/pulsechain/0xf892d93199b4de0ab1cdf35799ccf9d5a425581b" isExternal>
                     <Flex>
                     ${atropaPrice}
                     </Flex>

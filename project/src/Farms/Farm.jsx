@@ -41,7 +41,7 @@ return(
                 Farming Pools
                 </Text>
             </Flex>
-            <Flex fontSize={[null, 12, 15, 20]} paddingBottom={5}>
+            <Flex fontSize={[7, 10, 15, 20]} paddingBottom={5}>
                 <Text bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text' fontFamily='heading' fontWeight='normal' >
                 All pools except for pDai/Atropa are PulseX V2 pools
                 </Text>

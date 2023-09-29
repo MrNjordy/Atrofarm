@@ -45,8 +45,9 @@ export default function FarmPoolInfo({
     })
     const maxDeposit = depositIncrementButtonProps();
     const inputDeposit = depositInputProps();
+    console.log(inputDeposit);
     function setMaxDeposit() {
-        setDepositInput((userBalance * 10**18)-1)
+        setDepositInput((userBalance * 10**18)-5)
     }
 
         //============ WITHDRAWAL FORM HOOK (INPUT NUMBER AND MAX BUTTON) ==========
@@ -60,8 +61,9 @@ export default function FarmPoolInfo({
     const maxWithdraw = withdrawIncrementButtonProps();
     const inputWithdraw = withdrawInputProps();
     function setMaxWithdraw() {
-        setWithdrawInput((userStaked * 10**18)-1)
+        setWithdrawInput((userStaked * 10**18)-5)
     }
+    
 
 //============================== CONTRACTS FUNCTIONS =====================
     async function deposit() {

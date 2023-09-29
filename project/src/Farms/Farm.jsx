@@ -1,6 +1,6 @@
 import { useAccount } from "wagmi";
 import { useEffect, useState } from "react";
-import { Flex, Spinner, Box, Center, Text, SimpleGrid} from "@chakra-ui/react";
+import { Flex, Spinner, Box, Center, Text, SimpleGrid, VStack} from "@chakra-ui/react";
 import PoolInfo from "./PoolInfo";
 import { useContext } from "react";
 import { InfoContext } from "../App";
@@ -35,11 +35,18 @@ function Farm() {
 return(
     <Box minHeight='100vh'>
         <Center fontWeight='bold' borderBottom='6px' borderBottomStyle='groove' borderColor='black' ml={[10, null, null, 40]} mr={[10, null, null, 40]}>
-            <Flex fontSize={[null, 24, 30, 40]} mt={5} paddingBottom={5}>
+            <VStack>
+            <Flex fontSize={[null, 24, 30, 40]} mt={5}>
                 <Text bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text' fontFamily='heading' >
                 Farming Pools
                 </Text>
             </Flex>
+            <Flex fontSize={[null, 12, 15, 20]} paddingBottom={5}>
+                <Text bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text' fontFamily='heading' fontWeight='normal' >
+                All pools except for pDai/Atropa are PulseX V2 pools
+                </Text>
+            </Flex>
+            </VStack>
         </Center>
         <Flex>
         {isLoading ?    <Spinner

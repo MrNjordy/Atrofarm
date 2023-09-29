@@ -41,7 +41,7 @@ export default function FarmPoolInfo({
         step: userBalance,
         min:0,
         max: userBalance,
-        onChange: (e) => setDepositInput(e * 10**18),
+        onChange: (e) => setDepositInput((e * 10**18)-5),
     })
     const maxDeposit = depositIncrementButtonProps();
     const inputDeposit = depositInputProps();
@@ -55,7 +55,7 @@ export default function FarmPoolInfo({
         step: userStaked,
         min:0,
         max: userStaked,
-        onChange: (e) => setWithdrawInput(e * 10**18),
+        onChange: (e) => setWithdrawInput((e * 10**18)-5),
     })
     const maxWithdraw = withdrawIncrementButtonProps();
     const inputWithdraw = withdrawInputProps();

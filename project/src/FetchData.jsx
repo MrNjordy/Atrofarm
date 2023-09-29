@@ -153,7 +153,10 @@ generalInfo.nativeTokenSupply = nativeTokenSupply;
             if(poolInfo[0] == '0x5EF7AaC0DE4F2012CB36730Da140025B113FAdA4') {
                 lpName = 'p' + token0Name.symbol + "-" + token1Name.symbol + " LP V1"
             }
-            else {lpName = token0Name.symbol + "-" + token1Name.symbol + " LP V2"}
+            else if (poolInfo[0] == '0x7631150B9d22A805C6A10dc0C28680b4f7838069') {
+                lpName = token0Name.symbol + "-" + token1Name.symbol + " LP V2"
+            }
+            else {lpName = token0Name.symbol + "-" + token1Name.symbol + " LP"}
             
             let lpPriceUsd;
             if(token0Name.name == 'Wrapped Pulse'){

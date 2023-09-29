@@ -45,7 +45,6 @@ export default function FarmPoolInfo({
     })
     const maxDeposit = depositIncrementButtonProps();
     const inputDeposit = depositInputProps();
-    console.log(inputDeposit);
     function setMaxDeposit() {
         setDepositInput((userBalance * 10**18)-5)
     }

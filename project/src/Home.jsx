@@ -107,9 +107,9 @@ function Home() {
          return(
             <Box minHeight='100vh'>
                 <VStack>
-                    <Box bgGradient='linear(to-bl, yellow.300, yellow.700)' width='100%' padding={10}>
+                    <Box bgGradient='linear(to-bl, yellow.300, yellow.700)' width='100%' padding={[5, null, null, 10]}>
                         <Center>
-                            <Text fontFamily='heading' fontWeight='bold' fontSize={[null, 25, 30, 40]} color='black' ml={[10,20,30,40]} mr={[10,20,30,40]} align='center'>
+                            <Text fontFamily='heading' fontWeight='bold' fontSize={[null, null, 30, 40]} color='black' ml={[10,20,30,40]} mr={[10,20,30,40]} align='center'>
                                 Liquidity Hub of the Atropa Ecosystem
                             </Text>
                         </Center>  

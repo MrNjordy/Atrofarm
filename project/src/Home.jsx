@@ -118,6 +118,11 @@ function Home() {
                         Yield farming powered by $Atrofa
                     </Text>
                     </Center>
+                    <Center>                 
+                    <Text ml='auto' mr='auto' fontSize={[7, 11, 13, 15]} fontFamily='fantasy' fontWeight='hairline'>
+                            0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17
+                    </Text>
+                    </Center>
                     <Flex>
                     <SimpleGrid columns={4} spacing={3} ml='auto' mr='auto' mt={2}>
                         <Link href="https://scan.pulsechain.com/address/0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17" isExternal>

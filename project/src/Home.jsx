@@ -137,7 +137,7 @@ function Home() {
                     </Box>
                 </VStack>
                 <Flex>
-                <SimpleGrid columns={[1, null, null, 2]} spacing={[10, 15, 30, 40]} ml='auto' mr='auto' mt={20}>
+                <SimpleGrid columns={[1, null, null, 2]} spacing={[10, 15, 30, 40]} ml='auto' mr='auto' mt={[5, 10, 15, 20]}>
                 <Box  bgColor='blue.900' padding={3} width={[null, 250, 350, 450]} fontSize={[null, 10, 15, 20]} color='yellow.500'>
                         <Center>
                         <Text mb={3} fontWeight='semibold' fontSize={[null, 15, 20, 25]}>

@@ -55,7 +55,7 @@ function Profile() {
                     <RouteLink to='/Staking' >Stake</RouteLink>
                 </Flex>
             </HStack>
-            <HStack ml='auto' spacing={[5, null, null, 5]} height={45} mt={4} mr={10} mb={2}>
+            <HStack ml='auto' spacing={[5, null, null, 5]} height={45} mt={4} mr={[5, null, null, 10]} mb={2}>
                 <Flex fontSize={[8, 11, 14, 17]}>
                     <Link href="https://twitter.com/Atrofarm17023" isExternal>
                         <Image src={X} alt='dex' boxSize={[3,4,5,6]} mr={1} ></Image>

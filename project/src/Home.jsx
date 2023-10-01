@@ -109,7 +109,7 @@ function Home() {
                 <VStack>
                     <Box bgGradient='linear(to-bl, yellow.300, yellow.700)' width='100%' padding={10}>
                         <Center>
-                            <Text fontFamily='heading' fontWeight='bold' fontSize={[null, 20, 30, 40]} color='black' ml={[10,20,30,40]} mr={[10,20,30,40]} align='center'>
+                            <Text fontFamily='heading' fontWeight='bold' fontSize={[null, 25, 30, 40]} color='black' ml={[10,20,30,40]} mr={[10,20,30,40]} align='center'>
                                 Liquidity Hub of the Atropa Ecosystem
                             </Text>
                         </Center>  
@@ -137,7 +137,7 @@ function Home() {
                     </Box>
                 </VStack>
                 <Flex>
-                <SimpleGrid columns={[1, null, null, 2]} spacing={[10, 15, 30, 40]} ml='auto' mr='auto' mt={[5, 10, 15, 20]}>
+                <SimpleGrid columns={[1, null, null, 2]} spacing={[8, 15, 30, 40]} ml='auto' mr='auto' mt={[5, 10, 15, 20]}>
                 <Box  bgColor='blue.900' padding={3} width={[null, 250, 350, 450]} fontSize={[null, 10, 15, 20]} color='yellow.500'>
                         <Center>
                         <Text mb={3} fontWeight='semibold' fontSize={[null, 15, 20, 25]}>
@@ -177,7 +177,7 @@ function Home() {
                             </Flex>
                         </HStack>
                 </Box>
-                <Box ml='auto' bgColor='blue.900' color='yellow.500'  padding={3} width={[null, 250, 350, 450]} fontSize={[null, 10, 15, 20]}>
+                <Box ml='auto' bgColor='blue.900' color='yellow.500'  padding={3} width={[null, null, 350, 450]} fontSize={[null, 10, 15, 20]}>
                     <Center>
                         <Text mb={3} fontWeight='semibold' fontSize={[null, 15, 20, 25]}>
                             Available to claim:

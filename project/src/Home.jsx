@@ -177,7 +177,7 @@ function Home() {
                             </Flex>
                         </HStack>
                 </Box>
-                <Box ml='auto' bgColor='blue.900' color='yellow.500'  padding={3} width={[null, null, 350, 450]} fontSize={[null, 10, 15, 20]}>
+                <Box ml='auto' mr='auto' bgColor='blue.900' color='yellow.500'  padding={3} width={[null, 250, 350, 450]} fontSize={[null, 10, 15, 20]}>
                     <Center>
                         <Text mb={3} fontWeight='semibold' fontSize={[null, 15, 20, 25]}>
                             Available to claim:

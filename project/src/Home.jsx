@@ -1,11 +1,16 @@
 import { useContractWrite } from "wagmi";
-import { Box, Button, Center, Flex, HStack, VStack, Text } from "@chakra-ui/react";
+import { Box, Button, Center, Flex, HStack, VStack, Text, SimpleGrid, Image, Link } from "@chakra-ui/react";
 import { useAccount } from "wagmi";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { InfoContext } from "./App";
 import { masterAbi } from "./data";
 import { usePublicClient } from "wagmi";
+import dexscreener from './assets/dexscreener.png'
+import dextool from './assets/dextool.jpeg'
+import geckoTerminal from './assets/geckoterminal.png'
+import pulseChain from './assets/PulseChain.jpeg'
+
 
 function Home() {
     const allPools = useContext(InfoContext);
@@ -16,6 +21,7 @@ function Home() {
     const [nativeTokenPrice, setNativeTokenPrice] = useState();
     const [marketCap, setMarketCap] = useState();
     const [totalSupply, setTotalSupply] = useState();
+    const [inflation, setInflation] = useState();
 
     const { address } = useAccount();
     const { data, isLoading, isSuccess, write } = useContractWrite({
@@ -37,6 +43,8 @@ function Home() {
                 const nativeTokenPrice = allPools.generalInfo[0].nativeTokenPriceUsd;
                 const marketCap = (allPools.generalInfo[0].nativeTokenSupply) * nativeTokenPrice;
                 const totalSupply = parseInt(allPools.generalInfo[0].nativeTokenSupply);
+                const inflation = allPools.generalInfo[0].inflation;
+                console.log(inflation)
 
                 setNativeTokenPrice(parseFloat(nativeTokenPrice).toFixed(4));
                 setMarketCap(marketCap.toFixed(0));
@@ -56,6 +64,7 @@ function Home() {
                 setTotalRewards(totalRewards.toFixed(2));
                 setTotalRewardsUsd(totalRewardsUsd.toFixed(2));
                 setTvl(tvl.toFixed(2));
+                setInflation(inflation)
             }
           }
           wait();
@@ -98,74 +107,110 @@ function Home() {
          return(
             <Box minHeight='100vh'>
                 <VStack>
-                    <Box width={[null, 250, 350, 700]} mt={[2, null, null, 10]} padding={5} fontWeight='bold' border='4px' borderRadius='2xl' bgGradient='linear(to-bl, yellow.400, yellow.600)' >
+                    <Box bgGradient='linear(to-bl, yellow.300, yellow.700)' width='100%' padding={10}>
                         <Center>
-                            <Text fontFamily='heading' fontSize={[null, 20, 30, 40]}>
-                                Welcome to Atrofarm
+                            <Text fontFamily='heading' fontWeight='bold' fontSize={[null, 20, 30, 40]} color='black' ml={[10,20,30,40]} mr={[10,20,30,40]} align='center'>
+                                Liquidity Hub of the Atropa Ecosystem
                             </Text>
-                        </Center>
-                    </Box >
-                    
-                    <Text ml='auto' mr='auto' fontSize={[11, 15, 20, 25]} fontFamily='fantasy' fontWeight='semibold' bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text'>
-                        Where degens get rewarded for supporting the Atropa ecosystem
+                        </Center>  
+                        <Center>                 
+                    <Text ml='auto' mr='auto' fontSize={[10, 15, 25, 35]} fontFamily='fantasy' fontWeight='semibold'>
+                        Yield farming powered by $Atrofa
                     </Text>
+                    </Center>
+                    <Flex>
+                    <SimpleGrid columns={4} spacing={3} ml='auto' mr='auto' mt={2}>
+                        <Link href="https://scan.pulsechain.com/address/0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17" isExternal>
+                        <Image src={pulseChain} alt='dex' boxSize={[3,4,5,6]} mr={1}></Image>
+                        </Link>
+                        <Link href="https://dexscreener.com/pulsechain/0x772d497bcdeb51fdf38bd7d097a4cb38cf7420a7" isExternal>
+                        <Image src={dexscreener} alt='dex' boxSize={[3,4,5,6]} mr={1}></Image>
+                        </Link>
+                        <Link href="https://www.dextools.io/app/en/pulse/pair-explorer/0x772d497bcdeb51fdf38bd7d097a4cb38cf7420a7" isExternal>
+                        <Image src={dextool} alt='dex' boxSize={[3,4,5,6]} mr={1}></Image>
+                        </Link>
+                        <Link href="https://www.geckoterminal.com/pulsechain/pools/0x772d497bcdeb51fdf38bd7d097a4cb38cf7420a7" isExternal>
+                        <Image src={geckoTerminal} alt='dex' boxSize={[3,4,5,6]} mr={1}></Image>
+                        </Link>
+                    </SimpleGrid> 
+                    </Flex>
+                    </Box>
                 </VStack>
-                <Box  bgGradient='linear(to-bl, yellow.400, yellow.600)' ml='auto' mr='auto' mt='40px' border='2px' padding={3} width={[null, 250, 350, 450]} borderRadius='2xl' fontSize={[null, 15, 20, 25]} fontWeight='bold'>
-                        <HStack mb={5}>
+                <Flex>
+                <SimpleGrid columns={[1, null, null, 2]} spacing={[10, 15, 30, 40]} ml='auto' mr='auto' mt={20}>
+                <Box  bgColor='blue.900' padding={3} width={[null, 250, 350, 450]} fontSize={[null, 10, 15, 20]} color='yellow.500'>
+                        <Center>
+                        <Text mb={3} fontWeight='semibold' fontSize={[null, 15, 20, 25]}>
+                                $Atrofa
+                        </Text>
+                        </Center>
+                        <HStack mb={1}>
                             <Flex fontFamily='heading' ml={1} mr='auto'>
-                                $Atrofa:
+                                Price:
                             </Flex>
-                            <Flex ml='auto' mr={1}>
+                            <Flex ml='auto' mr={1} fontWeight='semibold'>
                                 ${nativeTokenPrice}
                             </Flex>
                         </HStack>
-                        <HStack mb={5}>
+                        <HStack mb={1}>
                             <Flex fontFamily='heading' ml={1} mr='auto'>
                                 Market Cap:
                             </Flex>
-                            <Flex ml='auto' mr={1}>
+                            <Flex ml='auto' mr={1} fontWeight='semibold'>
                                 ${marketCap}
                             </Flex>
                         </HStack>
-                        <HStack>
+                        <HStack mb={1}>
                             <Flex fontFamily='heading' ml={1} mr='auto'>
                                 Total Supply:
                             </Flex>
-                            <Flex ml='auto' mr={1}>
+                            <Flex ml='auto' mr={1} fontWeight='semibold'>
                                 {totalSupply}
                             </Flex>
                         </HStack>
+                        <HStack mb={1}>
+                            <Flex fontFamily='heading' ml={1} mr='auto'>
+                                Daily Inflation:
+                            </Flex>
+                            <Flex ml='auto' mr={1} fontWeight='semibold'>
+                                {inflation}
+                            </Flex>
+                        </HStack>
                 </Box>
-                <Box fontFamily='heading' ml='auto' mr='auto' mt={10} border='2px' padding={2} width={[null, 500, 700, 900]} borderRadius='2xl' bgGradient='linear(to-bl, yellow.400, yellow.600)'>
-                    <VStack fontSize={[null, 15, 20, 25]} fontWeight='bold'>
+                <Box ml='auto' bgColor='blue.900' color='yellow.500'  padding={3} width={[null, 250, 350, 450]} fontSize={[null, 10, 15, 20]}>
+                    <Center>
+                        <Text mb={3} fontWeight='semibold' fontSize={[null, 15, 20, 25]}>
+                            Available to claim:
+                        </Text>
+                    </Center>
+                    <HStack >
+                        <Flex ml='auto' mr='auto' fontWeight='semibold'>
+                            {totalRewards}
+                        </Flex>
+                    </HStack>
+                    <HStack>
+                        <Flex ml='auto' mr='auto' fontSize='smaller' fontWeight='light'>
+                            ${totalRewardsUsd}
+                        </Flex>
+                    </HStack>
+                        <Center>
+                            <Button mt={6} onClick={write} isLoading={isLoading} width={[null, 75, 100, 150]} height={[null,31,null,34]} paddingBottom={2} paddingTop={2} fontSize={[null, 11, 13, 15]} bgColor='yellow.500' color='black' _hover={{ bgColor: 'gray.600'}}>
+                                Claim
+                            </Button>
+                        </Center> 
+                </Box>
+                </SimpleGrid> 
+                </Flex>
+                <Box fontFamily='heading' ml='auto' mr='auto' mt={[5, null, null, 10]} padding={2} width={[null, 250, 350, 450]} bgColor='blue.900' color='yellow.500'>
+                    <VStack fontSize={[null, 15, 20, 25]} fontWeight='semibold'>
                         <Flex fontFamily='heading' ml='auto' mr='auto'>
-                            Total Value Locked accross the protocol:
+                            TVL:
                         </Flex>
                         <Flex ml='auto' mr='auto'>
                         ${tvl}
                         </Flex>
                     </VStack>
-                </Box>
-                <Box ml='auto' mr='auto' mt={10} bgGradient='linear(to-bl, yellow.400, yellow.600)' border='2px'padding={3} width={[null, 250, 350, 450]} borderRadius='2xl' fontSize={[null, 15, 20, 25]} fontWeight='bold'>
-                    <HStack >
-                        <Flex fontFamily='heading' ml={1} mr='auto'>
-                            Your rewards: 
-                        </Flex>
-                        <Flex ml='auto' mr={1}>
-                            {totalRewards}
-                        </Flex>
-                    </HStack>
-                    <HStack>
-                        <Flex ml='auto' mr={1} fontSize='smaller' fontWeight='light'>
-                            ${totalRewardsUsd}
-                        </Flex>
-                    </HStack>
-                        <Center>
-                            <Button onClick={write} isLoading={isLoading} width={[null, 75, 100, 150]} height={[null,31,null,34]} paddingBottom={2} paddingTop={2} fontSize={[null, 11, 13, 15]} bgColor='blackAlpha.800' color='wheat' _hover={{ bgColor: 'gray.600'}}>
-                                Claim All
-                            </Button>
-                        </Center> 
-                </Box>  
+                </Box> 
              </Box>
         ) 
 }

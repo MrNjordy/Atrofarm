@@ -7,6 +7,9 @@ import atrofaIcon from './assets/Atrofa.png'
 import atropaIcon from './assets/Atropa.png'
 import { useContext } from "react";
 import { InfoContext } from "./App";
+import {FaSquareXTwitter} from 'react-icons/fa6'
+import X from './assets/X.png'
+import telegram from './assets/telegram3.png'
 
 function Profile() {
     const allPools = useContext(InfoContext);
@@ -40,8 +43,8 @@ function Profile() {
     // }, [address, allPools])
     // console.log(allPools)
     return (
-        <Flex paddingBottom={3} bgGradient='linear(to-b, gray.400, gray.700)' color='gray.800' fontWeight='bold' fontSize={[11, 14, 17, 20]}>
-            <HStack ml={[5, null, null, 10]} spacing={[5, null, null, 20]} height={45} mr={2}>
+        <Flex paddingBottom={3} bgColor='gray.800' color='gray.300' fontWeight='bold' fontSize={[11, 14, 17, 20]}>
+            <HStack ml={[5, null, null, 10]} spacing={[5, null, null, 20]} height={75} mr={2}>
                 <Flex>
                     <RouteLink to='/' >Home</RouteLink>
                 </Flex>
@@ -52,24 +55,18 @@ function Profile() {
                     <RouteLink to='/Staking' >Stake</RouteLink>
                 </Flex>
             </HStack>
-            <HStack ml='auto' spacing={[5, null, null, 20]} height={45} mr={10} mb={2}>
+            <HStack ml='auto' spacing={[5, null, null, 5]} height={45} mt={4} mr={10} mb={2}>
                 <Flex fontSize={[8, 11, 14, 17]}>
-                    <Image src={atrofaIcon} alt='Atrofa' boxSize={[3,4,5,6]} mr={1}></Image>
-                    <Link href="https://dexscreener.com/pulsechain/0x772d497bcdeb51fdf38bd7d097a4cb38cf7420a7" isExternal>
-                    <Flex>
-                    ${nativeTokenPrice}
-                    </Flex>
+                    <Link href="https://twitter.com/Atrofarm17023" isExternal>
+                        <Image src={X} alt='dex' boxSize={[3,4,5,6]} mr={1} ></Image>
                     </Link>
                 </Flex>
                 <Flex fontSize={[8, 11, 14, 17]}>
-                    <Image src={atropaIcon} alt='Atropa' boxSize={[3,4,5,6]} mr={1}></Image>
-                    <Link href="https://dexscreener.com/pulsechain/0xf892d93199b4de0ab1cdf35799ccf9d5a425581b" isExternal>
-                    <Flex>
-                    ${atropaPrice}
-                    </Flex>
+                    <Link href="https://t.me/+xBSQP3AYGXs3OWEx" isExternal>
+                        <Image src={telegram} alt='dex' boxSize={[3,4,6,8]} ></Image>
                     </Link>
                 </Flex>
-                <Button fontSize={[null, 11, 14, 17]} height={[null,31,null,42]} paddingTop={2} paddingBottom={2} mt={2} bgGradient='linear(to-b, gray.700, gray.900)' color='wheat' onClick={() => open()}> 
+                <Button fontSize={[null, 11, 14, 17]} height={[null,31,null,42]} paddingTop={2} paddingBottom={2} bgColor='blue.900' color='wheat' onClick={() => open()}> 
                     {isConnected ? address.substring(0,7) + '...' : "Connect" }
                 </Button>
             </HStack>

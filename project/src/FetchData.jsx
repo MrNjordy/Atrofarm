@@ -66,6 +66,7 @@ const nativeTokenSupply = nativeToken.totalSupply.formatted;
 
 const numberOfPool = parseInt((data[1].result).toString());
 const tokenMintedPerBlock = data[2].result;
+const tokenMintedPerDay = parseInt(tokenMintedPerBlock.toString()) / (10**18) * 6 * 60 * 24;
 const multiplier = data[3].result;
 const totalAllocPoint = data[4].result;
 
@@ -73,6 +74,8 @@ let generalInfo = {};
 generalInfo.atropaPrice = atropaPrice;
 generalInfo.nativeTokenPriceUsd = nativeTokenPriceUsd;
 generalInfo.nativeTokenSupply = nativeTokenSupply;
+generalInfo.inflation = tokenMintedPerDay;
+
 
 
 //========================= Fill all pools with the data collected ========================

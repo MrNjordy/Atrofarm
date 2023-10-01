@@ -68,7 +68,6 @@ function App() {
           <Route path ='/Farms' Component={Farm} />
           <Route path ='/Staking' Component={Staking} />
         </Routes>
-        <Footer />
       </BrowserRouter>
       </InfoContext.Provider>
     </WagmiConfig>

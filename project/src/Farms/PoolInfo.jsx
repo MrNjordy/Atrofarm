@@ -1,4 +1,4 @@
-import { Flex, HStack, Box, Center, Button, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, FormControl, FormLabel, Input, useNumberInput, Spinner, Text, VStack, Link} from "@chakra-ui/react"
+import { Flex, HStack, Box, Center, Button, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, FormControl, FormLabel, Input, useNumberInput, Spinner, Text, VStack, Link, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, border} from "@chakra-ui/react"
 import { useAccount, useWaitForTransaction } from "wagmi";
 import { writeContract, prepareWriteContract } from "wagmi/actions";
 import { masterContract, tokenAbi } from "../data";
@@ -19,6 +19,7 @@ export default function FarmPoolInfo({
     allowance,
     address,
     depositFee,
+    isAtrofa,
 }) {
 
 // ============================ HOOKS =============================================
@@ -120,54 +121,60 @@ export default function FarmPoolInfo({
        })
    }
     return(
-            <Box fontFamily='heading' mt={5} padding={2} width='full' borderRadius='2xl' bgGradient='linear(to-bl, yellow.400, yellow.600)' fontWeight='semibold'>
-                
-                <Center borderBottom='2px'>
-                <VStack spacing='1px'>
-                    <Flex fontSize={[null, null, null, 17]}>
+        <Box>
+            <Box fontFamily='heading' mt={5} padding={3} paddingBottom={1} width='full' bgColor='blue.900' fontWeight='semibold' color={isAtrofa ? 'yellow.500' : 'gray.300'} border={userStaked>0 ? '2px' : 'none'} borderBottom='none' borderColor='yellow.500'>
+                <Center borderBottom='2px' borderColor='yellow.500'>
+                    <Box mb={3}>
                         {name}
-                    </Flex>
+                    </Box>
                     <Flex mb="3" fontSize='small' fontWeight='light'>
-                        {/* <Link href={`https://dexscreener.com/pulsechain/${address}`}>
-                        {address.substring(0,12) + '...'}
-                        </Link> */}
                     </Flex>
-                    </VStack>
                 </Center>
-                <HStack mb='3' mt={3}> 
-                    <Flex ml={1} mr='auto'>
-                        Deposit Fee: 
-                    </Flex>
-                    <Flex ml='auto' mr={1}>
-                        {depositFee}%
-                    </Flex>
-                </HStack>
-                <HStack mb='3' mt={3}> 
-                    <Flex ml={1} mr='auto'>
+                <HStack mb={1} mt={3}> 
+                    <Flex ml={1} mr='auto' fontSize='smaller'>
                         APR: 
                     </Flex>
                     <Flex ml='auto' mr={1}>
                         {apr}%
                     </Flex>
                 </HStack>
-                <HStack>
+                <HStack >
                     <Flex ml={1} mr='auto' fontSize='smaller'>
-                        Deposited: 
+                        Your Deposit: 
                     </Flex>
                     <Flex ml='auto' mr={1} fontSize='large'>
                         {parseFloat(userStaked).toFixed(2)} 
                     </Flex>
                 </HStack> 
-                <Flex justify='right' mr={1} mb={3} mt={-2} fontSize='smaller' fontWeight='light'>
+                <Flex justify='right' mr={1} mb={1} mt={-1} fontSize='smaller' fontWeight='light'>
                     ${userStakedUsd}
                 </Flex>
+                <HStack>
+                    <Flex ml={1} mr='auto' fontSize='smaller'>
+                        To Claim:
+                    </Flex>
+                    <Flex ml='auto' mr={1} fontSize='large'>
+                        {rewards}
+                    </Flex>
+                </HStack>
+                <Flex justify='right' mr={1} mt={-1} fontSize='smaller' fontWeight='light'>
+                    ${rewardsUsd}
+                </Flex>
+                </Box>
+                <Box fontFamily='heading' padding={2} paddingTop={0} width='full' bgColor='blue.900' fontWeight='semibold' color={isAtrofa ? 'yellow.500' : 'gray.300'} border={userStaked>0 ? '2px' : 'none'} borderTop='none' borderColor='yellow.500'>
+                <Accordion defaultIndex={[]} allowMultiple>
+                    <AccordionItem border='none'>
+                        <AccordionButton justifyContent='center'>   
+                            <AccordionIcon></AccordionIcon>  
+                        </AccordionButton>
+                        <AccordionPanel>
                 <Center mb={3}>
-                    <Button mr={2} ml={2} bgColor='blackAlpha.800' color='wheat' _hover={{ bgColor: 'gray.600'}} isDisabled={!isConnected} onClick={onDepositOpen}>Deposit</Button>
+                    <Button fontSize='smaller' mr={2} bgGradient='linear(to-bl, yellow.300, yellow.700)' color='black' isDisabled={!isConnected} onClick={onDepositOpen}>Deposit</Button>
                         <Modal isOpen={isDepositOpen} onClose={onDepositClose} isCentered >
                             <ModalOverlay />
-                                <ModalContent bgGradient='linear(to-b, gray.700, gray.900)'>
-                                    <ModalHeader mb={1} borderBottom='1px' borderColor='yellow.600'>
-                                        <Text bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text' >
+                                <ModalContent bgColor='blue.900'>
+                                    <ModalHeader mb={1} borderBottom='1px' borderColor='yellow.500'>
+                                        <Text color='gray.300' >
                                             Deposit {name}
                                         </Text>
                                     </ModalHeader>
@@ -177,73 +184,79 @@ export default function FarmPoolInfo({
                                             <FormLabel fontSize='small' mt={2}>
                                                 <HStack>
                                                     <Flex ml={1} mr='auto'>
-                                                        <Text bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text' >
+                                                        <Text color='gray.300' >
                                                             Balance: {userBalance} {name}
                                                         </Text>
                                                     </Flex>
-                                                    <Button {...maxDeposit} onClick={setMaxDeposit} size='xs'>MAX</Button>
+                                                    <Button {...maxDeposit} bgGradient='linear(to-bl, yellow.300, yellow.700)' onClick={setMaxDeposit} size='xs'>MAX</Button>
                                                 </HStack>
                                             </FormLabel>
-                                            <Input {...inputDeposit} bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text' focusBorderColor='yellow.600' color='yellow.500' />
+                                            <Input {...inputDeposit} color='gray.300' focusBorderColor='yellow.500' />
                                         </FormControl>
                                     </ModalBody>
                                     <Center>
                                     <ModalFooter>
-                                        {allowance == 0 || allowance < depositInput ? <Button mr={5} isLoading={approvalLoading} onClick={approval}>                                                                                                                  
+                                        {allowance == 0 || allowance < depositInput ? <Button bgGradient='linear(to-bl, yellow.300, yellow.700)'  mr={5} isLoading={approvalLoading} onClick={approval}>                                                                                                                  
                                                                         {"Approve"} 
                                                                     </Button> 
-                                                                  : <Button mr={5} isDisabled={userBalance==0 || depositInput==0} isLoading={depositLoading} onClick={deposit}>                                                                                                                  
+                                                                  : <Button bgGradient='linear(to-bl, yellow.300, yellow.700)' mr={5} isDisabled={userBalance==0 || depositInput==0} isLoading={depositLoading} onClick={deposit}>                                                                                                                  
                                                                         {"Deposit" }                           
                                                                     </Button> }
                                             <Modal isOpen={isDepositProcessingOpen} onClose={onDepositProcessingClose} isCentered>
                                                 <ModalOverlay>
-                                                    <ModalContent border='4px' borderColor={depositSuccess ? 'green.600'
-                                                                                                           : depositError ? 'red.200'
-                                                                                                           : 'yellow.700'}>
-                                                        <ModalHeader borderTopRadius='md' borderBottom='1px' color='yellow.600' bgGradient='linear(to-b, gray.700, gray.900)'>
+                                                    <ModalContent>
+                                                        <ModalHeader borderBottom='1px' color='gray.300' bgColor='blue.900' borderColor='yellow.500'>
                                                             { depositLoading ? "Processing Transaction..."
                                                                         : depositSuccess ? 'Transaction Successful'
                                                                         : depositError ? 'Transaction Reverted'
                                                                         : "Waiting Approval"}
                                                             <ModalCloseButton />
                                                         </ModalHeader>
-                                                        <ModalBody bgGradient='linear(to-b, gray.700, gray.900)' color= 'yellow.600'>
-                                                            {depositLoading? <Flex ><Spinner
+                                                        <ModalBody bgColor='blue.900' color= 'gray.300'>
+                                                            {depositLoading? <Flex >
+                                                                                <Spinner
                                                                                thickness='4px'
                                                                                speed='0.65s'
                                                                                emptyColor='gray.200'
-                                                                               color='blue.500'
+                                                                               color='yellow.500'
                                                                                size='xl'
                                                                                ml='auto' mr='auto' mt={5} mb={5}
-                                                                             /></Flex>
+                                                                             />
+                                                                             </Flex>
                                                                            : depositSuccess? `Deposited ${name}: ${depositTxData}`
                                                                            : depositError? depositTxData
-                                                                           :<Flex><Spinner
+                                                                           :<VStack>
+                                                                                <Text align='center'>
+                                                                                    If stuck on this window remove the last 2 decimals from deposit/withdrawal amount
+                                                                                </Text>
+                                                                            <Flex>
+                                                                            <Spinner
                                                                            thickness='4px'
                                                                            speed='0.65s'
                                                                            emptyColor='gray.200'
-                                                                           color='blue.500'
+                                                                           color='yellow.500'
                                                                            size='xl'
                                                                            ml='auto' mr='auto' mt={5} mb={5}
-                                                                         /></Flex>}
+                                                                         /></Flex>
+                                                                         </VStack>}
                                                                             
                                                         </ModalBody>
                                                     </ModalContent>
                                                 </ModalOverlay>
                                             </Modal>
-                                            <Button ml={5} onClick={onDepositClose}>
+                                            <Button bgGradient='linear(to-bl, yellow.300, yellow.700)' ml={5} onClick={onDepositClose}>
                                                 {"Cancel"}
                                             </Button>
                                         </ModalFooter>
                                     </Center>
                                 </ModalContent>
                         </Modal>
-                    <Button mr={2} ml={2} bgColor='blackAlpha.800' color='wheat' _hover={{ bgColor: 'gray.600'}} isDisabled={!isConnected} onClick={onWithdrawOpen}>Withdraw</Button>
+                    <Button fontSize='smaller' ml={2} bgGradient='linear(to-bl, yellow.300, yellow.700)' color='black' isDisabled={!isConnected} onClick={onWithdrawOpen}>Withdraw</Button>
                         <Modal isOpen={isWithdrawOpen} onClose={onWithdrawClose} isCentered>
                             <ModalOverlay />
-                            <ModalContent bgGradient='linear(to-b, gray.700, gray.900)'>
-                                    <ModalHeader mb={1} borderBottom='1px' borderColor='yellow.600'>
-                                        <Text bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text' >
+                            <ModalContent bgColor='blue.900'>
+                                    <ModalHeader mb={1} borderBottom='1px' borderColor='yellow.500'>
+                                        <Text color='gray.300'>
                                             Withdraw {name}
                                         </Text>
                                     </ModalHeader>
@@ -253,57 +266,61 @@ export default function FarmPoolInfo({
                                             <FormLabel fontSize='small' mt={2}>
                                                 <HStack>
                                                     <Flex ml={1} mr='auto'>
-                                                        <Text bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text' >
+                                                        <Text color='gray.300' >
                                                             Total Staked: {userStaked} {name}
                                                         </Text>
                                                     </Flex>
-                                                    <Button {...maxWithdraw} onClick={setMaxWithdraw} size='xs'>MAX</Button>
+                                                    <Button bgGradient='linear(to-bl, yellow.300, yellow.700)' {...maxWithdraw} onClick={setMaxWithdraw} size='xs'>MAX</Button>
                                                 </HStack>
                                             </FormLabel>
-                                            <Input {...inputWithdraw} bgGradient='linear(to-bl, yellow.400, yellow.600)' bgClip='text' focusBorderColor='yellow.600' color='yellow.500' />
+                                            <Input {...inputWithdraw} color='gray.300' focusBorderColor='yellow.500' />
                                         </FormControl>
                                     </ModalBody>
                                     <Center>
                                         <ModalFooter>                   
-                                            <Button isDisabled={userStaked==0 || withdrawInput==0} isLoading={withdrawLoading} onClick={withdraw}>
+                                            <Button bgGradient='linear(to-bl, yellow.300, yellow.700)' mr={5} isDisabled={userStaked==0 || withdrawInput==0} isLoading={withdrawLoading} onClick={withdraw}>
                                                 {"Withdraw"}
                                             </Button>
                                                 <Modal isOpen={isWithdrawProcessingOpen} onClose={onWithdrawProcessingClose} isCentered>
                                                     <ModalOverlay>
-                                                    <ModalContent border='4px' borderColor={withdrawSuccess ? 'green.600'
-                                                                                                           : withdrawError ? 'red.500'
-                                                                                                           : 'yellow.700'}>
-                                                        <ModalHeader borderTopRadius='md' borderBottom='1px' color='yellow.600' bgGradient='linear(to-b, gray.700, gray.900)'>
+                                                    <ModalContent>
+                                                        <ModalHeader borderBottom='1px' color='gray.300' bgColor='blue.900' borderColor='yellow.500'>
                                                             { withdrawLoading ? "Processing Transaction..."
                                                                         : withdrawSuccess ? 'Transaction Successful'
                                                                         : withdrawError ? 'Transaction Reverted'
                                                                         : "Waiting Approval"}
                                                             <ModalCloseButton />
                                                         </ModalHeader>
-                                                        <ModalBody bgGradient='linear(to-b, gray.700, gray.900)' color= 'yellow.600'>
+                                                        <ModalBody bgColor='blue.900' color= 'gray.300'>
                                                             {withdrawLoading? <Flex ><Spinner
                                                                                thickness='4px'
                                                                                speed='0.65s'
-                                                                               emptyColor='gray.200'
-                                                                               color='blue.500'
+                                                                               emptyColor='gray.300'
+                                                                               color='yellow.500'
                                                                                size='xl'
                                                                                ml='auto' mr='auto' mt={5} mb={5}
                                                                              /></Flex>
                                                                            : withdrawSuccess? `Withdrew ${name}: ${withdrawTxData}`
                                                                            : withdrawError? withdrawTxData
-                                                                           :<Flex><Spinner
-                                                                           thickness='4px'
-                                                                           speed='0.65s'
-                                                                           emptyColor='gray.200'
-                                                                           color='blue.500'
-                                                                           size='xl'
-                                                                           ml='auto' mr='auto' mt={5} mb={5}
-                                                                         /></Flex>}       
+                                                                           :<VStack>
+                                                                           <Text align='center'>
+                                                                               If stuck on this window remove the last 2 decimals from deposit/withdrawal amount
+                                                                           </Text>
+                                                                       <Flex>
+                                                                       <Spinner
+                                                                      thickness='4px'
+                                                                      speed='0.65s'
+                                                                      emptyColor='gray.300'
+                                                                      color='yellow.500'
+                                                                      size='xl'
+                                                                      ml='auto' mr='auto' mt={5} mb={5}
+                                                                    /></Flex>
+                                                                    </VStack>}       
                                                         </ModalBody>
                                                     </ModalContent>
                                                     </ModalOverlay>
                                                 </Modal>
-                                            <Button onClick={onWithdrawClose}>
+                                            <Button bgGradient='linear(to-bl, yellow.300, yellow.700)' ml={5} onClick={onWithdrawClose}>
                                                 {"Cancel"}
                                             </Button>
                                         </ModalFooter>
@@ -311,27 +328,21 @@ export default function FarmPoolInfo({
                                 </ModalContent>
                         </Modal>
                 </Center>
+                <Button fontSize='smaller' width='full' mb={5} bgGradient='linear(to-bl, yellow.300, yellow.700)' color='black' isDisabled={!isConnected} onClick={claim}>Claim</Button>
                 <HStack>
-                    <Flex ml={1} mr='auto'>
-                        Rewards:
-                    </Flex>
-                    <Flex ml='auto' mr={1} fontSize='large'>
-                        {rewards}
-                    </Flex>
-                </HStack>
-                <Flex justify='right' mr={1} mb={3} mt={-2} fontSize='smaller' fontWeight='light'>
-                    ${rewardsUsd}
-                </Flex>
-                <Button width='full' mb={5} bgColor='blackAlpha.800' color='wheat' _hover={{ bgColor: 'gray.600'}} isDisabled={!isConnected} onClick={claim}>Claim</Button>
-                <HStack>
-                    <Flex ml={1} mr='auto'>
+                    <Flex mr='auto' fontSize='smaller'>
                         Pool TVL:
                     </Flex>
-                    <Flex ml='auto' mr={1}>
+                    <Flex ml='auto'>
                         ${totalStakedUsd}
                     </Flex>
                 </HStack>
-             </Box>
+                </AccordionPanel>
+                </AccordionItem>
+                </Accordion>
+                </Box>
+              </Box>
+
              
     )
 }

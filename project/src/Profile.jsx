@@ -10,6 +10,7 @@ import { InfoContext } from "./App";
 import {FaSquareXTwitter} from 'react-icons/fa6'
 import X from './assets/X.png'
 import telegram from './assets/telegram3.png'
+import atroc from './assets/Atrofarm.png'
 
 function Profile() {
     const allPools = useContext(InfoContext);
@@ -46,7 +47,9 @@ function Profile() {
         <Flex paddingBottom={3} bgColor='gray.800' color='gray.300' fontWeight='bold' fontSize={[11, 14, 17, 20]}>
             <HStack ml={[5, null, null, 10]} spacing={[5, null, null, 20]} height={75} mr={2}>
                 <Flex>
-                    <RouteLink to='/' >Home</RouteLink>
+                    <RouteLink to='/' >
+                        <Image src={atroc}></Image>
+                    </RouteLink>
                 </Flex>
                 <Flex>
                     <RouteLink to='/Farms' >Farm</RouteLink>
@@ -55,7 +58,7 @@ function Profile() {
                     <RouteLink to='/Staking' >Stake</RouteLink>
                 </Flex>
             </HStack>
-            <HStack ml='auto' spacing={[5, null, null, 5]} height={45} mt={4} mr={[5, null, null, 10]} mb={2}>
+            <HStack ml='auto' spacing={[2, 3, 4, 5]} height={45} mt={4} mr={[5, null, null, 10]} mb={2}>
                 <Flex fontSize={[8, 11, 14, 17]}>
                     <Text>${nativeTokenPrice}</Text>
                 </Flex>

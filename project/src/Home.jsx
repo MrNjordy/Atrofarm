@@ -114,10 +114,10 @@ function Home() {
                             </Text>
                         </Center>  
                         <Center>                 
-                    <Text ml='auto' mr='auto' fontSize={[10, 15, 25, 35]} fontFamily='fantasy' fontWeight='semibold'>
-                        Yield farming powered by $Atrofa
-                    </Text>
-                    </Center>
+                            <Text ml='auto' mr='auto' fontSize={[10, 15, 25, 35]} fontFamily='fantasy' fontWeight='semibold'>
+                                Yield farming powered by $Atrofa
+                            </Text>
+                        </Center>
                     <Flex>
                     <SimpleGrid columns={4} spacing={3} ml='auto' mr='auto' mt={2}>
                         <Link href="https://scan.pulsechain.com/address/0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17" isExternal>
@@ -176,6 +176,14 @@ function Home() {
                                 {inflation}
                             </Flex>
                         </HStack>
+                        <HStack mb={1}>
+                            <Flex fontFamily='heading' ml={1} mr='auto'>
+                                Buy & Burn:
+                            </Flex>
+                            <Flex ml='auto' mr={1} fontWeight='semibold'>
+                                0
+                            </Flex>
+                        </HStack>
                 </Box>
                 <Box ml='auto' mr='auto' bgColor='blue.900' color='yellow.500'  padding={3} width={[null, 250, 350, 450]} fontSize={[null, 10, 15, 20]}>
                     <Center>
@@ -194,7 +202,7 @@ function Home() {
                         </Flex>
                     </HStack>
                         <Center>
-                            <Button mt={6} onClick={write} isLoading={isLoading} width={[null, 75, 100, 150]} height={[null,31,null,34]} paddingBottom={2} paddingTop={2} fontSize={[null, 11, 13, 15]} bgColor='yellow.500' color='black' _hover={{ bgColor: 'gray.600'}}>
+                            <Button mt={9} onClick={write} isLoading={isLoading} width={[null, 75, 100, 150]} height={[null,31,null,34]} paddingBottom={2} paddingTop={2} fontSize={[null, 11, 13, 15]} bgGradient='linear(to-bl, yellow.300, yellow.700)' color='black' _hover={{ bgColor: 'gray.600'}}>
                                 Claim
                             </Button>
                         </Center> 

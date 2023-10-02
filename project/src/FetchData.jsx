@@ -153,11 +153,9 @@ generalInfo.inflation = tokenMintedPerDay;
             const token1Name = await fetchToken({ address: lpToken1Name })
 
             let lpName = '';
+            let isAtrofa = false;
             if(poolInfo[0] == '0x5EF7AaC0DE4F2012CB36730Da140025B113FAdA4') {
                 lpName = 'p' + token0Name.symbol + "-" + token1Name.symbol + " LP V1"
-            }
-            else if (poolInfo[0] == '0x7631150B9d22A805C6A10dc0C28680b4f7838069') {
-                lpName = token0Name.symbol + "-" + token1Name.symbol + " LP V2"
             }
             else {lpName = token0Name.symbol + "-" + token1Name.symbol + " LP"}
             
@@ -186,6 +184,9 @@ generalInfo.inflation = tokenMintedPerDay;
                 const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
                 lpPriceUsd = (lpPriceEth * wBtcPrice).toString();
             }
+            if (token0Name.symbol == 'Atrofa' || token1Name.symbol == 'Atrofa') {
+                isAtrofa = true;
+            };
 
             const totalStakedUsd = (parseInt(totalStaked.toString()) / 10**18) * lpPriceUsd;
 
@@ -244,6 +245,7 @@ generalInfo.inflation = tokenMintedPerDay;
                 allInfo.allowance = allowance;
                 allInfo.address = poolInfo[0];
                 allInfo.depositFee = depositFee;
+                allInfo.isAtrofa = isAtrofa;
             } else {    //user is not connected
                 allInfo.name = lpName;
                 allInfo.userStaked = '0';
@@ -253,6 +255,7 @@ generalInfo.inflation = tokenMintedPerDay;
                 allInfo.rewards = '0';
                 allInfo.rewardsUsd = '0';
                 allInfo.depositFee = depositFee;
+                allInfo.isAtrofa = isAtrofa;
             }
             farmingPools.push(allInfo) 
 

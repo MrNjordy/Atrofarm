@@ -8,7 +8,7 @@ import theme from './Theme/theme.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <Box bgColor='gray.800' paddingBottom={5}>
+      <Box bgColor='gray.800' paddingBottom={20}>
       <App />
       </Box>
     </ChakraProvider>

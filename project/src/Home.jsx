@@ -10,6 +10,7 @@ import dexscreener from './assets/dexscreener.png'
 import dextool from './assets/dextool.jpeg'
 import geckoTerminal from './assets/geckoterminal.png'
 import pulseChain from './assets/PulseChain.jpeg'
+import coinGecko from './assets/coinG.jpeg'
 
 
 function Home() {
@@ -119,9 +120,12 @@ function Home() {
                             </Text>
                         </Center>
                     <Flex>
-                    <SimpleGrid columns={4} spacing={3} ml='auto' mr='auto' mt={2}>
+                    <SimpleGrid columns={5} spacing={3} ml='auto' mr='auto' mt={2}>
                         <Link href="https://scan.pulsechain.com/address/0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17" isExternal>
                         <Image src={pulseChain} alt='dex' boxSize={[3,4,5,6]} mr={1}></Image>
+                        </Link>
+                        <Link href="https://www.coingecko.com/en/coins/atrofarm" isExternal>
+                        <Image src={coinGecko} alt='dex' boxSize={[3,4,5,6]} mr={1}></Image>
                         </Link>
                         <Link href="https://dexscreener.com/pulsechain/0x772d497bcdeb51fdf38bd7d097a4cb38cf7420a7" isExternal>
                         <Image src={dexscreener} alt='dex' boxSize={[3,4,5,6]} mr={1}></Image>

@@ -1,4 +1,4 @@
-import { Button, Flex, HStack, Image, Link } from "@chakra-ui/react";
+import { Button, Flex, HStack, Image, Link, Text } from "@chakra-ui/react";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import {  useAccount } from "wagmi";
 import { Link as RouteLink } from "react-router-dom";
@@ -56,6 +56,9 @@ function Profile() {
                 </Flex>
             </HStack>
             <HStack ml='auto' spacing={[5, null, null, 5]} height={45} mt={4} mr={[5, null, null, 10]} mb={2}>
+                <Flex fontSize={[8, 11, 14, 17]}>
+                    <Text>${nativeTokenPrice}</Text>
+                </Flex>
                 <Flex fontSize={[8, 11, 14, 17]}>
                     <Link href="https://twitter.com/Atrofarm17023" isExternal>
                         <Image src={X} alt='dex' boxSize={[3,4,5,6]} mr={1} ></Image>

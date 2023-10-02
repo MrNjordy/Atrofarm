@@ -48,7 +48,7 @@ function Profile() {
             <HStack ml={[5, null, null, 10]} spacing={[5, null, null, 20]} height={75} mr={2}>
                 <Flex>
                     <RouteLink to='/' >
-                        <Image src={atroc}></Image>
+                        <Image src={atroc} boxSize={[8,10,12,14]}></Image>
                     </RouteLink>
                 </Flex>
                 <Flex>

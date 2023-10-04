@@ -68,7 +68,7 @@ function Profile() {
                     </Link>
                 </Flex>
                 <Flex fontSize={[8, 11, 14, 17]}>
-                    <Link href="https://t.me/+xBSQP3AYGXs3OWEx" isExternal>
+                    <Link href="https://t.me/Atrofarm" isExternal>
                         <Image src={telegram} alt='dex' boxSize={[3,4,6,8]} ></Image>
                     </Link>
                 </Flex>

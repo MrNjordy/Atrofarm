@@ -56,7 +56,6 @@ return(
                 </Center>
             </Box>
             <Flex fontSize={[7, 10, 15, 20]} paddingBottom={5}>
-
             </Flex>
             </VStack>
             <Flex>

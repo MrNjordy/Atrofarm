@@ -154,19 +154,29 @@ generalInfo.inflation = tokenMintedPerDay;
 
             let lpName = '';
             let isAtrofa = false;
+            let isV1 = false;
+
+// ======================== SORT V1 PAIRS ====================================
             if(poolInfo[0] == '0x5EF7AaC0DE4F2012CB36730Da140025B113FAdA4') {
-                lpName = 'p' + token0Name.symbol + "-" + token1Name.symbol + " LP V1"
+                lpName = 'p' + token0Name.symbol + "-" + token1Name.symbol + " LP V1";
+                isV1 = true;
             }
             else {lpName = token0Name.symbol + "-" + token1Name.symbol + " LP"}
-            
+
+// ========================= GET THE CORRECT LP PRICE DEPENDING ON PAIRING =======================          
             let lpPriceUsd;
+            let token0 = lpToken0Name;
+            let token1 = lpToken1Name;
+
             if(token0Name.name == 'Wrapped Pulse'){
             const lpPriceEth = parseInt(getLpReserves[0].toString()) * 2 / parseInt(lpTotalSupply.toString());
             lpPriceUsd = (lpPriceEth * pulsePrice).toString();
+            token0 ='PLS'
             }
             else if (token1Name.name == 'Wrapped Pulse'){
             const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
             lpPriceUsd = (lpPriceEth * pulsePrice).toString();
+            token1 = 'PLS'
             }
             else if (token0Name.name == 'Atropa') {
             const lpPriceEth = parseInt(getLpReserves[0].toString()) * 2 / parseInt(lpTotalSupply.toString());
@@ -187,7 +197,7 @@ generalInfo.inflation = tokenMintedPerDay;
             if (token0Name.symbol == 'Atrofa' || token1Name.symbol == 'Atrofa') {
                 isAtrofa = true;
             };
-
+//=======================================================================================
             const totalStakedUsd = (parseInt(totalStaked.toString()) / 10**18) * lpPriceUsd;
 
             let Apr
@@ -246,6 +256,9 @@ generalInfo.inflation = tokenMintedPerDay;
                 allInfo.address = poolInfo[0];
                 allInfo.depositFee = depositFee;
                 allInfo.isAtrofa = isAtrofa;
+                allInfo.isV1 = isV1;
+                allInfo.token0 = token0;
+                allInfo.token1 = token1;
             } else {    //user is not connected
                 allInfo.name = lpName;
                 allInfo.userStaked = '0';
@@ -256,6 +269,9 @@ generalInfo.inflation = tokenMintedPerDay;
                 allInfo.rewardsUsd = '0';
                 allInfo.depositFee = depositFee;
                 allInfo.isAtrofa = isAtrofa;
+                allInfo.isV1 = isV1;
+                allInfo.token0 = token0;
+                allInfo.token1 = token1;
             }
             farmingPools.push(allInfo) 
 

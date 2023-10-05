@@ -20,6 +20,9 @@ export default function FarmPoolInfo({
     address,
     depositFee,
     isAtrofa,
+    isV1,
+    token0,
+    token1,
 }) {
 
 // ============================ HOOKS =============================================
@@ -30,6 +33,7 @@ export default function FarmPoolInfo({
     const [depositTxData, setDepositTxData] = useState();
     const [withdrawTxData, setWithdrawTxData] = useState();
     const [approvalTxData, setApprovalTxData] = useState();
+    const [addLP, setAddLP] = useState();
 
             //============ MODAL HOOKS ================
     const { isOpen: isDepositOpen, onOpen: onDepositOpen, onClose: onDepositClose } = useDisclosure();
@@ -63,7 +67,13 @@ export default function FarmPoolInfo({
     function setMaxWithdraw() {
         setWithdrawInput((userStaked * 10**18)-5)
     }
-    
+// =================== Link adress to PulseX liquidity ==============
+
+let addLpLink = '';
+if(isV1 == false) {
+    addLpLink = `https://app.pulsex.com/add/V2/${token0}/${token1}`
+}
+else {addLpLink = `https://app.pulsex.com/add/V2/${token0}/${token1}`}
 
 //============================== CONTRACTS FUNCTIONS =====================
     async function deposit() {
@@ -127,9 +137,12 @@ export default function FarmPoolInfo({
                     <Box mb={3}>
                         {name}
                     </Box>
-                    <Flex mb="3" fontSize='small' fontWeight='light'>
-                    </Flex>
                 </Center>
+                <Flex fontSize='small' fontWeight='light'>
+                    <Link ml='auto' mr='auto' isExternal href={isV1 ? `https://app.pulsex.com/add/V1/${token0}/${token1}` : `https://app.pulsex.com/add/V2/${token0}/${token1}`} alt='Pulsex LP' >
+                        Get LP tokens on PulseX
+                    </Link>
+                </Flex>
                 <HStack mb={1} mt={3}> 
                     <Flex ml={1} mr='auto' fontSize='smaller'>
                         APR: 

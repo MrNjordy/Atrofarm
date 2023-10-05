@@ -235,8 +235,9 @@ generalInfo.inflation = tokenMintedPerDay;
                 const pendingRewards = (parseFloat(rewards.toString()) / 10**18).toFixed(2);
                 const pendingRewardsUsd = (pendingRewards * nativeTokenPriceUsd).toFixed(2);
 
-                const userStaked = parseInt(userInfo[0].toString()) / 10**18;
-                const userStakedUsd = userStaked * lpPriceUsd;
+                // const userStaked = parseInt(userInfo[0].toString()) / 10**18;
+                const userStaked = userInfo[0].toString();
+                const userStakedUsd = parseInt(userStaked.toString()) /10**18 * lpPriceUsd;
                 const rewardPerShare = poolRewardPerYear / parseInt(totalStaked.toString());
                 const rewardPerShareUsd = rewardPerShare * pulsePrice;
 
@@ -245,13 +246,14 @@ generalInfo.inflation = tokenMintedPerDay;
 
                 allInfo.id = i;
                 allInfo.name = lpName;
-                allInfo.userStaked = userStaked;
+                allInfo.userStaked = userStaked.toString();
                 allInfo.userStakedUsd = userStakedUsd.toFixed(2);
                 allInfo.totalStakedUsd = totalStakedUsd.toFixed(2);
                 allInfo.apr = parseInt(Apr);
                 allInfo.rewards = pendingRewards;
                 allInfo.rewardsUsd = pendingRewardsUsd;
-                allInfo.userBalance = (parseInt(userBalance.toString()) / 10**18);
+                allInfo.userBalance = userBalance.toString();
+                // allInfo.userBalance = (parseInt(userBalance.toString()) / 10**18);
                 allInfo.allowance = allowance;
                 allInfo.address = poolInfo[0];
                 allInfo.depositFee = depositFee;
@@ -346,8 +348,8 @@ generalInfo.inflation = tokenMintedPerDay;
                 const pendingRewards = (parseFloat(rewards.toString()) / 10**18)
                 const pendingRewardsUsd = (pendingRewards * nativeTokenPriceUsd)
 
-                const userStaked = parseInt(userInfo[0].toString()) / 10**18;
-                const userStakedUsd = userStaked * parseFloat(tokenPriceUsd);
+                const userStaked = userInfo[0]
+                const userStakedUsd = parseInt(userStaked.toString()) / 10**18 * parseFloat(tokenPriceUsd);
 
                 const rewardPerShare = poolRewardPerYear / parseInt(totalStaked.toString());
                 const rewardPerShareUsd = rewardPerShare * pulsePrice;
@@ -356,13 +358,13 @@ generalInfo.inflation = tokenMintedPerDay;
         
                 allInfo.id = i;
                 allInfo.name = tokenInfo.symbol
-                allInfo.userStaked = userStaked;
+                allInfo.userStaked = userStaked.toString();
                 allInfo.userStakedUsd = userStakedUsd.toFixed(2)
                 allInfo.totalStakedUsd = totalStakedUsd.toFixed(2)
                 allInfo.apr = parseInt(Apr);
                 allInfo.rewards = pendingRewards.toFixed(2);
                 allInfo.rewardsUsd = pendingRewardsUsd.toFixed(2);
-                allInfo.userBalance = (parseInt(userBalance.toString()) / 10**18)
+                allInfo.userBalance = userBalance;
                 allInfo.allowance = allowance;
                 allInfo.address = poolInfo[0];
                 allInfo.depositFee = depositFee;

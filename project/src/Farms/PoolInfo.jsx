@@ -43,29 +43,29 @@ export default function FarmPoolInfo({
             //============ DEPOSIT FORM HOOK (INPUT NUMBER AND MAX BUTTON) ==========
     const { getInputProps: depositInputProps, getIncrementButtonProps: depositIncrementButtonProps } = useNumberInput({
         defaultValue: 0,
-        step: userBalance,
+        step: parseInt(userBalance)/10**18,
         min:0,
-        max: userBalance,
-        onChange: (e) => setDepositInput((e * 10**18)-5),
+        max: parseInt(userBalance)/10**18,
+        onChange: (e) => setDepositInput((e * 10**18)),
     })
     const maxDeposit = depositIncrementButtonProps();
     const inputDeposit = depositInputProps();
     function setMaxDeposit() {
-        setDepositInput((userBalance * 10**18)-5)
+        setDepositInput((userBalance))
     }
 
         //============ WITHDRAWAL FORM HOOK (INPUT NUMBER AND MAX BUTTON) ==========
     const { getInputProps: withdrawInputProps, getIncrementButtonProps: withdrawIncrementButtonProps } = useNumberInput({
         defaultValue: 0,
-        step: userStaked,
+        step: parseInt(userStaked)/10**18,
         min:0,
-        max: userStaked,
-        onChange: (e) => setWithdrawInput((e * 10**18)-5),
+        max: parseInt(userStaked)/10**18,
+        onChange: (e) => setWithdrawInput((e * 10**18)),
     })
     const maxWithdraw = withdrawIncrementButtonProps();
     const inputWithdraw = withdrawInputProps();
     function setMaxWithdraw() {
-        setWithdrawInput((userStaked * 10**18)-5)
+        setWithdrawInput((userStaked))
     }
 // =================== Link adress to PulseX liquidity ==============
 
@@ -156,7 +156,7 @@ else {addLpLink = `https://app.pulsex.com/add/V2/${token0}/${token1}`}
                         Your Deposit: 
                     </Flex>
                     <Flex ml='auto' mr={1} fontSize='large'>
-                        {parseFloat(userStaked).toFixed(2)} 
+                        {(parseFloat(userStaked)/10**18).toFixed(2)} 
                     </Flex>
                 </HStack> 
                 <Flex justify='right' mr={1} mb={1} mt={-1} fontSize='smaller' fontWeight='light'>
@@ -198,7 +198,7 @@ else {addLpLink = `https://app.pulsex.com/add/V2/${token0}/${token1}`}
                                                 <HStack>
                                                     <Flex ml={1} mr='auto'>
                                                         <Text color='gray.300' >
-                                                            Balance: {userBalance} {name}
+                                                            Balance: {parseInt(userBalance)/10**18} {name}
                                                         </Text>
                                                     </Flex>
                                                     <Button {...maxDeposit} bgGradient='linear(to-bl, yellow.300, yellow.700)' onClick={setMaxDeposit} size='xs'>MAX</Button>
@@ -280,7 +280,7 @@ else {addLpLink = `https://app.pulsex.com/add/V2/${token0}/${token1}`}
                                                 <HStack>
                                                     <Flex ml={1} mr='auto'>
                                                         <Text color='gray.300' >
-                                                            Total Staked: {userStaked} {name}
+                                                            Total Staked: {parseInt(userStaked)/10**18} {name}
                                                         </Text>
                                                     </Flex>
                                                     <Button bgGradient='linear(to-bl, yellow.300, yellow.700)' {...maxWithdraw} onClick={setMaxWithdraw} size='xs'>MAX</Button>

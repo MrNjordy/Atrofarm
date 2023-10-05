@@ -52,7 +52,7 @@ function App() {
       setAllPools(allPools)
     }
     function timeInterval() {
-      setTimeout(()=> {setCounter(counter+1)}, 10000);
+      setTimeout(()=> {setCounter(counter+1)}, 5000);
     }
     getData();
     timeInterval();

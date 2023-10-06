@@ -11,7 +11,7 @@ import {FaSquareXTwitter} from 'react-icons/fa6'
 import X from './assets/X.png'
 import telegram from './assets/telegram3.png'
 import atroc from './assets/Atrofarm.png'
-import piteas from './assets/piteas.png'
+import piteas from './assets/Piteas.png'
 
 function Profile() {
     const allPools = useContext(InfoContext);

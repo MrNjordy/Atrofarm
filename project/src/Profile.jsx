@@ -11,6 +11,7 @@ import {FaSquareXTwitter} from 'react-icons/fa6'
 import X from './assets/X.png'
 import telegram from './assets/telegram3.png'
 import atroc from './assets/Atrofarm.png'
+import piteas from './assets/piteas.png'
 
 function Profile() {
     const allPools = useContext(InfoContext);
@@ -44,11 +45,11 @@ function Profile() {
     // }, [address, allPools])
     // console.log(allPools)
     return (
-        <Flex paddingBottom={3} bgColor='gray.800' color='gray.300' fontWeight='bold' fontSize={[11, 14, 17, 20]}>
-            <HStack ml={[5, null, null, 10]} spacing={[5, null, null, 20]} height={75} mr={2}>
+        <Flex paddingBottom={3} bgColor='gray.800' color='gray.300' fontWeight='bold' fontSize={[11, 12, 16, 17]}>
+            <HStack ml={[5, null, null, 10]} spacing={[5, null, null, 9]} height={75} mr={2}>
                 <Flex>
                     <RouteLink to='/' >
-                        <Image src={atroc} boxSize={[8,10,12,14]}></Image>
+                        <Image src={atroc} boxSize={[8,8,10,12]}></Image>
                     </RouteLink>
                 </Flex>
                 <Flex>
@@ -59,6 +60,14 @@ function Profile() {
                 </Flex>
             </HStack>
             <HStack ml='auto' spacing={[2, 3, 4, 5]} height={45} mt={4} mr={[5, null, null, 10]} mb={2}>
+                <Flex fontSize={[8, 11, 14, 17]}>
+                    <Link href="https://app.piteas.io/#/swap?exactField=input&exactAmount=0&inputCurrency=ETH&outputCurrency=0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17" isExternal>
+                        <HStack spacing={1}>
+                        <Text>Buy on</Text>
+                        <Image src={piteas} alt='Piteas' boxSize={[3,4,5,6]} mr={1} ></Image>
+                        </HStack>
+                    </Link>
+                </Flex>
                 <Flex fontSize={[8, 11, 14, 17]}>
                     <Text>${nativeTokenPrice}</Text>
                 </Flex>

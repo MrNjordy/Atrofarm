@@ -51,6 +51,12 @@ const data = await readContracts({
         abi: lpAbi,
         functionName: 'getReserves',
 
+    },
+    {//Getting wBTC/wPL reserves to calculate wBTC price
+        address: '0x1EA22beA96C5498C8347Cc98b76d2dB1D0609Cea',
+        abi: lpAbi,
+        functionName: 'getReserves',
+    
     }
     ]
 });
@@ -59,7 +65,8 @@ const data = await readContracts({
 const pulsePrice = parseInt(data[5].result[1].toString())/parseInt(data[5].result[0].toString())
 const atropaPrice = parseInt(data[6].result[0].toString())/parseInt(data[6].result[1].toString()) * pulsePrice
 const wBtcPrice = parseInt(data[7].result[1].toString())/parseInt(data[7].result[0].toString()) * pulsePrice / 10**10
-
+const afcPrice = parseInt(data[8].result[0].toString())/parseInt(data[8].result[1].toString()) * pulsePrice
+console.log(afcPrice);
 const nativeTokenPriceUsd = (parseInt(data[0].result[1].toString())/parseInt(data[0].result[0].toString()) * pulsePrice).toString();
 const nativeToken = await fetchToken({ address: import.meta.env.VITE_TOKEN })
 const nativeTokenSupply = nativeToken.totalSupply.formatted;
@@ -189,11 +196,21 @@ generalInfo.inflation = tokenMintedPerDay;
             else if (token0Name.name == 'Wrapped BTC') {
                 const lpPriceEth = (parseInt(getLpReserves[0].toString()) * 2 / 10**8) / (parseInt(lpTotalSupply.toString()) /10**18);
                 lpPriceUsd = (lpPriceEth * wBtcPrice).toString();
-                }
+            }
             else if (token1Name.name == 'Wrapped BTC') {
                 const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
                 lpPriceUsd = (lpPriceEth * wBtcPrice).toString();
             }
+            else if(token0Name.name == 'Atropa Fan Club'){
+                const lpPriceEth = parseInt(getLpReserves[0].toString()) * 2 / parseInt(lpTotalSupply.toString());
+                lpPriceUsd = (lpPriceEth * afcPrice).toString();
+                token0 ='PLS'
+            }
+                else if (token1Name.name == 'Atropa Fan Club'){
+                const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
+                lpPriceUsd = (lpPriceEth * afcPrice).toString();
+                token1 = 'PLS'
+                }
             if (token0Name.symbol == 'Atrofa' || token1Name.symbol == 'Atrofa') {
                 isAtrofa = true;
             };

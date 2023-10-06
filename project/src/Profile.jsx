@@ -46,10 +46,10 @@ function Profile() {
     // console.log(allPools)
     return (
         <Flex paddingBottom={3} bgColor='gray.800' color='gray.300' fontWeight='bold' fontSize={[11, 12, 16, 17]}>
-            <HStack ml={[5, null, null, 10]} spacing={[5, null, null, 9]} height={75} mr={2}>
+            <HStack ml={[5, null, null, 10]} spacing={[2, null, null, 9]} height={75} mr={2}>
                 <Flex>
                     <RouteLink to='/' >
-                        <Image src={atroc} boxSize={[8,8,10,12]}></Image>
+                        <Image src={atroc} boxSize={[6,8,10,12]}></Image>
                     </RouteLink>
                 </Flex>
                 <Flex>

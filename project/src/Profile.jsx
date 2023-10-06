@@ -59,7 +59,7 @@ function Profile() {
                     <RouteLink to='/Staking' >Stake</RouteLink>
                 </Flex>
             </HStack>
-            <HStack ml='auto' spacing={[2, 3, 4, 5]} height={45} mt={4} mr={[5, null, null, 10]} mb={2}>
+            <HStack ml='auto' spacing={[1, 3, 4, 5]} height={45} mt={4} mr={[5, null, null, 10]} mb={2}>
                 <Flex fontSize={[8, 11, 14, 16]}>
                     <Link href="https://app.piteas.io/#/swap?exactField=input&exactAmount=0&inputCurrency=ETH&outputCurrency=0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17" isExternal>
                         <HStack spacing={1}>

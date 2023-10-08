@@ -133,13 +133,12 @@ else {addLpLink = `https://app.pulsex.com/add/V2/${token0}/${token1}`}
     return(
         <Box>
             <Box fontFamily='heading' mt={5} padding={3} paddingBottom={1} width='full' bgColor='blue.900' fontWeight='semibold' color={isAtrofa ? 'yellow.500' : 'gray.300'} border={userStaked>0 ? '2px' : 'none'} borderBottom='none' borderColor='yellow.500'>
-                <Center borderBottom='2px' borderColor='yellow.500'>       
+                <Center ml={7} mr={7}>       
                         <Flex mb={3}>
                         <Text>{name}</Text>
-                        </Flex>
-                        
-                    
+                        </Flex>                     
                 </Center>
+                <Center borderBottom='2px' borderColor='yellow.500'></Center>
                 <Flex fontSize='small' fontWeight='light'>
                     <Link ml='auto' mr='auto' isExternal href={isV1 ? `https://app.pulsex.com/add/V1/${token0}/${token1}` : `https://app.pulsex.com/add/V2/${token0}/${token1}`} alt='Pulsex LP' >
                         Get LP tokens on PulseX

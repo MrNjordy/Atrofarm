@@ -170,12 +170,26 @@ generalInfo.inflation = tokenMintedPerDay;
             let isAtrofa = false;
             let isV1 = false;
 
-// ======================== SORT V1 PAIRS ====================================
+// ======================== SORT V1 PAIRS AND NAME WITH SYMBOLS ====================================
             if(poolInfo[0] == '0x5EF7AaC0DE4F2012CB36730Da140025B113FAdA4') {
-                lpName = 'p' + token0Name.symbol + "-" + token1Name.symbol + " LP V1";
+                lpName = 'p' + token0Name.symbol + "-" + token1Name.symbol + " V1";
                 isV1 = true;
             }
-            else {lpName = token0Name.symbol + "-" + token1Name.symbol + " LP"}
+            else if(poolInfo[0] == '0xF892d93199B4DE0aB1CDf35799Ccf9D5A425581B') {
+                lpName = token1Name.symbol + "-" + token0Name.symbol;
+            }
+            else if(poolInfo[0] == '0xC2131e4A8aaA8A47BeBe87482B67Be2d6701Ce98') {
+                lpName = "T.BEAR" + "-" + token0Name.symbol;
+            }
+            else if(poolInfo[0] == '0x71423f29f8376eF8EFdB9207343a5ff32604C2E3') {
+                lpName = "Monat Money" + "-" + token0Name.symbol;
+            }
+            else if(poolInfo[0] == '0x10843FB4c712526E3fEef838D72059EbfC0cF61f' ||
+                poolInfo[0] == '0x0b1B8f70816a4f52427AA7A759b05EAe4e743b40') {
+                lpName = "CiA" + "-" + token1Name.symbol;
+            }
+
+            else {lpName = token0Name.symbol + "-" + token1Name.symbol}
 
 // ========================= GET THE CORRECT LP PRICE DEPENDING ON PAIRING =======================          
             let lpPriceUsd;

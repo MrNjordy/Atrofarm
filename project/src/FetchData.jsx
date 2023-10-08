@@ -57,7 +57,13 @@ const data = await readContracts({
         abi: lpAbi,
         functionName: 'getReserves',
     
-    }
+    },
+    {//Getting wBTC/wPL reserves to calculate wBTC price
+        address: '0x10843FB4c712526E3fEef838D72059EbfC0cF61f',
+        abi: lpAbi,
+        functionName: 'getReserves',
+        
+        }
     ]
 });
 
@@ -66,7 +72,8 @@ const pulsePrice = parseInt(data[5].result[1].toString())/parseInt(data[5].resul
 const atropaPrice = parseInt(data[6].result[0].toString())/parseInt(data[6].result[1].toString()) * pulsePrice
 const wBtcPrice = parseInt(data[7].result[1].toString())/parseInt(data[7].result[0].toString()) * pulsePrice / 10**10
 const afcPrice = parseInt(data[8].result[0].toString())/parseInt(data[8].result[1].toString()) * pulsePrice
-console.log(afcPrice);
+const ciaPrice = parseInt(data[9].result[1].toString())/parseInt(data[9].result[0].toString()) * pulsePrice
+
 const nativeTokenPriceUsd = (parseInt(data[0].result[1].toString())/parseInt(data[0].result[0].toString()) * pulsePrice).toString();
 const nativeToken = await fetchToken({ address: import.meta.env.VITE_TOKEN })
 const nativeTokenSupply = nativeToken.totalSupply.formatted;
@@ -204,13 +211,19 @@ generalInfo.inflation = tokenMintedPerDay;
             else if(token0Name.name == 'Atropa Fan Club'){
                 const lpPriceEth = parseInt(getLpReserves[0].toString()) * 2 / parseInt(lpTotalSupply.toString());
                 lpPriceUsd = (lpPriceEth * afcPrice).toString();
-                token0 ='PLS'
             }
-                else if (token1Name.name == 'Atropa Fan Club'){
+            else if (token1Name.name == 'Atropa Fan Club'){
                 const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
                 lpPriceUsd = (lpPriceEth * afcPrice).toString();
-                token1 = 'PLS'
                 }
+            else if(token0Name.address == '0x2e5898b2e107a3cAf4f0597aCFE5D2e6d73F2196'){
+                    const lpPriceEth = parseInt(getLpReserves[0].toString()) * 2 / parseInt(lpTotalSupply.toString());
+                    lpPriceUsd = (lpPriceEth * ciaPrice).toString();
+                }
+            else if (token1Name.address == '0x2e5898b2e107a3cAf4f0597aCFE5D2e6d73F2196'){
+                    const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
+                    lpPriceUsd = (lpPriceEth * ciaPrice).toString();
+                    }
             if (token0Name.symbol == 'Atrofa' || token1Name.symbol == 'Atrofa') {
                 isAtrofa = true;
             };

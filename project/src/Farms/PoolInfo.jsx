@@ -4,7 +4,6 @@ import { writeContract, prepareWriteContract } from "wagmi/actions";
 import { masterContract, tokenAbi } from "../data";
 import { useState } from "react";
 import { redirect } from "react-router-dom";
-import atrofa from '../assets/atro100.png'
 
 export default function FarmPoolInfo({
     id,

@@ -193,7 +193,7 @@ function Home() {
                                 Daily Inflation:
                             </Flex>
                             <Flex ml='auto' mr={1} fontWeight='semibold'>
-                                {inflation}
+                                {parseInt(inflation)}
                             </Flex>
                         </HStack>
                         <HStack mb={1}>

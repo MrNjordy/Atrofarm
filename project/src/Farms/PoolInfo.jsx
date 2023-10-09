@@ -158,6 +158,14 @@ export default function FarmPoolInfo({
                 <Flex justify='right' mr={1} mb={1} mt={-1} fontSize='smaller' fontWeight='light'>
                     ${userStakedUsd}
                 </Flex>
+                <HStack >
+                    <Flex ml={1} mr='auto' fontSize='smaller'>
+                        Your Pool Share: 
+                    </Flex>
+                    <Flex ml='auto' mr={1} fontSize='smaller'>
+                        {(userStakedUsd / totalStakedUsd * 100).toFixed(2)}% 
+                    </Flex>
+                </HStack> 
                 <HStack>
                     <Flex ml={1} mr='auto' fontSize='smaller'>
                         To Claim:
@@ -170,7 +178,7 @@ export default function FarmPoolInfo({
                     ${rewardsUsd}
                 </Flex>
                 </Box>
-                <Box fontFamily='heading' padding={2} paddingTop={0} width={250} bgColor='gray.900' fontWeight='semibold' color={isAtrofa ? 'yellow.500' : 'gray.300'} border={isAtrofa ? '2px' : 'none'} borderTop='none' borderColor='yellow.500'>
+                <Box fontFamily='heading' padding={2} paddingTop={0} width={250} bgColor='gray.900' fontWeight='semibold' color={'gray.300'} border={isAtrofa ? '2px' : 'none'} borderTop='none' borderColor='yellow.500'>
                 <Accordion defaultIndex={[]} allowMultiple>
                     <AccordionItem border='none'>
                         <AccordionButton justifyContent='center'>   

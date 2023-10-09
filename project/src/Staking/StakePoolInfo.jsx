@@ -122,7 +122,7 @@ export default function StakePoolInfo({
 
     return(
         <Box>
-            <Box fontFamily='heading' mt={10} padding={3} paddingBottom={1} width='full' bgColor='blue.900' fontWeight='semibold' color='gray.300' border={userStaked>0 ? '2px' : 'none'} borderBottom='none' borderColor='yellow.500'>
+            <Box fontFamily='heading' mt={10} padding={3} paddingBottom={1} width='full' bgColor='gray.900' fontWeight='semibold' color='gray.300' border={userStaked>0 ? '2px' : 'none'} borderBottom='none' borderColor='yellow.500'>
                 <Center borderBottom='2px' borderColor='yellow.500'>
                     <Box mb={3}>
                         <Text marginLeft={20} marginRight={20}>
@@ -161,7 +161,7 @@ export default function StakePoolInfo({
                     ${rewardsUsd}
                 </Flex>
                 </Box>
-                <Box fontFamily='heading' padding={3} paddingTop={0} width='full' bgColor='blue.900' fontWeight='semibold' color='gray.300' border={userStaked>0 ? '2px' : 'none'} borderTop='none' borderColor='yellow.500'>
+                <Box fontFamily='heading' padding={3} paddingTop={0} width='full' bgColor='gray.900' fontWeight='semibold' color='gray.300' border={userStaked>0 ? '2px' : 'none'} borderTop='none' borderColor='yellow.500'>
                 <Accordion defaultIndex={[]} allowMultiple>
                     <AccordionItem border='none'>
                         <AccordionButton justifyContent='center'>   
@@ -169,7 +169,7 @@ export default function StakePoolInfo({
                         </AccordionButton>
                         <AccordionPanel>
                 <Center mb={3}>
-                    <Button fontSize='smaller' mr={2} bgGradient='linear(to-bl, yellow.300, yellow.700)' color='black' isDisabled={!isConnected} onClick={onDepositOpen}>Deposit</Button>
+                    <Button fontSize='smaller' mr={2} bgGradient='linear(to-bl, yellow.400, yellow.700)' color='black' isDisabled={!isConnected} onClick={onDepositOpen}>Deposit</Button>
                         <Modal isOpen={isDepositOpen} onClose={onDepositClose} isCentered >
                             <ModalOverlay />
                                 <ModalContent bgColor='blue.900'>
@@ -188,7 +188,7 @@ export default function StakePoolInfo({
                                                             Balance: {parseInt(userBalance) / 10**18} {name}
                                                         </Text>
                                                     </Flex>
-                                                    <Button bgGradient='linear(to-bl, yellow.300, yellow.700)' {...maxDeposit} onClick={setMaxDeposit} size='xs'>MAX</Button>
+                                                    <Button bgGradient='linear(to-bl, yellow.400, yellow.700)' {...maxDeposit} onClick={setMaxDeposit} size='xs'>MAX</Button>
                                                 </HStack>
                                             </FormLabel>
                                             <Input {...inputDeposit} focusBorderColor='yellow.500' color='gray.300' />
@@ -196,10 +196,10 @@ export default function StakePoolInfo({
                                     </ModalBody>
                                     <Center>
                                     <ModalFooter>
-                                        {allowance == 0 || allowance < depositInput ? <Button bgGradient='linear(to-bl, yellow.300, yellow.700)' mr={5} isLoading={approvalLoading} onClick={approval}>                                                                                                                  
+                                        {allowance == 0 || allowance < depositInput ? <Button bgGradient='linear(to-bl, yellow.400, yellow.700)' mr={5} isLoading={approvalLoading} onClick={approval}>                                                                                                                  
                                                                         {"Approve"} 
                                                                     </Button> 
-                                                                  : <Button bgGradient='linear(to-bl, yellow.300, yellow.700)' mr={5} isDisabled={userBalance==0 || depositInput==0} isLoading={depositLoading} onClick={deposit}>                                                                                                                  
+                                                                  : <Button bgGradient='linear(to-bl, yellow.400, yellow.700)' mr={5} isDisabled={userBalance==0 || depositInput==0} isLoading={depositLoading} onClick={deposit}>                                                                                                                  
                                                                         {"Deposit" }                           
                                                                     </Button> }
                                             <Modal isOpen={isDepositProcessingOpen} onClose={onDepositProcessingClose} isCentered>
@@ -241,14 +241,14 @@ export default function StakePoolInfo({
                                                     </ModalContent>
                                                 </ModalOverlay>
                                             </Modal>
-                                            <Button bgGradient='linear(to-bl, yellow.300, yellow.700)' ml={5} onClick={onDepositClose}>
+                                            <Button bgGradient='linear(to-bl, yellow.400, yellow.700)' ml={5} onClick={onDepositClose}>
                                                 {"Cancel"}
                                             </Button>
                                         </ModalFooter>
                                     </Center>
                                 </ModalContent>
                         </Modal>
-                    <Button fontSize='smaller' ml={2} bgGradient='linear(to-bl, yellow.300, yellow.700)' color='black' isDisabled={!isConnected} onClick={onWithdrawOpen}>Withdraw</Button>
+                    <Button fontSize='smaller' ml={2} bgGradient='linear(to-bl, yellow.400, yellow.700)' color='black' isDisabled={!isConnected} onClick={onWithdrawOpen}>Withdraw</Button>
                         <Modal isOpen={isWithdrawOpen} onClose={onWithdrawClose} isCentered>
                             <ModalOverlay />
                             <ModalContent bgColor='blue.900'>
@@ -267,7 +267,7 @@ export default function StakePoolInfo({
                                                             Total Staked: {(parseFloat(userStaked) / 10**18).toFixed(2)} {name}
                                                         </Text>
                                                     </Flex>
-                                                    <Button bgGradient='linear(to-bl, yellow.300, yellow.700)' {...maxWithdraw} onClick={setMaxWithdraw} size='xs'>MAX</Button>
+                                                    <Button bgGradient='linear(to-bl, yellow.400, yellow.700)' {...maxWithdraw} onClick={setMaxWithdraw} size='xs'>MAX</Button>
                                                 </HStack>
                                             </FormLabel>
                                             <Input {...inputWithdraw}  focusBorderColor='yellow.500' color='gray.300' />
@@ -275,7 +275,7 @@ export default function StakePoolInfo({
                                     </ModalBody>
                                     <Center>
                                         <ModalFooter>                   
-                                            <Button bgGradient='linear(to-bl, yellow.300, yellow.700)' mr={5} isDisabled={userStaked==0 || withdrawInput==0} isLoading={withdrawLoading} onClick={withdraw}>
+                                            <Button bgGradient='linear(to-bl, yellow.400, yellow.700)' mr={5} isDisabled={userStaked==0 || withdrawInput==0} isLoading={withdrawLoading} onClick={withdraw}>
                                                 {"Withdraw"}
                                             </Button>
                                                 <Modal isOpen={isWithdrawProcessingOpen} onClose={onWithdrawProcessingClose} isCentered>
@@ -317,7 +317,7 @@ export default function StakePoolInfo({
                                                     </ModalContent>
                                                     </ModalOverlay>
                                                 </Modal>
-                                            <Button bgGradient='linear(to-bl, yellow.300, yellow.700)' ml={5} onClick={onWithdrawClose}>
+                                            <Button bgGradient='linear(to-bl, yellow.400, yellow.700)' ml={5} onClick={onWithdrawClose}>
                                                 {"Cancel"}
                                             </Button>
                                         </ModalFooter>
@@ -325,7 +325,7 @@ export default function StakePoolInfo({
                                 </ModalContent>
                         </Modal>
                 </Center>
-                <Button fontSize='smaller' width='full' mb={5} bgGradient='linear(to-bl, yellow.300, yellow.700)' color='black' isDisabled={!isConnected} onClick={claim}>Claim</Button>
+                <Button fontSize='smaller' width='full' mb={5} bgGradient='linear(to-bl, yellow.400, yellow.700)' color='black' isDisabled={!isConnected} onClick={claim}>Claim</Button>
                 <HStack>
                     <Flex mr='auto' fontSize='smaller'>
                         Pool TVL:

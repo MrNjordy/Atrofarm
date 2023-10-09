@@ -46,7 +46,6 @@ function Home() {
                 const marketCap = (allPools.generalInfo[0].nativeTokenSupply) * nativeTokenPrice;
                 const totalSupply = parseInt(allPools.generalInfo[0].nativeTokenSupply);
                 const inflation = allPools.generalInfo[0].inflation;
-                console.log(inflation)
 
                 setNativeTokenPrice(parseFloat(nativeTokenPrice).toFixed(4));
                 setMarketCap(marketCap.toFixed(0));
@@ -109,7 +108,7 @@ function Home() {
          return(
             <Box minHeight='100vh'>
                 <VStack>
-                    <Box bgGradient='linear(to-bl, yellow.300, yellow.700)' width='100%' padding={[5, null, null, 10]}>
+                    <Box bgGradient='linear(to-bl, yellow.400, yellow.700)' width='100%' padding={[5, null, null, 10]}>
                         <Center>
                             <Text fontFamily='heading' fontWeight='bold' fontSize={[null, null, 30, 40]} color='black' ml={[10,20,30,40]} mr={[10,20,30,40]} align='center'>
                                 Liquidity Hub of the Atropa Ecosystem
@@ -158,7 +157,7 @@ function Home() {
                 </VStack>
                 <Flex>
                 <SimpleGrid columns={[1, null, null, 2]} spacing={[8, 15, 30, 40]} ml='auto' mr='auto' mt={[5, 10, 15, 20]}>
-                <Box  bgColor='blue.900' padding={3} width={[null, 250, 350, 450]} fontSize={[null, 10, 15, 20]} color='yellow.500'>
+                <Box  bgColor='gray.900' padding={3} width={[null, 250, 350, 450]} fontSize={[null, 10, 15, 20]} color='gray.300'>
                         <Center>
                         <Text mb={3} fontWeight='semibold' fontSize={[null, 15, 20, 25]}>
                                 $Atrofa
@@ -205,7 +204,7 @@ function Home() {
                             </Flex>
                         </HStack>
                 </Box>
-                <Box ml='auto' mr='auto' bgColor='blue.900' color='yellow.500'  padding={3} width={[null, 250, 350, 450]} fontSize={[null, 10, 15, 20]}>
+                <Box ml='auto' mr='auto' bgColor='gray.900' color='gray.300'  padding={3} width={[null, 250, 350, 450]} fontSize={[null, 10, 15, 20]}>
                     <Center>
                         <Text mb={3} fontWeight='semibold' fontSize={[null, 15, 20, 25]}>
                             Available to claim:
@@ -222,14 +221,14 @@ function Home() {
                         </Flex>
                     </HStack>
                         <Center>
-                            <Button mt={9} onClick={write} isLoading={isLoading} width={[null, 75, 100, 150]} height={[null,31,null,34]} paddingBottom={2} paddingTop={2} fontSize={[null, 11, 13, 15]} bgGradient='linear(to-bl, yellow.300, yellow.700)' color='black' _hover={{ bgColor: 'gray.600'}}>
+                            <Button mt={9} onClick={write} isLoading={isLoading} width={[null, 75, 100, 150]} height={[null,31,null,34]} paddingBottom={2} paddingTop={2} fontSize={[null, 11, 13, 15]} bgGradient='linear(to-bl, yellow.400, yellow.700)' color='black' _hover={{ bgColor: 'gray.600'}}>
                                 Claim
                             </Button>
                         </Center> 
                 </Box>
                 </SimpleGrid> 
                 </Flex>
-                <Box fontFamily='heading' ml='auto' mr='auto' mt={[5, null, null, 10]} padding={2} width={[null, 250, 350, 450]} bgColor='blue.900' color='yellow.500'>
+                <Box fontFamily='heading' ml='auto' mr='auto' mt={[5, null, null, 10]} padding={2} width={[null, 250, 350, 450]} bgColor='gray.900' color='gray.300'>
                     <VStack fontSize={[null, 15, 20, 25]} fontWeight='semibold'>
                         <Flex fontFamily='heading' ml='auto' mr='auto'>
                             TVL:

@@ -126,10 +126,10 @@ export default function FarmPoolInfo({
    }
     return(
         <Box>
-            <Box fontFamily='heading' mt={5} padding={3} paddingBottom={1} width='full' bgColor='blue.900' fontWeight='semibold' color={isAtrofa ? 'yellow.500' : 'gray.300'} border={userStaked>0 ? '2px' : 'none'} borderBottom='none' borderColor='yellow.500'>
+            <Box fontFamily='heading' mt={5} padding={3} paddingBottom={1} width={250} bgColor='gray.900' fontWeight='semibold' color='gray.300' border={isAtrofa ? '2px' : 'none'} borderBottom='none' borderColor='yellow.500'>
                 <Center ml={7} mr={7}>       
                         <Flex mb={3}>
-                        <Text>{name}</Text>
+                        <Text color='gray.300'>{name}</Text>
                         </Flex>                     
                 </Center>
                 <Center borderBottom='2px' borderColor='yellow.500'></Center>
@@ -170,7 +170,7 @@ export default function FarmPoolInfo({
                     ${rewardsUsd}
                 </Flex>
                 </Box>
-                <Box fontFamily='heading' padding={2} paddingTop={0} width='full' bgColor='blue.900' fontWeight='semibold' color={isAtrofa ? 'yellow.500' : 'gray.300'} border={userStaked>0 ? '2px' : 'none'} borderTop='none' borderColor='yellow.500'>
+                <Box fontFamily='heading' padding={2} paddingTop={0} width={250} bgColor='gray.900' fontWeight='semibold' color={isAtrofa ? 'yellow.500' : 'gray.300'} border={isAtrofa ? '2px' : 'none'} borderTop='none' borderColor='yellow.500'>
                 <Accordion defaultIndex={[]} allowMultiple>
                     <AccordionItem border='none'>
                         <AccordionButton justifyContent='center'>   
@@ -178,7 +178,7 @@ export default function FarmPoolInfo({
                         </AccordionButton>
                         <AccordionPanel>
                 <Center mb={3}>
-                    <Button fontSize='smaller' mr={2} bgGradient='linear(to-bl, yellow.300, yellow.700)' color='black' isDisabled={!isConnected} onClick={onDepositOpen}>Deposit</Button>
+                    <Button fontSize='smaller' mr={2} bgGradient='linear(to-bl, yellow.400, yellow.700)' color='black' isDisabled={!isConnected} onClick={onDepositOpen}>Deposit</Button>
                         <Modal isOpen={isDepositOpen} onClose={onDepositClose} isCentered >
                             <ModalOverlay />
                                 <ModalContent bgColor='blue.900'>
@@ -197,7 +197,7 @@ export default function FarmPoolInfo({
                                                             Balance: {parseInt(userBalance)/10**18} {name}
                                                         </Text>
                                                     </Flex>
-                                                    <Button {...maxDeposit} bgGradient='linear(to-bl, yellow.300, yellow.700)' onClick={setMaxDeposit} size='xs'>MAX</Button>
+                                                    <Button {...maxDeposit} bgGradient='linear(to-bl, yellow.400, yellow.700)' onClick={setMaxDeposit} size='xs'>MAX</Button>
                                                 </HStack>
                                             </FormLabel>
                                             <Input {...inputDeposit} color='gray.300' focusBorderColor='yellow.500' />
@@ -205,10 +205,10 @@ export default function FarmPoolInfo({
                                     </ModalBody>
                                     <Center>
                                     <ModalFooter>
-                                        {allowance == 0 || allowance < depositInput ? <Button bgGradient='linear(to-bl, yellow.300, yellow.700)'  mr={5} isLoading={approvalLoading} onClick={approval}>                                                                                                                  
+                                        {allowance == 0 || allowance < depositInput ? <Button bgGradient='linear(to-bl, yellow.400, yellow.700)'  mr={5} isLoading={approvalLoading} onClick={approval}>                                                                                                                  
                                                                         {"Approve"} 
                                                                     </Button> 
-                                                                  : <Button bgGradient='linear(to-bl, yellow.300, yellow.700)' mr={5} isDisabled={userBalance==0 || depositInput==0} isLoading={depositLoading} onClick={deposit}>                                                                                                                  
+                                                                  : <Button bgGradient='linear(to-bl, yellow.400, yellow.700)' mr={5} isDisabled={userBalance==0 || depositInput==0} isLoading={depositLoading} onClick={deposit}>                                                                                                                  
                                                                         {"Deposit" }                           
                                                                     </Button> }
                                             <Modal isOpen={isDepositProcessingOpen} onClose={onDepositProcessingClose} isCentered>
@@ -253,14 +253,14 @@ export default function FarmPoolInfo({
                                                     </ModalContent>
                                                 </ModalOverlay>
                                             </Modal>
-                                            <Button bgGradient='linear(to-bl, yellow.300, yellow.700)' ml={5} onClick={onDepositClose}>
+                                            <Button bgGradient='linear(to-bl, yellow.400, yellow.700)' ml={5} onClick={onDepositClose}>
                                                 {"Cancel"}
                                             </Button>
                                         </ModalFooter>
                                     </Center>
                                 </ModalContent>
                         </Modal>
-                    <Button fontSize='smaller' ml={2} bgGradient='linear(to-bl, yellow.300, yellow.700)' color='black' isDisabled={!isConnected} onClick={onWithdrawOpen}>Withdraw</Button>
+                    <Button fontSize='smaller' ml={2} bgGradient='linear(to-bl, yellow.400, yellow.700)' color='black' isDisabled={!isConnected} onClick={onWithdrawOpen}>Withdraw</Button>
                         <Modal isOpen={isWithdrawOpen} onClose={onWithdrawClose} isCentered>
                             <ModalOverlay />
                             <ModalContent bgColor='blue.900'>
@@ -279,7 +279,7 @@ export default function FarmPoolInfo({
                                                             Total Staked: {parseInt(userStaked)/10**18} {name}
                                                         </Text>
                                                     </Flex>
-                                                    <Button bgGradient='linear(to-bl, yellow.300, yellow.700)' {...maxWithdraw} onClick={setMaxWithdraw} size='xs'>MAX</Button>
+                                                    <Button bgGradient='linear(to-bl, yellow.400, yellow.700)' {...maxWithdraw} onClick={setMaxWithdraw} size='xs'>MAX</Button>
                                                 </HStack>
                                             </FormLabel>
                                             <Input {...inputWithdraw} color='gray.300' focusBorderColor='yellow.500' />
@@ -287,7 +287,7 @@ export default function FarmPoolInfo({
                                     </ModalBody>
                                     <Center>
                                         <ModalFooter>                   
-                                            <Button bgGradient='linear(to-bl, yellow.300, yellow.700)' mr={5} isDisabled={userStaked==0 || withdrawInput==0} isLoading={withdrawLoading} onClick={withdraw}>
+                                            <Button bgGradient='linear(to-bl, yellow.400, yellow.700)' mr={5} isDisabled={userStaked==0 || withdrawInput==0} isLoading={withdrawLoading} onClick={withdraw}>
                                                 {"Withdraw"}
                                             </Button>
                                                 <Modal isOpen={isWithdrawProcessingOpen} onClose={onWithdrawProcessingClose} isCentered>
@@ -329,7 +329,7 @@ export default function FarmPoolInfo({
                                                     </ModalContent>
                                                     </ModalOverlay>
                                                 </Modal>
-                                            <Button bgGradient='linear(to-bl, yellow.300, yellow.700)' ml={5} onClick={onWithdrawClose}>
+                                            <Button bgGradient='linear(to-bl, yellow.400, yellow.700)' ml={5} onClick={onWithdrawClose}>
                                                 {"Cancel"}
                                             </Button>
                                         </ModalFooter>
@@ -337,7 +337,7 @@ export default function FarmPoolInfo({
                                 </ModalContent>
                         </Modal>
                 </Center>
-                <Button fontSize='smaller' width='full' mb={5} bgGradient='linear(to-bl, yellow.300, yellow.700)' color='black' isDisabled={!isConnected} onClick={claim}>Claim</Button>
+                <Button fontSize='smaller' width='full' mb={5} bgGradient='linear(to-bl, yellow.400, yellow.700)' color='black' isDisabled={!isConnected} onClick={claim}>Claim</Button>
                 <HStack>
                     <Flex mr='auto' fontSize='smaller'>
                         Pool TVL:

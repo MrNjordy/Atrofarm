@@ -1,9 +1,11 @@
 import { Flex, HStack, Box, Center, Button, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, FormControl, FormLabel, Input, useNumberInput, Spinner, Text, VStack, Link, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, Image} from "@chakra-ui/react"
+import { ExternalLinkIcon } from '@chakra-ui/icons'
 import { useAccount, useWaitForTransaction } from "wagmi";
 import { writeContract, prepareWriteContract } from "wagmi/actions";
 import { masterContract, tokenAbi } from "../data";
 import { useState } from "react";
 import { redirect } from "react-router-dom";
+
 
 export default function FarmPoolInfo({
     id,
@@ -141,7 +143,8 @@ else {addLpLink = `https://app.pulsex.com/add/V2/${token0}/${token1}`}
                 <Center borderBottom='2px' borderColor='yellow.500'></Center>
                 <Flex fontSize='small' fontWeight='light'>
                     <Link ml='auto' mr='auto' isExternal href={isV1 ? `https://app.pulsex.com/add/V1/${token0}/${token1}` : `https://app.pulsex.com/add/V2/${token0}/${token1}`} alt='Pulsex LP' >
-                        Get LP tokens on PulseX
+                        Get LP tokens on PulseX 
+                        <ExternalLinkIcon ml={1}></ExternalLinkIcon>
                     </Link>
                 </Flex>
                 <HStack mb={1} mt={3}> 

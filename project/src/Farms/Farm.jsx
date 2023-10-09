@@ -115,7 +115,7 @@ return(
                     thickness='4px'
                     speed='0.65s'
                     emptyColor='gray.200'
-                    color='blue.500'
+                    color='yellow.500'
                     size='xl'
                     ml='auto' mr='auto' mt={20} />
                 :
@@ -126,7 +126,7 @@ return(
                             <FormLabel color='gray.300' mb={0} ml='auto' mr={1}>
                                 Staked Only
                             </FormLabel>
-                            <Switch onChange={!onlyStaked ? onlyStakedDiplayed : allDiplayed} ml={1} mr='auto'></Switch>
+                            <Switch onChange={!onlyStaked ? onlyStakedDiplayed : allDiplayed} ml={1} mr='auto' colorScheme="yellow"></Switch>
                         </FormControl>
                     </Flex>
                     <Flex>

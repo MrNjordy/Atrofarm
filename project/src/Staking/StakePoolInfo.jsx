@@ -149,6 +149,14 @@ export default function StakePoolInfo({
                 <Flex justify='right' mr={1} mb={1} mt={-1} fontSize='smaller' fontWeight='light'>
                     ${userStakedUsd}
                 </Flex>
+                <HStack >
+                    <Flex ml={1} mr='auto' fontSize='smaller'>
+                        Your Pool Share: 
+                    </Flex>
+                    <Flex ml='auto' mr={1} fontSize='smaller'>
+                        {(userStakedUsd / totalStakedUsd * 100).toFixed(2)}% 
+                    </Flex>
+                </HStack> 
                 <HStack>
                     <Flex ml={1} mr='auto' fontSize='smaller'>
                         To Claim:

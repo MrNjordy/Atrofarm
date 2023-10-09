@@ -35,7 +35,6 @@ export default function FarmPoolInfo({
     const [depositTxData, setDepositTxData] = useState();
     const [withdrawTxData, setWithdrawTxData] = useState();
     const [approvalTxData, setApprovalTxData] = useState();
-    const [addLP, setAddLP] = useState();
 
             //============ MODAL HOOKS ================
     const { isOpen: isDepositOpen, onOpen: onDepositOpen, onClose: onDepositClose } = useDisclosure();
@@ -67,15 +66,8 @@ export default function FarmPoolInfo({
     const maxWithdraw = withdrawIncrementButtonProps();
     const inputWithdraw = withdrawInputProps();
     function setMaxWithdraw() {
-        setWithdrawInput((userStaked))
+        setWithdrawInput((userStaked)) 
     }
-// =================== Link adress to PulseX liquidity ==============
-
-let addLpLink = '';
-if(isV1 == false) {
-    addLpLink = `https://app.pulsex.com/add/V2/${token0}/${token1}`
-}
-else {addLpLink = `https://app.pulsex.com/add/V2/${token0}/${token1}`}
 
 //============================== CONTRACTS FUNCTIONS =====================
     async function deposit() {

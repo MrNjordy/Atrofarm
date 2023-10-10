@@ -5,10 +5,6 @@ import { writeContract, prepareWriteContract } from "wagmi/actions";
 import { masterContract, tokenAbi } from "../data";
 import { useState } from "react";
 import { redirect } from "react-router-dom";
-import atro from '../assets/FarmIcons/0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17.png'
-import AFC from '../assets/FarmIcons/0xc83b18FafFC78c73f3aB0EA2Ae1a1bF333C1A549.png'
-import atropa from '../assets/FarmIcons/0xCc78A0acDF847A2C1714D2A925bB4477df5d48a6.png'
-
 
 
 

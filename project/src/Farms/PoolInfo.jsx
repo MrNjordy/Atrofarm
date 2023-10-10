@@ -166,7 +166,7 @@ export default function FarmPoolInfo({
                             mb={3}>
                     </Image>    
                     <Flex mb={3} mr={1} ml='auto'>
-                        <Text color='gray.300'>{name}</Text>
+                        <Text color='gray.300' align='right'>{name}</Text>
                     </Flex>   
                 </HStack>                  
                 <Center borderBottom='2px' borderColor='yellow.500'></Center>
@@ -176,7 +176,7 @@ export default function FarmPoolInfo({
                         <ExternalLinkIcon ml={1}></ExternalLinkIcon>
                     </Link>
                 </Flex>
-                <HStack mb={1} mt={3}> 
+                <HStack mb={-3} mt={3}> 
                     <Flex ml={1} mr='auto' fontSize='smaller'>
                         APR: 
                     </Flex>
@@ -184,18 +184,29 @@ export default function FarmPoolInfo({
                         {apr}%
                     </Flex>
                 </HStack>
+                <HStack color='gray.400' mb={1} mt={3}> 
+                    <Flex ml={1} mr='auto' fontSize='smaller'>
+                        Daily: 
+                    </Flex>
+                    <Flex ml='auto' mr={1} fontSize='sm'>
+                        {(apr/365).toFixed(2)}%
+                    </Flex>
+                </HStack>
+                <Flex color='gray.400' justify='right' mr={1} mb={1} mt={-2} fontSize='smaller' fontWeight='light'>
+                    ${(userStakedUsd * apr/100 /365).toFixed(2)}
+                </Flex>
                 <HStack >
                     <Flex ml={1} mr='auto' fontSize='smaller'>
                         Your Deposit: 
                     </Flex>
                     <Flex ml='auto' mr={1} fontSize='large'>
-                        {(parseFloat(userStaked)/10**18).toFixed(2)} 
+                    ${userStakedUsd}
                     </Flex>
                 </HStack> 
                 <Flex justify='right' mr={1} mb={1} mt={-1} fontSize='smaller' fontWeight='light'>
-                    ${userStakedUsd}
+                    {(parseFloat(userStaked)/10**18).toFixed(2)} LP     
                 </Flex>
-                <HStack >
+                <HStack color='gray.400'>
                     <Flex ml={1} mr='auto' fontSize='smaller'>
                         Your Pool Share: 
                     </Flex>

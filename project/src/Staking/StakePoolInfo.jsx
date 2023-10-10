@@ -142,6 +142,17 @@ export default function StakePoolInfo({
                         {apr}%
                     </Flex>
                 </HStack>
+                <HStack color='gray.400' mb={1} mt={3}> 
+                    <Flex ml={1} mr='auto' fontSize='smaller'>
+                        Daily: 
+                    </Flex>
+                    <Flex ml='auto' mr={1} fontSize='sm'>
+                        {(apr/365).toFixed(2)}%
+                    </Flex>
+                </HStack>
+                <Flex color='gray.400' justify='right' mr={1} mb={1} mt={-2} fontSize='smaller' fontWeight='light'>
+                    ${(userStakedUsd * apr/100 /365).toFixed(2)}
+                </Flex>
                 <HStack >
                     <Flex ml={1} fontSize='smaller'>
                         Your Deposit: 
@@ -153,7 +164,7 @@ export default function StakePoolInfo({
                 <Flex justify='right' mr={1} mb={1} mt={-1} fontSize='smaller' fontWeight='light'>
                     ${userStakedUsd}
                 </Flex>
-                <HStack >
+                <HStack color='gray.400' >
                     <Flex ml={1} mr='auto' fontSize='smaller'>
                         Your Pool Share: 
                     </Flex>

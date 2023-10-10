@@ -79,8 +79,8 @@ function Profile() {
                         <Image src={telegram} alt='dex' boxSize={[3,4,6,8]} ></Image>
                     </Link>
                 </Flex>
-                <Button fontSize={[null, 11, 14, 17]} height={[null,31,null,42]} paddingTop={2} paddingBottom={2} bgColor='gray.900' color='gray.300' onClick={() => open()}> 
-                    {isConnected ? address.substring(0,7) + '...' : "Connect" }
+                <Button fontSize={[null, 11, 14, 17]} height={[null,31,null,42]} paddingTop={2} paddingBottom={2} bgColor='gray.500' color='gray.200' onClick={() => open()}> 
+                    {isConnected ? address.substring(0,5) + '...' + address.substring(address.length - 5) : "Connect Wallet" }
                 </Button>
             </HStack>
         </Flex>

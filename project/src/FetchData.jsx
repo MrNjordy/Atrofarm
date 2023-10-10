@@ -414,6 +414,7 @@ generalInfo.inflation = tokenMintedPerDay;
                 allInfo.depositFee = depositFee;
                 allInfo.pulsePrice = pulsePrice;
                 allInfo.nativeTokenPriceUsd = nativeTokenPriceUsd;
+                allInfo.token = tokenInfo.address
 
             } else {    //user not connected
                 allInfo.name = tokenInfo.symbol;
@@ -426,6 +427,7 @@ generalInfo.inflation = tokenMintedPerDay;
                 allInfo.depositFee = depositFee;
                 allInfo.pulsePrice = pulsePrice;
                 allInfo.nativeTokenPriceUsd = nativeTokenPriceUsd;
+                allInfo.token = tokenInfo.address
             }
             stakingPools.push(allInfo);
         } 

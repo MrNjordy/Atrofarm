@@ -1,8 +1,9 @@
-import { Flex, HStack, Box, Center, Button, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, FormControl, FormLabel, Input, useNumberInput, Spinner, Text, Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, VStack } from "@chakra-ui/react"
+import { Flex, HStack, Box, Center, Button, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, FormControl, FormLabel, Input, useNumberInput, Spinner, Text, Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, VStack, Image } from "@chakra-ui/react"
 import { useAccount, useWaitForTransaction } from "wagmi";
 import { writeContract, prepareWriteContract } from "wagmi/actions";
 import { masterContract, tokenAbi } from "../data";
 import { useState } from "react";
+import atrofa from '../assets/FarmIcons/0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17.png'
 
 export default function StakePoolInfo({
     id,
@@ -18,6 +19,7 @@ export default function StakePoolInfo({
     depositFee,
     allowance,
     address,
+    token,
 }) {
 
 // ============================ HOOKS =============================================
@@ -119,17 +121,19 @@ export default function StakePoolInfo({
            args: [id, 0]
        })
    }
-
     return(
         <Box>
-            <Box fontFamily='heading' mt={10} padding={3} paddingBottom={1} width='full' bgColor='gray.900' fontWeight='semibold' color='gray.300' border={userStaked>0 ? '2px' : 'none'} borderBottom='none' borderColor='yellow.500'>
-                <Center borderBottom='2px' borderColor='yellow.500'>
-                    <Box mb={3}>
-                        <Text marginLeft={20} marginRight={20}>
-                        {name}
-                        </Text>
-                    </Box>
-                </Center>
+<Box fontFamily='heading' mt={5} padding={3} paddingBottom={1} width={250} bgColor='gray.900' fontWeight='semibold' color='gray.300' borderBottom='none'>                
+    <HStack>
+        <Image src={token == '0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17' ? atrofa 
+                    : atrofa}
+                mb={3}>
+        </Image>    
+        <Flex mb={3} mr={1} ml='auto'>
+            <Text color='gray.300'>{name}</Text>
+        </Flex>  
+    </HStack>
+    <Center borderBottom='2px' borderColor='yellow.500'></Center>
                 <HStack mb={1} mt={3}> 
                     <Flex ml={1} mr='auto' fontSize='smaller'>
                         APR: 
@@ -169,7 +173,7 @@ export default function StakePoolInfo({
                     ${rewardsUsd}
                 </Flex>
                 </Box>
-                <Box fontFamily='heading' padding={3} paddingTop={0} width='full' bgColor='gray.900' fontWeight='semibold' color='gray.300' border={userStaked>0 ? '2px' : 'none'} borderTop='none' borderColor='yellow.500'>
+                <Box fontFamily='heading' padding={3} paddingTop={0} width={250} bgColor='gray.900' fontWeight='semibold' color='gray.300' borderTop='none'>
                 <Accordion defaultIndex={[]} allowMultiple>
                     <AccordionItem border='none'>
                         <AccordionButton justifyContent='center'>   
@@ -180,7 +184,7 @@ export default function StakePoolInfo({
                     <Button fontSize='smaller' mr={2} bgGradient='linear(to-bl, yellow.400, yellow.700)' color='black' isDisabled={!isConnected} onClick={onDepositOpen}>Deposit</Button>
                         <Modal isOpen={isDepositOpen} onClose={onDepositClose} isCentered >
                             <ModalOverlay />
-                                <ModalContent bgColor='blue.900'>
+                                <ModalContent bgColor='gray.900'>
                                     <ModalHeader mb={1} borderBottom='1px' borderColor='yellow.500'>
                                         <Text color='gray.300' >
                                             Deposit {name}
@@ -213,14 +217,14 @@ export default function StakePoolInfo({
                                             <Modal isOpen={isDepositProcessingOpen} onClose={onDepositProcessingClose} isCentered>
                                                 <ModalOverlay>
                                                     <ModalContent>
-                                                        <ModalHeader borderBottom='1px' borderColor='yellow.500' bgColor='blue.900' color='gray.300'>
+                                                        <ModalHeader borderBottom='1px' borderColor='yellow.500' bgColor='gray.900' color='gray.300'>
                                                             { depositLoading ? "Processing Transaction..."
                                                                         : depositSuccess ? 'Transaction Successful'
                                                                         : depositError ? 'Transaction Reverted'
                                                                         : "Waiting Approval"}
                                                             <ModalCloseButton />
                                                         </ModalHeader>
-                                                        <ModalBody bgColor='blue.900' color= 'gray.300'>
+                                                        <ModalBody bgColor='gray.900' color= 'gray.300'>
                                                             {depositLoading? <Flex ><Spinner
                                                                                thickness='4px'
                                                                                speed='0.65s'
@@ -259,7 +263,7 @@ export default function StakePoolInfo({
                     <Button fontSize='smaller' ml={2} bgGradient='linear(to-bl, yellow.400, yellow.700)' color='black' isDisabled={!isConnected} onClick={onWithdrawOpen}>Withdraw</Button>
                         <Modal isOpen={isWithdrawOpen} onClose={onWithdrawClose} isCentered>
                             <ModalOverlay />
-                            <ModalContent bgColor='blue.900'>
+                            <ModalContent bgColor='gray.900'>
                                     <ModalHeader mb={1} borderBottom='1px' borderColor='yellow.500'>
                                         <Text color='gray.300' >
                                             Withdraw {name}
@@ -289,14 +293,14 @@ export default function StakePoolInfo({
                                                 <Modal isOpen={isWithdrawProcessingOpen} onClose={onWithdrawProcessingClose} isCentered>
                                                     <ModalOverlay>
                                                     <ModalContent>
-                                                        <ModalHeader borderBottom='1px' borderColor='yellow.500' bgColor='blue.900' color='gray.300'>
+                                                        <ModalHeader borderBottom='1px' borderColor='yellow.500' bgColor='gray.900' color='gray.300'>
                                                             { withdrawLoading ? "Processing Transaction..."
                                                                         : withdrawSuccess ? 'Transaction Successful'
                                                                         : withdrawError ? 'Transaction Reverted'
                                                                         : "Waiting Approval"}
                                                             <ModalCloseButton />
                                                         </ModalHeader>
-                                                        <ModalBody bgColor='blue.900' color= 'gray.300'>
+                                                        <ModalBody bgColor='gray.900' color= 'gray.300'>
                                                             {withdrawLoading? <Flex ><Spinner
                                                                                thickness='4px'
                                                                                speed='0.65s'

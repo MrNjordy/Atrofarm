@@ -226,7 +226,7 @@ export default function FarmPoolInfo({
                     <Button fontSize='smaller' mr={2} bgGradient='linear(to-bl, yellow.400, yellow.700)' color='black' isDisabled={!isConnected} onClick={onDepositOpen}>Deposit</Button>
                         <Modal isOpen={isDepositOpen} onClose={onDepositClose} isCentered >
                             <ModalOverlay />
-                                <ModalContent bgColor='blue.900'>
+                                <ModalContent bgColor='gray.900'>
                                     <ModalHeader mb={1} borderBottom='1px' borderColor='yellow.500'>
                                         <Text color='gray.300' >
                                             Deposit {name}
@@ -259,14 +259,14 @@ export default function FarmPoolInfo({
                                             <Modal isOpen={isDepositProcessingOpen} onClose={onDepositProcessingClose} isCentered>
                                                 <ModalOverlay>
                                                     <ModalContent>
-                                                        <ModalHeader borderBottom='1px' color='gray.300' bgColor='blue.900' borderColor='yellow.500'>
+                                                        <ModalHeader borderBottom='1px' color='gray.300' bgColor='gray.900' borderColor='yellow.500'>
                                                             { depositLoading ? "Processing Transaction..."
                                                                         : depositSuccess ? 'Transaction Successful'
                                                                         : depositError ? 'Transaction Reverted'
                                                                         : "Waiting Approval"}
                                                             <ModalCloseButton />
                                                         </ModalHeader>
-                                                        <ModalBody bgColor='blue.900' color= 'gray.300'>
+                                                        <ModalBody bgColor='gray.900' color= 'gray.300'>
                                                             {depositLoading? <Flex >
                                                                                 <Spinner
                                                                                thickness='4px'
@@ -308,7 +308,7 @@ export default function FarmPoolInfo({
                     <Button fontSize='smaller' ml={2} bgGradient='linear(to-bl, yellow.400, yellow.700)' color='black' isDisabled={!isConnected} onClick={onWithdrawOpen}>Withdraw</Button>
                         <Modal isOpen={isWithdrawOpen} onClose={onWithdrawClose} isCentered>
                             <ModalOverlay />
-                            <ModalContent bgColor='blue.900'>
+                            <ModalContent bgColor='gray.900'>
                                     <ModalHeader mb={1} borderBottom='1px' borderColor='yellow.500'>
                                         <Text color='gray.300'>
                                             Withdraw {name}
@@ -338,14 +338,14 @@ export default function FarmPoolInfo({
                                                 <Modal isOpen={isWithdrawProcessingOpen} onClose={onWithdrawProcessingClose} isCentered>
                                                     <ModalOverlay>
                                                     <ModalContent>
-                                                        <ModalHeader borderBottom='1px' color='gray.300' bgColor='blue.900' borderColor='yellow.500'>
+                                                        <ModalHeader borderBottom='1px' color='gray.300' bgColor='gray.900' borderColor='yellow.500'>
                                                             { withdrawLoading ? "Processing Transaction..."
                                                                         : withdrawSuccess ? 'Transaction Successful'
                                                                         : withdrawError ? 'Transaction Reverted'
                                                                         : "Waiting Approval"}
                                                             <ModalCloseButton />
                                                         </ModalHeader>
-                                                        <ModalBody bgColor='blue.900' color= 'gray.300'>
+                                                        <ModalBody bgColor='gray.900' color= 'gray.300'>
                                                             {withdrawLoading? <Flex ><Spinner
                                                                                thickness='4px'
                                                                                speed='0.65s'

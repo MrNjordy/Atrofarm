@@ -91,7 +91,7 @@ function Farm() {
 return(
     <Box minHeight='100vh'>
             <VStack>
-            <Box bgGradient='linear(to-bl, yellow.400, yellow.700)' width='100%' padding={[5, null, null, 10]}>
+            <Box height={220} bgGradient='linear(to-bl, yellow.400, yellow.700)' width='100%' padding={[5, null, null, 10]}>
                 <Center>
                 <Text fontFamily='heading' fontWeight='bold' fontSize={[null, 20, 30, 40]} color='black' ml={[10,20,30,40]} mr={[10,20,30,40]} align='center'>
                 Farming Pools

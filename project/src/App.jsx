@@ -14,6 +14,7 @@ import Footer from './Footer'
 import { BrowserRouter, Route, Routes} from 'react-router-dom'
 import { useState, useEffect, createContext, useCallback } from 'react'
 import { fetchData } from './FetchData'
+import Atrofa from './FarmsIcons/Atropfa'
 
 export const InfoContext = createContext();
 
@@ -67,6 +68,7 @@ function App() {
           <Route path ='/' Component={Home} />
           <Route path ='/Farms' Component={Farm} />
           <Route path ='/Staking' Component={Staking} />
+          <Route path= '/0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17' Component={Atrofa} />
         </Routes>
       </BrowserRouter>
       </InfoContext.Provider>

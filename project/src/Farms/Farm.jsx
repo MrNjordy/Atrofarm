@@ -4,6 +4,7 @@ import { Flex, Spinner, Box, Center, Text, SimpleGrid, VStack, Switch, FormContr
 import PoolInfo from "./PoolInfo";
 import { useContext } from "react";
 import { InfoContext } from "../App";
+import atrofa from '../assets/FarmIcons/0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17.png'
 
 function Farm() {
     const allPools = useContext(InfoContext);

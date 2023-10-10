@@ -3,8 +3,6 @@ import { useWeb3Modal } from "@web3modal/wagmi/react";
 import {  useAccount } from "wagmi";
 import { Link as RouteLink } from "react-router-dom";
 import { useEffect, useState } from "react";
-import atrofaIcon from './assets/Atrofa.png'
-import atropaIcon from './assets/Atropa.png'
 import { useContext } from "react";
 import { InfoContext } from "./App";
 import {FaSquareXTwitter} from 'react-icons/fa6'

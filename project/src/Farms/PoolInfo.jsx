@@ -5,6 +5,11 @@ import { writeContract, prepareWriteContract } from "wagmi/actions";
 import { masterContract, tokenAbi } from "../data";
 import { useState } from "react";
 import { redirect } from "react-router-dom";
+import atro from '../assets/FarmIcons/0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17.png'
+import AFC from '../assets/FarmIcons/0xc83b18FafFC78c73f3aB0EA2Ae1a1bF333C1A549.png'
+import atropa from '../assets/FarmIcons/0xCc78A0acDF847A2C1714D2A925bB4477df5d48a6.png'
+
+
 
 
 export default function FarmPoolInfo({
@@ -127,11 +132,13 @@ export default function FarmPoolInfo({
     return(
         <Box>
             <Box fontFamily='heading' mt={5} padding={3} paddingBottom={1} width={250} bgColor='gray.900' fontWeight='semibold' color='gray.300' border={isAtrofa ? '2px' : 'none'} borderBottom='none' borderColor='yellow.500'>
-                <Center ml={7} mr={7}>       
-                        <Flex mb={3}>
+                <HStack>
+                <Image src={`../src/assets/FarmIcons/${token0}.png`} mb={3}></Image>  
+                <Image src={`../src/assets/FarmIcons/${token1}.png`} mb={3}></Image>    
+                        <Flex mb={3} mr={1} ml='auto'>
                         <Text color='gray.300'>{name}</Text>
-                        </Flex>                     
-                </Center>
+                        </Flex>   
+                </HStack>                  
                 <Center borderBottom='2px' borderColor='yellow.500'></Center>
                 <Flex fontSize='small' fontWeight='light'>
                     <Link ml='auto' mr='auto' isExternal href={isV1 ? `https://app.pulsex.com/add/V1/${token0}/${token1}` : `https://app.pulsex.com/add/V2/${token0}/${token1}`} alt='Pulsex LP' >

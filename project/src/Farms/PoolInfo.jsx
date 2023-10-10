@@ -129,8 +129,8 @@ export default function FarmPoolInfo({
         <Box>
             <Box fontFamily='heading' mt={5} padding={3} paddingBottom={1} width={250} bgColor='gray.900' fontWeight='semibold' color='gray.300' border={isAtrofa ? '2px' : 'none'} borderBottom='none' borderColor='yellow.500'>
                 <HStack>
-                {/* <Image src={`../src/assets/FarmIcons/${token0}.png`} mb={3}></Image>  
-                <Image src={`../src/assets/FarmIcons/${token1}.png`} mb={3}></Image>     */}
+                <Image src={`https://github.com/MrNjordy/Atrofarm/project/src/assets/FarmIcons/${token0}.png`} mb={3}></Image>  
+                <Image src={`https://github.com/MrNjordy/Atrofarm/project/src/assets/FarmIcons/${token1}.png`} mb={3}></Image>    
                         <Flex mb={3} mr={1} ml='auto'>
                         <Text color='gray.300'>{name}</Text>
                         </Flex>   

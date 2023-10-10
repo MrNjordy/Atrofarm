@@ -6,8 +6,16 @@ import { masterContract, tokenAbi } from "../data";
 import { useState } from "react";
 import { redirect } from "react-router-dom";
 import atrofa from '../assets/FarmIcons/0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17.png'
-
-
+import afc from '../assets/FarmIcons/0xc83b18FafFC78c73f3aB0EA2Ae1a1bF333C1A549.png'
+import atropa from '../assets/FarmIcons/0xCc78A0acDF847A2C1714D2A925bB4477df5d48a6.png'
+import bear from '../assets/FarmIcons/0xd6c31bA0754C4383A41c0e9DF042C62b5e918f6d.png'
+import tsfi from '../assets/FarmIcons/0x4243568Fa2bbad327ee36e06c16824cAd8B37819.png'
+import pls from '../assets/FarmIcons/PLS.png'
+import dai from '../assets/FarmIcons/0x6B175474E89094C44Da98b954EedeAC495271d0F.png'
+import monat from '../assets/FarmIcons/0xf8AB3393b1f5CD6184Fb6800A1fC802043C4063e.png'
+import cia from '../assets/FarmIcons/0x2e5898b2e107a3cAf4f0597aCFE5D2e6d73F2196.png'
+import sens from '../assets/FarmIcons/0x415AD92C5Ae913217B05fcC3D529ED8c77d4D0B8.png'
+import wbtc from '../assets/FarmIcons/0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599.png'
 
 export default function FarmPoolInfo({
     id,
@@ -131,11 +139,35 @@ export default function FarmPoolInfo({
         <Box>
             <Box fontFamily='heading' mt={5} padding={3} paddingBottom={1} width={250} bgColor='gray.900' fontWeight='semibold' color='gray.300' border={isAtrofa ? '2px' : 'none'} borderBottom='none' borderColor='yellow.500'>
                 <HStack>
-                {/* <Image src={`https://github.com/MrNjordy/Atrofarm/blob/main/project/src/assets/FarmIcons/Atro200.svg`} mb={3}></Image>   */}
-                {/* <Image src={`https://github.com/MrNjordy/Atrofarm/tree/main/project/src/assets/FarmIcons/${token1}.png`} mb={3}></Image>     */}
-                        <Flex mb={3} mr={1} ml='auto'>
+                    <Image src={token0 == '0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17' ? atrofa 
+                                : token0 == '0xCc78A0acDF847A2C1714D2A925bB4477df5d48a6' ? atropa 
+                                : token0 == '0xd6c31bA0754C4383A41c0e9DF042C62b5e918f6d' ? bear 
+                                : token0 == '0x4243568Fa2bbad327ee36e06c16824cAd8B37819' ? tsfi 
+                                : token0 == 'PLS' ? pls 
+                                : token0 == '0x6B175474E89094C44Da98b954EedeAC495271d0F' ? dai 
+                                : token0 == '0xf8AB3393b1f5CD6184Fb6800A1fC802043C4063e' ? monat 
+                                : token0 == '0x2e5898b2e107a3cAf4f0597aCFE5D2e6d73F2196' ? cia 
+                                : token0 == '0x415AD92C5Ae913217B05fcC3D529ED8c77d4D0B8' ? sens 
+                                : token0 == '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599' ? wbtc 
+                                : afc} 
+                            mb={3}>
+                    </Image>  
+                    <Image src={token1 == '0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17' ? atrofa 
+                                : token1 == '0xCc78A0acDF847A2C1714D2A925bB4477df5d48a6' ? atropa 
+                                : token1 == '0xd6c31bA0754C4383A41c0e9DF042C62b5e918f6d' ? bear 
+                                : token1 == '0x4243568Fa2bbad327ee36e06c16824cAd8B37819' ? tsfi 
+                                : token1 == 'PLS' ? pls 
+                                : token1 == '0x6B175474E89094C44Da98b954EedeAC495271d0F' ? dai 
+                                : token1 == '0xf8AB3393b1f5CD6184Fb6800A1fC802043C4063e' ? monat 
+                                : token1 == '0x2e5898b2e107a3cAf4f0597aCFE5D2e6d73F2196' ? cia 
+                                : token1 == '0x415AD92C5Ae913217B05fcC3D529ED8c77d4D0B8' ? sens 
+                                : token1 == '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599' ? wbtc 
+                                : afc}  
+                            mb={3}>
+                    </Image>    
+                    <Flex mb={3} mr={1} ml='auto'>
                         <Text color='gray.300'>{name}</Text>
-                        </Flex>   
+                    </Flex>   
                 </HStack>                  
                 <Center borderBottom='2px' borderColor='yellow.500'></Center>
                 <Flex fontSize='small' fontWeight='light'>

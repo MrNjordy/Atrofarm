@@ -34,8 +34,8 @@ function Staking() {
 
     return(
         <Box minHeight='100vh'>
-            <Box bgGradient='linear(to-bl, yellow.400, yellow.700)' width='100%' height={[120, 130, 150,220]}>
-                <Center height={[120, 130, 150,220]}>
+            <Box bgGradient='linear(to-bl, yellow.400, yellow.700)' width='100%' height={[120, 130, 150,200]}>
+                <Center height={[120, 130, 150,200]}>
                     <Box>
                         <Text fontFamily='heading' fontWeight='bold' fontSize={[20, 20, 30, 40]} color='black' ml={[10,20,30,40]} mr={[10,20,30,40]} mn='auto' align='center'>
                             Staking Pools

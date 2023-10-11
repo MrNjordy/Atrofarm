@@ -221,7 +221,7 @@ function Home() {
                                     </Link>
                                 </Tooltip>
                                 <Tooltip label="Copy Address">
-                                        <IconButton variant='unstyled' color='gray.300' icon={hasCopied ? <Text fontSize={'xs'}>copied!</Text> : <CopyIcon />} onClick={onCopy} mb={3}></IconButton>
+                                        <IconButton variant='unstyled' ml={-3} color='gray.300' icon={hasCopied ? <Text fontSize={'xs'}>copied!</Text> : <CopyIcon />} onClick={onCopy} mb={3}></IconButton>
                                 </Tooltip>
                             </HStack>
                     </HStack>

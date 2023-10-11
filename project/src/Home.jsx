@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { InfoContext } from "./App";
 import { masterAbi } from "./data";
 import { usePublicClient } from "wagmi";
-import { CopyIcon } from '@chakra-ui/icons'
+import { CopyIcon, CheckIcon } from '@chakra-ui/icons'
 import dexscreener from './assets/dexscreener.png'
 import dextool from './assets/dextool.jpeg'
 import geckoTerminal from './assets/geckoterminal.png'
@@ -221,7 +221,7 @@ function Home() {
                                     </Link>
                                 </Tooltip>
                                 <Tooltip label="Copy Address">
-                                        <IconButton variant='unstyled' ml={-3} color='gray.300' icon={hasCopied ? <Text fontSize={'xs'}>copied!</Text> : <CopyIcon />} onClick={onCopy} mb={3}></IconButton>
+                                        <IconButton variant='unstyled' ml={-3} color='gray.300' icon={hasCopied ? <CheckIcon /> : <CopyIcon />} onClick={onCopy} mb={3}></IconButton>
                                 </Tooltip>
                             </HStack>
                     </HStack>

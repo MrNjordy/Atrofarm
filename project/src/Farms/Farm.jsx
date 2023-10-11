@@ -98,12 +98,12 @@ return(
                 </Text>
                 </Center>
                 <Center>
-                    <Text ml='auto' mr='auto' Text fontSize={[10, 15,20, 25, 30]} fontFamily='fantasy' fontWeight='semibold' >
+                    <Text ml='auto' mr='auto' Text fontSize={[10, 15,20, 25, 30]} fontFamily='fantasy' >
                         All pools are PulseX V2 unless indicated otherwise
                     </Text>
                 </Center>
                 <Center>
-                    <Text ml='auto' mr='auto' fontSize={[9, 13, 17, 25]} fontFamily='fantasy' fontWeight='hairline' >
+                    <Text ml='auto' mr='auto' Text fontSize={[10, 15,20, 25, 30]} fontFamily='fantasy' >
                         Deposit fee of 2% on non-native pools
                     </Text>
                 </Center>

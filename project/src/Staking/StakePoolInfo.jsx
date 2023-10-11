@@ -162,7 +162,7 @@ export default function StakePoolInfo({
                     </Flex>
                 </HStack> 
                 <Flex justify='right' mr={1} mb={1} mt={-1} fontSize='smaller' fontWeight='light'>
-                    ${userStakedUsd}
+                    ${parseFloat(userStakedUsd).toFixed(2)}
                 </Flex>
                 <HStack color='gray.400' >
                     <Flex ml={1} mr='auto' fontSize='smaller'>

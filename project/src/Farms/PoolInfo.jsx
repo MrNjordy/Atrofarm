@@ -200,7 +200,7 @@ export default function FarmPoolInfo({
                         Your Deposit: 
                     </Flex>
                     <Flex ml='auto' mr={1} fontSize='large'>
-                    ${userStakedUsd}
+                    ${parseFloat(userStakedUsd).toFixed(2)}
                     </Flex>
                 </HStack> 
                 <Flex justify='right' mr={1} mb={1} mt={-1} fontSize='smaller' fontWeight='light'>

@@ -34,17 +34,14 @@ function Staking() {
 
     return(
         <Box minHeight='100vh'>
-            <Box height={[120, 130, 150,220]} bgGradient='linear(to-bl, yellow.400, yellow.700)' width='100%' padding={[5, null, null, 10]}>
-                <Center>
-                <Text fontFamily='heading' fontWeight='bold' fontSize={[null, 20, 30, 40]} color='black' ml={[10,20,30,40]} mr={[10,20,30,40]} align='center' mt={2}>
-                Staking Pools
-                </Text>
-                </Center>
-                <Center>
-                    <Text ml='auto' mr='auto' fontSize={[9, 13, 17, 25]} fontFamily='fantasy' fontWeight='hairline' mb={7} >
-                        No deposit fee
-                    </Text>
-                </Center>
+            <Box bgGradient='linear(to-bl, yellow.400, yellow.700)' width='100%' height={[120, 130, 150,220]}>
+                <Center height={[120, 130, 150,220]}>
+                    <Box>
+                        <Text fontFamily='heading' fontWeight='bold' fontSize={[20, 20, 30, 40]} color='black' ml={[10,20,30,40]} mr={[10,20,30,40]} mn='auto' align='center'>
+                            Staking Pools
+                        </Text>   
+                    </Box>                     
+                </Center>                  
             </Box>
             <Flex>
                 {isLoading ?    <Spinner

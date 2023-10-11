@@ -131,7 +131,7 @@ return(
                         </FormControl>
                     </Flex>
                     <Flex>
-                        <SimpleGrid columns={[1, 2, 3, 4]} spacing={[null, 15, 20]} ml='auto' mr='auto' mt={5}>         
+                        <SimpleGrid columns={[1, 2, 3, 3]} spacing={[null, 15, 20]} ml='auto' mr='auto' mt={5}>         
                             {poolsInfo.map((item) => {
                                 return (
                                     <PoolInfo key={item.id} {...item} />

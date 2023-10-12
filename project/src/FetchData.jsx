@@ -63,7 +63,13 @@ const data = await readContracts({
         abi: lpAbi,
         functionName: 'getReserves',
         
-        }
+        },
+    {//Getting wBTC/wPL reserves to calculate wBTC price
+        address: '0x9B00c1e16C9681D791A1143bDf70b42D77AA4f65',
+        abi: lpAbi,
+        functionName: 'getReserves',
+            
+        },
     ]
 });
 
@@ -73,6 +79,8 @@ const atropaPrice = parseInt(data[6].result[0].toString())/parseInt(data[6].resu
 const wBtcPrice = parseInt(data[7].result[1].toString())/parseInt(data[7].result[0].toString()) * pulsePrice / 10**10
 const afcPrice = parseInt(data[8].result[0].toString())/parseInt(data[8].result[1].toString()) * pulsePrice
 const ciaPrice = parseInt(data[9].result[1].toString())/parseInt(data[9].result[0].toString()) * pulsePrice
+const trsPrice = parseInt(data[10].result[1].toString())/parseInt(data[10].result[0].toString()) * pulsePrice /10**9
+console.log(trsPrice)
 
 const nativeTokenPriceUsd = (parseInt(data[0].result[1].toString())/parseInt(data[0].result[0].toString()) * pulsePrice).toString();
 const nativeToken = await fetchToken({ address: import.meta.env.VITE_TOKEN })
@@ -108,7 +116,10 @@ generalInfo.inflation = tokenMintedPerDay;
             functionName: 'poolInfo',
             args: [i]
         })
-        if(poolInfo[1] == 0) { //if allocpoint == 0
+        // if(poolInfo[1] == 0) { //if allocpoint == 0
+        //     continue
+        // }
+        if(poolInfo[0] == '0xf8AB3393b1f5CD6184Fb6800A1fC802043C4063e') {
             continue
         }
         const tokenInfo = await fetchToken({ address: poolInfo[0]})
@@ -238,6 +249,26 @@ generalInfo.inflation = tokenMintedPerDay;
                     const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
                     lpPriceUsd = (lpPriceEth * ciaPrice).toString();
                     }
+            else if(token0Name.address == '0x359C29e88992A7F4De7C0a00f78E3373d1A710Cb'){
+                    const lpPriceEth = parseInt(getLpReserves[0].toString()) * 2 / parseInt(lpTotalSupply.toString());
+                    console.log(lpPriceEth)
+                    lpPriceUsd = (lpPriceEth * trsPrice).toString();
+                    }
+            else if (token1Name.address == '0x359C29e88992A7F4De7C0a00f78E3373d1A710Cb'){
+                    const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
+                    console.log(lpPriceEth)
+                    lpPriceUsd = (lpPriceEth * trsPrice).toString();
+                     }
+            // else if(token0Name.name == 'Atrofarm'){
+            //             const lpPriceEth = parseInt(getLpReserves[0].toString()) * 2 / parseInt(lpTotalSupply.toString());
+            //             console.log("Atro", lpPriceEth)
+            //             lpPriceUsd = (lpPriceEth * nativeTokenPriceUsd).toString();
+            //             }
+            // else if (token1Name.name == 'Atrofarm'){
+            //             const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
+            //             console.log("Atro", lpPriceEth)
+            //             lpPriceUsd = (lpPriceEth * nativeTokenPriceUsd).toString();
+            //              }     
             if (token0Name.symbol == 'Atrofa' || token1Name.symbol == 'Atrofa') {
                 isAtrofa = true;
             };

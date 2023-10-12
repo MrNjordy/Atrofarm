@@ -80,7 +80,6 @@ const wBtcPrice = parseInt(data[7].result[1].toString())/parseInt(data[7].result
 const afcPrice = parseInt(data[8].result[0].toString())/parseInt(data[8].result[1].toString()) * pulsePrice
 const ciaPrice = parseInt(data[9].result[1].toString())/parseInt(data[9].result[0].toString()) * pulsePrice
 const trsPrice = parseInt(data[10].result[1].toString())/parseInt(data[10].result[0].toString()) * pulsePrice /10**9
-console.log(trsPrice)
 
 const nativeTokenPriceUsd = (parseInt(data[0].result[1].toString())/parseInt(data[0].result[0].toString()) * pulsePrice).toString();
 const nativeToken = await fetchToken({ address: import.meta.env.VITE_TOKEN })
@@ -250,23 +249,21 @@ generalInfo.inflation = tokenMintedPerDay;
                     lpPriceUsd = (lpPriceEth * ciaPrice).toString();
                     }
             // else if(token0Name.address == '0x359C29e88992A7F4De7C0a00f78E3373d1A710Cb'){
-            //         const lpPriceEth = parseInt(getLpReserves[0].toString()) * 2 / parseInt(lpTotalSupply.toString());
+            //         const lpPriceEth = parseInt(getLpReserves[0].toString()) * 2 / parseFloat(lpTotalSupply.toString());
             //         console.log(lpPriceEth)
             //         lpPriceUsd = (lpPriceEth * trsPrice).toString();
             //         }
             // else if (token1Name.address == '0x359C29e88992A7F4De7C0a00f78E3373d1A710Cb'){
-            //         const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
+            //         const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseFloat(lpTotalSupply.toString());
             //         console.log(lpPriceEth)
             //         lpPriceUsd = (lpPriceEth * trsPrice).toString();
             //          }
             else if(token0Name.name == 'Atrofarm'){
                         const lpPriceEth = parseInt(getLpReserves[0].toString()) * 2 / parseInt(lpTotalSupply.toString());
-                        console.log("Atro", lpPriceEth)
                         lpPriceUsd = (lpPriceEth * nativeTokenPriceUsd).toString();
                         }
             else if (token1Name.name == 'Atrofarm'){
                         const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
-                        console.log("Atro", lpPriceEth)
                         lpPriceUsd = (lpPriceEth * nativeTokenPriceUsd).toString();
                          }     
             if (token0Name.symbol == 'Atrofa' || token1Name.symbol == 'Atrofa') {

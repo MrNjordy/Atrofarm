@@ -76,14 +76,13 @@ function Home() {
                     totalRewards += parseFloat(protocolPools[i].rewards);
                     totalRewardsUsd += parseFloat((protocolPools[i].rewardsUsd));
                     if(protocolPools[i].userStaked > 0) {
-                        sumApr += protocolPools[i].apr;
-                        poolStaked += 1;
+                        sumApr += protocolPools[i].apr * protocolPools[i].userStakedUsd;
                         userTotalStaked += protocolPools[i].userStakedUsd
                         poolEarnings = protocolPools[i].userStakedUsd * protocolPools[i].apr  / 100 / 365
                         sumEarnings += poolEarnings
                     }
                 }
-                averageApr = sumApr / poolStaked / 365;
+                averageApr = sumApr / userTotalStaked / 365;
 
                 setTotalRewards(totalRewards.toFixed(2));
                 setTotalRewardsUsd(totalRewardsUsd.toFixed(2));

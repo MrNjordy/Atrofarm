@@ -43,9 +43,9 @@ export default function StakePoolInfo({
             //============ DEPOSIT FORM HOOK (INPUT NUMBER AND MAX BUTTON) ==========
     const { getInputProps: depositInputProps, getIncrementButtonProps: depositIncrementButtonProps } = useNumberInput({
         defaultValue:0,
-        step: parseInt(userBalance) / 10**18,
+        step: address == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ? parseInt(userBalance) / 10**6 : parseInt(userBalance) / 10**18,
         min:0,
-        max: parseInt(userBalance) / 10**18,
+        max: address == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ? parseInt(userBalance) / 10**6 : parseInt(userBalance) / 10**18,
         onChange: (e) => setDepositInput(e * 10**18),
     })
     const maxDeposit = depositIncrementButtonProps();
@@ -57,9 +57,9 @@ export default function StakePoolInfo({
         //============ WITHDRAWAL FORM HOOK (INPUT NUMBER AND MAX BUTTON) ==========
     const { getInputProps: withdrawInputProps, getIncrementButtonProps: withdrawIncrementButtonProps } = useNumberInput({
         defaultValue:0,
-        step: parseInt(userStaked) / 10**18,
+        step: address == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ? parseInt(userStaked) / 10**6 : parseInt(userBalance) / 10**18,
         min:0,
-        max: parseInt(userStaked) / 10**18,
+        max: address == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ? parseInt(userBalance) / 10**6 : parseInt(userBalance) / 10**18,
         onChange: (e) => setWithdrawInput(e * 10**18),
     })
     const maxWithdraw = withdrawIncrementButtonProps();
@@ -211,7 +211,8 @@ export default function StakePoolInfo({
                                                 <HStack>
                                                     <Flex ml={1} mr='auto'>
                                                         <Text color='gray.300' >
-                                                            Balance: {parseInt(userBalance) / 10**18} {name}
+                                                            Balance: {address == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ?  `${parseInt(userBalance) / 10**6} ${name}`
+                                                                        : `${parseInt(userBalance) / 10**18} ${name}` }
                                                         </Text>
                                                     </Flex>
                                                     <Button bgGradient='linear(to-bl, yellow.400, yellow.700)' {...maxDeposit} onClick={setMaxDeposit} size='xs'>MAX</Button>

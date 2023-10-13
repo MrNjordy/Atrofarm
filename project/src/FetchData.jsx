@@ -179,6 +179,9 @@ generalInfo.inflation = tokenMintedPerDay;
             else if(poolInfo[0] == '0x0f93aB5AfEE39ecfeC04eB5E2B49dC9F28A77936') {
                 lpName = token1Name.symbol + "-" + token0Name.symbol;
             }
+            else if(poolInfo[0] == '0xc2eACD88cb2579DFe0890f887A34feAe729d522B') {
+                lpName = token1Name.symbol + "-" + token0Name.symbol;
+            }
             else if(poolInfo[0] == '0xC2131e4A8aaA8A47BeBe87482B67Be2d6701Ce98') {
                 lpName = "T.BEAR" + "-" + token0Name.symbol;
             }

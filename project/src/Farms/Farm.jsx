@@ -219,17 +219,17 @@ return(
             <VStack>
             <Box height={[120, 130, 150,200]} bgGradient='linear(to-bl, yellow.400, yellow.700)' width='100%' padding={[5, null, null, 10]}>
                 <Center>
-                <Text fontFamily='heading' fontWeight='bold' fontSize={[null, 20, 30, 40]} color='black' ml={[10,20,30,40]} mr={[10,20,30,40]} align='center'>
+                <Text fontFamily='heading' fontWeight='bold' fontSize={[20, 20, 30, 40]} color='black' ml={[10,20,30,40]} mr={[10,20,30,40]} align='center'>
                 Farming Pools
                 </Text>
                 </Center>
                 <Center>
-                    <Text ml='auto' mr='auto' Text fontSize={[10, 15,20, 25, 30]} fontFamily='fantasy' >
+                    <Text ml='auto' mr='auto' Text fontSize={[15, 15,20, 25, 30]} fontFamily='fantasy' >
                         All pools are PulseX V2 unless indicated otherwise
                     </Text>
                 </Center>
                 <Center>
-                    <Text ml='auto' mr='auto' Text fontSize={[10, 15,20, 25, 30]} fontFamily='fantasy' >
+                    <Text ml='auto' mr='auto' Text fontSize={[15, 15,20, 25, 30]} fontFamily='fantasy' >
                         Deposit fee of 2% on non-native pools
                     </Text>
                 </Center>

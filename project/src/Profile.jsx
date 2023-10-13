@@ -93,6 +93,12 @@ function Profile() {
                                     Telegram
                                 </Link>
                             </MenuItem>
+                            <MenuItem bgColor='gray.900' fontSize={15} color='gray.300'>
+                                <Link href="https://impls.finance/vaults" isExternal>
+                                    IMPLS
+                                    <ExternalLinkIcon ml={1} mb={1}></ExternalLinkIcon>
+                                </Link>
+                            </MenuItem>
                         </MenuList>
                         </>
                     )}
@@ -146,6 +152,12 @@ function Profile() {
                             <MenuItem bgColor='gray.900' fontSize={15} color='gray.300'>
                                 <Link href="https://app.piteas.io/#/swap?exactField=input&exactAmount=0&inputCurrency=ETH&outputCurrency=0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17" isExternal>
                                     Buy on Piteas
+                                    <ExternalLinkIcon ml={1} mb={1}></ExternalLinkIcon>
+                                </Link>
+                            </MenuItem>
+                            <MenuItem bgColor='gray.900' fontSize={15} color='gray.300'>
+                                <Link href="https://impls.finance/vaults" isExternal>
+                                    IMPLS
                                     <ExternalLinkIcon ml={1} mb={1}></ExternalLinkIcon>
                                 </Link>
                             </MenuItem>

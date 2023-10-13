@@ -115,9 +115,9 @@ generalInfo.inflation = tokenMintedPerDay;
             functionName: 'poolInfo',
             args: [i]
         })
-        // if(poolInfo[1] == 0) { //if allocpoint == 0
-        //     continue
-        // }
+        if(poolInfo[1] == 0) { //if allocpoint == 0
+            continue
+        }
         if(poolInfo[0] == '0xf8AB3393b1f5CD6184Fb6800A1fC802043C4063e') {
             continue
         }

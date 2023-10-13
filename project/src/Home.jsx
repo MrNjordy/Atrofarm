@@ -44,7 +44,6 @@ function Home() {
         let totalRewardsUsd = 0;
 
         let sumApr = 0;
-        let poolStaked = 0;
         let averageApr = 0;
 
         let userTotalStaked = 0

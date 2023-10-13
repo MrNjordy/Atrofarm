@@ -138,7 +138,7 @@ export default function FarmPoolInfo({
 
     return(
         <Box>
-            <Box fontFamily='heading' mt={5} padding={3} paddingBottom={1} width={250} bgColor='gray.900' fontWeight='semibold' color='gray.300' border={isAtrofa ? '2px' : 'none'} borderBottom='none' borderColor='yellow.500'>
+            <Box fontFamily='heading' mt={5} padding={3} paddingBottom={1} width={250} bgColor='gray.900' fontWeight='semibold' color='gray.300'>
                 <HStack>
                     <Image src={token0 == '0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17' ? atrofa 
                                 : token0 == '0xCc78A0acDF847A2C1714D2A925bB4477df5d48a6' ? atropa 
@@ -229,7 +229,7 @@ export default function FarmPoolInfo({
                     ${rewardsUsd}
                 </Flex>
                 </Box>
-                <Box fontFamily='heading' padding={2} paddingTop={0} width={250} bgColor='gray.900' fontWeight='semibold' color={'gray.300'} border={isAtrofa ? '2px' : 'none'} borderTop='none' borderColor='yellow.500'>
+                <Box fontFamily='heading' padding={2} paddingTop={0} width={250} bgColor='gray.900' fontWeight='semibold' color={'gray.300'}>
                 <Accordion defaultIndex={[]} allowMultiple>
                     <AccordionItem border='none'>
                         <AccordionButton justifyContent='center'>   

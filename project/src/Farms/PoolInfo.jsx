@@ -17,6 +17,8 @@ import cia from '../assets/FarmIcons/0x2e5898b2e107a3cAf4f0597aCFE5D2e6d73F2196.
 import sens from '../assets/FarmIcons/0x415AD92C5Ae913217B05fcC3D529ED8c77d4D0B8.png'
 import wbtc from '../assets/FarmIcons/0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599.png'
 import trs from '../assets/FarmIcons/0x359C29e88992A7F4De7C0a00f78E3373d1A710Cb.png'
+import mega from '../assets/FarmIcons/0x8eDb13CE75562056DFf2221D193557Fb4A05770D.png';
+import eth from '../assets/FarmIcons/0x02DcdD04e3F455D838cd1249292C58f3B79e3C3C.png';
 
 export default function FarmPoolInfo({
     id,
@@ -151,6 +153,8 @@ export default function FarmPoolInfo({
                                 : token0 == '0x415AD92C5Ae913217B05fcC3D529ED8c77d4D0B8' ? sens 
                                 : token0 == '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599' ? wbtc 
                                 : token0 == '0x359C29e88992A7F4De7C0a00f78E3373d1A710Cb' ? trs
+                                : token0 == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ? mega
+                                : token0 == '0x02DcdD04e3F455D838cd1249292C58f3B79e3C3C' ? eth
                                 : afc} 
                             mb={3}>
                     </Image>  
@@ -165,6 +169,8 @@ export default function FarmPoolInfo({
                                 : token1 == '0x415AD92C5Ae913217B05fcC3D529ED8c77d4D0B8' ? sens 
                                 : token1 == '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599' ? wbtc 
                                 : token1 == '0x359C29e88992A7F4De7C0a00f78E3373d1A710Cb' ? trs
+                                : token1 == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ? mega
+                                : token1 == '0x02DcdD04e3F455D838cd1249292C58f3B79e3C3C' ? eth
                                 : afc}  
                             mb={3}>
                     </Image>    

@@ -4,6 +4,8 @@ import { writeContract, prepareWriteContract } from "wagmi/actions";
 import { masterContract, tokenAbi } from "../data";
 import { useState } from "react";
 import atrofa from '../assets/FarmIcons/0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17.png'
+import mega from '../assets/FarmIcons/0x8eDb13CE75562056DFf2221D193557Fb4A05770D.png';
+
 
 export default function StakePoolInfo({
     id,
@@ -126,6 +128,7 @@ export default function StakePoolInfo({
 <Box fontFamily='heading' mt={5} padding={3} paddingBottom={1} width={250} bgColor='gray.900' fontWeight='semibold' color='gray.300' borderBottom='none'>                
     <HStack>
         <Image src={token == '0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17' ? atrofa 
+                    : token == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ? mega
                     : atrofa}
                 mb={3}>
         </Image>    

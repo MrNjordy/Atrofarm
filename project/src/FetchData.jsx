@@ -2,6 +2,7 @@ import { fetchBlockNumber, fetchToken, readContract, readContracts } from 'wagmi
 import { getAccount } from "wagmi/actions";
 import { tokenAbi, masterContract, lpAbi } from "./data";
 import axios from 'axios';
+import { etherUnits } from 'viem';
 
 export const fetchData = async () => {
     const account = getAccount();
@@ -52,24 +53,12 @@ const data = await readContracts({
         functionName: 'getReserves',
 
     },
-    {//Getting wBTC/wPL reserves to calculate wBTC price
-        address: '0x1EA22beA96C5498C8347Cc98b76d2dB1D0609Cea',
+    {//Getting wETH/wPL reserves to calculate wETH price
+        address: '0x42AbdFDB63f3282033C766E72Cc4810738571609',
         abi: lpAbi,
         functionName: 'getReserves',
     
     },
-    {//Getting wBTC/wPL reserves to calculate wBTC price
-        address: '0x10843FB4c712526E3fEef838D72059EbfC0cF61f',
-        abi: lpAbi,
-        functionName: 'getReserves',
-        
-        },
-    {//Getting wBTC/wPL reserves to calculate wBTC price
-        address: '0x9B00c1e16C9681D791A1143bDf70b42D77AA4f65',
-        abi: lpAbi,
-        functionName: 'getReserves',
-            
-        },
     ]
 });
 
@@ -77,9 +66,8 @@ const data = await readContracts({
 const pulsePrice = parseInt(data[5].result[1].toString())/parseInt(data[5].result[0].toString())
 const atropaPrice = parseInt(data[6].result[0].toString())/parseInt(data[6].result[1].toString()) * pulsePrice
 const wBtcPrice = parseInt(data[7].result[1].toString())/parseInt(data[7].result[0].toString()) * pulsePrice / 10**10
-const afcPrice = parseInt(data[8].result[0].toString())/parseInt(data[8].result[1].toString()) * pulsePrice
-const ciaPrice = parseInt(data[9].result[1].toString())/parseInt(data[9].result[0].toString()) * pulsePrice
-const trsPrice = parseInt(data[10].result[1].toString())/parseInt(data[10].result[0].toString()) * pulsePrice /10**9
+const wethPrice = parseInt(data[8].result[1].toString())/parseInt(data[8].result[0].toString()) * pulsePrice
+
 
 const nativeTokenPriceUsd = (parseInt(data[0].result[1].toString())/parseInt(data[0].result[0].toString()) * pulsePrice).toString();
 const nativeToken = await fetchToken({ address: import.meta.env.VITE_TOKEN })
@@ -188,6 +176,9 @@ generalInfo.inflation = tokenMintedPerDay;
             else if(poolInfo[0] == '0xF892d93199B4DE0aB1CDf35799Ccf9D5A425581B') {
                 lpName = token1Name.symbol + "-" + token0Name.symbol;
             }
+            else if(poolInfo[0] == '0x0f93aB5AfEE39ecfeC04eB5E2B49dC9F28A77936') {
+                lpName = token1Name.symbol + "-" + token0Name.symbol;
+            }
             else if(poolInfo[0] == '0xC2131e4A8aaA8A47BeBe87482B67Be2d6701Ce98') {
                 lpName = "T.BEAR" + "-" + token0Name.symbol;
             }
@@ -232,47 +223,29 @@ generalInfo.inflation = tokenMintedPerDay;
                 const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
                 lpPriceUsd = (lpPriceEth * wBtcPrice).toString();
             }
-            else if(token0Name.name == 'Atropa Fan Club'){
-                const lpPriceEth = parseInt(getLpReserves[0].toString()) * 2 / parseInt(lpTotalSupply.toString());
-                lpPriceUsd = (lpPriceEth * afcPrice).toString();
-            }
-            else if (token1Name.name == 'Atropa Fan Club'){
-                const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
-                lpPriceUsd = (lpPriceEth * afcPrice).toString();
-                }
-            else if(token0Name.address == '0x2e5898b2e107a3cAf4f0597aCFE5D2e6d73F2196'){
-                    const lpPriceEth = parseInt(getLpReserves[0].toString()) * 2 / parseInt(lpTotalSupply.toString());
-                    lpPriceUsd = (lpPriceEth * ciaPrice).toString();
-                }
-            else if (token1Name.address == '0x2e5898b2e107a3cAf4f0597aCFE5D2e6d73F2196'){
-                    const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
-                    lpPriceUsd = (lpPriceEth * ciaPrice).toString();
-                    }
-            // else if(token0Name.address == '0x359C29e88992A7F4De7C0a00f78E3373d1A710Cb'){
-            //         const lpPriceEth = parseInt(getLpReserves[0].toString()) * 2 / parseFloat(lpTotalSupply.toString());
-            //         console.log(lpPriceEth)
-            //         lpPriceUsd = (lpPriceEth * trsPrice).toString();
-            //         }
-            // else if (token1Name.address == '0x359C29e88992A7F4De7C0a00f78E3373d1A710Cb'){
-            //         const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseFloat(lpTotalSupply.toString());
-            //         console.log(lpPriceEth)
-            //         lpPriceUsd = (lpPriceEth * trsPrice).toString();
-            //          }
             else if(token0Name.name == 'Atrofarm'){
-                        const lpPriceEth = parseInt(getLpReserves[0].toString()) * 2 / parseInt(lpTotalSupply.toString());
-                        lpPriceUsd = (lpPriceEth * nativeTokenPriceUsd).toString();
-                        }
+                const lpPriceEth = parseInt(getLpReserves[0].toString()) * 2 / parseInt(lpTotalSupply.toString());
+                lpPriceUsd = (lpPriceEth * nativeTokenPriceUsd).toString();
+            }
             else if (token1Name.name == 'Atrofarm'){
-                        const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
-                        lpPriceUsd = (lpPriceEth * nativeTokenPriceUsd).toString();
-                         }     
+                const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
+                lpPriceUsd = (lpPriceEth * nativeTokenPriceUsd).toString();
+            }
+            else if(token0Name.address == '0x02DcdD04e3F455D838cd1249292C58f3B79e3C3C'){ //WETH
+                const lpPriceEth = parseInt(getLpReserves[0].toString()) * 2 / parseInt(lpTotalSupply.toString());
+                lpPriceUsd = (lpPriceEth * wethPrice).toString();
+            }
+            else if (token1Name.address == '0x02DcdD04e3F455D838cd1249292C58f3B79e3C3C'){ //WETH
+                const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
+                lpPriceUsd = (lpPriceEth * wethPrice).toString();
+            }    
             if (token0Name.symbol == 'Atrofa' || token1Name.symbol == 'Atrofa') {
                 isAtrofa = true;
             };
 //=======================================================================================
             const totalStakedUsd = (parseInt(totalStaked.toString()) / 10**18) * lpPriceUsd;
 
-            let Apr
+            let Apr;
             if (totalStakedUsd == 0) {
                 Apr = poolRewardPerYearUsd / 1 * 100
             }
@@ -370,11 +343,17 @@ generalInfo.inflation = tokenMintedPerDay;
                         functionName:'allowance',
                         args: [address, import.meta.env.VITE_MASTER],
                     },
+                    {
+                        address: '0x0f93aB5AfEE39ecfeC04eB5E2B49dC9F28A77936', //MEGA/wETH
+                        abi: lpAbi,
+                        functionName: 'getReserves',
+                    },
                 ]
             })
             const tokenPriceEth = data[0].result;
             const totalStaked = data[1].result;
             const allowance = data[2].result;
+            const megaReserve = data[3].result;
 
             //This one would be more generic as long as tokens are paired with the same token eg:wETH
             //Should find a way to find a pair reliably
@@ -386,10 +365,23 @@ generalInfo.inflation = tokenMintedPerDay;
             // });
             //const apiCall = await axios.get(`https://api.dexscreener.com/latest/dex/tokens/${poolInfo[0]}`)
 
-            const tokenPriceUsd = (parseInt(tokenPriceEth[1].toString())/parseInt(tokenPriceEth[0].toString()) * pulsePrice).toString();
-            const totalStakedUsd = (parseInt(totalStaked.toString()) / 10**18) * tokenPriceUsd;
+            const AtrofaPriceUsd = (parseInt(tokenPriceEth[1].toString())/parseInt(tokenPriceEth[0].toString()) * pulsePrice).toString();
+            const megaPrice = (parseInt(megaReserve[0].toString())/parseInt(megaReserve[1].toString()) / 10**12 * wethPrice).toString();
 
-            const Apr = poolRewardPerYearUsd / totalStakedUsd * 100
+            let tokenPriceUsd;
+            if (poolInfo[0] == '0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17') {
+                tokenPriceUsd = AtrofaPriceUsd;
+            }
+            else if (poolInfo[0] == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D') {
+                tokenPriceUsd = megaPrice; 
+            }
+            const totalStakedUsd = (parseInt(totalStaked.toString()) / 10**18) * tokenPriceUsd;
+            let Apr;
+            if (totalStakedUsd == 0) {
+                Apr = poolRewardPerYearUsd / 1 * 100
+            }
+            else {Apr = poolRewardPerYearUsd / totalStakedUsd * 100 }
+            if (Apr > 10000000) {Apr = 1000000}
 
             if(isConnected) {
 

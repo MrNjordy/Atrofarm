@@ -46,7 +46,7 @@ export default function StakePoolInfo({
         step: address == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ? parseInt(userBalance) / 10**6 : parseInt(userBalance) / 10**18,
         min:0,
         max: address == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ? parseInt(userBalance) / 10**6 : parseInt(userBalance) / 10**18,
-        onChange: (e) => setDepositInput(e * 10**18),
+        onChange: address == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ? (e) => setDepositInput(e * 10**6) : (e) => setDepositInput(e * 10**18),
     })
     const maxDeposit = depositIncrementButtonProps();
     const inputDeposit = depositInputProps();
@@ -59,8 +59,8 @@ export default function StakePoolInfo({
         defaultValue:0,
         step: address == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ? parseInt(userStaked) / 10**6 : parseInt(userBalance) / 10**18,
         min:0,
-        max: address == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ? parseInt(userBalance) / 10**6 : parseInt(userBalance) / 10**18,
-        onChange: (e) => setWithdrawInput(e * 10**18),
+        max: address == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ? parseInt(userStaked) / 10**6 : parseInt(userStaked) / 10**18,
+        onChange: address == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ? (e) => setWithdrawInput(e * 10**6) : (e) => setWithdrawInput(e * 10**18),
     })
     const maxWithdraw = withdrawIncrementButtonProps();
     const inputWithdraw = withdrawInputProps();

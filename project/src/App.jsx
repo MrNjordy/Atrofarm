@@ -14,6 +14,7 @@ import Footer from './Footer'
 import { BrowserRouter, Route, Routes} from 'react-router-dom'
 import { useState, useEffect, createContext, useCallback } from 'react'
 import { fetchData } from './FetchData'
+import Portfolio from './Portfolio'
 
 export const InfoContext = createContext();
 
@@ -67,6 +68,7 @@ function App() {
           <Route path ='/' Component={Home} />
           <Route path ='/Farms' Component={Farm} />
           <Route path ='/Staking' Component={Staking} />
+          <Route path ='/Portfolio' Component={Portfolio} />
         </Routes>
       </BrowserRouter>
       </InfoContext.Provider>

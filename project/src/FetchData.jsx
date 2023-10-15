@@ -103,9 +103,9 @@ generalInfo.inflation = tokenMintedPerDay;
             functionName: 'poolInfo',
             args: [i]
         })
-        if(poolInfo[1] == 0) { //if allocpoint == 0
-            continue
-        }
+        // if(poolInfo[1] == 0) { //if allocpoint == 0
+        //     continue
+        // }
         if(poolInfo[0] == '0xf8AB3393b1f5CD6184Fb6800A1fC802043C4063e') {
             continue
         }
@@ -376,7 +376,8 @@ generalInfo.inflation = tokenMintedPerDay;
                 tokenPriceUsd = AtrofaPriceUsd;
             }
             else if (poolInfo[0] == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D') {
-                tokenPriceUsd = megaPrice; 
+                tokenPriceUsd = megaPrice;
+                tokenInfo.symbol = "COMING SOON!"
             }
             const totalStakedUsd = (parseInt(totalStaked.toString()) / 10**18) * tokenPriceUsd;
             let Apr;

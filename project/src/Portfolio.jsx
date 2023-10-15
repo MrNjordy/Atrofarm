@@ -219,10 +219,10 @@ function Portfolio () {
                 {tokenList && isConnected ? 
             <Box>
             
-            <Box fontFamily='heading' width='-webkit-fit-content' ml='auto' mr='auto' mt={10}>
+            <Box fontFamily='heading' width={[300, 500, 750, 1000]} ml='auto' mr='auto' mt={10}>
                     <Box color={'gray.300'} mb={10}>
                         <HStack>
-                            <Text fontSize={20}>
+                            <Text paddingLeft={5} fontSize={[15, 16, 18, 20]}>
                                 {address.substring(0,5) + '...' + address.substring(address.length - 5)}
                             </Text>
                             <Tooltip label="Copy Address">
@@ -230,16 +230,16 @@ function Portfolio () {
                                 </Tooltip>
                             <Tooltip label="View on PulseScan">
                                 <Link href={`https://scan.pulsechain.com/address/${address}`} isExternal>
-                                    <Image src={pulseChain} alt='dex' mb={-1} boxSize={[4,5,6,7]}></Image>
+                                    <Image src={pulseChain} alt='dex' mb={-1} boxSize={[3,5,6,7]}></Image>
                                 </Link>
                              </Tooltip>
                             <Flex ml='auto' mr={5}>
-                        <HStack spacing={0} justifyContent='right' mr={5}>
+                        <HStack spacing={0} justifyContent='right' mr={[0, null, null, 5]}>
                         <Flex>
                     <IconButton isLoading={isLoading} icon={<RepeatIcon/>} variant='ghost' size='sm' onClick={getTokens} color='gray.300'>CLick to refresh</IconButton>
                         </Flex>
                         <Flex>
-                            <Text fontSize={40}>
+                            <Text fontSize={[25, 30, 35, 40]}>
                                 ${parseFloat(totalPort).toFixed(2)}
                             </Text>
                         </Flex>
@@ -248,7 +248,7 @@ function Portfolio () {
                         </HStack>
                     </Box>
             <Flex >
-            <HStack width={[300, 500, 750, 1000]} ml='auto' mr='auto' spacing={0} paddingBottom={2} color='gray.300' bgColor='gray.900'>
+            <HStack fontSize={[11,13,15,18]} width={[300, 500, 750, 1000]} ml='auto' mr='auto' spacing={0} paddingBottom={2} color='gray.300' bgColor='gray.900'>
                 <Box width={[120, 200, 300, 400]}>
                 <Text  ml={5} mt={5}  mr='auto'>
                     Asset

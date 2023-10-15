@@ -19,9 +19,9 @@ export default function PortInfo({
     const { onCopy: onCopyContract, value: contractValue, setValue: setContractValue, hasCopied: hasCopiedContract } = useClipboard(contractAddress);
 
     return(
-    <Box>
+    <Box width={[300, 500, 750, 1000]}>
         <HStack paddingTop={3} spacing={0}>
-        <Box bgColor={'gray.900'} height={70} width={400}>
+        <Box bgColor={'gray.900'} height={70} width={[120, 200, 300, 400]}>
             <Center h={70} justifyContent='left'>
             <Text ml={5}>
                 {name}
@@ -47,7 +47,7 @@ export default function PortInfo({
                 {contractAddress}
             </Text>
         </Box> */}
-        <Box bgColor={'gray.900'} height={70} width={200}>
+        <Box bgColor={'gray.900'} height={70} width={[60, 100, 150, 200]}>
             <VStack align='left'>
             <Center h={70} justifyContent='left'>
             <Box>
@@ -62,7 +62,7 @@ export default function PortInfo({
             </Center>
             </VStack>
             </Box>
-            <Box bgColor={'gray.900'} height={70} width={200}>
+            <Box bgColor={'gray.900'} height={70} width={[60, 100, 150, 200]}>
             <Center h={70} justifyContent='left'>
             <Text>
                 ${(parseFloat(priceInUsd.toString())) < 0.001 ? (parseFloat(priceInUsd.toString())).toExponential(2)
@@ -70,7 +70,7 @@ export default function PortInfo({
             </Text>
             </Center>
             </Box>
-            <Box bgColor={'gray.900'} height={70} width={200}>
+            <Box bgColor={'gray.900'} height={70} width={[60, 100, 150, 200]}>
             <Center h={70} justifyContent='left'>
             <Text>
                 ${(parseFloat(balanceValueUsd.toString())) < 0.001 ? (parseFloat(balanceValueUsd.toString())).toExponential(2)

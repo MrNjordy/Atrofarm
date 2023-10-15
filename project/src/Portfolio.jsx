@@ -247,33 +247,35 @@ function Portfolio () {
                         </Flex>
                         </HStack>
                     </Box>
-            <Flex>
-            <HStack ml='auto' mr='auto' spacing={0} paddingBottom={2} color='gray.300' bgColor='gray.900'>
-                <Box width={400}>
+            <Flex >
+            <HStack width={[300, 500, 750, 1000]} ml='auto' mr='auto' spacing={0} paddingBottom={2} color='gray.300' bgColor='gray.900'>
+                <Box width={[120, 200, 300, 400]}>
                 <Text  ml={5} mt={5}  mr='auto'>
                     Asset
                 </Text>
                 </Box>
-                <Box width={200}>
+                <Box width={[60, 100, 150, 200]}>
                 <Text mt={5} ml='auto' mr='auto'>
                     Amount
                 </Text>
                 </Box>
-                <Box width={200}>
+                <Box width={[60, 100, 150, 200]}>
                 <Text mt={5} ml='auto' mr='auto'>
                     Price
                 </Text>
                 </Box>
-                <Box width={200}>
+                <Box width={[60, 100, 150, 200]}>
                 <Text mt={5} ml='auto' mr='auto'>
                     USD Value
                 </Text>
                 </Box>
+                
             </HStack>
+            
             </Flex>
-            <Center borderBottom='2px' borderColor='yellow.500'></Center>
+            <Center borderBottom='2px' borderColor='yellow.500' ml='auto' mr='auto' width={[300, 500, 750, 1000]}></Center>
                 <Flex>
-                    <VStack spacing={1} ml='auto' mr='auto' color='gray.300' bgColor='gray.900' >
+                    <VStack fontSize={[11,13,15,18]} spacing={1} ml='auto' mr='auto' color='gray.300' bgColor='gray.900' >
                         {valueTokenList.map((item) => {
                             return(
                                 <PortInfo key={item.contractAddress} {...item}/> 
@@ -285,7 +287,7 @@ function Portfolio () {
             </Box>
             <Box >
                 <Center>
-                    <Accordion mt={5} color={'gray.300'} bgColor='gray.900' width={1000} defaultIndex={[]} allowMultiple>
+                    <Accordion mt={5} color={'gray.300'} bgColor='gray.900' width={[300, 500, 750, 1000]} defaultIndex={[]} allowMultiple>
                         <AccordionItem border='none'>
                             <AccordionButton>
                             <Box as="span" flex={1} textAlign={'left'}>

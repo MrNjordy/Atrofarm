@@ -271,7 +271,7 @@ function Portfolio () {
                 </Box>
             </HStack>
             </Flex>
-            <Center mb={3} borderBottom='2px' borderColor='yellow.500'></Center>
+            <Center borderBottom='2px' borderColor='yellow.500'></Center>
                 <Flex>
                     <VStack spacing={1} ml='auto' mr='auto' color='gray.300' bgColor='gray.900' >
                         {valueTokenList.map((item) => {

@@ -20,7 +20,7 @@ export default function PortInfo({
 
     return(
     <Box>
-        <HStack spacing={0}>
+        <HStack paddingTop={3} spacing={0}>
         <Box bgColor={'gray.900'} height={70} width={400}>
             <Center h={70} justifyContent='left'>
             <Text ml={5}>

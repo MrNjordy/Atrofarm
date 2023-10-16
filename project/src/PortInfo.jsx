@@ -19,7 +19,7 @@ export default function PortInfo({
     const { onCopy: onCopyContract, value: contractValue, setValue: setContractValue, hasCopied: hasCopiedContract } = useClipboard(contractAddress);
 
     return(
-        <Box width={[320, 500, 750, 1000]}>
+        <Box width={[300, 500, 750, 1000]}>
     <Box hideBelow={'sm'} width={[300, 500, 750, 1000]}>
         <HStack paddingTop={3} spacing={0}>
         <Box bgColor={'gray.900'} height={70} width={[120, 200, 300, 400]}>
@@ -76,10 +76,10 @@ export default function PortInfo({
         </Box>
         </HStack>
     </Box>
-    <Box display={{ base: "flex", sm: "none" }} width={320} fontSize={13}>
-        <HStack width={320} display={{ base: "flex", sm: "none" }} paddingTop={3} spacing={0} height={20}>
+    <Box display={{ base: "flex", sm: "none" }} width={300} fontSize={13}>
+        <HStack width={300} display={{ base: "flex", sm: "none" }} paddingTop={3} spacing={0} height={20}>
         <Center height={20} justifyContent='left'>
-            <Box  bgColor={'gray.900'} width={75}>
+            <Box  bgColor={'gray.900'} width={20}>
             <Text mb={0} ml={2}>
                 {symbol}
             </Text>
@@ -99,9 +99,9 @@ export default function PortInfo({
             </Box>
             </Center>
             <Center height={20} justifyContent='left'>
-        <Box bgColor={'gray.900'} width={70}>
+        <Box bgColor={'gray.900'} width={16}>
             <VStack align='left'>
-            <Center h={20} justifyContent='center'>
+            <Center h={20} justifyContent='left'>
             <Box>
             <Text>
                 {(parseInt(balance.toString())/10**decimals) < 0.001 ? (parseInt(balance.toString())/10**decimals).toExponential(2)
@@ -118,7 +118,7 @@ export default function PortInfo({
             </Box>
             </Center>
             <Center height={20} justifyContent='left'>
-        <Box bgColor={'gray.900'} width={90}>
+        <Box bgColor={'gray.900'} width={16}>
             <Center h={20} justifyContent='center'>
             <Text>
                 ${(parseFloat(priceInUsd.toString())) < 0.001 ? (parseFloat(priceInUsd.toString())).toExponential(2)
@@ -127,7 +127,7 @@ export default function PortInfo({
             </Center>
         </Box>
         </Center>
-        <Box bgColor={'gray.900'} height={20} width={90}>
+        <Box bgColor={'gray.900'} height={20} width={20}>
             <Center h={20} justifyContent='right'>
             <Text mr={2}>
                 ${(parseFloat(balanceValueUsd.toString())) < 0.001 ? (parseFloat(balanceValueUsd.toString())).toExponential(2)

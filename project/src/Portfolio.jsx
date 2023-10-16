@@ -248,7 +248,7 @@ function Portfolio () {
                         </HStack>
                     </Box>
             <Flex >
-            <HStack fontSize={[11,13,15,18]} width={[320, 500, 750, 1000]} ml='auto' mr='auto' spacing={0} paddingBottom={2} color='gray.300' bgColor='gray.900'>
+            <HStack fontSize={[11,13,15,18]} width={[300, 500, 750, 1000]} ml='auto' mr='auto' spacing={0} paddingBottom={2} color='gray.300' bgColor='gray.900'>
                 <Box width={[120, 200, 300, 400]}>
                 <Text ml={5} mt={5}  mr='auto'>
                     Asset
@@ -273,7 +273,7 @@ function Portfolio () {
             </HStack>
             
             </Flex>
-            <Center borderBottom='2px' borderColor='yellow.500' ml='auto' mr='auto' width={[320, 500, 750, 1000]}></Center>
+            <Center borderBottom='2px' borderColor='yellow.500' ml='auto' mr='auto' width={[300, 500, 750, 1000]}></Center>
                 <Flex>
                     <VStack fontSize={[11,13,15,18]} spacing={1} ml='auto' mr='auto' color='gray.300' bgColor='gray.900' >
                         {valueTokenList.map((item) => {

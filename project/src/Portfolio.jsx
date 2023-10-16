@@ -224,16 +224,16 @@ function Portfolio () {
                         <Box color={'gray.300'} mb={5}>
                             <HStack>
                                 <Box ml={[0,1,2,3]}>
-                                <Text fontSize={[15, 16, 18, 20]}>
+                                <Text fontSize={[17, 17, 18, 20]}>
                                     {address.substring(0,5) + '...' + address.substring(address.length - 5)}
                                 </Text>
-                                <HStack>
+                                <HStack mt={-2}>
                                     <Tooltip  label="Copy Address">
                                             <IconButton variant='unstyled' mr={-3} color='gray.300' icon={hasCopied ? <CheckIcon /> : <CopyIcon />} onClick={onCopyAddress}></IconButton>
                                     </Tooltip>
                                     <Tooltip label="View on PulseScan">
                                         <Link href={`https://scan.pulsechain.com/address/${address}`} isExternal>
-                                            <Image src={pulseChain} alt='dex' mb={-1} boxSize={[3,5,6,7]}></Image>
+                                            <Image src={pulseChain} alt='dex' mb={-1} boxSize={[6,6,6,7]}></Image>
                                         </Link>
                                     </Tooltip>
                                 </HStack>

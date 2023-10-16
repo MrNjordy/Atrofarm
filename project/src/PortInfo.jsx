@@ -94,20 +94,20 @@ export default function PortInfo({
                             <Text mb={0} ml={2}>
                                 {symbol}
                             </Text>
-                            <HStack  ml={2} spacing={1}>
+                            <HStack  ml={1} spacing={1} mt={1}>
                                 <Tooltip  label="View on PulseScan">
                                     <Link  href={`https://scan.pulsechain.com/address/${contractAddress}`} isExternal>
-                                        <Image mb={-1} src={pulseChain} alt='dex' boxSize={5}></Image>
+                                        <Image mb={-1} src={pulseChain} alt='dex' boxSize={6}></Image>
                                     </Link>
                                 </Tooltip>
                                 <Tooltip label="Sell on Piteas">
                                     <Link  mb={-1} href={`https://app.piteas.io/#/swap?exactField=input&exactAmount=0&inputCurrency=${contractAddress}&outputCurrency=ETH`} isExternal>
-                                        <Image src={piteas} alt='Piteas' boxSize={3} ></Image>
+                                        <Image src={piteas} alt='Piteas' boxSize={4} ></Image>
                                     </Link>
                                 </Tooltip>
                                 <Tooltip label="Dexscreener">
                                     <Link  mb={-1} href={`https://app.piteas.io/#/swap?exactField=input&exactAmount=0&inputCurrency=${contractAddress}&outputCurrency=ETH`} isExternal>
-                                        <Image src={dexscreener} alt='Chart' boxSize={4} ></Image>
+                                        <Image src={dexscreener} alt='Chart' boxSize={5} ></Image>
                                     </Link>
                                 </Tooltip>
                             </HStack>

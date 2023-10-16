@@ -8,6 +8,7 @@ import { routerAbi, lpAbi, factoryAbi } from "./data";
 import PortInfo from "./PortInfo";
 import { RepeatIcon, CopyIcon, CheckIcon } from '@chakra-ui/icons'
 import pulseChain from './assets/pulse.png'
+import dexscreener from './assets/dexscreener.png'
 
 
 function Portfolio () {
@@ -219,105 +220,107 @@ function Portfolio () {
                 {tokenList && isConnected ? 
             <Box>
             <Center>
-            <Box fontFamily='heading' width={[300, 500, 750, 1000]} mt={10}>
-                    <Box color={'gray.300'} mb={10}>
-                        <HStack>
-                            <Text paddingLeft={[0,3, 4, 5]} fontSize={[15, 16, 18, 20]}>
-                                {address.substring(0,5) + '...' + address.substring(address.length - 5)}
-                            </Text>
-                            <Tooltip label="Copy Address">
-                                        <IconButton variant='unstyled' mr={-4} color='gray.300' icon={hasCopied ? <CheckIcon /> : <CopyIcon />} onClick={onCopyAddress}></IconButton>
-                                </Tooltip>
-                            <Tooltip label="View on PulseScan">
-                                <Link href={`https://scan.pulsechain.com/address/${address}`} isExternal>
-                                    <Image src={pulseChain} alt='dex' mb={-1} boxSize={[3,5,6,7]}></Image>
-                                </Link>
-                             </Tooltip>
-                            <Flex ml='auto' mr={5}>
-                        <HStack spacing={0} justifyContent='right' mr={[0, null, null, 5]}>
+                <Box fontFamily='heading' width={[300, 500, 750, 1000]} mt={10}>
+                        <Box color={'gray.300'} mb={5}>
+                            <HStack>
+                                <Box ml={[0,1,2,3]}>
+                                <Text fontSize={[15, 16, 18, 20]}>
+                                    {address.substring(0,5) + '...' + address.substring(address.length - 5)}
+                                </Text>
+                                <HStack>
+                                    <Tooltip  label="Copy Address">
+                                            <IconButton variant='unstyled' mr={-3} color='gray.300' icon={hasCopied ? <CheckIcon /> : <CopyIcon />} onClick={onCopyAddress}></IconButton>
+                                    </Tooltip>
+                                    <Tooltip label="View on PulseScan">
+                                        <Link href={`https://scan.pulsechain.com/address/${address}`} isExternal>
+                                            <Image src={pulseChain} alt='dex' mb={-1} boxSize={[3,5,6,7]}></Image>
+                                        </Link>
+                                    </Tooltip>
+                                </HStack>
+                                </Box>
+                                <Flex ml='auto' mr={5}>
+                                    <HStack spacing={0} justifyContent='right' mr={[0, null, null, 5]}>
+                                        <Flex>
+                                            <IconButton isLoading={isLoading} icon={<RepeatIcon/>} variant='ghost' size='sm' onClick={getTokens} color='gray.300'>CLick to refresh</IconButton>
+                                        </Flex>
+                                        <Flex>
+                                            <Text fontSize={[25, 30, 35, 40]}>
+                                                ${parseFloat(totalPort).toFixed(2)}
+                                            </Text>
+                                        </Flex>
+                                    </HStack>
+                                </Flex>
+                            </HStack>
+                        </Box>
                         <Flex>
-                    <IconButton isLoading={isLoading} icon={<RepeatIcon/>} variant='ghost' size='sm' onClick={getTokens} color='gray.300'>CLick to refresh</IconButton>
+                            <HStack fontSize={[15,16,17,18]} width={[300, 500, 750, 1000]} ml='auto' mr='auto' spacing={0} paddingBottom={2} color='gray.300' bgColor='gray.900'>
+                                <Box width={[20, 200, 300, 400]}>
+                                    <Text ml={[2,3,4,5]} mt={5} align={'left'}>
+                                        Assets
+                                    </Text>
+                                </Box>
+                                <Box width={[16, 100, 150, 200]}>
+                                    <Text mt={5} align={['center', 'left']}>
+                                        Amount
+                                    </Text>
+                                </Box>
+                                <Box width={[16, 100, 150, 200]}>
+                                    <Text mt={5} align={['center', 'left']}>
+                                        Price
+                                    </Text>
+                                </Box>
+                                <Box width={[20, 100, 150, 200]}>
+                                    <Text mt={5} mr={[2,3,4,5]} align={['right', 'left']}>
+                                        Value
+                                    </Text>
+                                </Box>
+                            </HStack>
                         </Flex>
+                        <Center borderBottom='2px' borderColor='yellow.500' ml='auto' mr='auto' width={[300, 500, 750, 1000]}></Center>
                         <Flex>
-                            <Text fontSize={[25, 30, 35, 40]}>
-                                ${parseFloat(totalPort).toFixed(2)}
-                            </Text>
+                            <VStack fontSize={[11,13,15,18]} spacing={1} ml='auto' mr='auto' color='gray.300' bgColor='gray.900' >
+                                {valueTokenList.map((item) => {
+                                    return(
+                                        <PortInfo key={item.contractAddress} {...item}/>    
+                                    )
+                                })}
+                            </VStack>
                         </Flex>
-                        </HStack>
-                        </Flex>
-                        </HStack>
-                    </Box>
-            <Flex >
-            <HStack fontSize={[11,13,15,18]} width={[300, 500, 750, 1000]} ml='auto' mr='auto' spacing={0} paddingBottom={2} color='gray.300' bgColor='gray.900'>
-                <Box width={[120, 200, 300, 400]}>
-                <Text ml={5} mt={5}  mr='auto'>
-                    Asset
-                </Text>
                 </Box>
-                <Box width={[60, 100, 150, 200]}>
-                <Text mt={5} ml='auto' mr='auto'>
-                    Amount
-                </Text>
-                </Box>
-                <Box width={[60, 100, 150, 200]}>
-                <Text mt={5} ml='auto' mr='auto'>
-                    Price
-                </Text>
-                </Box>
-                <Box width={[60, 100, 150, 200]}>
-                <Text mt={5} ml='auto' mr='auto'>
-                    USD Value
-                </Text>
-                </Box>
-                
-            </HStack>
-            
-            </Flex>
-            <Center borderBottom='2px' borderColor='yellow.500' ml='auto' mr='auto' width={[300, 500, 750, 1000]}></Center>
-                <Flex>
-                    <VStack fontSize={[11,13,15,18]} spacing={1} ml='auto' mr='auto' color='gray.300' bgColor='gray.900' >
-                        {valueTokenList.map((item) => {
-                            return(
-                                <PortInfo key={item.contractAddress} {...item}/> 
-                                
-                            )
-                        })}
-                    </VStack>
-                </Flex>
-            </Box>
             </Center>
-            <Box >
+            <Box>
                 <Center>
                     <Accordion mt={5} color={'gray.300'} bgColor='gray.900' width={[300, 500, 750, 1000]} defaultIndex={[]} allowMultiple>
                         <AccordionItem border='none'>
                             <AccordionButton>
-                            <Box as="span" flex={1} textAlign={'left'}>
-                                {`Assets with value < $20 - Total $${parseFloat(lowListTvl).toFixed(2)}`} 
-                            </Box>  
-                             <AccordionIcon></AccordionIcon>  
+                                <Box as="span" flex={1} textAlign={'left'} fontSize={[15, 16, 17,18]}>
+                                    {`Assets < $20 - $${parseFloat(lowListTvl).toFixed(2)}`} 
+                                </Box>  
+                                <AccordionIcon></AccordionIcon>  
                             </AccordionButton>
-                        <AccordionPanel>
-                            <VStack spacing={1} ml='auto' mr='auto' color='gray.300' bgColor='gray.900' >
-                                {lowList.map((item) => {
-                                    return(
-                                        <PortInfo key={item.contractAddress} {...item}/>       
-                                    )
-                                })}
-                            </VStack>
-                        </AccordionPanel>
+                            <AccordionPanel>
+                                <VStack fontSize={[11,13,15,18]} spacing={1} ml='auto' mr='auto' color='gray.300' bgColor='gray.900' >
+                                    {lowList.map((item) => {
+                                        return(
+                                            <PortInfo key={item.contractAddress} {...item}/>       
+                                        )
+                                    })}
+                                </VStack>
+                            </AccordionPanel>
                         </AccordionItem>
                     </Accordion>
                 </Center>
             </Box>
-            </Box>
-            : <Box mt={20} color='gray.300'>                        
+        </Box>
+
+        : <Box mt={20} color='gray.300'>                        
             <Flex ml='auto' mr='auto'>
-            <Button ml='auto' mr='auto' width={[150, 150, 175, 200]} height={50} fontSize={15} paddingTop={2} paddingBottom={2} bgColor='gray.500' color='gray.200' onClick={() => open()}> 
-                {isConnected ? address.substring(0,5) + '...' + address.substring(address.length - 5) : "Connect Wallet" }
-            </Button>
-                </Flex> 
-            </Box> }
-            </Box>
+                <Button ml='auto' mr='auto' width={[150, 150, 175, 200]} height={50} fontSize={15} paddingTop={2} paddingBottom={2} bgColor='gray.500' color='gray.200' onClick={() => open()}> 
+                    {isConnected ? address.substring(0,5) + '...' + address.substring(address.length - 5) : "Connect Wallet" }
+                </Button>
+            </Flex> 
+         </Box> }
+    </Box>
         )
 
 }

@@ -209,10 +209,10 @@ function Portfolio () {
                     <Center height={[120, 130, 150,200]}>
                         <Box>
                             <Text fontFamily='heading' fontWeight='bold' fontSize={[20, 20, 30, 40]} color='black' ml={[10,20,30,40]} mr={[10,20,30,40]} mn='auto' align='center'>
-                                Pulse Port
+                                dePulse
                             </Text>  
                             <Text fontSize={[15, 15,20, 25, 30]} fontFamily='fantasy' align='center'>
-                                A Pulse Shitcoin Tracker
+                                Pulse Shitcoin Tracker
                             </Text> 
                         </Box>                   
                     </Center>                  

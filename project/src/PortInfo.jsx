@@ -43,11 +43,6 @@ export default function PortInfo({
                                             <Image src={piteas} alt='Piteas' boxSize={[2,4,4,4]} ></Image>
                                         </Link>
                                     </Tooltip>
-                                    <Tooltip label="Dexscreener">
-                                        <Link  mb={-1} href={`https://app.piteas.io/#/swap?exactField=input&exactAmount=0&inputCurrency=${contractAddress}&outputCurrency=ETH`} isExternal>
-                                            <Image src={dexscreener} alt='Chart' boxSize={[3,5,5,5]} ></Image>
-                                        </Link>
-                                    </Tooltip>
                                 </HStack>
                             </Box>
                         </Center>
@@ -103,11 +98,6 @@ export default function PortInfo({
                                 <Tooltip label="Sell on Piteas">
                                     <Link  mb={-1} href={`https://app.piteas.io/#/swap?exactField=input&exactAmount=0&inputCurrency=${contractAddress}&outputCurrency=ETH`} isExternal>
                                         <Image src={piteas} alt='Piteas' boxSize={4} ></Image>
-                                    </Link>
-                                </Tooltip>
-                                <Tooltip label="Dexscreener">
-                                    <Link  mb={-1} href={`https://app.piteas.io/#/swap?exactField=input&exactAmount=0&inputCurrency=${contractAddress}&outputCurrency=ETH`} isExternal>
-                                        <Image src={dexscreener} alt='Chart' boxSize={5} ></Image>
                                     </Link>
                                 </Tooltip>
                             </HStack>

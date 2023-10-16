@@ -19,7 +19,7 @@ export default function PortInfo({
     const { onCopy: onCopyContract, value: contractValue, setValue: setContractValue, hasCopied: hasCopiedContract } = useClipboard(contractAddress);
 
     return(
-        <Box width={[300, 500, 750, 1000]}>
+        <Box width={[320, 500, 750, 1000]}>
     <Box hideBelow={'sm'} width={[300, 500, 750, 1000]}>
         <HStack paddingTop={3} spacing={0}>
         <Box bgColor={'gray.900'} height={70} width={[120, 200, 300, 400]}>
@@ -76,14 +76,14 @@ export default function PortInfo({
         </Box>
         </HStack>
     </Box>
-    <Box display={{ base: "flex", sm: "none" }} width={300} fontSize={13}>
-        <HStack width={300} display={{ base: "flex", sm: "none" }} paddingTop={3} spacing={0} height={20}>
+    <Box display={{ base: "flex", sm: "none" }} width={320} fontSize={13}>
+        <HStack width={320} display={{ base: "flex", sm: "none" }} paddingTop={3} spacing={0} height={20}>
         <Center height={20} justifyContent='left'>
-            <Box  bgColor={'gray.900'} width={90}>
-            <Text mb={0} ml={5}>
+            <Box  bgColor={'gray.900'} width={75}>
+            <Text mb={0} ml={2}>
                 {symbol}
             </Text>
-            <HStack  ml={5} spacing={0}>
+            <HStack  ml={2} spacing={0}>
             <Tooltip  label="View on PulseScan">
                 <Link  href={`https://scan.pulsechain.com/address/${contractAddress}`} isExternal>
                     <Image mb={-1} src={pulseChain} alt='dex' boxSize={5}></Image>
@@ -99,13 +99,15 @@ export default function PortInfo({
             </Box>
             </Center>
             <Center height={20} justifyContent='left'>
-        <Box bgColor={'gray.900'} width={20}>
+        <Box bgColor={'gray.900'} width={70}>
             <VStack align='left'>
-            <Center h={20} justifyContent='left'>
+            <Center h={20} justifyContent='center'>
             <Box>
             <Text>
                 {(parseInt(balance.toString())/10**decimals) < 0.001 ? (parseInt(balance.toString())/10**decimals).toExponential(2)
-                : (parseInt(balance.toString())/10**decimals).toFixed(2)}
+                : (parseInt(balance.toString())/10**decimals) > 10000000 ? (parseInt(balance.toString())/10**decimals).toExponential(2)
+                : (parseInt(balance.toString())/10**decimals) < 100000 ? (parseInt(balance.toString())/10**decimals).toFixed(2)
+                : (parseInt(balance.toString())/10**decimals).toFixed(0) }
             </Text>
             <Text fontFamily='fantasy'>
                 {symbol}
@@ -116,8 +118,8 @@ export default function PortInfo({
             </Box>
             </Center>
             <Center height={20} justifyContent='left'>
-        <Box bgColor={'gray.900'} width={20}>
-            <Center h={20} justifyContent='left'>
+        <Box bgColor={'gray.900'} width={90}>
+            <Center h={20} justifyContent='center'>
             <Text>
                 ${(parseFloat(priceInUsd.toString())) < 0.001 ? (parseFloat(priceInUsd.toString())).toExponential(2)
                 : (parseFloat(priceInUsd.toString())).toFixed(4)}  
@@ -125,9 +127,9 @@ export default function PortInfo({
             </Center>
         </Box>
         </Center>
-        <Box bgColor={'gray.900'} height={20} width={60}>
-            <Center h={20} justifyContent='left'>
-            <Text>
+        <Box bgColor={'gray.900'} height={20} width={90}>
+            <Center h={20} justifyContent='right'>
+            <Text mr={2}>
                 ${(parseFloat(balanceValueUsd.toString())) < 0.001 ? (parseFloat(balanceValueUsd.toString())).toExponential(2)
                 : (parseFloat(balanceValueUsd.toString())).toFixed(2)} 
             </Text>

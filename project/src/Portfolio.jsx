@@ -288,7 +288,7 @@ function Portfolio () {
                         </Flex>
                 </Box>
             </Center>
-            <Box>
+            <Box fontFamily={'heading'}>
                 <Center>
                     <Accordion mt={5} color={'gray.300'} bgColor='gray.900' width={[300, 500, 750, 1000]} defaultIndex={[]} allowMultiple>
                         <AccordionItem border='none'>

@@ -2,7 +2,7 @@ import { Box, Center, Flex, HStack, Image, SimpleGrid, Text, Tooltip, VStack, Li
 import { RepeatIcon, CopyIcon, CheckIcon } from '@chakra-ui/icons'
 import pulseChain from './assets/PulseChain.jpeg'
 import piteas from './assets/Piteas.png'
-import dexscreener from './assets/dexscreener.png'
+import dexscreener from './assets/dexscreenernobg.png'
 
 
 
@@ -31,7 +31,7 @@ export default function PortInfo({
                                 </Text>
                                 <HStack ml={-3}>
                                     <Tooltip hideBelow={'sm'} label="Copy Address">
-                                        <IconButton variant='unstyled' color='gray.300' mr={-2} icon={hasCopiedContract ? <CheckIcon /> : <CopyIcon />} onClick={onCopyContract}></IconButton>
+                                        <IconButton variant='unstyled' color='gray.300' mr={-3} icon={hasCopiedContract ? <CheckIcon /> : <CopyIcon />} onClick={onCopyContract}></IconButton>
                                     </Tooltip>
                                     <Tooltip hideBelow={'sm'} label="View on PulseScan">
                                         <Link mb={-1} href={`https://scan.pulsechain.com/address/${contractAddress}`} isExternal>

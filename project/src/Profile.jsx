@@ -58,6 +58,9 @@ function Profile() {
                 <Flex>
                     <RouteLink to='/Staking' >Stake</RouteLink>
                 </Flex>
+                <Flex>
+                    <RouteLink to='/dePulse' >dePulse</RouteLink>
+                </Flex>
             </HStack>
             <HStack hideBelow='sm' ml='auto' spacing={[1, 3, 4, 5]} height={45} mt={4} mr={[5, null, null, 10]} mb={2}>
                 <Flex fontSize={[8, 11, 14, 17]}>
@@ -129,6 +132,11 @@ function Profile() {
                             <MenuItem bgColor='gray.900' fontSize={20} color='gray.300'>
                                 <RouteLink to='/Staking'>
                                     STAKE
+                                </RouteLink>
+                            </MenuItem>
+                            <MenuItem>
+                                <RouteLink to='/dePulse' >
+                                    dePulse
                                 </RouteLink>
                             </MenuItem>
                             <MenuItem bgColor='gray.900'>

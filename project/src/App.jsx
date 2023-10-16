@@ -68,7 +68,7 @@ function App() {
           <Route path ='/' Component={Home} />
           <Route path ='/Farms' Component={Farm} />
           <Route path ='/Staking' Component={Staking} />
-          <Route path ='/Portfolio' Component={Portfolio} />
+          <Route path ='/dePulse' Component={Portfolio} />
         </Routes>
       </BrowserRouter>
       </InfoContext.Provider>

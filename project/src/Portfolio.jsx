@@ -262,6 +262,7 @@ function Portfolio () {
                 {(tokenList && isConnected) || (tokenList && searched) ? 
             <Box>
             <Center>
+                
                 <Box fontFamily='heading' width={[300, 500, 750, 1000]} mt={10}>
                     <Flex>
                         <form onSubmit={handleSubmit}>

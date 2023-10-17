@@ -3,12 +3,11 @@ import { useAccount } from "wagmi";
 import { readContract, readContracts } from 'wagmi/actions'
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Button, Center, Flex, HStack, IconButton, Image, Link, SimpleGrid, Text, Tooltip, VStack, useClipboard } from "@chakra-ui/react";
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Button, Center, Flex, HStack, IconButton, Image, Input, InputGroup, InputRightElement, Link, SimpleGrid, Text, Tooltip, VStack, useClipboard } from "@chakra-ui/react";
 import { routerAbi, lpAbi, factoryAbi } from "./data";
 import PortInfo from "./PortInfo";
-import { RepeatIcon, CopyIcon, CheckIcon } from '@chakra-ui/icons'
+import { RepeatIcon, CopyIcon, CheckIcon, CloseIcon } from '@chakra-ui/icons'
 import pulseChain from './assets/pulse.png'
-import dexscreener from './assets/dexscreener.png'
 
 
 function Portfolio () {
@@ -20,11 +19,16 @@ function Portfolio () {
     const [lowList, setLowList] = useState([]);
     const [totalPort, setTotalPort] = useState();
     const [lowListTvl, setLowListTvl] = useState();
+    const [searchValue, setSearchValue] = useState();
     const { onCopy: onCopyAddress, value, setValue, hasCopied } = useClipboard(address);
     const { onCopy: onCopyContract, value: contractValue, setValue: setContractValue, hasCopied: hasCopiedContract } = useClipboard();
     const [isLoading, setIsLoading] = useState(true);
+    const [searched, setSearched] = useState(false);
+    const [displaySearch, setDisplaySearch] = useState('')
 
     const wPls = '0xA1077a294dDE1B09bB078844df40758a5D0f9a27';
+    let hasSearched = false;
+    let searchedAddress = "";
 
 
         async function getTokens() {
@@ -42,7 +46,13 @@ function Portfolio () {
 
             while (retries <= maxRetries && !success) {
                 try {
+                    if(isConnected && !hasSearched) {
                     response = await axios.get(`https://scan.pulsechain.com/api?module=account&action=tokenlist&address=${address}`)
+                    }
+                    else if ((isConnected && hasSearched) || (!isConnected && hasSearched)) {
+                    response = await axios.get(`https://scan.pulsechain.com/api?module=account&action=tokenlist&address=${searchedAddress}`)  
+                    console.log("hereS")
+                    }
                     success = true;
                     console.log("Axios success")
                     break;
@@ -203,6 +213,34 @@ function Portfolio () {
         
         }, [isConnected])
 
+        const handleChange = (e) => {
+            e.preventDefault();
+            setSearchValue((e.target.value));
+            if(e.target.value == '') {
+                setSearchValue(address);
+             } 
+            console.log("here", searchValue);
+        }
+        const handleSubmit = (e) => {
+            e.preventDefault()
+            setDisplaySearch((searchValue));
+            if(e.target.value == '') {
+                hasSearched=false
+                setSearched(hasSearched);
+             }  
+            hasSearched = true;
+            searchedAddress = (searchValue);
+            setSearched(hasSearched);
+            console.log(searchedAddress)
+            getTokens();
+        }
+        function clearSearch() {
+            hasSearched = false;
+            searchedAddress = "";
+            setSearched(hasSearched);
+            if(isConnected) { getTokens() };
+        }
+
         return(
             <Box minHeight='100vh'>
                 <Box bgGradient='linear(to-bl, yellow.400, yellow.700)' width='100%' height={[120, 130, 150,200]}>
@@ -217,15 +255,26 @@ function Portfolio () {
                         </Box>                   
                     </Center>                  
             </Box>
-                {tokenList && isConnected ? 
+                {(tokenList && isConnected) || (tokenList && searched) ? 
             <Box>
             <Center>
                 <Box fontFamily='heading' width={[300, 500, 750, 1000]} mt={10}>
+                    <Flex>
+                        <form onSubmit={handleSubmit}>
+                            <InputGroup>
+                            <Input mb={5} onChange={handleChange} onKeyDown={e=> {if(e.key==='Enter'){handleSubmit}}} onSubmit={handleSubmit} ml='auto' mr='auto' type='text' textColor='gray.300' focusBorderColor='yellow.500' placeholder="Search Address" _placeholder={{ color: 'gray.300' }} width={300} ></Input>
+                            <InputRightElement>
+                            <IconButton color={'yellow.500'} onClick={clearSearch} variant='unstyled' icon={<CloseIcon></CloseIcon>}></IconButton>
+                            </InputRightElement>
+                            </InputGroup>
+                        </form>
+                        
+                    </Flex>
                         <Box color={'gray.300'} mb={5}>
                             <HStack>
                                 <Box ml={[0,1,2,3]}>
                                 <Text fontSize={[17, 17, 18, 20]}>
-                                    {address.substring(0,5) + '...' + address.substring(address.length - 5)}
+                                    {searched ? (displaySearch.substring(0,5) + '...' + displaySearch.substring(displaySearch.length - 5)) : address.substring(0,5) + '...' + address.substring(address.length - 5)}
                                 </Text>
                                 <HStack mt={-2}>
                                     <Tooltip  label="Copy Address">
@@ -315,10 +364,23 @@ function Portfolio () {
 
         : <Box mt={20} color='gray.300'>                        
             <Flex ml='auto' mr='auto'>
-                <Button ml='auto' mr='auto' width={[150, 150, 175, 200]} height={50} fontSize={15} paddingTop={2} paddingBottom={2} bgColor='gray.500' color='gray.200' onClick={() => open()}> 
+                <Button ml='auto' mr='auto' mb={5} width={[150, 150, 175, 200]} height={50} fontSize={15} paddingTop={2} paddingBottom={2} bgColor='gray.500' color='gray.200' onClick={() => open()}> 
                     {isConnected ? address.substring(0,5) + '...' + address.substring(address.length - 5) : "Connect Wallet" }
                 </Button>
-            </Flex> 
+            </Flex>
+            <Center>
+            <Flex>
+                <form onSubmit={handleSubmit}>
+                    <InputGroup>
+                        <Input mb={5} onChange={handleChange} onKeyDown={e=> {if(e.key==='Enter'){handleSubmit}}} onSubmit={handleSubmit} ml='auto' mr='auto' type='text' textColor='gray.300' focusBorderColor='yellow.500' placeholder="Search Address" _placeholder={{ color: 'gray.300' }} width={300} ></Input>
+                        <InputRightElement>
+                            <IconButton color={'yellow.500'} onClick={clearSearch} variant='unstyled' icon={<CloseIcon></CloseIcon>}></IconButton>
+                        </InputRightElement>
+                    </InputGroup>
+                </form>
+                
+            </Flex>
+            </Center>
          </Box> }
     </Box>
         )

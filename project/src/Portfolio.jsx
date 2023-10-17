@@ -20,11 +20,14 @@ function Portfolio () {
     const [totalPort, setTotalPort] = useState();
     const [lowListTvl, setLowListTvl] = useState();
     const [searchValue, setSearchValue] = useState();
+    const [displaySearch, setDisplaySearch] = useState('')
     const { onCopy: onCopyAddress, value, setValue, hasCopied } = useClipboard(address);
+    const { onCopy: onCopySearch, value : searchedValue, setValue: setSearchedValue, hasCopied: hasCopiedSearched } = useClipboard(displaySearch);
+
     const { onCopy: onCopyContract, value: contractValue, setValue: setContractValue, hasCopied: hasCopiedContract } = useClipboard();
     const [isLoading, setIsLoading] = useState(true);
     const [searched, setSearched] = useState(false);
-    const [displaySearch, setDisplaySearch] = useState('')
+
 
     const wPls = '0xA1077a294dDE1B09bB078844df40758a5D0f9a27';
     let hasSearched = false;
@@ -278,7 +281,8 @@ function Portfolio () {
                                 </Text>
                                 <HStack mt={-2}>
                                     <Tooltip  label="Copy Address">
-                                            <IconButton variant='unstyled' mr={-3} color='gray.300' icon={hasCopied ? <CheckIcon /> : <CopyIcon />} onClick={onCopyAddress}></IconButton>
+                                            <IconButton variant='unstyled' mr={-3} color='gray.300' icon={hasCopied || hasCopiedSearched ? <CheckIcon /> : <CopyIcon />} 
+                                                        onClick={searched ? onCopySearch : onCopyAddress}></IconButton>
                                     </Tooltip>
                                     <Tooltip label="View on PulseScan">
                                         <Link href={`https://scan.pulsechain.com/address/${address}`} isExternal>

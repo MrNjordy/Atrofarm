@@ -23,7 +23,6 @@ function Portfolio () {
     const [displaySearch, setDisplaySearch] = useState('')
     const { onCopy: onCopyAddress, value, setValue, hasCopied } = useClipboard(address);
     const { onCopy: onCopySearch, value : searchedValue, setValue: setSearchedValue, hasCopied: hasCopiedSearched } = useClipboard(displaySearch);
-
     const { onCopy: onCopyContract, value: contractValue, setValue: setContractValue, hasCopied: hasCopiedContract } = useClipboard();
     const [isLoading, setIsLoading] = useState(true);
     const [searched, setSearched] = useState(false);
@@ -262,7 +261,7 @@ function Portfolio () {
                 {(tokenList && isConnected) || (tokenList && searched) ? 
             <Box>
             <Center>
-                
+
                 <Box fontFamily='heading' width={[300, 500, 750, 1000]} mt={10}>
                     <Flex>
                         <form onSubmit={handleSubmit}>

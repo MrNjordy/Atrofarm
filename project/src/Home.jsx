@@ -205,7 +205,7 @@ function Home() {
                                 Buy & Burn:
                             </Flex>
                             <Flex ml='auto' mr={2} fontWeight='semibold'>
-                                {burned}
+                                {parseInt(burned)}
                             </Flex>
                         </HStack>
                 </Box>

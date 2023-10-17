@@ -29,6 +29,7 @@ function Home() {
     const [averageApr, setAverageApr] = useState();
     const [userTotalStaked, setUserTotalStaked] = useState();
     const [dailyEarnings, setDailyEarnings] = useState();
+    const [burned, setBurned] = useState();
 
     const { address, isConnected } = useAccount();
     const { data, isLoading, isSuccess, write } = useContractWrite({
@@ -59,10 +60,12 @@ function Home() {
                 const marketCap = (allPools.generalInfo[0].nativeTokenSupply) * nativeTokenPrice;
                 const totalSupply = parseInt(allPools.generalInfo[0].nativeTokenSupply);
                 const inflation = allPools.generalInfo[0].inflation;
+                const burned = allPools.generalInfo[0].burned;
 
                 setNativeTokenPrice(parseFloat(nativeTokenPrice).toFixed(4));
                 setMarketCap(marketCap.toFixed(0));
                 setTotalSupply(totalSupply);
+                setBurned(burned)
 
                 for(let i=0; i<(allPools.farmingPools).length; i++) { 
                     protocolPools.push(allPools.farmingPools[i])
@@ -202,7 +205,7 @@ function Home() {
                                 Buy & Burn:
                             </Flex>
                             <Flex ml='auto' mr={2} fontWeight='semibold'>
-                                0
+                                {burned}
                             </Flex>
                         </HStack>
                 </Box>

@@ -59,6 +59,12 @@ const data = await readContracts({
         functionName: 'getReserves',
     
     },
+    {//Getting wETH/wPL reserves to calculate wETH price
+        address: import.meta.env.VITE_TOKEN,
+        abi: tokenAbi,
+        functionName: 'balanceOf',
+        args: ['0x0000000000000000000000000000000000000369'],
+        },
     ]
 });
 
@@ -67,7 +73,7 @@ const pulsePrice = parseInt(data[5].result[1].toString())/parseInt(data[5].resul
 const atropaPrice = parseInt(data[6].result[0].toString())/parseInt(data[6].result[1].toString()) * pulsePrice
 const wBtcPrice = parseInt(data[7].result[1].toString())/parseInt(data[7].result[0].toString()) * pulsePrice / 10**10
 const wethPrice = parseInt(data[8].result[1].toString())/parseInt(data[8].result[0].toString()) * pulsePrice
-
+const burnedAtrofa = parseInt(data[9].result.toString()) / 10**18;
 
 const nativeTokenPriceUsd = (parseInt(data[0].result[1].toString())/parseInt(data[0].result[0].toString()) * pulsePrice).toString();
 const nativeToken = await fetchToken({ address: import.meta.env.VITE_TOKEN })
@@ -84,6 +90,7 @@ generalInfo.atropaPrice = atropaPrice;
 generalInfo.nativeTokenPriceUsd = nativeTokenPriceUsd;
 generalInfo.nativeTokenSupply = nativeTokenSupply;
 generalInfo.inflation = tokenMintedPerDay;
+generalInfo.burned = burnedAtrofa;
 
 
 

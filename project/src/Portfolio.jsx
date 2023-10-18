@@ -3,10 +3,10 @@ import { useAccount } from "wagmi";
 import { readContract, readContracts } from 'wagmi/actions'
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Button, Center, Flex, HStack, IconButton, Image, Input, InputGroup, InputRightElement, Link, SimpleGrid, Text, Tooltip, VStack, useClipboard } from "@chakra-ui/react";
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Button, Center, Flex, FormControl, HStack, IconButton, Image, Input, InputGroup, InputRightElement, Link, SimpleGrid, Text, Tooltip, VStack, useClipboard } from "@chakra-ui/react";
 import { routerAbi, lpAbi, factoryAbi } from "./data";
 import PortInfo from "./PortInfo";
-import { RepeatIcon, CopyIcon, CheckIcon, CloseIcon } from '@chakra-ui/icons'
+import { RepeatIcon, CopyIcon, CheckIcon, CloseIcon, SearchIcon } from '@chakra-ui/icons'
 import pulseChain from './assets/pulse.png'
 
 
@@ -220,8 +220,7 @@ function Portfolio () {
             setSearchValue((e.target.value));
             if(e.target.value == '') {
                 setSearchValue(address);
-             } 
-            console.log("here", searchValue);
+             }
         }
         const handleSubmit = (e) => {
             e.preventDefault()
@@ -261,19 +260,16 @@ function Portfolio () {
                 {(tokenList && isConnected) || (tokenList && searched) ? 
             <Box>
             <Center>
-
                 <Box fontFamily='heading' width={[300, 500, 750, 1000]} mt={10}>
-                    <Flex>
-                        <form onSubmit={handleSubmit}>
-                            <InputGroup>
-                            <Input value={searchValue} mb={5} onChange={handleChange} onKeyDown={e=> {if(e.key==='Enter'){handleSubmit}}} onSubmit={handleSubmit} ml='auto' mr='auto' type='text' textColor='gray.300' focusBorderColor='yellow.500' placeholder="Search Address" _placeholder={{ color: 'gray.300' }} width={300} ></Input>
+                    <Flex width={300}>
+                        <InputGroup>
+                            <Input value={searchValue} mb={5} onChange={handleChange} onKeyDown={e=> {if(e.key==='Enter'){handleSubmit}}} onSubmit={handleSubmit} type='text' textColor='gray.300' focusBorderColor='yellow.500' placeholder="Search Address" _placeholder={{ color: 'gray.300' }} width={300} ></Input>
                             <InputRightElement>
-                            <IconButton color={'yellow.500'} onClick={clearSearch} variant='unstyled' icon={<CloseIcon></CloseIcon>}></IconButton>
+                                <IconButton color={'yellow.500'} onClick={handleSubmit} variant='unstyled' icon={<SearchIcon></SearchIcon>}></IconButton>
                             </InputRightElement>
-                            </InputGroup>
-                        </form>
-                        
-                    </Flex>
+                        </InputGroup>   
+                        <IconButton color={'yellow.500'} onClick={clearSearch} variant='unstyled' icon={<CloseIcon></CloseIcon>}></IconButton>
+                    </Flex> 
                         <Box color={'gray.300'} mb={5}>
                             <HStack>
                                 <Box ml={[0,1,2,3]}>

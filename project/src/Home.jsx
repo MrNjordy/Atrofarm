@@ -138,7 +138,7 @@ function Home() {
                         <Center height={[120, 130, 150,200]}>
                             <Box>
                             <Text fontFamily='heading' fontWeight='bold' fontSize={[15, 20, 25, 30, 35]} color='black' ml={[10,20,30,40]} mr={[10,20,30,40]} mn='auto' align='center'>
-                                Liquidity Hub of the Atropa Ecosystem
+                                Liquidity Hub of PulseChain Communities
                             </Text>  
                             <Center>      
                             <Text fontSize={[10, 15,20, 25, 30]} fontFamily='fantasy' fontWeight='semibold'>

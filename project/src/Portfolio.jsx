@@ -46,6 +46,7 @@ function Portfolio () {
             const valueList = [];
             const lowList = [];
 
+            console.log(hasSearched)
             while (retries <= maxRetries && !success) {
                 try {
                     if(isConnected && !hasSearched) {
@@ -53,7 +54,6 @@ function Portfolio () {
                     }
                     else if ((isConnected && hasSearched) || (!isConnected && hasSearched)) {
                     response = await axios.get(`https://scan.pulsechain.com/api?module=account&action=tokenlist&address=${searchedAddress}`)  
-                    console.log("hereS")
                     }
                     success = true;
                     console.log("Axios success")
@@ -67,8 +67,6 @@ function Portfolio () {
             if(retries >= maxRetries) console.log("Too many request.");
 
             const tokenList = response.data.result;
-            // const token = await axios.get(`https://scan.pulsechain.com/api?module=token&action=getToken&contractaddress=${tokenList[0].contractAddress}`)
-            // console.log(token);
 
             const contractsData = await readContract({
                     //Getting wPLS / DAI reserves to calculate Pulse price
@@ -84,6 +82,13 @@ function Portfolio () {
                 if(tokenList[i].type == "ERC-20") {
                     // const token = await fetchToken({ address: tokenList[i].contractAddress });
                     // console.log(token);
+                //    if (tokenList[i].contractAddress = '0xA1077a294dDE1B09bB078844df40758a5D0f9a27') { //wPLS
+                        
+                //         tokenList[i].priceInUsd = 1 * pulsePrice
+                //         tokenList[i].balanceValueUsd = parseInt(tokenList[i].balance.toString())/(10**tokenList[i].decimals) * pulsePrice
+                //         totalPort += tokenList[i].balanceValueUsd;
+                //     }
+                
                     const findPairs = await readContracts({
                         contracts: [
                             {
@@ -124,8 +129,6 @@ function Portfolio () {
                             }
                         ]   
                     })
-                    // console.log("V2", getReserve[0])
-                    // console.log("V1", getReserve[3].result == '0xA1077a294dDE1B09bB078844df40758a5D0f9a27')
                     let v1PlsReserve = 0;
                     let v2PlsReserve = 0;
                     let priceInPulse = 0;
@@ -173,7 +176,6 @@ function Portfolio () {
                     }
                     
                     priceInUsd = (priceInPulse * pulsePrice) / 10**(18-tokenList[i].decimals) ;
-                    // console.log(tokenList[i].contractAddress, priceInUsd);
                     tokenList[i].priceInPulse = priceInPulse;
                     tokenList[i].priceInUsd = priceInUsd;
                     tokenList[i].balanceValueUsd = parseInt(tokenList[i].balance.toString())/(10**tokenList[i].decimals) * priceInUsd
@@ -186,6 +188,12 @@ function Portfolio () {
                     }
                     else { lowList.push(tokenList[i])}
                 }
+                // if (tokenList[i].contractAddress = '0xA1077a294dDE1B09bB078844df40758a5D0f9a27') { //wPLS
+                //     if(tokenList[i].balanceValueUsd > 20) {
+                //         valueList.push(tokenList[i]);
+                //     }
+                //     else { lowList.push(tokenList[i])}
+                // }
             }
             finalList.sort((a, b) => {
                 return b.balanceValueUsd-a.balanceValueUsd;
@@ -218,17 +226,17 @@ function Portfolio () {
         const handleChange = (e) => {
             e.preventDefault();
             setSearchValue((e.target.value));
-            if(e.target.value == '') {
+            if(e.target.value == '' && isConnected) {
                 setSearchValue(address);
-             }
+            }
         }
         const handleSubmit = (e) => {
             e.preventDefault()
             setDisplaySearch((searchValue));
-            if(e.target.value == '') {
+            if(searchValue == '') {
                 hasSearched=false
                 setSearched(hasSearched);
-             }  
+            }  
             hasSearched = true;
             searchedAddress = (searchValue);
             setSearched(hasSearched);

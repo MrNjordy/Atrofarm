@@ -365,16 +365,6 @@ generalInfo.burned = burnedAtrofa;
             const allowance = data[2].result;
             const megaReserve = data[3].result;
 
-            //This one would be more generic as long as tokens are paired with the same token eg:wETH
-            //Should find a way to find a pair reliably
-            // const tokenPair = await readContract({
-            //     address: import.meta.env.VITE_FACTORY,
-            //     abi: factoryAbi,
-            //     functionName: 'getPair',
-            //     args: [poolInfo[0], import.meta.env.VITE_WETH]
-            // });
-            //const apiCall = await axios.get(`https://api.dexscreener.com/latest/dex/tokens/${poolInfo[0]}`)
-
             const AtrofaPriceUsd = (parseInt(tokenPriceEth[1].toString())/parseInt(tokenPriceEth[0].toString()) * pulsePrice).toString();
             const megaPrice = (parseInt(megaReserve[0].toString())/parseInt(megaReserve[1].toString()) / 10**12 * wethPrice).toString();
 

@@ -261,15 +261,25 @@ function Portfolio () {
             <Box>
             <Center>
                 <Box fontFamily='heading' width={[300, 500, 750, 1000]} mt={10}>
-                    <Flex width={300}>
+                <Flex>
+                <form onSubmit={handleSubmit}>
+                    <InputGroup>
+                        <Input mb={5} onChange={handleChange} onKeyDown={e=> {if(e.key==='Enter'){handleSubmit}}} onSubmit={handleSubmit} ml='auto' mr='auto' type='text' textColor='gray.300' focusBorderColor='yellow.500' placeholder="Search Address" _placeholder={{ color: 'gray.300' }} width={300} ></Input>
+                        <InputRightElement>
+                            <IconButton color={'yellow.500'} onClick={clearSearch} variant='unstyled' icon={<CloseIcon></CloseIcon>}></IconButton>
+                        </InputRightElement>
+                    </InputGroup>
+                </form>
+                </Flex>
+                    {/* <Flex width={300}>
                         <InputGroup>
                             <Input value={searchValue} mb={5} onChange={handleChange} onKeyDown={e=> {if(e.key==='Enter'){handleSubmit}}} onSubmit={handleSubmit} type='text' textColor='gray.300' focusBorderColor='yellow.500' placeholder="Search Address" _placeholder={{ color: 'gray.300' }} width={300} ></Input>
                             <InputRightElement>
-                                <IconButton color={'yellow.500'} onClick={handleSubmit} variant='unstyled' icon={<SearchIcon></SearchIcon>}></IconButton>
+                                <IconButton color={'gray.300'} onClick={handleSubmit} variant='unstyled' icon={<SearchIcon></SearchIcon>}></IconButton>
                             </InputRightElement>
                         </InputGroup>   
                         <IconButton color={'yellow.500'} onClick={clearSearch} variant='unstyled' icon={<CloseIcon></CloseIcon>}></IconButton>
-                    </Flex> 
+                    </Flex>  */}
                         <Box color={'gray.300'} mb={5}>
                             <HStack>
                                 <Box ml={[0,1,2,3]}>

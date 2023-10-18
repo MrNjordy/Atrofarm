@@ -264,7 +264,7 @@ function Portfolio () {
                 <Flex>
                 <form onSubmit={handleSubmit}>
                     <InputGroup>
-                        <Input mb={5} onChange={handleChange} onKeyDown={e=> {if(e.key==='Enter'){handleSubmit}}} onSubmit={handleSubmit} ml='auto' mr='auto' type='text' textColor='gray.300' focusBorderColor='yellow.500' placeholder="Search Address" _placeholder={{ color: 'gray.300' }} width={300} ></Input>
+                        <Input value={searchValue} mb={5} onChange={handleChange} onKeyDown={e=> {if(e.key==='Enter'){handleSubmit}}} onSubmit={handleSubmit} ml='auto' mr='auto' type='text' textColor='gray.300' focusBorderColor='yellow.500' placeholder="Search Address" _placeholder={{ color: 'gray.300' }} width={300} ></Input>
                         <InputRightElement>
                             <IconButton color={'yellow.500'} onClick={clearSearch} variant='unstyled' icon={<CloseIcon></CloseIcon>}></IconButton>
                         </InputRightElement>
@@ -383,7 +383,7 @@ function Portfolio () {
             <Flex>
                 <form onSubmit={handleSubmit}>
                     <InputGroup>
-                        <Input mb={5} onChange={handleChange} onKeyDown={e=> {if(e.key==='Enter'){handleSubmit}}} onSubmit={handleSubmit} ml='auto' mr='auto' type='text' textColor='gray.300' focusBorderColor='yellow.500' placeholder="Search Address" _placeholder={{ color: 'gray.300' }} width={300} ></Input>
+                        <Input value={searchValue} mb={5} onChange={handleChange} onKeyDown={e=> {if(e.key==='Enter'){handleSubmit}}} onSubmit={handleSubmit} ml='auto' mr='auto' type='text' textColor='gray.300' focusBorderColor='yellow.500' placeholder="Search Address" _placeholder={{ color: 'gray.300' }} width={300} ></Input>
                         <InputRightElement>
                             <IconButton color={'yellow.500'} onClick={clearSearch} variant='unstyled' icon={<CloseIcon></CloseIcon>}></IconButton>
                         </InputRightElement>

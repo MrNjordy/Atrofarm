@@ -22,6 +22,7 @@ import eth from '../assets/FarmIcons/0x02DcdD04e3F455D838cd1249292C58f3B79e3C3C.
 import bytc from '../assets/FarmIcons/BYTC.png'
 import plsd from '../assets/FarmIcons/plsd.png'
 import plsb from '../assets/FarmIcons/plsb.png'
+import dmnd from '../assets/FarmIcons/dmnd.png'
 
 export default function FarmPoolInfo({
     id,
@@ -161,6 +162,7 @@ export default function FarmPoolInfo({
                                 : token0 == '0x2D30Bec5cD5511E426A09F5AfbA475e682ACc73F' ? bytc
                                 : token0 == '0x34F0915a5f15a66Eba86F6a58bE1A471FB7836A7' ? plsd
                                 : token0 == '0x5EE84583f67D5EcEa5420dBb42b462896E7f8D06' ? plsb
+                                : token0 == '0xCF409C91B49DD3F796d20Eec20535fDC79A08798' ? dmnd
                                 : afc} 
                             mb={3}>
                     </Image>  
@@ -180,6 +182,7 @@ export default function FarmPoolInfo({
                                 : token1 == '0x2D30Bec5cD5511E426A09F5AfbA475e682ACc73F' ? bytc
                                 : token1 == '0x34F0915a5f15a66Eba86F6a58bE1A471FB7836A7' ? plsd
                                 : token1 == '0x5EE84583f67D5EcEa5420dBb42b462896E7f8D06' ? plsb
+                                : token1 == '0xCF409C91B49DD3F796d20Eec20535fDC79A08798' ? dmnd
                                 : afc}  
                             mb={3}>
                     </Image>    

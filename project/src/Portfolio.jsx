@@ -21,7 +21,7 @@ function Portfolio () {
     const [lowListTvl, setLowListTvl] = useState();
     const [searchValue, setSearchValue] = useState();
     const [displaySearch, setDisplaySearch] = useState('')
-    const [pulseInfo, setPulseInfo] = useState();
+    const [pulseInfo, setPulseInfo] = useState([]);
     const { onCopy: onCopyAddress, value, setValue, hasCopied } = useClipboard(address);
     const { onCopy: onCopySearch, value : searchedValue, setValue: setSearchedValue, hasCopied: hasCopiedSearched } = useClipboard(displaySearch);
     const { onCopy: onCopyContract, value: contractValue, setValue: setContractValue, hasCopied: hasCopiedContract } = useClipboard();
@@ -41,24 +41,24 @@ function Portfolio () {
             let retries = 0;
             let maxRetries = 10;
             let success = false;
+            let success2 = false;
             let totalPort = 0;
             let lowAssetsTvl = 0;
+            let pulseBalanceRaw = 0;
 
             const finalList = [];
             const valueList = [];
             const lowList = [];
             const plsInfo = {};
+            const plsInfoArr = [];
 
-            console.log(hasSearched)
             while (retries <= maxRetries && !success) {
                 try {
                     if(isConnected && !hasSearched) {
                     response = await axios.get(`https://scan.pulsechain.com/api?module=account&action=tokenlist&address=${address}`)
-                    response2 = await axios.get(`https://scan.pulsechain.com/api?module=account&action=balance&address=${address}`)
                     }
                     else if ((isConnected && hasSearched) || (!isConnected && hasSearched)) {
                     response = await axios.get(`https://scan.pulsechain.com/api?module=account&action=tokenlist&address=${searchedAddress}`) 
-                    response2 = await axios.get(`https://scan.pulsechain.com/api?module=account&action=balance&address=${searchedAddress}`) 
                     }
                     success = true;
                     console.log("Axios success")
@@ -71,8 +71,20 @@ function Portfolio () {
             }
             if(retries >= maxRetries) console.log("Too many request.");
 
+            if(isConnected && !hasSearched) {
+                pulseBalanceRaw = await fetchBalance({
+                    address: address,
+                    })
+                }
+            else if ((isConnected && hasSearched) || (!isConnected && hasSearched)) {
+                pulseBalanceRaw = await fetchBalance({
+                    address: searchedAddress,
+                    })
+                }
+                
+            const pulseBalance = pulseBalanceRaw.value;
             const tokenList = response.data.result;
-            const pulseBalance = response2.data.result
+            
 
             const contractsData = await readContract({
                     //Getting wPLS / DAI reserves to calculate Pulse price
@@ -82,7 +94,6 @@ function Portfolio () {
             });
             
             const pulsePrice = parseInt(contractsData[1].toString())/parseInt(contractsData[0].toString())
-            console.log("PULSE", pulsePrice);
 
             plsInfo.contractAddress = null;
             plsInfo.name = "Pulse";
@@ -91,6 +102,8 @@ function Portfolio () {
             plsInfo.priceInUsd = pulsePrice;
             plsInfo.balanceValueUsd = parseInt(pulseBalance)/10**18 * pulsePrice; 
             plsInfo.decimals = 18;
+
+            plsInfoArr.push(plsInfo);
 
             for(let i=0; i<tokenList.length; i++) {
                 if(tokenList[i].type == "ERC-20") {
@@ -221,13 +234,14 @@ function Portfolio () {
             for(let i=0; i<lowList.length; i++) {
                 lowAssetsTvl += lowList[i].balanceValueUsd;
             }
+        setPulseInfo(plsInfoArr);
         setTokenList(finalList)
         setValueTokenList(valueList)
         setLowList(lowList)
         setTotalPort(totalPort)
         setLowListTvl(lowAssetsTvl)
         setIsLoading(false);
-        setPulseInfo(plsInfo);
+
         // return finalList;
 
 
@@ -256,7 +270,6 @@ function Portfolio () {
             hasSearched = true;
             searchedAddress = (searchValue);
             setSearched(hasSearched);
-            console.log(searchedAddress)
             getTokens();
         }
         function clearSearch() {
@@ -358,12 +371,17 @@ function Portfolio () {
                                         Value
                                     </Text>
                                 </Box>
+
                             </HStack>
                         </Flex>
                         <Center borderBottom='2px' borderColor='yellow.500' ml='auto' mr='auto' width={[300, 500, 750, 1000]}></Center>
-                        {/* <Flex fontSize={[11,13,15,18]} spacing={1} ml='auto' mr='auto' color='gray.300' bgColor='gray.900'>
-                            <PortInfo {...pulseInfo}></PortInfo>
-                        </Flex> */}
+                        <Flex fontSize={[11,13,15,18]} spacing={1} ml='auto' mr='auto' color='gray.300' bgColor='gray.900'>
+                        {pulseInfo.map((item) => {
+                                    return(
+                                        <PortInfo key={item.balance} {...item}/>    
+                                    )
+                                })}
+                        </Flex>
                         <Flex>
                             <VStack fontSize={[11,13,15,18]} spacing={1} ml='auto' mr='auto' color='gray.300' bgColor='gray.900' >
                                 {valueTokenList.map((item) => {

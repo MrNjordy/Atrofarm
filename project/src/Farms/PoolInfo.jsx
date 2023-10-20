@@ -282,7 +282,7 @@ export default function FarmPoolInfo({
                                     </ModalBody>
                                     <Center>
                                     <ModalFooter>
-                                        {allowance == 0 || allowance < depositInput ? <Button bgGradient='linear(to-bl, yellow.400, yellow.700)'  mr={5} isLoading={approvalLoading} onClick={approval}>                                                                                                                  
+                                        {allowance == 0 || allowance < depositInput ? <Button bgColor='yellow.900' color={'gray.300'}  mr={5} isLoading={approvalLoading} onClick={approval}>                                                                                                                  
                                                                         {"Approve"} 
                                                                     </Button> 
                                                                   : <Button bgGradient='linear(to-bl, yellow.400, yellow.700)' mr={5} isDisabled={userBalance==0 || depositInput==0} isLoading={depositLoading} onClick={deposit}>                                                                                                                  

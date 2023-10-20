@@ -221,8 +221,6 @@ function Portfolio () {
             for(let i=0; i<lowList.length; i++) {
                 lowAssetsTvl += lowList[i].balanceValueUsd;
             }
-            console.log(plsInfo);
-            console.log(valueList);
         setTokenList(finalList)
         setValueTokenList(valueList)
         setLowList(lowList)

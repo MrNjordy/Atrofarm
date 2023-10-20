@@ -361,9 +361,9 @@ function Portfolio () {
                             </HStack>
                         </Flex>
                         <Center borderBottom='2px' borderColor='yellow.500' ml='auto' mr='auto' width={[300, 500, 750, 1000]}></Center>
-                        <Flex fontSize={[11,13,15,18]} spacing={1} ml='auto' mr='auto' color='gray.300' bgColor='gray.900'>
+                        {/* <Flex fontSize={[11,13,15,18]} spacing={1} ml='auto' mr='auto' color='gray.300' bgColor='gray.900'>
                             <PortInfo {...pulseInfo}></PortInfo>
-                        </Flex>
+                        </Flex> */}
                         <Flex>
                             <VStack fontSize={[11,13,15,18]} spacing={1} ml='auto' mr='auto' color='gray.300' bgColor='gray.900' >
                                 {valueTokenList.map((item) => {

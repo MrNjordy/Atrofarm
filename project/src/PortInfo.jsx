@@ -89,6 +89,7 @@ export default function PortInfo({
                             <Text mb={0} ml={2}>
                                 {symbol}
                             </Text>
+                            {!contractAddress ? null :
                             <HStack  ml={1} spacing={1} mt={1}>
                                 <Tooltip  label="View on PulseScan">
                                     <Link  href={`https://scan.pulsechain.com/address/${contractAddress}`} isExternal>
@@ -100,7 +101,7 @@ export default function PortInfo({
                                         <Image src={piteas} alt='Piteas' boxSize={4} ></Image>
                                     </Link>
                                 </Tooltip>
-                            </HStack>
+                            </HStack>}
             
                         </Box>
                     </Center>

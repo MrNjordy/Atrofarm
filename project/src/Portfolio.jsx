@@ -1,6 +1,6 @@
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { useAccount } from "wagmi";
-import { readContract, readContracts } from 'wagmi/actions'
+import { readContract, readContracts, fetchBalance } from 'wagmi/actions'
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Button, Center, Flex, FormControl, HStack, IconButton, Image, Input, InputGroup, InputRightElement, Link, SimpleGrid, Text, Tooltip, VStack, useClipboard } from "@chakra-ui/react";
@@ -21,6 +21,7 @@ function Portfolio () {
     const [lowListTvl, setLowListTvl] = useState();
     const [searchValue, setSearchValue] = useState();
     const [displaySearch, setDisplaySearch] = useState('')
+    const [pulseInfo, setPulseInfo] = useState();
     const { onCopy: onCopyAddress, value, setValue, hasCopied } = useClipboard(address);
     const { onCopy: onCopySearch, value : searchedValue, setValue: setSearchedValue, hasCopied: hasCopiedSearched } = useClipboard(displaySearch);
     const { onCopy: onCopyContract, value: contractValue, setValue: setContractValue, hasCopied: hasCopiedContract } = useClipboard();
@@ -36,6 +37,7 @@ function Portfolio () {
         async function getTokens() {
             setIsLoading(true);
             let response = null;
+            let response2 = null;
             let retries = 0;
             let maxRetries = 10;
             let success = false;
@@ -45,15 +47,18 @@ function Portfolio () {
             const finalList = [];
             const valueList = [];
             const lowList = [];
+            const plsInfo = {};
 
             console.log(hasSearched)
             while (retries <= maxRetries && !success) {
                 try {
                     if(isConnected && !hasSearched) {
                     response = await axios.get(`https://scan.pulsechain.com/api?module=account&action=tokenlist&address=${address}`)
+                    response2 = await axios.get(`https://scan.pulsechain.com/api?module=account&action=balance&address=${address}`)
                     }
                     else if ((isConnected && hasSearched) || (!isConnected && hasSearched)) {
-                    response = await axios.get(`https://scan.pulsechain.com/api?module=account&action=tokenlist&address=${searchedAddress}`)  
+                    response = await axios.get(`https://scan.pulsechain.com/api?module=account&action=tokenlist&address=${searchedAddress}`) 
+                    response2 = await axios.get(`https://scan.pulsechain.com/api?module=account&action=balance&address=${searchedAddress}`) 
                     }
                     success = true;
                     console.log("Axios success")
@@ -67,6 +72,7 @@ function Portfolio () {
             if(retries >= maxRetries) console.log("Too many request.");
 
             const tokenList = response.data.result;
+            const pulseBalance = response2.data.result
 
             const contractsData = await readContract({
                     //Getting wPLS / DAI reserves to calculate Pulse price
@@ -77,6 +83,14 @@ function Portfolio () {
             
             const pulsePrice = parseInt(contractsData[1].toString())/parseInt(contractsData[0].toString())
             console.log("PULSE", pulsePrice);
+
+            plsInfo.contractAddress = null;
+            plsInfo.name = "Pulse";
+            plsInfo.symbol = "PLS";
+            plsInfo.balance = pulseBalance;
+            plsInfo.priceInUsd = pulsePrice;
+            plsInfo.balanceValueUsd = parseInt(pulseBalance)/10**18 * pulsePrice; 
+            plsInfo.decimals = 18;
 
             for(let i=0; i<tokenList.length; i++) {
                 if(tokenList[i].type == "ERC-20") {
@@ -207,14 +221,18 @@ function Portfolio () {
             for(let i=0; i<lowList.length; i++) {
                 lowAssetsTvl += lowList[i].balanceValueUsd;
             }
-
+            console.log(plsInfo);
+            console.log(valueList);
         setTokenList(finalList)
         setValueTokenList(valueList)
         setLowList(lowList)
         setTotalPort(totalPort)
         setLowListTvl(lowAssetsTvl)
         setIsLoading(false);
+        setPulseInfo(plsInfo);
         // return finalList;
+
+
         }
 
         useEffect(() => {
@@ -345,6 +363,9 @@ function Portfolio () {
                             </HStack>
                         </Flex>
                         <Center borderBottom='2px' borderColor='yellow.500' ml='auto' mr='auto' width={[300, 500, 750, 1000]}></Center>
+                        <Flex fontSize={[11,13,15,18]} spacing={1} ml='auto' mr='auto' color='gray.300' bgColor='gray.900'>
+                            <PortInfo {...pulseInfo}></PortInfo>
+                        </Flex>
                         <Flex>
                             <VStack fontSize={[11,13,15,18]} spacing={1} ml='auto' mr='auto' color='gray.300' bgColor='gray.900' >
                                 {valueTokenList.map((item) => {

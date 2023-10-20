@@ -29,7 +29,7 @@ export default function PortInfo({
                                 <Text hideBelow='sm'>
                                     {name}
                                 </Text>
-                                <HStack ml={-3}>
+                                {!contractAddress ? null : <HStack ml={-3}>
                                     <Tooltip hideBelow={'sm'} label="Copy Address">
                                         <IconButton variant='unstyled' color='gray.300' mr={-3} icon={hasCopiedContract ? <CheckIcon /> : <CopyIcon />} onClick={onCopyContract}></IconButton>
                                     </Tooltip>
@@ -43,7 +43,7 @@ export default function PortInfo({
                                             <Image src={piteas} alt='Piteas' boxSize={[2,4,4,4]} ></Image>
                                         </Link>
                                     </Tooltip>
-                                </HStack>
+                                </HStack>}
                             </Box>
                         </Center>
                     </Box>

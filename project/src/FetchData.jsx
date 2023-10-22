@@ -115,10 +115,11 @@ generalInfo.burned = burnedAtrofa;
         // }
         const rewardAlloc = poolInfo[1];
 
-        // if(poolInfo[0] == '0xf8AB3393b1f5CD6184Fb6800A1fC802043C4063e'
-        //     || poolInfo[0] == '0x10843FB4c712526E3fEef838D72059EbfC0cF61f') {
-        //     continue
-        // }
+        if(poolInfo[0] == '0xf8AB3393b1f5CD6184Fb6800A1fC802043C4063e'
+            // || poolInfo[0] == '0x10843FB4c712526E3fEef838D72059EbfC0cF61f'
+            ) {
+            continue
+        }
         const tokenInfo = await fetchToken({ address: poolInfo[0]})
         const depositFee = parseInt(poolInfo[4].toString()) /100;
 

@@ -1,6 +1,6 @@
 import { useAccount } from "wagmi";
 import { useEffect, useState } from "react";
-import { Flex, Spinner, Box, Center, Text, SimpleGrid, VStack, Switch, FormControl, FormLabel, HStack, Input, Wrap, WrapItem, InputRightAddon, InputGroup} from "@chakra-ui/react";
+import { Flex, Spinner, Box, Center, Text, SimpleGrid, VStack, Switch, FormControl, FormLabel, HStack, Input, Wrap, WrapItem, InputRightAddon, InputGroup, Tabs, Tab, TabList, TabPanel, TabPanels} from "@chakra-ui/react";
 import PoolInfo from "./PoolInfo";
 import { useContext } from "react";
 import { InfoContext } from "../App";
@@ -9,6 +9,7 @@ function Farm() {
     const allPools = useContext(InfoContext);
     const [isLoading, setIsLoading] = useState(true)
     const [poolsInfo, setPools] = useState([]);
+    const [inactivePools, setInactivePools] = useState([]);
     const [onlyStaked, setOnlyStaked] = useState(false);
     const [onlyNative, setOnlyNative] = useState(false);
     const [searchValue, setSearchValue] = useState();
@@ -20,8 +21,20 @@ function Farm() {
               setTimeout(wait, 100)
             } else {
                 const farmingPools = allPools.farmingPools;
+                const activePools = [];
+                const inactivePools = [];
+
+                for(let i=0; i<farmingPools.length; i++) {
+                    if(farmingPools[i].rewardAlloc == 0) {
+                        inactivePools.push(farmingPools[i])
+                    }
+                    else {
+                        activePools.push(farmingPools[i])
+                    };
+                }
+                setInactivePools(inactivePools);
                 if(searchValue) {
-                    farmingPools.sort((a, b) => {
+                    activePools.sort((a, b) => {
                         let fa = a.name.toLowerCase();
                         let fb = b.name.toLowerCase(); 
                         if(fa<fb) {
@@ -33,15 +46,15 @@ function Farm() {
                         return 0;
                     })
                     let onlySearchedPools = [];
-                        for(let i=0; i< farmingPools.length; i++) {
-                            if((farmingPools[i].name).toLowerCase().includes((searchValue))){
-                                onlySearchedPools.push(farmingPools[i])
+                        for(let i=0; i< activePools.length; i++) {
+                            if((activePools[i].name).toLowerCase().includes((searchValue))){
+                                onlySearchedPools.push(activePools[i])
                             }
                         }
                         setPools(onlySearchedPools);
                 }
                 else if(!onlyStaked && !onlyNative) {                    
-                    farmingPools.sort((a, b) => {
+                    activePools.sort((a, b) => {
                         let fa = a.name.toLowerCase();
                         let fb = b.name.toLowerCase(); 
                         if(fa<fb) {
@@ -52,13 +65,13 @@ function Farm() {
                         }
                         return 0;
                     })
-                    setPools(farmingPools);
+                    setPools(activePools);
                     setIsLoading(false);
                 }
                 else if (onlyStaked && !onlyNative) {
                     let onlyStakedPools = [];
-                    for(let i=0; i< farmingPools.length; i++) {
-                        farmingPools.sort((a, b) => {
+                    for(let i=0; i< activePools.length; i++) {
+                        activePools.sort((a, b) => {
                             let fa = a.name.toLowerCase();
                             let fb = b.name.toLowerCase(); 
                             if(fa<fb) {
@@ -69,16 +82,16 @@ function Farm() {
                             }
                             return 0;
                         })
-                        if(farmingPools[i].userStaked > 0){
-                            onlyStakedPools.push(farmingPools[i])
+                        if(activePools[i].userStaked > 0){
+                            onlyStakedPools.push(activePools[i])
                         }
                     }
                     setPools(onlyStakedPools);
                 }
                 else if (!onlyStaked && onlyNative) {
                     let onlyNativePools = [];
-                    for(let i=0; i< farmingPools.length; i++) {
-                        farmingPools.sort((a, b) => {
+                    for(let i=0; i< activePools.length; i++) {
+                        activePools.sort((a, b) => {
                             let fa = a.name.toLowerCase();
                             let fb = b.name.toLowerCase(); 
                             if(fa<fb) {
@@ -89,16 +102,16 @@ function Farm() {
                             }
                             return 0;
                         })
-                        if(farmingPools[i].isAtrofa){
-                            onlyNativePools.push(farmingPools[i])
+                        if(activePools[i].isAtrofa){
+                            onlyNativePools.push(activePools[i])
                         }
                     }
                     setPools(onlyNativePools);
                 }
                 else if (onlyStaked && onlyNative) {
                     let bothStakedNativePools = [];
-                    for(let i=0; i< farmingPools.length; i++) {
-                        farmingPools.sort((a, b) => {
+                    for(let i=0; i< activePools.length; i++) {
+                        activePools.sort((a, b) => {
                             let fa = a.name.toLowerCase();
                             let fb = b.name.toLowerCase(); 
                             if(fa<fb) {
@@ -109,8 +122,8 @@ function Farm() {
                             }
                             return 0;
                         })
-                        if(farmingPools[i].isAtrofa && farmingPools[i].userStaked > 0){
-                            bothStakedNativePools.push(farmingPools[i])
+                        if(activePools[i].isAtrofa && activePools[i].userStaked > 0){
+                            bothStakedNativePools.push(activePools[i])
                         }
                     }
                     setPools(bothStakedNativePools);
@@ -119,13 +132,21 @@ function Farm() {
           }
           wait();
     }, [address, allPools]);
+
     function onlyStakedDiplayed() {
         const farmingPools = allPools.farmingPools;
+        const activePools = [];
+
+        for(let i=0; i<farmingPools.length; i++) {
+            if(farmingPools[i].rewardAlloc != 0) {
+                activePools.push(farmingPools[i])
+            };
+        }
 
         let onlyStakedPools = [];
-            for(let i=0; i< farmingPools.length; i++) {
-                if(farmingPools[i].userStaked > 0){
-                    onlyStakedPools.push(farmingPools[i])
+            for(let i=0; i< activePools.length; i++) {
+                if(activePools[i].userStaked > 0){
+                    onlyStakedPools.push(activePools[i])
                 }
             }
             setOnlyStaked(true);
@@ -134,11 +155,18 @@ function Farm() {
 
     function onlyNativeDisplayed() {
         const farmingPools = allPools.farmingPools;
+        const activePools = [];
+
+        for(let i=0; i<farmingPools.length; i++) {
+            if(farmingPools[i].rewardAlloc != 0) {
+                activePools.push(farmingPools[i])
+            };
+        }
 
         let onlyNativePools = [];
-            for(let i=0; i< farmingPools.length; i++) {
-                if(farmingPools[i].isAtrofa){
-                    onlyNativePools.push(farmingPools[i])
+            for(let i=0; i< activePools.length; i++) {
+                if(activePools[i].isAtrofa){
+                    onlyNativePools.push(activePools[i])
                 }
             }
             setOnlyNative(true);
@@ -146,6 +174,8 @@ function Farm() {
     } 
     function allDiplayedStaked() {         
             const farmingPools = allPools.farmingPools;
+            const activePools = [];
+
             farmingPools.sort((a, b) => {
                 let fa = a.name.toLowerCase();
                 let fb = b.name.toLowerCase(); 
@@ -157,23 +187,32 @@ function Farm() {
                 }
                 return 0;
             })
+
+            for(let i=0; i<farmingPools.length; i++) {
+                if(farmingPools[i].rewardAlloc != 0) {
+                    activePools.push(farmingPools[i])
+                };
+            }
+
             if(onlyNative) {
                 let onlyNativePools = [];
-                for(let i=0; i< farmingPools.length; i++) {
-                    if(farmingPools[i].isAtrofa){
-                        onlyNativePools.push(farmingPools[i])
+                for(let i=0; i< activePools.length; i++) {
+                    if(activePools[i].isAtrofa){
+                        onlyNativePools.push(activePools[i])
                     }
                 }
                 setPools(onlyNativePools);
             } 
             else {
-            setPools(farmingPools);
+            setPools(activePools);
             }
             setOnlyStaked(false);
     }
 
     function allDiplayedNative() {         
         const farmingPools = allPools.farmingPools;
+        const activePools = [];
+
         farmingPools.sort((a, b) => {
             let fa = a.name.toLowerCase();
             let fb = b.name.toLowerCase(); 
@@ -185,33 +224,45 @@ function Farm() {
             }
             return 0;
         })
+
+        for(let i=0; i<farmingPools.length; i++) {
+            if(farmingPools[i].rewardAlloc != 0) {
+                activePools.push(farmingPools[i])
+            };
+        }
+        
         if(onlyStaked) {
             let onlyStakedPools = [];
-            for(let i=0; i< farmingPools.length; i++) {
-                if(farmingPools[i].userStaked > 0){
-                    onlyStakedPools.push(farmingPools[i])
+            for(let i=0; i< activePools.length; i++) {
+                if(activePools[i].userStaked > 0){
+                    onlyStakedPools.push(activePools[i])
                 }
             }
             setPools(onlyStakedPools);
         } 
         else {
-        setPools(farmingPools);
+        setPools(activePools);
         }
         setOnlyNative(false);
     }
     const handleChange = (e) => {
         e.preventDefault();
         const farmingPools = allPools.farmingPools;
+        const activePools = [];
+
+        for(let i=0; i<farmingPools.length; i++) {
+            if(farmingPools[i].rewardAlloc != 0) {
+                activePools.push(farmingPools[i])
+            };
+        }
         let onlySearchedPools = [];
-            for(let i=0; i< farmingPools.length; i++) {
-                if((farmingPools[i].name).toLowerCase().includes((e.target.value).toLowerCase())){
-                    onlySearchedPools.push(farmingPools[i])
+            for(let i=0; i< activePools.length; i++) {
+                if((activePools[i].name).toLowerCase().includes((e.target.value).toLowerCase())){
+                    onlySearchedPools.push(activePools[i])
                 }
             }
             setPools(onlySearchedPools);
-            setSearchValue((e.target.value).toLowerCase());
-        
-        
+            setSearchValue((e.target.value).toLowerCase());   
     }
 
 return(
@@ -244,6 +295,18 @@ return(
                 :
                 
                 <Box ml='auto' mr='auto'>
+                    <Center>
+                        <Tabs align='center' mb={5} size={'md'} color={'gray.300'} colorScheme='yellow' variant={'solid-rounded'}>
+                            <TabList>
+                                <Tab>
+                                    Active
+                                </Tab>
+                                <Tab>
+                                    Inactive
+                                </Tab>
+                            </TabList>
+                            <TabPanels>
+                            <TabPanel>
                     <Center>
                         <HStack spacing={10}>
                             <Flex>
@@ -280,7 +343,23 @@ return(
                                 )
                             })}
                         </SimpleGrid>
-                    </Flex>
+                        </Flex>
+                            </TabPanel>
+                            <TabPanel>
+                            <Flex>
+                        <SimpleGrid columns={[1, 2, 3, 3]} spacing={[null, 15, 20]} ml='auto' mr='auto' mt={5}>         
+                            {inactivePools.map((item) => {
+                                return (
+                                    <PoolInfo key={item.id} {...item} />
+                                )
+                            })}
+                        </SimpleGrid>
+                        </Flex>
+                            </TabPanel>
+                        </TabPanels>
+
+                    </Tabs>
+                    </Center>
                 </Box>
         }
         </Flex>

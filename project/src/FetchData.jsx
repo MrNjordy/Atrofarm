@@ -113,10 +113,12 @@ generalInfo.burned = burnedAtrofa;
         // if(poolInfo[1] == 0) { //if allocpoint == 0
         //     continue
         // }
-        if(poolInfo[0] == '0xf8AB3393b1f5CD6184Fb6800A1fC802043C4063e'
-            || poolInfo[0] == '0x10843FB4c712526E3fEef838D72059EbfC0cF61f') {
-            continue
-        }
+        const rewardAlloc = poolInfo[1];
+
+        // if(poolInfo[0] == '0xf8AB3393b1f5CD6184Fb6800A1fC802043C4063e'
+        //     || poolInfo[0] == '0x10843FB4c712526E3fEef838D72059EbfC0cF61f') {
+        //     continue
+        // }
         const tokenInfo = await fetchToken({ address: poolInfo[0]})
         const depositFee = parseInt(poolInfo[4].toString()) /100;
 
@@ -317,6 +319,7 @@ generalInfo.burned = burnedAtrofa;
                 allInfo.isV1 = isV1;
                 allInfo.token0 = token0;
                 allInfo.token1 = token1;
+                allInfo.rewardAlloc = rewardAlloc;
             } else {    //user is not connected
                 allInfo.name = lpName;
                 allInfo.userStaked = '0';
@@ -330,6 +333,7 @@ generalInfo.burned = burnedAtrofa;
                 allInfo.isV1 = isV1;
                 allInfo.token0 = token0;
                 allInfo.token1 = token1;
+                allInfo.rewardAlloc = rewardAlloc;
             }
             farmingPools.push(allInfo) 
 

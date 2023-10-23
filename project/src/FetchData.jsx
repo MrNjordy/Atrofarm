@@ -214,6 +214,10 @@ generalInfo.burned = burnedAtrofa;
                 poolInfo[0] == '0x0b1B8f70816a4f52427AA7A759b05EAe4e743b40') {
                 lpName = "CiA" + "-" + token1Name.symbol;
             }
+            else if(poolInfo[0] == '0x3D3B080A1Ec1AFc121a27AE4cBad17A14E80f7B5' ||
+            poolInfo[0] == '0x0b1B8f70816a4f52427AA7A759b05EAe4e743b40') {
+            lpName = token1Name.symbol + "-" + token0Name.symbol;
+        }
 
             else {lpName = token0Name.symbol + "-" + token1Name.symbol}
 

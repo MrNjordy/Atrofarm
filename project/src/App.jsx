@@ -15,12 +15,13 @@ import { BrowserRouter, Route, Routes} from 'react-router-dom'
 import { useState, useEffect, createContext, useCallback } from 'react'
 import { fetchData } from './FetchData'
 import Portfolio from './Portfolio'
+import TimelockEvents from './TimeLock'
 
 export const InfoContext = createContext();
 
 const projectId = import.meta.env.VITE_WALLET_CONNECT;
 
-const { chains, publicClient, webSocketPublicCLient } = configureChains(
+export const { chains, publicClient, webSocketPublicCLient } = configureChains(
     [pulsechain],
     [alchemyProvider( {apiKey: import.meta.env.VITE_ALCHEMY}), publicProvider()],
     [walletConnectProvider({ projectId })],
@@ -69,6 +70,7 @@ function App() {
           <Route path ='/Farms' Component={Farm} />
           <Route path ='/Staking' Component={Staking} />
           <Route path ='/dePulse' Component={Portfolio} />
+          <Route path ='/Timelock' Component={TimelockEvents} />
         </Routes>
       </BrowserRouter>
       </InfoContext.Provider>

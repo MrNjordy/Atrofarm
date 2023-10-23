@@ -23,6 +23,8 @@ import bytc from '../assets/FarmIcons/BYTC.png'
 import plsd from '../assets/FarmIcons/plsd.png'
 import plsb from '../assets/FarmIcons/plsb.png'
 import dmnd from '../assets/FarmIcons/dmnd.png'
+import carn from '../assets/FarmIcons/carn.png'
+import more from '../assets/FarmIcons/more.png'
 
 export default function FarmPoolInfo({
     id,
@@ -163,6 +165,8 @@ export default function FarmPoolInfo({
                                 : token0 == '0x34F0915a5f15a66Eba86F6a58bE1A471FB7836A7' ? plsd
                                 : token0 == '0x5EE84583f67D5EcEa5420dBb42b462896E7f8D06' ? plsb
                                 : token0 == '0xCF409C91B49DD3F796d20Eec20535fDC79A08798' ? dmnd
+                                : token0 == '0x488Db574C77dd27A07f9C97BAc673BC8E9fC6Bf3' ? carn
+                                : token0 == '0xbEEf3bB9dA340EbdF0f5bae2E85368140d7D85D0' ? more
                                 : afc} 
                             mb={3}>
                     </Image>  
@@ -183,7 +187,9 @@ export default function FarmPoolInfo({
                                 : token1 == '0x34F0915a5f15a66Eba86F6a58bE1A471FB7836A7' ? plsd
                                 : token1 == '0x5EE84583f67D5EcEa5420dBb42b462896E7f8D06' ? plsb
                                 : token1 == '0xCF409C91B49DD3F796d20Eec20535fDC79A08798' ? dmnd
-                                : afc}  
+                                : token1 == '0x488Db574C77dd27A07f9C97BAc673BC8E9fC6Bf3' ? carn
+                                : token1 == '0xbEEf3bB9dA340EbdF0f5bae2E85368140d7D85D0' ? more
+                                : afc}
                             mb={3}>
                     </Image>    
                     <Flex mb={3} mr={1} ml='auto'>

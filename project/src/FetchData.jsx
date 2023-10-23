@@ -59,12 +59,19 @@ const data = await readContracts({
         functionName: 'getReserves',
     
     },
-    {//Getting wETH/wPL reserves to calculate wETH price
+    {//Getting burn address balance
         address: import.meta.env.VITE_TOKEN,
         abi: tokenAbi,
         functionName: 'balanceOf',
         args: ['0x0000000000000000000000000000000000000369'],
         },
+        {//Getting PLSB/wpls reserves to calculate PLSB price
+            address: '0x894167362577Ea6ec0aC01aB56A7B2d3946EAD55',
+            abi: lpAbi,
+            functionName: 'getReserves',
+        
+        },
+        
     ]
 });
 
@@ -74,6 +81,10 @@ const atropaPrice = parseInt(data[6].result[0].toString())/parseInt(data[6].resu
 const wBtcPrice = parseInt(data[7].result[1].toString())/parseInt(data[7].result[0].toString()) * pulsePrice / 10**10
 const wethPrice = parseInt(data[8].result[1].toString())/parseInt(data[8].result[0].toString()) * pulsePrice
 const burnedAtrofa = parseInt(data[9].result.toString()) / 10**18;
+
+const plsReserve = parseInt(data[10].result[1].toString())/10**18
+const plsbReserve = parseInt(data[10].result[0].toString())/10**12
+const plsbPrice = plsReserve/plsbReserve * pulsePrice
 
 const nativeTokenPriceUsd = (parseInt(data[0].result[1].toString())/parseInt(data[0].result[0].toString()) * pulsePrice).toString();
 const nativeToken = await fetchToken({ address: import.meta.env.VITE_TOKEN })
@@ -252,7 +263,15 @@ generalInfo.burned = burnedAtrofa;
             else if (token1Name.address == '0x02DcdD04e3F455D838cd1249292C58f3B79e3C3C'){ //WETH
                 const lpPriceEth = parseInt(getLpReserves[1].toString()) * 2 / parseInt(lpTotalSupply.toString());
                 lpPriceUsd = (lpPriceEth * wethPrice).toString();
-            }    
+            }
+            else if(token0Name.address == '0x5EE84583f67D5EcEa5420dBb42b462896E7f8D06'){ //PLSB
+                const lpPriceEth = (parseInt(getLpReserves[0].toString()) * 2 /10**12) / (parseInt(lpTotalSupply.toString()) /10**18);
+                lpPriceUsd = (lpPriceEth * plsbPrice).toString();
+            }
+            else if (token1Name.address == '0x5EE84583f67D5EcEa5420dBb42b462896E7f8D06'){ //PLSB
+                const lpPriceEth = (parseInt(getLpReserves[1].toString()) * 2 /10**12) / (parseInt(lpTotalSupply.toString()) /10**18);
+                lpPriceUsd = (lpPriceEth * plsbPrice).toString();
+            }      
             if (token0Name.symbol == 'Atrofa' || token1Name.symbol == 'Atrofa') {
                 isAtrofa = true;
             };

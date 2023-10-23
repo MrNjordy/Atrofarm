@@ -74,6 +74,9 @@ function Home() {
                     protocolPools.push(allPools.stakingPools[i])
                 }
                 for(let i=0; i<protocolPools.length; i++) {
+                    if(!parseFloat(protocolPools[i].totalStakedUsd)){
+                        protocolPools[i].totalStakedUsd = 0
+                    }
                     tvl += parseFloat(protocolPools[i].totalStakedUsd);
                     totalRewards += parseFloat(protocolPools[i].rewards);
                     totalRewardsUsd += parseFloat((protocolPools[i].rewardsUsd));

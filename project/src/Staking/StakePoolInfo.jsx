@@ -161,7 +161,8 @@ export default function StakePoolInfo({
                         Your Deposit: 
                     </Flex>
                     <Flex ml='auto' mr={1} fontSize='large'>
-                        {(parseFloat(userStaked) / 10**18).toFixed(2)} 
+                        {token == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ? (parseFloat(userStaked) / 10**6).toExponential(2)
+                         : (parseFloat(userStaked) / 10**18).toFixed(2)}
                     </Flex>
                 </HStack> 
                 <Flex justify='right' mr={1} mb={1} mt={-1} fontSize='smaller' fontWeight='light'>

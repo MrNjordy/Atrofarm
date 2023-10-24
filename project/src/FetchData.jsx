@@ -398,14 +398,15 @@ generalInfo.burned = burnedAtrofa;
             const megaPrice = (parseInt(megaReserve[0].toString())/parseInt(megaReserve[1].toString()) / 10**12 * wethPrice).toString();
 
             let tokenPriceUsd;
+            let totalStakedUsd
             if (poolInfo[0] == '0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17') {
                 tokenPriceUsd = AtrofaPriceUsd;
+                totalStakedUsd = (parseInt(totalStaked.toString()) / 10**18) * tokenPriceUsd;
             }
             else if (poolInfo[0] == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D') {
                 tokenPriceUsd = megaPrice;
-                tokenInfo.symbol = "COMING SOON!"
+                totalStakedUsd = (parseInt(totalStaked.toString()) / 10**6) * tokenPriceUsd;
             }
-            const totalStakedUsd = (parseInt(totalStaked.toString()) / 10**18) * tokenPriceUsd;
             let Apr;
             if (totalStakedUsd == 0) {
                 Apr = poolRewardPerYearUsd / 1 * 100

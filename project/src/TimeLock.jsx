@@ -1,9 +1,10 @@
-import {  parseAbiItem, decodeEventLog, decodeFunctionData } from 'viem';
+import {  parseAbiItem, decodeEventLog, decodeFunctionData, transactionType } from 'viem';
 import { useState, useEffect } from 'react'
 import { pulsechain } from 'wagmi/chains'
 import { createPublicClient, http } from 'viem';
-import { Box, Center, Link, Text } from '@chakra-ui/react';
+import { Box, Center, Flex, Link, SimpleGrid, Text } from '@chakra-ui/react';
 import { masterAbi, timelockAbi } from './data';
+import TimeLockInfo from './TimeLockInfo';
 
 const  publicClient = createPublicClient({
     chain: pulsechain,
@@ -11,41 +12,51 @@ const  publicClient = createPublicClient({
 })
 
 export default function TimelockEvents() {
-    const [previousLogs, setPreviousLogs] = useState();
+    const [previousLogs, setPreviousLogs] = useState([]);
 
     useEffect(() => {
         async function getPreviousLogs() {
-
-            const blockNumber = await publicClient.getBlock({
-                blockNumber: 18641642n
-            });
-            console.log(blockNumber)
+            let transactionsInfo = [];
 
             const logs = await publicClient.getLogs({
                 address: "0xDadD562f3EEFE9a880990c57c11E3544B4734c1C",
                 event: parseAbiItem('event CallScheduled(bytes32 indexed id, uint256 indexed index, address target, uint256 value, bytes data, bytes32 predecessor, uint256 delay)'),
-                // args: { 
-                //     degen: '0x938A03E67E0B7de5f060b88E028E8CA19fE9e731'
-                // },
                 fromBlock: 'earliest',
                 toBlock: 'latest'
             })
-            console.log("LAGS ", logs)
 
-            // const topics = decodeEventLog({
-            //     abi: timelockAbi,
-            //     data: logs[0].data,
-            //     topics: logs[0].topics,
-            // })
-            // const { functionName, args } = decodeFunctionData({
-            //     abi: masterAbi,
-            //     data: logs[0].args.data,
-            // })
-            // console.log(functionName, " ", args);
-            // console.log("TOPICS ", topics);
-            // setPreviousLogs(logs);
+            for(let i=0; i<logs.length; i++) {
+                const scheduledTx = {};
+                
+                const { functionName, args } = decodeFunctionData({
+                    abi: masterAbi,
+                    data: logs[i].args.data,
+                })
+
+                //====== To Find all the timing info =====
+                const blockCalled = logs[i].blockNumber;
+                const blockInfo = await publicClient.getBlock({
+                    blockNumber: blockCalled
+                });
+                const blockTimestamp = blockInfo.timestamp;
+                const  timestampToExec = blockTimestamp + logs[i].args.delay;
+
+                const currentBlockInfo = await publicClient.getBlock({
+                    });
+                const currentBlockTimestamp = currentBlockInfo.timestamp;
+
+                const timer = timestampToExec - currentBlockTimestamp;
+
+                scheduledTx.ca = logs[i].transactionHash;;
+                scheduledTx.functionName = functionName;
+                scheduledTx.args = args;
+                scheduledTx.timer = timer;
+                scheduledTx.id = i;
+                console.log(scheduledTx)
+                transactionsInfo.push(scheduledTx);
+            }
+            setPreviousLogs(transactionsInfo);
         }
-    
         getPreviousLogs()
 
     }, [])
@@ -66,6 +77,17 @@ export default function TimelockEvents() {
                     </Box>                   
                 </Center>                  
             </Box>
+            <Flex>
+                <SimpleGrid columns={[1, 2, 3, 3]} spacing={[null, 15, 20]} ml='auto' mr='auto' mt={5}>
+                    {previousLogs.map((item) => {
+                        return (
+                            <TimeLockInfo key={item.id} {...item}>
+
+                            </TimeLockInfo>
+                                            )
+                    })}
+                </SimpleGrid>
+            </Flex>
         </Box>
     )
 

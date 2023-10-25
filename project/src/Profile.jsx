@@ -144,7 +144,7 @@ function Profile() {
                             </MenuItem>
                             <MenuItem bgColor='gray.900' fontSize={20} color='gray.300'>
                                 <RouteLink to='/Timelock' >
-                                    TIMELOCK
+                                    Timelock
                                 </RouteLink>
                             </MenuItem>
                             <MenuItem bgColor='gray.900'>

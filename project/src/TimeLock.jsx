@@ -30,19 +30,19 @@ export default function TimelockEvents() {
                 fromBlock: 'earliest',
                 toBlock: 'latest'
             })
-            console.log(logs)
+            console.log("LOGS ", logs)
 
-            // const topics = decodeEventLog({
-            //     abi: timelockAbi,
-            //     data: logs[0].data,
-            //     topics: logs[0].topics,
-            // })
-            // const { functionName, args } = decodeFunctionData({
-            //     abi: masterAbi,
-            //     data: logs[0].args.data,
-            // })
-            // console.log(functionName, " ", args);
-            // console.log(topics);
+            const topics = decodeEventLog({
+                abi: timelockAbi,
+                data: logs[0].data,
+                topics: logs[0].topics,
+            })
+            const { functionName, args } = decodeFunctionData({
+                abi: masterAbi,
+                data: logs[0].args.data,
+            })
+            console.log(functionName, " ", args);
+            console.log("TOPICS ", topics);
             setPreviousLogs(logs);
         }
     

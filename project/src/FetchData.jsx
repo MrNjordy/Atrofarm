@@ -399,20 +399,27 @@ generalInfo.burned = burnedAtrofa;
 
             let tokenPriceUsd;
             let totalStakedUsd
+            let Apr =0 ;
             if (poolInfo[0] == '0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17') {
                 tokenPriceUsd = AtrofaPriceUsd;
                 totalStakedUsd = (parseInt(totalStaked.toString()) / 10**18) * tokenPriceUsd;
+                if (totalStakedUsd == 0) {
+                    Apr = poolRewardPerYearUsd / 1 * 100
+                }
+                else {Apr = poolRewardPerYearUsd / totalStakedUsd * 100 }
+                if (Apr > 10000000) {Apr = 1000000}
             }
             else if (poolInfo[0] == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D') {
                 tokenPriceUsd = megaPrice;
                 totalStakedUsd = (parseInt(totalStaked.toString()) / 10**6) * tokenPriceUsd;
+                Apr = 542049 * nativeTokenPriceUsd / totalStakedUsd * 100
             }
-            let Apr;
-            if (totalStakedUsd == 0) {
-                Apr = poolRewardPerYearUsd / 1 * 100
-            }
-            else {Apr = poolRewardPerYearUsd / totalStakedUsd * 100 }
-            if (Apr > 10000000) {Apr = 1000000}
+            // let Apr;
+            // if (totalStakedUsd == 0) {
+            //     Apr = poolRewardPerYearUsd / 1 * 100
+            // }
+            // else {Apr = poolRewardPerYearUsd / totalStakedUsd * 100 }
+            // if (Apr > 10000000) {Apr = 1000000}
 
             if(isConnected) {
 

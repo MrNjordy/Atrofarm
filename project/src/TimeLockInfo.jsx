@@ -43,8 +43,7 @@ export default function TimeLockInfo({
                     <Flex ml={1} mr='auto' fontSize='smaller'>
                         Time remaining:
                     </Flex>
-                    <Flex mt={-1} ml={1} mr='auto' fontSize='sm'>
-                        
+                    <Flex mt={-1} ml={1} mr='auto' fontSize='sm'>    
                         {timer[0]<0 ? "0H 0M 0S" : timer[0].toString()+"H "+timer[1].toString()+"M " +timer[2].toString()+"S"}
                     </Flex>
                 </VStack>

@@ -335,29 +335,28 @@ return(
                         <Input display={{ base: "flex", md: "none" }} mt={3} type='text' onChange={handleChange} textColor='gray.300' focusBorderColor='yellow.500' placeholder="Search Pools" _placeholder={{ color: 'gray.300' }} width={250} ></Input>
                         </Flex>
                     </Center>
-                    <Flex>
-                        <SimpleGrid columns={[1, 2, 3, 3]} spacing={[null, 15, 20]} ml='auto' mr='auto' mt={5}>         
-                            {poolsInfo.map((item) => {
-                                return (
-                                    <PoolInfo key={item.id} {...item} />
-                                )
-                            })}
-                        </SimpleGrid>
+                        <Flex>
+                            <SimpleGrid columns={[1, 2, 3, 3]} spacing={[null, 15, 20]} ml='auto' mr='auto' mt={5}>         
+                                {poolsInfo.map((item) => {
+                                    return (
+                                        <PoolInfo key={item.id} {...item} />
+                                    )
+                                })}
+                            </SimpleGrid>
                         </Flex>
                             </TabPanel>
                             <TabPanel>
-                            <Flex>
-                        <SimpleGrid columns={[1, 2, 3, 3]} spacing={[null, 15, 20]} ml='auto' mr='auto' mt={5}>         
-                            {inactivePools.map((item) => {
-                                return (
-                                    <PoolInfo key={item.id} {...item} />
-                                )
-                            })}
-                        </SimpleGrid>
-                        </Flex>
+                                <Flex>
+                                    <SimpleGrid columns={[1, 2, 3, 3]} spacing={[null, 15, 20]} ml='auto' mr='auto' mt={5}>         
+                                        {inactivePools.map((item) => {
+                                            return (
+                                                <PoolInfo key={item.id} {...item} />
+                                            )
+                                        })}
+                                    </SimpleGrid>
+                                </Flex>
                             </TabPanel>
                         </TabPanels>
-
                     </Tabs>
                     </Center>
                 </Box>

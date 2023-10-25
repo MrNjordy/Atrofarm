@@ -21,7 +21,7 @@ export const InfoContext = createContext();
 
 const projectId = import.meta.env.VITE_WALLET_CONNECT;
 
-export const { chains, publicClient, webSocketPublicCLient } = configureChains(
+const { chains, publicClient, webSocketPublicCLient } = configureChains(
     [pulsechain],
     [alchemyProvider( {apiKey: import.meta.env.VITE_ALCHEMY}), publicProvider()],
     [walletConnectProvider({ projectId })],

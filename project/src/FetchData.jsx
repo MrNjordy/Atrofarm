@@ -206,9 +206,11 @@ generalInfo.burned = burnedAtrofa;
             }
             else if(poolInfo[0] == '0xC2131e4A8aaA8A47BeBe87482B67Be2d6701Ce98') {
                 lpName = "T.BEAR" + "-" + token0Name.symbol;
+                token1Name.symbol = "BEAR";
             }
             else if(poolInfo[0] == '0x71423f29f8376eF8EFdB9207343a5ff32604C2E3') {
                 lpName = "Monat Money" + "-" + token0Name.symbol;
+                token1Name.symbol = "Monat";
             }
             else if(poolInfo[0] == '0x10843FB4c712526E3fEef838D72059EbfC0cF61f' ||
                 poolInfo[0] == '0x0b1B8f70816a4f52427AA7A759b05EAe4e743b40') {
@@ -279,6 +281,7 @@ generalInfo.burned = burnedAtrofa;
             if (token0Name.symbol == 'Atrofa' || token1Name.symbol == 'Atrofa') {
                 isAtrofa = true;
             };
+
 //=======================================================================================
             const totalStakedUsd = (parseInt(totalStaked.toString()) / 10**18) * lpPriceUsd;
 
@@ -326,6 +329,14 @@ generalInfo.burned = burnedAtrofa;
                 const userShare = parseInt(userStaked.toString()) / (parseInt(totalStaked.toString())/10**18);
                 const userShareUsdPerYear = rewardPerShareUsd * userShare;
 
+// ================= GET THE COMPOSITION OF LP TOKENS ==================
+            //Amount of each token per LP token
+            const token0Amount = parseInt(getLpReserves[0].toString())/ parseInt(lpTotalSupply.toString())
+            const token1Amount = parseInt(getLpReserves[1].toString()) / parseInt(lpTotalSupply.toString())
+
+            const token0staked = token0Amount * (parseInt(userStaked) / 10**token0Name.decimals)
+            const token1staked = token1Amount * (parseInt(userStaked) / 10**token1Name.decimals)
+
                 allInfo.id = i;
                 allInfo.name = lpName;
                 allInfo.userStaked = userStaked.toString();
@@ -335,7 +346,6 @@ generalInfo.burned = burnedAtrofa;
                 allInfo.rewards = pendingRewards;
                 allInfo.rewardsUsd = pendingRewardsUsd;
                 allInfo.userBalance = userBalance.toString();
-                // allInfo.userBalance = (parseInt(userBalance.toString()) / 10**18);
                 allInfo.allowance = allowance;
                 allInfo.address = poolInfo[0];
                 allInfo.depositFee = depositFee;
@@ -344,6 +354,12 @@ generalInfo.burned = burnedAtrofa;
                 allInfo.token0 = token0;
                 allInfo.token1 = token1;
                 allInfo.rewardAlloc = rewardAlloc;
+                allInfo.token0Staked = token0staked;
+                allInfo.token1Staked = token1staked;
+                allInfo.token0Symbol = token0Name.symbol;
+                allInfo.token1Symbol = token1Name.symbol;
+
+
             } else {    //user is not connected
                 allInfo.name = lpName;
                 allInfo.userStaked = '0';
@@ -408,7 +424,7 @@ generalInfo.burned = burnedAtrofa;
                 tokenPriceUsd = megaPrice;
                 totalStakedUsd = (parseInt(totalStaked.toString()) / 10**6) * tokenPriceUsd;
             }
-            
+
             if (totalStakedUsd == 0) {
                 Apr = poolRewardPerYearUsd / 1 * 100
             }

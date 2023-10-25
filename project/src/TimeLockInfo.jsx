@@ -24,21 +24,31 @@ export default function TimeLockInfo({
                         {functionName}
                     </Flex>
                 </VStack>
-                <VStack>
+                <VStack mb={4}>
                     <Flex ml={1} mr='auto' fontSize='smaller'>
                         Arguments: 
                     </Flex>
-                    <HStack mt={-1} ml={1} mr='auto' fontSize='sm' spacing={5}>
-                        {args.map((item) => {
-                            return (
-                                    <HStack>
-                                        <Flex>
-                                            {item.length>10 ? item.toString().substring(0,10)+"..." : item.toString()}
-                                        </Flex>
-                                    </HStack>
-                            )})}
-                    </HStack>
+                        <HStack mt={-1} ml={1} mr='auto' fontSize='sm' spacing={5}>
+                            {args.map((item) => {
+                                return (
+                                        <HStack>
+                                            <Flex>
+                                                {item.length>10 ? item.toString().substring(0,10)+"..." : item.toString()}
+                                            </Flex>
+                                        </HStack>
+                                )})}
+                        </HStack>
                 </VStack>
+                <VStack>
+                    <Flex ml={1} mr='auto' fontSize='smaller'>
+                        Time remaining:
+                    </Flex>
+                    <Flex mt={-1} ml={1} mr='auto' fontSize='sm'>
+                        
+                        {timer[0]<0 ? "0H 0M 0S" : timer[0].toString()+"H "+timer[1].toString()+"M " +timer[2].toString()+"S"}
+                    </Flex>
+                </VStack>
+
 
             </Box>
         </Box>

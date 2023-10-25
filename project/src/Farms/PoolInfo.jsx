@@ -44,6 +44,10 @@ export default function FarmPoolInfo({
     isV1,
     token0,
     token1,
+    token0Staked,
+    token1Staked,
+    token0Symbol,
+    token1Symbol
 }) {
 
 // ============================ HOOKS =============================================
@@ -231,7 +235,12 @@ export default function FarmPoolInfo({
                     </Flex>
                 </HStack> 
                 <Flex justify='right' mr={1} mb={1} mt={-1} fontSize='smaller' fontWeight='light'>
-                    {(parseFloat(userStaked)/10**18).toFixed(2)} LP     
+                    {token0Staked>1000000000 ? parseFloat(token0Staked).toExponential(2) + " " + token0Symbol
+                      : parseFloat(token0Staked).toFixed(2) + " " + token0Symbol}    
+                </Flex>
+                <Flex justify='right' mr={1} mb={1} mt={-1} fontSize='smaller' fontWeight='light'>
+                    {token1Staked>1000000000 ? parseFloat(token1Staked).toExponential(2) + " " + token1Symbol
+                      : parseFloat(token1Staked).toFixed(2) + " " + token1Symbol}
                 </Flex>
                 <HStack color='gray.400'>
                     <Flex ml={1} mr='auto' fontSize='smaller'>

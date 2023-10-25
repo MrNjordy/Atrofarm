@@ -45,14 +45,18 @@ export default function TimelockEvents() {
                     });
                 const currentBlockTimestamp = currentBlockInfo.timestamp;
 
-                const timer = timestampToExec - currentBlockTimestamp;
+                const timerSec = parseInt((timestampToExec - currentBlockTimestamp).toString());
+                const timerHour = Math.floor(timerSec/3600);
+                const timerMin = Math.floor((timerSec%3600)/60);
+                const timerSecRemain = Math.floor((timerSec%3600)%60);
+                const timer = [timerHour, timerMin, timerSecRemain];
+                console.log(timer)
 
                 scheduledTx.ca = logs[i].transactionHash;;
                 scheduledTx.functionName = functionName;
                 scheduledTx.args = args;
                 scheduledTx.timer = timer;
                 scheduledTx.id = i;
-                console.log(scheduledTx)
                 transactionsInfo.push(scheduledTx);
             }
             setPreviousLogs(transactionsInfo);

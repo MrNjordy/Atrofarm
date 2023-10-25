@@ -1,4 +1,5 @@
-import { Box, Center, Flex, HStack, Text, VStack } from "@chakra-ui/react";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
+import { Box, Center, Flex, HStack, Link, Text, VStack, Wrap, WrapItem } from "@chakra-ui/react";
 
 export default function TimeLockInfo({
     ca,
@@ -6,16 +7,19 @@ export default function TimeLockInfo({
     args,
     timer,
     id,
+    translation,
 }) {
 
     return(
         <Box>
             <Box fontFamily='heading' mt={5} padding={3} paddingBottom={1} width={250} bgColor='gray.900' fontWeight='semibold' color='gray.300'>
                 <Center>
-                    <Text>
+                    <Link href={`https://scan.pulsechain.com/tx/${ca}`} isExternal>
                         {ca.substring(0,5)+ "..."+ ca.substring(ca.length -5)}
-                    </Text>
+                        <ExternalLinkIcon ml={1} mb={1}></ExternalLinkIcon>
+                    </Link>
                 </Center>
+                <Center borderBottom='1px' borderColor={'yellow.500'} mb={4}></Center>
                 <VStack mb={4}>
                     <Flex ml={1} mr='auto' fontSize='smaller'>
                         Function: 
@@ -39,6 +43,14 @@ export default function TimeLockInfo({
                                 )})}
                         </HStack>
                 </VStack>
+                <Wrap mb={4}>
+                    <WrapItem>
+                        <Link fontSize={12} href={`https://scan.pulsechain.com/address/${args[1]}`} isExternal>
+                        {translation.toString()}
+                        <ExternalLinkIcon ml={1} mb={1}></ExternalLinkIcon>
+                        </Link>
+                    </WrapItem>
+                </Wrap>
                 <VStack>
                     <Flex ml={1} mr='auto' fontSize='smaller'>
                         Time remaining:

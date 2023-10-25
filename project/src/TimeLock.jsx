@@ -2,9 +2,11 @@ import {  parseAbiItem, decodeEventLog, decodeFunctionData, transactionType } fr
 import { useState, useEffect } from 'react'
 import { pulsechain } from 'wagmi/chains'
 import { createPublicClient, http } from 'viem';
-import { Box, Center, Flex, Link, SimpleGrid, Text } from '@chakra-ui/react';
+import { Box, Center, Flex, Link, SimpleGrid, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@chakra-ui/react';
 import { masterAbi, timelockAbi } from './data';
 import TimeLockInfo from './TimeLockInfo';
+import { readContract } from 'wagmi/actions';
+import { ExternalLinkIcon } from '@chakra-ui/icons';
 
 const  publicClient = createPublicClient({
     chain: pulsechain,
@@ -13,10 +15,12 @@ const  publicClient = createPublicClient({
 
 export default function TimelockEvents() {
     const [previousLogs, setPreviousLogs] = useState([]);
+    const [executed, setExecuted] = useState([]);
 
     useEffect(() => {
         async function getPreviousLogs() {
             let transactionsInfo = [];
+            let executedTransactionInfo = [];
 
             const logs = await publicClient.getLogs({
                 address: "0xDadD562f3EEFE9a880990c57c11E3544B4734c1C",
@@ -25,9 +29,11 @@ export default function TimelockEvents() {
                 toBlock: 'latest'
             })
 
+            console.log(logs)
+
             for(let i=0; i<logs.length; i++) {
                 const scheduledTx = {};
-                
+               
                 const { functionName, args } = decodeFunctionData({
                     abi: masterAbi,
                     data: logs[i].args.data,
@@ -50,16 +56,42 @@ export default function TimelockEvents() {
                 const timerMin = Math.floor((timerSec%3600)/60);
                 const timerSecRemain = Math.floor((timerSec%3600)%60);
                 const timer = [timerHour, timerMin, timerSecRemain];
-                console.log(timer)
+                    
+                //============== FUNCTION TRANSLATION=========
+                let translation = ""
+                if(functionName == 'add') {
+                    translation = `Add a pool for ${(args[1].toString()).substring(0,5)+"..."+ (args[1].toString()).substring(args[1].length -5)} with initial reward allocation
+                    of ${parseInt(args[0].toString())/10000*100}% and ${args[2].toString()}% deposit fee.`
+                }
+                else if(functionName == 'set') {
+                    translation = `Change reward allocation of pool with ID ${args[0].toString()} to ${(parseInt(args[1].toString())/10000*100).toFixed(2)}%`
+                }
+
+                //=========== Check if executed ===============
+                const isExecuted = await readContract({
+                    address: '0xDadD562f3EEFE9a880990c57c11E3544B4734c1C',
+                    abi: timelockAbi,
+                    functionName: 'isOperationDone',
+                    args: [logs[i].args.id]
+                })
+                console.log(isExecuted)
+
 
                 scheduledTx.ca = logs[i].transactionHash;;
                 scheduledTx.functionName = functionName;
                 scheduledTx.args = args;
                 scheduledTx.timer = timer;
                 scheduledTx.id = i;
-                transactionsInfo.push(scheduledTx);
+                scheduledTx.translation = translation;
+
+                if(!isExecuted) {
+                    transactionsInfo.push(scheduledTx);
+                }
+                else { executedTransactionInfo.push(scheduledTx)}
+                
             }
             setPreviousLogs(transactionsInfo);
+            setExecuted(executedTransactionInfo);
         }
         getPreviousLogs()
 
@@ -77,21 +109,49 @@ export default function TimelockEvents() {
                             <Link isExternal href='https://scan.pulsechain.com/address/0xDadD562f3EEFE9a880990c57c11E3544B4734c1C'>
                                 0xDadD562f3EEFE9a880990c57c11E3544B4734c1C
                             </Link>
+                            <ExternalLinkIcon ml={1} mb={1}></ExternalLinkIcon>
                         </Text> 
                     </Box>                   
                 </Center>                  
             </Box>
-            <Flex>
-                <SimpleGrid columns={[1, 2, 3, 3]} spacing={[null, 15, 20]} ml='auto' mr='auto' mt={5}>
-                    {previousLogs.map((item) => {
-                        return (
-                            <TimeLockInfo key={item.id} {...item}>
-
-                            </TimeLockInfo>
-                                            )
-                    })}
-                </SimpleGrid>
-            </Flex>
+            <Box ml='auto' mr='auto'>
+                <Center>
+                    <Tabs mt={5} align='center' mb={5} size={'md'} color={'gray.300'} colorScheme='yellow' variant={'solid-rounded'}>
+                        <TabList>
+                            <Tab>
+                                Scheduled
+                            </Tab>
+                            <Tab>
+                                Executed
+                            </Tab>
+                        </TabList>
+                            <TabPanels>
+                                <TabPanel>
+                                    {previousLogs.length == 0 ? <Text mt={5} color={'gray.300'}>Nothing to Display</Text>
+                                        : <SimpleGrid columns={[1, 2, 3, 3]} spacing={[null, 15, 20]} ml='auto' mr='auto' mt={5}>
+                                                {previousLogs.map((item) => {
+                                                    return (
+                                                        <TimeLockInfo key={item.id} {...item}>
+                                                        </TimeLockInfo>
+                                                    )
+                                                })}
+                                           </SimpleGrid>
+                    }
+                                </TabPanel>
+                                <TabPanel>
+                                    <SimpleGrid columns={[1, 2, 3, 3]} spacing={[null, 15, 20]} ml='auto' mr='auto' mt={5}>
+                                        {executed.map((item) => {
+                                            return (
+                                                <TimeLockInfo key={item.id} {...item}>
+                                                </TimeLockInfo>
+                                                                )
+                                        })}
+                                    </SimpleGrid>
+                                </TabPanel>
+                            </TabPanels>
+                        </Tabs>
+                </Center>
+            </Box>
         </Box>
     )
 

@@ -22,7 +22,7 @@ export default function TimelockEvents() {
             console.log(blockNumber)
 
             const logs = await publicClient.getLogs({
-                address: import.meta.env.VITE_TIMELOCK,
+                address: "0xDadD562f3EEFE9a880990c57c11E3544B4734c1C",
                 event: parseAbiItem('event CallScheduled(bytes32 indexed id, uint256 indexed index, address target, uint256 value, bytes data, bytes32 predecessor, uint256 delay)'),
                 // args: { 
                 //     degen: '0x938A03E67E0B7de5f060b88E028E8CA19fE9e731'

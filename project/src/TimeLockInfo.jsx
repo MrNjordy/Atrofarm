@@ -24,7 +24,7 @@ export default function TimeLockInfo({
                     <Flex ml={1} mr='auto' fontSize='smaller'>
                         Function: 
                     </Flex>
-                    <Flex mt={-1} ml={1} mr='auto' fontSize='sm'>
+                    <Flex mt={-1} ml={1} mr='auto' fontSize='sm' fontWeight={'light'}>
                         {functionName}
                     </Flex>
                 </VStack>
@@ -32,7 +32,7 @@ export default function TimeLockInfo({
                     <Flex ml={1} mr='auto' fontSize='smaller'>
                         Arguments: 
                     </Flex>
-                        <HStack mt={-1} ml={1} mr='auto' fontSize='sm' spacing={5}>
+                        <HStack mt={-1} ml={1} mr='auto' fontSize='sm' spacing={5} fontWeight={'light'}>
                             {args.map((item) => {
                                 return (
                                         <HStack>
@@ -43,6 +43,7 @@ export default function TimeLockInfo({
                                 )})}
                         </HStack>
                 </VStack>
+                <Center borderBottom='1px' borderColor={'yellow.500'} mb={4}></Center>
                 <Wrap mb={4}>
                     <WrapItem>
                         <Link fontSize={12} href={`https://scan.pulsechain.com/address/${args[1]}`} isExternal>
@@ -52,10 +53,10 @@ export default function TimeLockInfo({
                     </WrapItem>
                 </Wrap>
                 <VStack>
-                    <Flex ml={1} mr='auto' fontSize='smaller'>
+                    <Flex ml='auto' mr='auto' fontSize='smaller'>
                         Time remaining:
                     </Flex>
-                    <Flex mt={-1} ml={1} mr='auto' fontSize='sm'>    
+                    <Flex mt={-1} ml='auto' mr='auto' fontSize='sm'>    
                         {timer[0]<0 ? "0H 0M 0S" : timer[0].toString()+"H "+timer[1].toString()+"M " +timer[2].toString()+"S"}
                     </Flex>
                 </VStack>

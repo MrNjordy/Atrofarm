@@ -412,7 +412,6 @@ generalInfo.burned = burnedAtrofa;
 
             const AtrofaPriceUsd = (parseInt(tokenPriceEth[1].toString())/parseInt(tokenPriceEth[0].toString()) * pulsePrice).toString();
             const megaPrice = (parseInt(megaReserve[0].toString())/parseInt(megaReserve[1].toString()) / 10**12 * wethPrice).toString();
-
             let tokenPriceUsd;
             let totalStakedUsd
             let Apr =0 ;
@@ -450,22 +449,27 @@ generalInfo.burned = burnedAtrofa;
                             ...masterContract,
                             functionName: 'pendingRewards',
                             args:[i, address]
-                        }
+                        },
+                        {
+                            address: poolInfo[0],
+                            abi: tokenAbi,
+                            functionName: 'decimals', 
+                        },
                     ]
                 });
                 const userBalance = data[0].result;
                 const userInfo = data[1].result;
                 const rewards = data[2].result;
+                const decimals = data[3].result;
 
                 const pendingRewards = (parseFloat(rewards.toString()) / 10**18)
                 const pendingRewardsUsd = (pendingRewards * nativeTokenPriceUsd)
 
                 const userStaked = userInfo[0]
-                const userStakedUsd = parseInt(userStaked.toString()) / 10**18 * parseFloat(tokenPriceUsd);
-
+                const userStakedUsd = parseInt(userStaked.toString()) / (10**decimals) * parseFloat(tokenPriceUsd);
                 const rewardPerShare = poolRewardPerYear / parseInt(totalStaked.toString());
                 const rewardPerShareUsd = rewardPerShare * pulsePrice;
-                const userShare = parseInt(userStaked.toString()) / (parseInt(totalStaked.toString())/ 10**18);
+                const userShare = parseInt(userStaked.toString()) / (parseInt(totalStaked.toString()));
                 const userShareUsdPerYear = rewardPerShareUsd * userShare;
         
                 allInfo.id = i;

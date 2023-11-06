@@ -425,7 +425,7 @@ if(isConnected) {
     plsxVault.userBalance = userPlsxBalance;
     plsxVault.allowance = plsxAllowance;
     plsxVault.address = "0x95B303987A60C71504D99Aa1b13B4DA07b0790ab";
-    plsxVault.vaultAddress = '0x8615545328F1F6c8cefe8b48ad48c231731433ea';
+    plsxVault.vaultAddress = '0x4F3fd8C6d2ba3775CEfFdb57153447deCd2070C5';
     plsxVault.depositFee = depositFee;
 }
 else { //Not connected
@@ -441,7 +441,7 @@ else { //Not connected
     plsxVault.burnRewards = '0';
     plsxVault.burnRewardsUsd = '0';
     plsxVault.address = "0x95B303987A60C71504D99Aa1b13B4DA07b0790ab";
-    plsxVault.vaultAddress = '0x8615545328F1F6c8cefe8b48ad48c231731433ea';
+    plsxVault.vaultAddress = '0x4F3fd8C6d2ba3775CEfFdb57153447deCd2070C5';
     plsxVault.depositFee = depositFee;
 }
 

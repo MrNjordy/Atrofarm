@@ -44,7 +44,7 @@ function VaultStaking() {
                         address: '0xefd766ccb38eaf1dfd701853bfce31359239f305',
                         abi: tokenAbi,
                         functionName: 'balanceOf',
-                        args:['0xC374f356a4Fa0B0A6c55A277E8414271359E4078']
+                        args:['0xD2F81BF629e052a48fff15A789B60308c04a9D41']
                      },
                      {
                         ...masterContract,
@@ -61,7 +61,7 @@ function VaultStaking() {
                         functionName: 'totalAllocPoint',
                      },
                      {
-                        address: '0xC374f356a4Fa0B0A6c55A277E8414271359E4078',
+                        address: '0xD2F81BF629e052a48fff15A789B60308c04a9D41',
                         abi: vaultAbi,
                         functionName: 'getVaultTokenPulseValue',
                     },
@@ -70,7 +70,7 @@ function VaultStaking() {
                         functionName: 'rewardsPerBlock',
                     },
                     {
-                        address: '0xC374f356a4Fa0B0A6c55A277E8414271359E4078',
+                        address: '0xD2F81BF629e052a48fff15A789B60308c04a9D41',
                         abi: vaultAbi,
                         functionName: 'poolInfo',
                         args: [0]
@@ -106,13 +106,13 @@ function VaultStaking() {
                 const daiData = await readContracts ({
                     contracts: [
                         {
-                            address: '0xC374f356a4Fa0B0A6c55A277E8414271359E4078',
+                            address: '0xD2F81BF629e052a48fff15A789B60308c04a9D41',
                             abi: vaultAbi,
                             functionName: 'degenInfo',
                             args:[0, address]
                         },
                         {
-                            address: '0xC374f356a4Fa0B0A6c55A277E8414271359E4078',
+                            address: '0xD2F81BF629e052a48fff15A789B60308c04a9D41',
                             abi: vaultAbi,
                             functionName: 'pendingRewards',
                             args:[address]
@@ -127,7 +127,7 @@ function VaultStaking() {
                             address: '0xefd766ccb38eaf1dfd701853bfce31359239f305',
                             abi: lpAbi,
                             functionName:'allowance',
-                            args: [address, '0xC374f356a4Fa0B0A6c55A277E8414271359E4078'],
+                            args: [address, '0xD2F81BF629e052a48fff15A789B60308c04a9D41'],
                         },
                     ]
                 })
@@ -157,7 +157,7 @@ function VaultStaking() {
                 daiVault.userBalance = userDaiBalance;
                 daiVault.allowance = daiAllowance;
                 daiVault.address = "0xefd766ccb38eaf1dfd701853bfce31359239f305";
-                daiVault.vaultAddress = '0xC374f356a4Fa0B0A6c55A277E8414271359E4078';
+                daiVault.vaultAddress = '0xD2F81BF629e052a48fff15A789B60308c04a9D41';
                 daiVault.depositFee = depositFee;
             }
             else { //Not connected
@@ -173,7 +173,7 @@ function VaultStaking() {
                 daiVault.burnRewards = '0';
                 daiVault.burnRewardsUsd = '0';
                 daiVault.address = "0xefd766ccb38eaf1dfd701853bfce31359239f305";
-                daiVault.vaultAddress = '0xC374f356a4Fa0B0A6c55A277E8414271359E4078';
+                daiVault.vaultAddress = '0xD2F81BF629e052a48fff15A789B60308c04a9D41';
                 daiVault.depositFee = depositFee;
             }
 

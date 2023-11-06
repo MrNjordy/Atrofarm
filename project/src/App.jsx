@@ -16,6 +16,7 @@ import { useState, useEffect, createContext, useCallback } from 'react'
 import { fetchData } from './FetchData'
 import Portfolio from './Portfolio'
 import TimelockEvents from './TimeLock'
+import VaultStaking from './VaultStaking/VaultStaking'
 
 export const InfoContext = createContext();
 
@@ -71,6 +72,7 @@ function App() {
           <Route path ='/Staking' Component={Staking} />
           <Route path ='/dePulse' Component={Portfolio} />
           <Route path ='/Timelock' Component={TimelockEvents} />
+          <Route path ='/Stake' Component={VaultStaking} />
         </Routes>
       </BrowserRouter>
       </InfoContext.Provider>

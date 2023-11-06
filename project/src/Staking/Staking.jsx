@@ -4,6 +4,7 @@ import { Flex, Spinner, Box, Center, SimpleGrid, Text} from "@chakra-ui/react";
 import StakePoolInfo from "./StakePoolInfo";
 import { useContext } from "react";
 import { InfoContext } from "../App";
+import VaultStaking from "../VaultStaking/VaultStaking";
 
 function Staking() {
     const allPools = useContext(InfoContext);
@@ -55,7 +56,7 @@ function Staking() {
                                 size='xl'
                                 ml='auto' mr='auto' mt={20} />
                             
-                            :   <SimpleGrid columns={[1, null, 3]} spacing={[null, 15, 20]} ml='auto' mr='auto' mt= {5} mb={10}>       
+                            :   <SimpleGrid columns={[1, null, 2]} spacing={[null, 15, 20]} ml='auto' mr='auto' mt= {5} mb={10}>       
                                         {poolsInfo.map((item) => {
                                             return (
                                                 <StakePoolInfo key={item.name} {...item} />
@@ -64,6 +65,11 @@ function Staking() {
                                 </SimpleGrid>
                 }
             </Flex>
+            <Center borderTop={'2px'} borderColor={'yellow.500'}>
+            <Flex>
+                <VaultStaking/>
+            </Flex>
+            </Center>
         </Box>       
     )
 }

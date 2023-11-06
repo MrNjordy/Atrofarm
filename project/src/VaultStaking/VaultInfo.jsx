@@ -1,27 +1,30 @@
 import { Flex, HStack, Box, Center, Button, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, FormControl, FormLabel, Input, useNumberInput, Spinner, Text, Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, VStack, Image } from "@chakra-ui/react"
 import { useAccount, useWaitForTransaction } from "wagmi";
 import { writeContract, prepareWriteContract } from "wagmi/actions";
-import { masterContract, tokenAbi } from "../data";
+import { masterContract, tokenAbi, vaultAbi } from "../data";
 import { useState } from "react";
-import atrofa from '../assets/FarmIcons/0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17.png'
-import mega from '../assets/FarmIcons/0x8eDb13CE75562056DFf2221D193557Fb4A05770D.png';
+import dai from '../assets/FarmIcons/Dai.png'
+import pls from '../assets/FarmIcons/PLS.png'
+import plsx from '../assets/FarmIcons/plsx.png'
 
-
-export default function StakePoolInfo({
+export default function VaultInfo({
     id,
     name, 
     userStaked,
     userStakedUsd, 
     apr, 
     totalStakedUsd,
-    rewards,
-    rewardsUsd,
+    actualRewards,
+    actualRewardsUsd,
+    burnRewards,
+    burnRewardsUsd,
     deposit,
     userBalance,
     depositFee,
     allowance,
     address,
     token,
+    vaultAddress,
 }) {
 
 // ============================ HOOKS =============================================
@@ -43,10 +46,10 @@ export default function StakePoolInfo({
             //============ DEPOSIT FORM HOOK (INPUT NUMBER AND MAX BUTTON) ==========
     const { getInputProps: depositInputProps, getIncrementButtonProps: depositIncrementButtonProps } = useNumberInput({
         defaultValue:0,
-        step: address == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ? parseInt(userBalance) / 10**6 : parseInt(userBalance) / 10**18,
+        step: parseInt(userBalance) / 10**18,
         min:0,
-        max: address == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ? parseInt(userBalance) / 10**6 : parseInt(userBalance) / 10**18,
-        onChange: address == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ? (e) => setDepositInput(e * 10**6) : (e) => setDepositInput(e * 10**18),
+        max: parseInt(userBalance) / 10**18,
+        onChange: (e) => setDepositInput(e * 10**18),
     })
     const maxDeposit = depositIncrementButtonProps();
     const inputDeposit = depositInputProps();
@@ -57,10 +60,10 @@ export default function StakePoolInfo({
         //============ WITHDRAWAL FORM HOOK (INPUT NUMBER AND MAX BUTTON) ==========
     const { getInputProps: withdrawInputProps, getIncrementButtonProps: withdrawIncrementButtonProps } = useNumberInput({
         defaultValue:0,
-        step: address == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ? parseInt(userStaked) / 10**6 : parseInt(userStaked) / 10**18,
+        step: parseInt(userStaked) / 10**18,
         min:0,
-        max: address == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ? parseInt(userStaked) / 10**6 : parseInt(userStaked) / 10**18,
-        onChange: address == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ? (e) => setWithdrawInput(e * 10**6) : (e) => setWithdrawInput(e * 10**18),
+        max: parseInt(userStaked) / 10**18,
+        onChange: (e) => setWithdrawInput(e * 10**18),
     })
     const maxWithdraw = withdrawIncrementButtonProps();
     const inputWithdraw = withdrawInputProps();
@@ -73,10 +76,10 @@ export default function StakePoolInfo({
         setDepositTxData('');
         onDepositProcessingOpen();
         const config = await prepareWriteContract({
-            address: masterContract.address,
-            abi: masterContract.abi,
+            address: vaultAddress,
+            abi: vaultAbi,
             functionName: 'deposit',
-            args: [id, depositInput],
+            args: [depositInput],
         })
         const { hash } = await writeContract(config);
         setDepositTxData(hash); 
@@ -89,10 +92,10 @@ export default function StakePoolInfo({
         setWithdrawTxData('');
         onWithdrawProcessingOpen();
         const config = await prepareWriteContract({
-            address: masterContract.address,
-            abi: masterContract.abi,
+            address: vaultAddress,
+            abi: vaultAbi,
             functionName: 'withdraw',
-            args: [id, withdrawInput],
+            args: [withdrawInput],
         })
         const { hash } = await writeContract(config);
         setWithdrawTxData(hash); 
@@ -107,7 +110,7 @@ export default function StakePoolInfo({
             address: address,
             abi: tokenAbi,
             functionName: 'approve',
-            args: [import.meta.env.VITE_MASTER, 999999999999999*(10**18)],
+            args: [vaultAddress.toString(), 999999999999999*(10**18)],
         })
         const { hash } = await writeContract(config);
         setApprovalTxData(hash); 
@@ -118,18 +121,19 @@ export default function StakePoolInfo({
 
     async function claim() {
         await writeContract({
-           ...masterContract,
+           address: vaultAddress,
+           abi: vaultAbi,
            functionName:'deposit',
-           args: [id, 0]
+           args: [0]
        })
    }
     return(
         <Box>
 <Box fontFamily='heading' mt={5} padding={3} paddingBottom={1} width={250} bgColor='gray.900' fontWeight='semibold' color='gray.300' borderBottom='none'>                
     <HStack>
-        <Image src={token == '0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17' ? atrofa 
-                    : token == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ? mega
-                    : atrofa}
+        <Image src={address == '0xefd766ccb38eaf1dfd701853bfce31359239f305' ? dai 
+                    : address == '0xa1077a294dde1b09bb078844df40758a5d0f9a27' ? pls
+                    : plsx}
                 mb={3}>
         </Image>    
         <Flex mb={3} mr={1} ml='auto'>
@@ -157,16 +161,15 @@ export default function StakePoolInfo({
                     ${(userStakedUsd * apr/100 /365).toFixed(2)}
                 </Flex>
                 <HStack >
-                    <Flex ml={1} fontSize='smaller'>
+                    <Flex ml={1} fontSize='medium'>
                         Your Deposit: 
                     </Flex>
                     <Flex ml='auto' mr={1} fontSize='large'>
-                        {token == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ? (parseFloat(userStaked) / 10**6).toExponential(2)
-                         : (parseFloat(userStaked) / 10**18).toFixed(2)}
+                        {(parseFloat(userStaked) / 10**18).toFixed(2)}
                     </Flex>
                 </HStack> 
                 <Flex justify='right' mr={1} mb={1} mt={-1} fontSize='smaller' fontWeight='light'>
-                    ${parseFloat(userStakedUsd).toFixed(2)}
+                    ${(parseFloat(userStakedUsd)/10**18).toFixed(2)}
                 </Flex>
                 <HStack color='gray.400' >
                     <Flex ml={1} mr='auto' fontSize='smaller'>
@@ -177,15 +180,26 @@ export default function StakePoolInfo({
                     </Flex>
                 </HStack> 
                 <HStack>
-                    <Flex ml={1} mr='auto' fontSize='smaller'>
+                    <Flex ml={1} mr='auto' fontSize='medium'>
                         To Claim:
                     </Flex>
                     <Flex ml='auto' mr={1} fontSize='large'>
-                        {rewards}
+                        {actualRewards}
                     </Flex>
                 </HStack>
                 <Flex justify='right' mr={1} mt={-1} fontSize='smaller' fontWeight='light'>
-                    ${rewardsUsd}
+                    ${actualRewardsUsd}
+                </Flex>
+                <HStack color='gray.400'>
+                    <Flex ml={1} mr='auto' fontSize='smaller'>
+                        To Burn:
+                    </Flex>
+                    <Flex ml='auto' mr={1} fontSize='smaller'>
+                        {burnRewards}
+                    </Flex>
+                </HStack>
+                <Flex justify='right' mr={1} mt={-1} fontSize='smaller' fontWeight='light'>
+                    ${burnRewardsUsd}
                 </Flex>
                 </Box>
                 <Box fontFamily='heading' padding={3} paddingTop={0} width={250} bgColor='gray.900' fontWeight='semibold' color='gray.300' borderTop='none'>
@@ -212,8 +226,7 @@ export default function StakePoolInfo({
                                                 <HStack>
                                                     <Flex ml={1} mr='auto'>
                                                         <Text color='gray.300' >
-                                                            Balance: {address == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ?  `${parseInt(userBalance) / 10**6} ${name}`
-                                                                        : `${parseInt(userBalance) / 10**18} ${name}` }
+                                                            Balance: {`${parseInt(userBalance) / 10**18} ${name}`}
                                                         </Text>
                                                     </Flex>
                                                     <Button bgGradient='linear(to-bl, yellow.400, yellow.700)' {...maxDeposit} onClick={setMaxDeposit} size='xs'>MAX</Button>
@@ -359,7 +372,7 @@ export default function StakePoolInfo({
                         Pool TVL:
                     </Flex>
                     <Flex ml='auto'>
-                        ${totalStakedUsd}
+                        ${(parseInt(totalStakedUsd)/10**18).toFixed(2)}
                     </Flex>
                 </HStack>
                 </AccordionPanel>

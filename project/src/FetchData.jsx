@@ -1,6 +1,6 @@
 import { fetchBlockNumber, fetchToken, readContract, readContracts } from 'wagmi/actions'
 import { getAccount } from "wagmi/actions";
-import { tokenAbi, masterContract, lpAbi } from "./data";
+import { tokenAbi, masterContract, lpAbi, vaultAbi } from "./data";
 import axios from 'axios';
 import { etherUnits } from 'viem';
 
@@ -102,6 +102,7 @@ generalInfo.nativeTokenPriceUsd = nativeTokenPriceUsd;
 generalInfo.nativeTokenSupply = nativeTokenSupply;
 generalInfo.inflation = tokenMintedPerDay;
 generalInfo.burned = burnedAtrofa;
+generalInfo.pulsePrice = pulsePrice;
 
 
 
@@ -378,35 +379,37 @@ generalInfo.burned = burnedAtrofa;
                 allInfo.rewardAlloc = rewardAlloc;
             }
             farmingPools.push(allInfo) 
-
+// =========================== SINGLE SIDED STAKING ==============================
+        
         } else { //Not a LP token ie. single sided pool
 
-            const data = await readContracts({
-                contracts: [
-                    {
-                        address: import.meta.env.VITE_LP,
-                        abi: lpAbi,
-                        functionName: 'getReserves',
-                    },
-                    {
-                        address: poolInfo[0],
-                        abi: tokenAbi,
-                        functionName: 'balanceOf',
-                        args: [import.meta.env.VITE_MASTER]
-                    },
-                    {
-                        address: poolInfo[0],
-                        abi: tokenAbi,
-                        functionName:'allowance',
-                        args: [address, import.meta.env.VITE_MASTER],
-                    },
-                    {
-                        address: '0x0f93aB5AfEE39ecfeC04eB5E2B49dC9F28A77936', //MEGA/wETH
-                        abi: lpAbi,
-                        functionName: 'getReserves',
-                    },
-                ]
-            })
+                const data = await readContracts({
+                    contracts: [
+                        {
+                            address: import.meta.env.VITE_LP,
+                            abi: lpAbi,
+                            functionName: 'getReserves',
+                        },
+                        {
+                            address: poolInfo[0],
+                            abi: tokenAbi,
+                            functionName: 'balanceOf',
+                            args: [import.meta.env.VITE_MASTER]
+                        },
+                        {
+                            address: poolInfo[0],
+                            abi: tokenAbi,
+                            functionName:'allowance',
+                            args: [address, import.meta.env.VITE_MASTER],
+                        },
+                        {
+                            address: '0x0f93aB5AfEE39ecfeC04eB5E2B49dC9F28A77936', //MEGA/wETH
+                            abi: lpAbi,
+                            functionName: 'getReserves',
+                        },
+                    ]
+                })
+
             const tokenPriceEth = data[0].result;
             const totalStaked = data[1].result;
             const allowance = data[2].result;
@@ -414,8 +417,9 @@ generalInfo.burned = burnedAtrofa;
 
             const AtrofaPriceUsd = (parseInt(tokenPriceEth[1].toString())/parseInt(tokenPriceEth[0].toString()) * pulsePrice).toString();
             const megaPrice = (parseInt(megaReserve[0].toString())/parseInt(megaReserve[1].toString()) / 10**12 * wethPrice).toString();
+            
             let tokenPriceUsd;
-            let totalStakedUsd
+            let totalStakedUsd;
             let Apr =0 ;
             if (poolInfo[0] == '0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17') {
                 tokenPriceUsd = AtrofaPriceUsd;

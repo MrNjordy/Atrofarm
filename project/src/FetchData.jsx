@@ -130,7 +130,8 @@ generalInfo.pulsePrice = pulsePrice;
         if(poolInfo[0] == '0xf8AB3393b1f5CD6184Fb6800A1fC802043C4063e'
             // || poolInfo[0] == '0x10843FB4c712526E3fEef838D72059EbfC0cF61f'
             || poolInfo[0] == '0xB231AFB4f010E68eaA11dE1F7Ef9E1618967de73'
-            || poolInfo[0] == '0x9AEaef961DE2D3f6A6999D5bA7436FB6f2d01013' 
+            || poolInfo[0] == '0x9AEaef961DE2D3f6A6999D5bA7436FB6f2d01013'
+            || poolInfo[0] == '0x7DDCD6131753C0DE6e88E3d515a87245fAD0be1C' 
             ) {
             continue
         }

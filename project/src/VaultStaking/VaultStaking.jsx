@@ -319,7 +319,7 @@ const plsxGeneralData = await readContracts ({
          {
          ...masterContract,
          functionName: 'poolInfo',
-         args: [27]
+         args: [28]
          },
          {
             ...masterContract,
@@ -420,7 +420,7 @@ else { //Not connected
     plsxVault.name = plsxInfo.symbol;
     plsxVault.userStaked = '0';
     plsxVault.userStakedUsd = '0';
-    plsxVault.totalStakedUsd = totalPLSXStakedUsd.toFixed(2);
+    plsxVault.totalStakedUsd = totalPlsxStakedUsd.toFixed(2);
     plsxVault.apr = parseInt(Apr);
     plsxVault.actualRewards = '0';
     plsxVault.actualRewardsUsd = '0';

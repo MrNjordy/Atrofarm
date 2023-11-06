@@ -143,6 +143,14 @@ export default function VaultInfo({
     <Center borderBottom='2px' borderColor='yellow.500'></Center>
                 <HStack mb={1} mt={3}> 
                     <Flex ml={1} mr='auto' fontSize='smaller'>
+                        Deposit Fee: 
+                    </Flex>
+                    <Flex ml='auto' mr={1}>
+                        {depositFee}%
+                    </Flex>
+                </HStack>
+                <HStack mb={1} mt={3}> 
+                    <Flex ml={1} mr='auto' fontSize='smaller'>
                         APR: 
                     </Flex>
                     <Flex ml='auto' mr={1}>

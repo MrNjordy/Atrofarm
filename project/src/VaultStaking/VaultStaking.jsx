@@ -322,7 +322,7 @@ const plsxGeneralData = await readContracts ({
             address: '0x95B303987A60C71504D99Aa1b13B4DA07b0790ab',
             abi: tokenAbi,
             functionName: 'balanceOf',
-            args:['0x8615545328F1F6c8cefe8b48ad48c231731433ea']
+            args:['0x4F3fd8C6d2ba3775CEfFdb57153447deCd2070C5']
          },
          {
             ...masterContract,
@@ -339,7 +339,7 @@ const plsxGeneralData = await readContracts ({
             functionName: 'totalAllocPoint',
          },
          {
-            address: '0x8615545328F1F6c8cefe8b48ad48c231731433ea',
+            address: '0x4F3fd8C6d2ba3775CEfFdb57153447deCd2070C5',
             abi: vaultAbi,
             functionName: 'getVaultTokenPulseValue',
         },
@@ -374,13 +374,13 @@ if(isConnected) {
     const plsxData = await readContracts ({
         contracts: [
             {
-                address: '0x8615545328F1F6c8cefe8b48ad48c231731433ea',
+                address: '0x4F3fd8C6d2ba3775CEfFdb57153447deCd2070C5',
                 abi: vaultAbi,
                 functionName: 'degenInfo',
                 args:[0, address]
             },
             {
-                address: '0x8615545328F1F6c8cefe8b48ad48c231731433ea',
+                address: '0x4F3fd8C6d2ba3775CEfFdb57153447deCd2070C5',
                 abi: vaultAbi,
                 functionName: 'pendingRewards',
                 args:[address]
@@ -395,7 +395,7 @@ if(isConnected) {
                 address: '0x95B303987A60C71504D99Aa1b13B4DA07b0790ab',
                 abi: lpAbi,
                 functionName:'allowance',
-                args: [address, '0x8615545328F1F6c8cefe8b48ad48c231731433ea'],
+                args: [address, '0x4F3fd8C6d2ba3775CEfFdb57153447deCd2070C5'],
             },
         ]
     })

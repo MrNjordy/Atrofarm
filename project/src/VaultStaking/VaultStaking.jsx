@@ -101,7 +101,7 @@ function VaultStaking() {
 
             const daiPrice = parseInt(daiPulseValue.toString()) * pulsePrice / 10**18
 
-            const totalDaiStakedUsd = parseInt(totalDaiStaked.toString()) * daiPrice;
+            const totalDaiStakedUsd = parseInt(totalDaiStaked.toString()) * daiPrice /10**18;
             let poolRewardPerBlock = parseInt(tokenMintedPerBlock.toString()) * parseInt(multiplier.toString()) * parseInt(poolInfo[1].toString()) / parseInt(totalAllocPoint.toString());
             let poolRewardPerYear = poolRewardPerBlock * blockPerYear;
             let poolRewardPerYearUsd = (poolRewardPerYear / 10**18) * nativeTokenPriceUsd;
@@ -152,7 +152,7 @@ function VaultStaking() {
                 const daiAllowance = daiData[3].result;
 
                 const userDaiStaked = userDaiInfo[0];
-                const userDaiStakedUsd = parseInt(userDaiStaked.toString()) * daiPrice;            
+                const userDaiStakedUsd = parseInt(userDaiStaked.toString()) * daiPrice /10**18;            
                 const daiActualRewards = (parseFloat((daiRewards.actualRewards).toString()) / 10**18).toFixed(2);
                 const daiActualRewardsUsd = (daiActualRewards * nativeTokenPriceUsd).toFixed(2);
                 const daiBurnRewards = (parseFloat((daiRewards.burnedRewards).toString()) / 10**18).toFixed(2);
@@ -245,7 +245,7 @@ const pulseValue = pulseGeneralData[4].result;
 tokenMintedPerBlock = pulseGeneralData[5].result;
 let maxPulseStake = pulseGeneralData[6].result;
 
-const totalPulseStakedUsd = parseInt(totalPulseStaked.toString()) * pulsePrice;
+const totalPulseStakedUsd = parseInt(totalPulseStaked.toString()) * pulsePrice /10**18;
 poolRewardPerBlock = parseInt(tokenMintedPerBlock.toString()) * parseInt(multiplier.toString()) * parseInt(poolInfo[1].toString()) / parseInt(totalAllocPoint.toString());
 poolRewardPerYear = poolRewardPerBlock * blockPerYear;
 poolRewardPerYearUsd = (poolRewardPerYear / 10**18) * nativeTokenPriceUsd;
@@ -294,7 +294,7 @@ if(isConnected) {
     const pulseAllowance = pulseData[3].result;
 
     const userPulseStaked = userPulseInfo[0];
-    const userPulseStakedUsd = parseInt(userPulseStaked.toString()) * pulsePrice;            
+    const userPulseStakedUsd = parseInt(userPulseStaked.toString()) * pulsePrice /10**18;            
     const pulseActualRewards = (parseFloat((pulseRewards.actualRewards).toString()) / 10**18).toFixed(2);
     const pulseActualRewardsUsd = (pulseActualRewards * nativeTokenPriceUsd).toFixed(2);
     const pulseBurnRewards = (parseFloat((pulseRewards.burnedRewards).toString()) / 10**18).toFixed(2);
@@ -389,7 +389,7 @@ let maxPlsxStake = plsxGeneralData[6].result;
 
 const plsxPrice = parseInt(plsxPulseValue.toString()) * pulsePrice / 10**18
 
-const totalPlsxStakedUsd = parseInt(totalPlsxStaked.toString()) * plsxPrice;
+const totalPlsxStakedUsd = parseInt(totalPlsxStaked.toString()) * plsxPrice /10**18;
 poolRewardPerBlock = parseInt(tokenMintedPerBlock.toString()) * parseInt(multiplier.toString()) * parseInt(poolInfo[1].toString()) / parseInt(totalAllocPoint.toString());
 poolRewardPerYear = poolRewardPerBlock * blockPerYear;
 poolRewardPerYearUsd = (poolRewardPerYear / 10**18) * nativeTokenPriceUsd;
@@ -438,7 +438,7 @@ if(isConnected) {
     const plsxAllowance = plsxData[3].result;
 
     const userPlsxStaked = userPlsxInfo[0];
-    const userPlsxStakedUsd = parseInt(userPlsxStaked.toString()) * plsxPrice;            
+    const userPlsxStakedUsd = parseInt(userPlsxStaked.toString()) * plsxPrice /10**18;            
     const plsxActualRewards = (parseFloat((plsxRewards.actualRewards).toString()) / 10**18).toFixed(2);
     const plsxActualRewardsUsd = (plsxActualRewards * nativeTokenPriceUsd).toFixed(2);
     const plsxBurnRewards = (parseFloat((plsxRewards.burnedRewards).toString()) / 10**18).toFixed(2);

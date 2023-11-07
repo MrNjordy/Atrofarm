@@ -152,7 +152,7 @@ function VaultStaking() {
                 const daiAllowance = daiData[3].result;
 
                 const userDaiStaked = userDaiInfo[0];
-                const userDaiStakedUsd = parseInt(userDaiStaked.toString()) * daiPrice /10**18;            
+                const userDaiStakedUsd = parseInt(userDaiStaked.toString()) * daiPrice / 10**18;            
                 const daiActualRewards = (parseFloat((daiRewards.actualRewards).toString()) / 10**18).toFixed(2);
                 const daiActualRewardsUsd = (daiActualRewards * nativeTokenPriceUsd).toFixed(2);
                 const daiBurnRewards = (parseFloat((daiRewards.burnedRewards).toString()) / 10**18).toFixed(2);

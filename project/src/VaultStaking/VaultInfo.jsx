@@ -177,7 +177,7 @@ export default function VaultInfo({
                     </Flex>
                 </HStack> 
                 <Flex justify='right' mr={1} mb={1} mt={-1} fontSize='smaller' fontWeight='light'>
-                    ${(parseFloat(userStakedUsd)/10**18).toFixed(2)}
+                    ${(parseFloat(userStakedUsd)).toFixed(2)}
                 </Flex>
                 <HStack color='gray.400' >
                     <Flex ml={1} mr='auto' fontSize='smaller'>
@@ -380,7 +380,7 @@ export default function VaultInfo({
                         Pool TVL:
                     </Flex>
                     <Flex ml='auto'>
-                        ${(parseInt(totalStakedUsd)/10**18).toFixed(2)}
+                        ${(parseInt(totalStakedUsd)).toFixed(2)}
                     </Flex>
                 </HStack>
                 </AccordionPanel>

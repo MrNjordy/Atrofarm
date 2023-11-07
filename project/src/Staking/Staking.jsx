@@ -41,9 +41,6 @@ function Staking() {
                         <Text fontFamily='heading' fontWeight='bold' fontSize={[20, 20, 30, 40]} color='black' ml={[10,20,30,40]} mr={[10,20,30,40]} mn='auto' align='center'>
                             Staking Pools
                         </Text>  
-                        <Text fontSize={[15, 15,20, 25, 30]} fontFamily='fantasy' align='center'>
-                            Deposit fee of 2% on non-native pools
-                        </Text> 
                     </Box>                   
                 </Center>                  
             </Box>

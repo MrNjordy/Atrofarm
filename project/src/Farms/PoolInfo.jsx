@@ -11,7 +11,7 @@ import atropa from '../assets/FarmIcons/0xCc78A0acDF847A2C1714D2A925bB4477df5d48
 import bear from '../assets/FarmIcons/0xd6c31bA0754C4383A41c0e9DF042C62b5e918f6d.png'
 import tsfi from '../assets/FarmIcons/0x4243568Fa2bbad327ee36e06c16824cAd8B37819.png'
 import pls from '../assets/FarmIcons/PLS.png'
-import dai from '../assets/FarmIcons/0x6B175474E89094C44Da98b954EedeAC495271d0F.png'
+import pdai from '../assets/FarmIcons/0x6B175474E89094C44Da98b954EedeAC495271d0F.png'
 import monat from '../assets/FarmIcons/0xf8AB3393b1f5CD6184Fb6800A1fC802043C4063e.png'
 import cia from '../assets/FarmIcons/0x2e5898b2e107a3cAf4f0597aCFE5D2e6d73F2196.png'
 import sens from '../assets/FarmIcons/0x415AD92C5Ae913217B05fcC3D529ED8c77d4D0B8.png'
@@ -25,6 +25,9 @@ import plsb from '../assets/FarmIcons/plsb.png'
 import dmnd from '../assets/FarmIcons/dmnd.png'
 import carn from '../assets/FarmIcons/carn.png'
 import more from '../assets/FarmIcons/more.png'
+import boy from '../assets/FarmIcons/boy.jpeg'
+import dai from '../assets/FarmIcons/Dai.png'
+
 
 export default function FarmPoolInfo({
     id,
@@ -157,7 +160,7 @@ export default function FarmPoolInfo({
                                 : token0 == '0xd6c31bA0754C4383A41c0e9DF042C62b5e918f6d' ? bear 
                                 : token0 == '0x4243568Fa2bbad327ee36e06c16824cAd8B37819' ? tsfi 
                                 : token0 == 'PLS' ? pls 
-                                : token0 == '0x6B175474E89094C44Da98b954EedeAC495271d0F' ? dai 
+                                : token0 == '0x6B175474E89094C44Da98b954EedeAC495271d0F' ? pdai 
                                 : token0 == '0xf8AB3393b1f5CD6184Fb6800A1fC802043C4063e' ? monat 
                                 : token0 == '0x2e5898b2e107a3cAf4f0597aCFE5D2e6d73F2196' ? cia 
                                 : token0 == '0x415AD92C5Ae913217B05fcC3D529ED8c77d4D0B8' ? sens 
@@ -171,6 +174,8 @@ export default function FarmPoolInfo({
                                 : token0 == '0xCF409C91B49DD3F796d20Eec20535fDC79A08798' ? dmnd
                                 : token0 == '0x488Db574C77dd27A07f9C97BAc673BC8E9fC6Bf3' ? carn
                                 : token0 == '0xbEEf3bB9dA340EbdF0f5bae2E85368140d7D85D0' ? more
+                                : token0 == '0x3C870274f836b456fc823530A74189e541e55D68' ? boy
+                                : token0 == '0xefD766cCb38EaF1dfd701853BFCe31359239F305' ? dai
                                 : afc} 
                             mb={3}>
                     </Image>  
@@ -179,7 +184,7 @@ export default function FarmPoolInfo({
                                 : token1 == '0xd6c31bA0754C4383A41c0e9DF042C62b5e918f6d' ? bear 
                                 : token1 == '0x4243568Fa2bbad327ee36e06c16824cAd8B37819' ? tsfi 
                                 : token1 == 'PLS' ? pls 
-                                : token1 == '0x6B175474E89094C44Da98b954EedeAC495271d0F' ? dai 
+                                : token1 == '0x6B175474E89094C44Da98b954EedeAC495271d0F' ? pdai 
                                 : token1 == '0xf8AB3393b1f5CD6184Fb6800A1fC802043C4063e' ? monat 
                                 : token1 == '0x2e5898b2e107a3cAf4f0597aCFE5D2e6d73F2196' ? cia 
                                 : token1 == '0x415AD92C5Ae913217B05fcC3D529ED8c77d4D0B8' ? sens 
@@ -193,6 +198,8 @@ export default function FarmPoolInfo({
                                 : token1 == '0xCF409C91B49DD3F796d20Eec20535fDC79A08798' ? dmnd
                                 : token1 == '0x488Db574C77dd27A07f9C97BAc673BC8E9fC6Bf3' ? carn
                                 : token1 == '0xbEEf3bB9dA340EbdF0f5bae2E85368140d7D85D0' ? more
+                                : token1 == '0x3C870274f836b456fc823530A74189e541e55D68' ? boy
+                                : token1 == '0xefD766cCb38EaF1dfd701853BFCe31359239F305' ? dai
                                 : afc}
                             mb={3}>
                     </Image>    

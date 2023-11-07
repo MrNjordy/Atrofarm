@@ -166,7 +166,7 @@ export default function VaultInfo({
                     </Flex>
                 </HStack>
                 <Flex color='gray.400' justify='right' mr={1} mb={1} mt={-2} fontSize='smaller' fontWeight='light'>
-                    ${(userStakedUsd * apr/100 /365).toFixed(2)}
+                    ${(userStakedUsd /10**18 * apr/100 /365).toFixed(2)}
                 </Flex>
                 <HStack >
                     <Flex ml={1} fontSize='medium'>
@@ -177,14 +177,14 @@ export default function VaultInfo({
                     </Flex>
                 </HStack> 
                 <Flex justify='right' mr={1} mb={1} mt={-1} fontSize='smaller' fontWeight='light'>
-                    ${(parseFloat(userStakedUsd)).toFixed(2)}
+                    ${((parseFloat(userStakedUsd))/10**18).toFixed(2)}
                 </Flex>
                 <HStack color='gray.400' >
                     <Flex ml={1} mr='auto' fontSize='smaller'>
                         Your Pool Share: 
                     </Flex>
                     <Flex ml='auto' mr={1} fontSize='smaller'>
-                        {(userStakedUsd / totalStakedUsd * 100).toFixed(2)}% 
+                        {((userStakedUsd / totalStakedUsd * 100) /10**18).toFixed(2)}% 
                     </Flex>
                 </HStack> 
                 <HStack>
@@ -192,22 +192,22 @@ export default function VaultInfo({
                         To Claim:
                     </Flex>
                     <Flex ml='auto' mr={1} fontSize='large'>
-                        {actualRewards}
+                        {(parseInt(actualRewards) /10**18).toFixed(2)}
                     </Flex>
                 </HStack>
                 <Flex justify='right' mr={1} mt={-1} fontSize='smaller' fontWeight='light'>
-                    ${actualRewardsUsd}
+                    ${(parseInt(actualRewardsUsd) /10**18).toFixed(2)}
                 </Flex>
                 <HStack color='gray.400'>
                     <Flex ml={1} mr='auto' fontSize='smaller'>
                         To Burn:
                     </Flex>
                     <Flex ml='auto' mr={1} fontSize='smaller'>
-                        {burnRewards}
+                        {(parseInt(burnRewards)/10**18).toFixed(2)}
                     </Flex>
                 </HStack>
                 <Flex justify='right' mr={1} mt={-1} fontSize='smaller' fontWeight='light'>
-                    ${burnRewardsUsd}
+                    ${(parseInt(burnRewardsUsd)/10**18).toFixed(2)}
                 </Flex>
                 </Box>
                 <Box fontFamily='heading' padding={3} paddingTop={0} width={250} bgColor='gray.900' fontWeight='semibold' color='gray.300' borderTop='none'>

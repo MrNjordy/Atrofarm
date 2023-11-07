@@ -152,11 +152,11 @@ function VaultStaking() {
                 const daiAllowance = daiData[3].result;
 
                 const userDaiStaked = userDaiInfo[0];
-                const userDaiStakedUsd = parseInt(userDaiStaked.toString()) * daiPrice / 10**18;            
-                const daiActualRewards = (parseFloat((daiRewards.actualRewards).toString()) / 10**18).toFixed(2);
-                const daiActualRewardsUsd = (daiActualRewards * nativeTokenPriceUsd).toFixed(2);
-                const daiBurnRewards = (parseFloat((daiRewards.burnedRewards).toString()) / 10**18).toFixed(2);
-                const daiBurnRewardsUsd = (daiBurnRewards * nativeTokenPriceUsd).toFixed(2);
+                const userDaiStakedUsd = parseInt(userDaiStaked.toString()) * daiPrice;            
+                const daiActualRewards = parseFloat((daiRewards.actualRewards).toString());
+                const daiActualRewardsUsd = (daiActualRewards * nativeTokenPriceUsd);
+                const daiBurnRewards = parseFloat((daiRewards.burnedRewards).toString());
+                const daiBurnRewardsUsd = (daiBurnRewards * nativeTokenPriceUsd);
 
                 daiVault.id = 1;
                 daiVault.name = daiInfo.symbol;
@@ -294,11 +294,11 @@ if(isConnected) {
     const pulseAllowance = pulseData[3].result;
 
     const userPulseStaked = userPulseInfo[0];
-    const userPulseStakedUsd = parseInt(userPulseStaked.toString()) * pulsePrice /10**18;            
-    const pulseActualRewards = (parseFloat((pulseRewards.actualRewards).toString()) / 10**18).toFixed(2);
-    const pulseActualRewardsUsd = (pulseActualRewards * nativeTokenPriceUsd).toFixed(2);
-    const pulseBurnRewards = (parseFloat((pulseRewards.burnedRewards).toString()) / 10**18).toFixed(2);
-    const pulseBurnRewardsUsd = (pulseBurnRewards * nativeTokenPriceUsd).toFixed(2);
+    const userPulseStakedUsd = parseInt(userPulseStaked.toString()) * pulsePrice;            
+    const pulseActualRewards = parseFloat((pulseRewards.actualRewards).toString());
+    const pulseActualRewardsUsd = (pulseActualRewards * nativeTokenPriceUsd);
+    const pulseBurnRewards = parseFloat((pulseRewards.burnedRewards).toString());
+    const pulseBurnRewardsUsd = (pulseBurnRewards * nativeTokenPriceUsd);
 
     pulseVault.id = 2;
     pulseVault.name = pulseInfo.symbol;
@@ -438,11 +438,11 @@ if(isConnected) {
     const plsxAllowance = plsxData[3].result;
 
     const userPlsxStaked = userPlsxInfo[0];
-    const userPlsxStakedUsd = parseInt(userPlsxStaked.toString()) * plsxPrice /10**18;            
-    const plsxActualRewards = (parseFloat((plsxRewards.actualRewards).toString()) / 10**18).toFixed(2);
-    const plsxActualRewardsUsd = (plsxActualRewards * nativeTokenPriceUsd).toFixed(2);
-    const plsxBurnRewards = (parseFloat((plsxRewards.burnedRewards).toString()) / 10**18).toFixed(2);
-    const plsxBurnRewardsUsd = (plsxBurnRewards * nativeTokenPriceUsd).toFixed(2);
+    const userPlsxStakedUsd = parseInt(userPlsxStaked.toString()) * plsxPrice;            
+    const plsxActualRewards = (parseInt((plsxRewards.actualRewards).toString()));
+    const plsxActualRewardsUsd = (plsxActualRewards * nativeTokenPriceUsd);
+    const plsxBurnRewards = (parseInt((plsxRewards.burnedRewards).toString()));
+    const plsxBurnRewardsUsd = (plsxBurnRewards * nativeTokenPriceUsd);
 
     plsxVault.id = 3;
     plsxVault.name = plsxInfo.symbol;

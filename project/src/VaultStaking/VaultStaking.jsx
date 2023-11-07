@@ -60,7 +60,7 @@ function VaultStaking() {
                      {
                      ...masterContract,
                      functionName: 'poolInfo',
-                     args: [26]
+                     args: [34]
                      },
                      {
                         ...masterContract,
@@ -213,7 +213,7 @@ const pulseGeneralData = await readContracts ({
          {
             ...masterContract,
             functionName: 'poolInfo',
-            args: [27]
+            args: [35]
          },
          {
             ...masterContract,
@@ -355,7 +355,7 @@ const plsxGeneralData = await readContracts ({
          {
          ...masterContract,
          functionName: 'poolInfo',
-         args: [28]
+         args: [36]
          },
          {
             ...masterContract,
@@ -395,7 +395,7 @@ poolRewardPerYear = poolRewardPerBlock * blockPerYear;
 poolRewardPerYearUsd = (poolRewardPerYear / 10**18) * nativeTokenPriceUsd;
 let maxPlsxStakeUsd = parseInt(maxPlsxStake) * pulsePrice /10**18;
 
-
+console.log(poolRewardPerYear)
 if (totalPlsxStakedUsd == 0) {
     Apr = poolRewardPerYearUsd / 1 * 100
 }

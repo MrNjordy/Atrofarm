@@ -496,7 +496,7 @@ allVaults.push(plsxVault);
         <Box>
             <Box color = 'gray.300'>
                 <Center>
-                <HStack spacing={20} bgColor={"gray.900"} padding={3} fontFamily='heading'>
+                <HStack spacing={20} bgColor={"gray.900"} padding={3} fontFamily='heading' width={250}>
                     <Box>
                         <Flex mb={1}>
                             Max Dai:

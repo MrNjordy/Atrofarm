@@ -10,6 +10,12 @@ import VaultInfo from "./VaultInfo";
 function VaultStaking() {
     const allPools = useContext(InfoContext);
     const [vaults, setVaults] = useState([]);
+    const [maxDai, setMaxDai] = useState();
+    const [daiPrice, setDaiPrice] = useState();
+    const [maxPulse, setMaxPulse] = useState();
+    const [pulsePrice, setPulsePrice] = useState();
+    const [maxPlsx, setMaxPlsx] = useState();
+    const [plsxPrice, setPlsxPrice] = useState();
     const { address ,isConnected } = useAccount();
 
     useEffect(() => {
@@ -75,6 +81,12 @@ function VaultStaking() {
                         functionName: 'poolInfo',
                         args: [0]
                     },
+                    {
+                        address: '0x5726f36e62cf761332F5c655b68bc2E5D55ED083',
+                        abi: vaultAbi,
+                        functionName: 'getMaxStakedAmount',
+                        args: [address]
+                    },
                 ]
             })
 
@@ -85,6 +97,7 @@ function VaultStaking() {
             const daiPulseValue = daiGeneralData[4].result;
             let tokenMintedPerBlock = daiGeneralData[5].result;
             let vaultInfo = daiGeneralData[6].result;
+            let maxDaiStake = daiGeneralData[7].result;
 
             const daiPrice = parseInt(daiPulseValue.toString()) * pulsePrice / 10**18
 
@@ -94,6 +107,7 @@ function VaultStaking() {
             let poolRewardPerYearUsd = (poolRewardPerYear / 10**18) * nativeTokenPriceUsd;
 
             let depositFee = parseInt(vaultInfo[3].toString()) / 100;
+            let maxDaiStakeUsd = parseInt(maxDaiStake) * pulsePrice /10**18;
 
             let Apr;
             if (totalDaiStakedUsd == 0) {
@@ -214,6 +228,12 @@ const pulseGeneralData = await readContracts ({
             ...masterContract,
             functionName: 'rewardsPerBlock',
         },
+        {
+            address: '0xc4d4fb6cAD2931e65C0BF44b2A3fA9C598ADd37B',
+            abi: vaultAbi,
+            functionName: 'getMaxStakedAmount',
+            args: [address]
+        },
     ]
 })
 
@@ -223,11 +243,14 @@ poolInfo = pulseGeneralData[2].result;
 totalAllocPoint = pulseGeneralData[3].result;
 const pulseValue = pulseGeneralData[4].result;
 tokenMintedPerBlock = pulseGeneralData[5].result;
+let maxPulseStake = pulseGeneralData[6].result;
 
 const totalPulseStakedUsd = parseInt(totalPulseStaked.toString()) * pulsePrice;
 poolRewardPerBlock = parseInt(tokenMintedPerBlock.toString()) * parseInt(multiplier.toString()) * parseInt(poolInfo[1].toString()) / parseInt(totalAllocPoint.toString());
 poolRewardPerYear = poolRewardPerBlock * blockPerYear;
 poolRewardPerYearUsd = (poolRewardPerYear / 10**18) * nativeTokenPriceUsd;
+let maxPulseStakeUsd = parseInt(maxPulseStake) * pulsePrice /10**18;
+
 
 if (totalPulseStakedUsd == 0) {
     Apr = poolRewardPerYearUsd / 1 * 100
@@ -347,6 +370,12 @@ const plsxGeneralData = await readContracts ({
             ...masterContract,
             functionName: 'rewardsPerBlock',
         },
+        {
+            address: '0x8615545328F1F6c8cefe8b48ad48c231731433ea',
+            abi: vaultAbi,
+            functionName: 'getMaxStakedAmount',
+            args: [address]
+        },
     ]
 })
 
@@ -356,6 +385,7 @@ poolInfo = plsxGeneralData[2].result;
 totalAllocPoint = plsxGeneralData[3].result;
 const plsxPulseValue = plsxGeneralData[4].result;
 tokenMintedPerBlock = plsxGeneralData[5].result;
+let maxPlsxStake = plsxGeneralData[6].result;
 
 const plsxPrice = parseInt(plsxPulseValue.toString()) * pulsePrice / 10**18
 
@@ -363,6 +393,8 @@ const totalPlsxStakedUsd = parseInt(totalPlsxStaked.toString()) * plsxPrice;
 poolRewardPerBlock = parseInt(tokenMintedPerBlock.toString()) * parseInt(multiplier.toString()) * parseInt(poolInfo[1].toString()) / parseInt(totalAllocPoint.toString());
 poolRewardPerYear = poolRewardPerBlock * blockPerYear;
 poolRewardPerYearUsd = (poolRewardPerYear / 10**18) * nativeTokenPriceUsd;
+let maxPlsxStakeUsd = parseInt(maxPlsxStake) * pulsePrice /10**18;
+
 
 if (totalPlsxStakedUsd == 0) {
     Apr = poolRewardPerYearUsd / 1 * 100
@@ -450,12 +482,66 @@ allVaults.push(plsxVault);
 
 
             setVaults(allVaults);
+            setMaxDai(maxDaiStakeUsd);
+            setDaiPrice(daiPrice);
+            setMaxPulse(maxPulseStakeUsd);
+            setPulsePrice(pulsePrice);
+            setMaxPlsx(maxPlsxStakeUsd);
+            setPlsxPrice(plsxPrice);
         }   
         getInfo();
     }, [address, allPools]);
 
     return(
-        <Flex>
+        <Box>
+            <Box color = 'gray.300'>
+                <Center>
+                <HStack spacing={20} bgColor={"gray.900"} padding={3} fontFamily='heading'>
+                    <Box>
+                        <Flex mb={1}>
+                            Max Dai:
+                        </Flex>
+                        <Flex mb={1}>
+                            {(parseInt(maxDai)/parseFloat(daiPrice)).toFixed(2)}
+                        </Flex>
+                        <Flex mb={1}>
+                            Value:
+                        </Flex>
+                        <Flex mb={1}>
+                            ${parseInt(maxDai).toFixed(0)}
+                        </Flex>
+                    </Box>
+                    <Box>
+                        <Flex mb={1}>
+                            Max PLS:
+                        </Flex>
+                        <Flex mb={1}>
+                            {(parseInt(maxPulse)/parseFloat(pulsePrice)).toFixed(0)}
+                        </Flex>
+                        <Flex mb={1}>
+                            Value:
+                        </Flex>
+                        <Flex mb={1}>
+                            ${parseInt(maxPulse).toFixed(0)}
+                        </Flex>
+                    </Box>
+                    <Box>
+                        <Flex mb={1}>
+                            Max PLSX:
+                        </Flex>
+                        <Flex mb={1}>
+                            {(parseInt(maxPlsx)/parseFloat(plsxPrice)).toFixed(0)}
+                        </Flex>
+                        <Flex mb={1}>
+                            Value:
+                        </Flex>
+                        <Flex mb={1}>
+                            ${parseInt(maxPlsx).toFixed(0)}
+                        </Flex>
+                    </Box>
+                </HStack>
+                </Center>
+                </Box>
             <SimpleGrid columns={[1, null, 3]} spacing={[null, 15, 20]} ml='auto' mr='auto' mt= {5} mb={10}>       
                     {vaults.map((item) => {
                         return (
@@ -463,7 +549,7 @@ allVaults.push(plsxVault);
                                             )
                         })}
              </SimpleGrid>
-            </Flex>
+            </Box>
     )
 }
 

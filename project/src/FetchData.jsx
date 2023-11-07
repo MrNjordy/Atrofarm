@@ -135,6 +135,7 @@ generalInfo.pulsePrice = pulsePrice;
             || poolInfo[0] == '0x88e120936FFc1297431e14157d4110379F53F830'
             || poolInfo[0] == '0x9928bC26D73F1470043637f50898908AB80379a3'
             || poolInfo[0] == '0xc0a705bF4F57780Bd48B2bf25394ecA5Feb96746'
+            || poolInfo[0] == '0x05E981a0Fa6afDe3043187d44B7E09b6aa38f1ee'
             ) {
             continue
         }

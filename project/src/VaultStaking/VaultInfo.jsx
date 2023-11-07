@@ -218,7 +218,7 @@ export default function VaultInfo({
                         </AccordionButton>
                         <AccordionPanel>
                 <Center mb={3}>
-                    <Button fontSize='smaller' mr={2} bgGradient='linear(to-bl, yellow.400, yellow.700)' color='black' isDisabled={!isConnected} onClick={onDepositOpen}>Deposit</Button>
+                    <Button fontSize='smaller' mr={2} bgGradient='linear(to-bl, yellow.400, yellow.700)' color='black' isDisabled onClick={onDepositOpen}>Deposit</Button>
                         <Modal isOpen={isDepositOpen} onClose={onDepositClose} isCentered >
                             <ModalOverlay />
                                 <ModalContent bgColor='gray.900'>

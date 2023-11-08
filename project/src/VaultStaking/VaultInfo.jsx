@@ -49,9 +49,11 @@ export default function VaultInfo({
             //============ DEPOSIT FORM HOOK (INPUT NUMBER AND MAX BUTTON) ==========
     const { getInputProps: depositInputProps, getIncrementButtonProps: depositIncrementButtonProps } = useNumberInput({
         defaultValue:0,
-        step: parseInt(userBalance) / 10**18,
+        step: parseInt(userBalance)/10**18 <= (parseFloat(maxStakeUsd)/parseFloat(price)) ? parseInt(userBalance) / 10**18
+                : (parseFloat(maxStakeUsd)/parseFloat(price)),
         min:0,
-        max: parseInt(userBalance) / 10**18,
+        max: parseInt(userBalance)/10**18 <= (parseFloat(maxStakeUsd)/parseFloat(price)) ? parseInt(userBalance) / 10**18
+                : (parseFloat(maxStakeUsd)/parseFloat(price)),
         onChange: (e) => setDepositInput(e * 10**18),
     })
     const maxDeposit = depositIncrementButtonProps();

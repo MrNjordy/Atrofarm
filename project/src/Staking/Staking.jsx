@@ -5,6 +5,7 @@ import StakePoolInfo from "./StakePoolInfo";
 import { useContext } from "react";
 import { InfoContext } from "../App";
 import VaultStaking from "../VaultStaking/VaultStaking";
+import { Link } from "react-router-dom";
 
 function Staking() {
     const allPools = useContext(InfoContext);
@@ -40,7 +41,13 @@ function Staking() {
                     <Box>
                         <Text fontFamily='heading' fontWeight='bold' fontSize={[20, 20, 30, 40]} color='black' ml={[10,20,30,40]} mr={[10,20,30,40]} mn='auto' align='center'>
                             Staking Pools
-                        </Text>  
+                        </Text> 
+                        <Text ml='auto' mr='auto' Text fontSize={[15, 15,20, 25, 30]} fontFamily='fantasy' align='center' >
+                            Stake $Atrofa to Access DAI, PLS and PLSX Single Sided Staking
+                        </Text>
+                        <Text ml='auto' mr='auto' Text fontSize={[15, 15,20, 25, 30]} fontFamily='fantasy' align='center' >
+                            <Link>Docs</Link>
+                        </Text> 
                     </Box>                   
                 </Center>                  
             </Box>
@@ -62,7 +69,7 @@ function Staking() {
                                 </SimpleGrid>
                 }
             </Flex>
-            <Center borderTop={'2px'} borderColor={'yellow.500'}>
+            <Center>
             <Flex>
                 <VaultStaking/>
             </Flex>

@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { InfoContext } from "../App";
 import { vaultAbi, tokenAbi, masterContract, lpAbi } from "../data";
 import VaultInfo from "./VaultInfo";
+import { Link } from "react-router-dom";
 
 function VaultStaking() {
     const allPools = useContext(InfoContext);
@@ -173,6 +174,10 @@ function VaultStaking() {
                 daiVault.address = "0xefd766ccb38eaf1dfd701853bfce31359239f305";
                 daiVault.vaultAddress = '0x5726f36e62cf761332F5c655b68bc2E5D55ED083';
                 daiVault.depositFee = depositFee;
+                daiVault.maxStake = maxDaiStake;
+                daiVault.maxStakeUsd = maxDaiStakeUsd;
+                daiVault.price = daiPrice;
+
             }
             else { //Not connected
 
@@ -189,6 +194,8 @@ function VaultStaking() {
                 daiVault.address = "0xefd766ccb38eaf1dfd701853bfce31359239f305";
                 daiVault.vaultAddress = '0x5726f36e62cf761332F5c655b68bc2E5D55ED083';
                 daiVault.depositFee = depositFee;
+                daiVault.maxStake = '0';
+                daiVault.maxStakeUsd = '0';
             }
 
             allVaults.push(daiVault);
@@ -315,6 +322,9 @@ if(isConnected) {
     pulseVault.address = "0xa1077a294dde1b09bb078844df40758a5d0f9a27";
     pulseVault.vaultAddress = '0xc4d4fb6cAD2931e65C0BF44b2A3fA9C598ADd37B';
     pulseVault.depositFee = depositFee;
+    pulseVault.maxStake = maxPulseStake;
+    pulseVault.maxStakeUsd = maxPulseStakeUsd;
+    pulseVault.price = pulsePrice;
 }
 else { //Not connected
 
@@ -331,6 +341,8 @@ else { //Not connected
     pulseVault.address = "0xa1077a294dde1b09bb078844df40758a5d0f9a27";
     pulseVault.vaultAddress = '0xc4d4fb6cAD2931e65C0BF44b2A3fA9C598ADd37B';
     pulseVault.depositFee = depositFee;
+    pulseVault.maxStake = '0';
+    pulseVault.maxStakeUsd = '0';
 }
 
 allVaults.push(pulseVault);
@@ -459,6 +471,9 @@ if(isConnected) {
     plsxVault.address = "0x95B303987A60C71504D99Aa1b13B4DA07b0790ab";
     plsxVault.vaultAddress = '0x8615545328F1F6c8cefe8b48ad48c231731433ea';
     plsxVault.depositFee = depositFee;
+    plsxVault.maxStake = maxPlsxStake;
+    plsxVault.maxStakeUsd = maxPlsxStakeUsd;
+    plsxVault.price = plsxPrice;
 }
 else { //Not connected
 
@@ -475,6 +490,8 @@ else { //Not connected
     plsxVault.address = "0x95B303987A60C71504D99Aa1b13B4DA07b0790ab";
     plsxVault.vaultAddress = '0x8615545328F1F6c8cefe8b48ad48c231731433ea';
     plsxVault.depositFee = depositFee;
+    plsxVault.maxStake = '0';
+    plsxVault.maxStakeUsd = '0';
 }
 
 allVaults.push(plsxVault);
@@ -494,54 +511,12 @@ allVaults.push(plsxVault);
 
     return(
         <Box>
-            <Box color = 'gray.300'>
-                <Center>
-                <HStack spacing={20} bgColor={"gray.900"} padding={3} fontFamily='heading' width={[250, 300,350,400]}>
-                    <Box>
-                        <Flex mb={1}>
-                            Max Dai:
-                        </Flex>
-                        <Flex mb={1}>
-                            {(parseInt(maxDai)/parseFloat(daiPrice)).toFixed(2)}
-                        </Flex>
-                        <Flex mb={1}>
-                            Value:
-                        </Flex>
-                        <Flex mb={1}>
-                            ${parseInt(maxDai).toFixed(0)}
-                        </Flex>
-                    </Box>
-                    <Box>
-                        <Flex mb={1}>
-                            Max PLS:
-                        </Flex>
-                        <Flex mb={1}>
-                            {(parseInt(maxPulse)/parseFloat(pulsePrice)).toFixed(0)}
-                        </Flex>
-                        <Flex mb={1}>
-                            Value:
-                        </Flex>
-                        <Flex mb={1}>
-                            ${parseInt(maxPulse).toFixed(0)}
-                        </Flex>
-                    </Box>
-                    <Box>
-                        <Flex mb={1}>
-                            Max PLSX:
-                        </Flex>
-                        <Flex mb={1}>
-                            {(parseInt(maxPlsx)/parseFloat(plsxPrice)).toFixed(0)}
-                        </Flex>
-                        <Flex mb={1}>
-                            Value:
-                        </Flex>
-                        <Flex mb={1}>
-                            ${parseInt(maxPlsx).toFixed(0)}
-                        </Flex>
-                    </Box>
-                </HStack>
-                </Center>
+            <Center>
+                <Box color = 'black' bg={'yellow.500'} width={[300, 400, 500, 600]}>
+
                 </Box>
+            </Center>
+            <Flex>
             <SimpleGrid columns={[1, null, 3]} spacing={[null, 15, 20]} ml='auto' mr='auto' mt= {5} mb={10}>       
                     {vaults.map((item) => {
                         return (
@@ -549,6 +524,7 @@ allVaults.push(plsxVault);
                                             )
                         })}
              </SimpleGrid>
+             </Flex>
             </Box>
     )
 }

@@ -1,11 +1,11 @@
 import { useAccount } from "wagmi";
 import { useEffect, useState } from "react";
-import { Flex, Spinner, Box, Center, SimpleGrid, Text} from "@chakra-ui/react";
+import { Flex, Spinner, Box, Center, SimpleGrid, Text, Link} from "@chakra-ui/react";
 import StakePoolInfo from "./StakePoolInfo";
 import { useContext } from "react";
 import { InfoContext } from "../App";
 import VaultStaking from "../VaultStaking/VaultStaking";
-import { Link } from "react-router-dom";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
 
 function Staking() {
     const allPools = useContext(InfoContext);
@@ -46,7 +46,10 @@ function Staking() {
                             Stake $Atrofa to Access DAI, PLS and PLSX Single Sided Staking
                         </Text>
                         <Text ml='auto' mr='auto' Text fontSize={[15, 15,20, 25, 30]} fontFamily='fantasy' align='center' >
-                            <Link>Docs</Link>
+                            <Link isExternal href='https://app.gitbook.com/o/eBOkoGVdGQScbHnCOQqi/s/Wfeyg9h1gXFqfoXakI6K/single-sided-staking'>
+                                Docs
+                            </Link>
+                            <ExternalLinkIcon fontSize={15} ml={1}></ExternalLinkIcon>
                         </Text> 
                     </Box>                   
                 </Center>                  

@@ -237,7 +237,7 @@ export default function VaultInfo({
                         <AccordionPanel>
                 <Center mb={3}>
                     <Button fontSize='smaller' mr={2} bgGradient='linear(to-bl, yellow.400, yellow.700)' color='black' isDisbaled={!isConnected} onClick={onDepositOpen}>Deposit</Button>
-                        {userStakedUsd >= maxStakeUsd 
+                        {parseInt(userStakedUsd)/10**18 >= maxStakeUsd 
                             ? <Modal isOpen={isDepositOpen} onClose={onDepositClose} isCentered>
                                 <ModalOverlay />
                                     <ModalContent bgColor='gray.900'>

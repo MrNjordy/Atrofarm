@@ -71,7 +71,18 @@ const data = await readContracts({
             functionName: 'getReserves',
         
         },
+        {//Getting DAI/wPLS reserves to calculate DAI price
+            address: '0xE56043671df55dE5CDf8459710433C10324DE0aE',
+            abi: lpAbi,
+            functionName: 'getReserves',
         
+        },
+        {//Getting PLSX/wPLS reserves to calculate DAI price
+            address: '0x1b45b9148791d3a104184Cd5DFE5CE57193a3ee9',
+            abi: lpAbi,
+            functionName: 'getReserves',
+        
+        },   
     ]
 });
 
@@ -81,6 +92,8 @@ const atropaPrice = parseInt(data[6].result[0].toString())/parseInt(data[6].resu
 const wBtcPrice = parseInt(data[7].result[1].toString())/parseInt(data[7].result[0].toString()) * pulsePrice / 10**10
 const wethPrice = parseInt(data[8].result[1].toString())/parseInt(data[8].result[0].toString()) * pulsePrice
 const burnedAtrofa = parseInt(data[9].result.toString()) / 10**18;
+const daiPrice = parseInt(data[11].result[0].toString())/parseInt(data[11].result[1].toString()) * pulsePrice
+const plsxPrice = parseInt(data[12].result[1].toString())/parseInt(data[12].result[0].toString()) * pulsePrice
 
 const plsReserve = parseInt(data[10].result[1].toString())/10**18
 const plsbReserve = parseInt(data[10].result[0].toString())/10**12
@@ -103,6 +116,8 @@ generalInfo.nativeTokenSupply = nativeTokenSupply;
 generalInfo.inflation = tokenMintedPerDay;
 generalInfo.burned = burnedAtrofa;
 generalInfo.pulsePrice = pulsePrice;
+generalInfo.daiPrice = daiPrice;
+generalInfo.plsxPrice = plsxPrice;
 
 
 

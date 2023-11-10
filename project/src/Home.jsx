@@ -1,11 +1,12 @@
 import { useContractWrite } from "wagmi";
+import { readContracts } from 'wagmi/actions'
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { Box, Button, Center, Flex, HStack, VStack, Text, SimpleGrid, Image, Link, Tooltip, useClipboard, IconButton } from "@chakra-ui/react";
 import { useAccount } from "wagmi";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { InfoContext } from "./App";
-import { masterAbi } from "./data";
+import { lpAbi, masterAbi } from "./data";
 import { usePublicClient } from "wagmi";
 import { CopyIcon, CheckIcon } from '@chakra-ui/icons'
 import dexscreener from './assets/dexscreener.png'
@@ -37,8 +38,10 @@ function Home() {
         abi: masterAbi,
         functionName: 'claimAll',
       })
+
     const { onCopy, value, setValue, hasCopied } = useClipboard(address);
     useEffect(() => {
+        async function getData() {
         let protocolPools = [];
         let tvl = 0;
         let totalRewards = 0;
@@ -51,7 +54,56 @@ function Home() {
         let poolEarnings = 0;
         let sumEarnings = 0;
 
+        const data = await readContracts({
+            contracts: [
+              {
+                address: '0xefD766cCb38EaF1dfd701853BFCe31359239F305', //Dai
+                abi: lpAbi,
+                functionName: 'balanceOf',
+                args: ['0x5726f36e62cf761332F5c655b68bc2E5D55ED083']
+              },
+              {
+                address: '0xA1077a294dDE1B09bB078844df40758a5D0f9a27', //wPLS
+                abi: lpAbi,
+                functionName: 'balanceOf',
+                args: ['0xc4d4fb6cAD2931e65C0BF44b2A3fA9C598ADd37B']
+              },
+              {
+                address: '0x95B303987A60C71504D99Aa1b13B4DA07b0790ab', //PLSX
+                abi: lpAbi,
+                functionName: 'balanceOf',
+                args: ['0x8615545328F1F6c8cefe8b48ad48c231731433ea'],
+              },
+              {
+                address: '0x5726f36e62cf761332F5c655b68bc2E5D55ED083', //Dai vault
+                abi: masterAbi,
+                functionName: 'degenInfo',
+                args: [0, address],
+              },
+              {
+                address: '0xc4d4fb6cAD2931e65C0BF44b2A3fA9C598ADd37B', //PLS vault
+                abi: masterAbi,
+                functionName: 'degenInfo',
+                args: [0, address],
+              },
+              {
+                address: '0x8615545328F1F6c8cefe8b48ad48c231731433ea', //PLSX vault
+                abi: masterAbi,
+                functionName: 'degenInfo',
+                args: [0, address],
+              },
+            ]
+        });
+
+        const daiTvl = data[0].result;
+        const plsTvl = data[1].result;
+        const plsxTvl = data[2].result;
+        const daiStaked = data[3].result[0];
+        const plsStaked = data[4].result[0];
+        const plsxStaked = data[5].result[0];
+
         function wait() {
+
             if (!allPools) {
               setTimeout(wait, 100)
             } else {
@@ -61,6 +113,15 @@ function Home() {
                 const totalSupply = parseInt(allPools.generalInfo[0].nativeTokenSupply);
                 const inflation = allPools.generalInfo[0].inflation;
                 const burned = allPools.generalInfo[0].burned;
+                const daiPrice = allPools.generalInfo[0].daiPrice;
+                const plsxPrice = allPools.generalInfo[0].plsxPrice;
+
+                const daiTvlUsd = parseInt(daiTvl.toString()) * daiPrice / 10**18
+                const plsTvlUsd = parseInt(plsTvl.toString()) * pulsePrice / 10**18
+                const plsxTvlUsd = parseInt(plsxTvl.toString()) * plsxPrice / 10**18
+                const daiStakedUsd = parseInt(daiStaked.toString()) * daiPrice / 10**18
+                const plsStakedUsd = parseInt(plsStaked.toString()) * pulsePrice / 10**18
+                const plsxStakedUsd = parseInt(plsxStaked.toString()) * plsxPrice / 10**18
 
                 setNativeTokenPrice(parseFloat(nativeTokenPrice).toFixed(4));
                 setMarketCap(marketCap.toFixed(0));
@@ -89,6 +150,9 @@ function Home() {
                 }
                 averageApr = sumApr / userTotalStaked / 365;
 
+                tvl += daiTvlUsd + plsTvlUsd + plsxTvlUsd;
+                userTotalStaked += daiStakedUsd + plsStakedUsd + plsxStakedUsd
+
                 setTotalRewards(totalRewards.toFixed(2));
                 setTotalRewardsUsd(totalRewardsUsd.toFixed(2));
                 setTvl(tvl.toFixed(2));
@@ -99,6 +163,8 @@ function Home() {
             }
           }
           wait();
+        }
+        getData();
     },[address, allPools])
 
         // async function displayData() {

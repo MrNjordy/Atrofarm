@@ -82,7 +82,13 @@ const data = await readContracts({
             abi: lpAbi,
             functionName: 'getReserves',
         
-        },   
+        },
+        {//Getting Minu/DAI reserves to calculate Minu price (highest liquidity pair)
+            address: '0xB26a7c3C02f73369B75C321565138dE9D51A0b3F',
+            abi: lpAbi,
+            functionName: 'getReserves',
+        
+        },      
     ]
 });
 
@@ -94,6 +100,7 @@ const wethPrice = parseInt(data[8].result[1].toString())/parseInt(data[8].result
 const burnedAtrofa = parseInt(data[9].result.toString()) / 10**18;
 const daiPrice = parseInt(data[11].result[0].toString())/parseInt(data[11].result[1].toString()) * pulsePrice
 const plsxPrice = parseInt(data[12].result[1].toString())/parseInt(data[12].result[0].toString()) * pulsePrice
+const minuPrice =  parseInt(data[13].result[1].toString())/parseInt(data[13].result[0].toString()) * daiPrice;
 
 const plsReserve = parseInt(data[10].result[1].toString())/10**18
 const plsbReserve = parseInt(data[10].result[0].toString())/10**12
@@ -300,7 +307,15 @@ generalInfo.plsxPrice = plsxPrice;
             else if (token1Name.address == '0x5EE84583f67D5EcEa5420dBb42b462896E7f8D06'){ //PLSB
                 const lpPriceEth = (parseInt(getLpReserves[1].toString()) * 2 /10**12) / (parseInt(lpTotalSupply.toString()) /10**18);
                 lpPriceUsd = (lpPriceEth * plsbPrice).toString();
-            }      
+            }
+            else if(token0Name.address == '0x0E5E2d2480468561dFF0132317615F7D6C27D397'){ //MINU
+                const lpPriceEth = (parseInt(getLpReserves[0].toString()) * 2) / (parseInt(lpTotalSupply.toString()));
+                lpPriceUsd = (lpPriceEth * minuPrice).toString();
+            }
+            else if (token1Name.address == '0x0E5E2d2480468561dFF0132317615F7D6C27D397'){ //MINU
+                const lpPriceEth = (parseInt(getLpReserves[1].toString()) * 2) / (parseInt(lpTotalSupply.toString()));
+                lpPriceUsd = (lpPriceEth * minuPrice).toString();
+            }        
             if (token0Name.symbol == 'Atrofa' || token1Name.symbol == 'Atrofa') {
                 isAtrofa = true;
             };

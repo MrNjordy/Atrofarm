@@ -27,6 +27,12 @@ import carn from '../assets/FarmIcons/carn.png'
 import more from '../assets/FarmIcons/more.png'
 import boy from '../assets/FarmIcons/boy.jpeg'
 import dai from '../assets/FarmIcons/Dai.png'
+import grok from '../assets/FarmIcons/grok.png'
+import minu from '../assets/FarmIcons/minu.png'
+import wminu from '../assets/FarmIcons/wminu.png'
+
+
+
 
 
 export default function FarmPoolInfo({
@@ -176,6 +182,10 @@ export default function FarmPoolInfo({
                                 : token0 == '0xbEEf3bB9dA340EbdF0f5bae2E85368140d7D85D0' ? more
                                 : token0 == '0x3C870274f836b456fc823530A74189e541e55D68' ? boy
                                 : token0 == '0xefD766cCb38EaF1dfd701853BFCe31359239F305' ? dai
+                                : token0 == '0x841Cc61E7EDe1404fFe186A713f3AE836130F50a' ? grok
+                                : token0 == '0x0E5E2d2480468561dFF0132317615F7D6C27D397' ? minu
+                                : token0 == '0x8Ce726d39819Afe6b75c30da3c435842aDa5Be00' ? wminu
+
                                 : afc} 
                             mb={3}>
                     </Image>  
@@ -200,6 +210,9 @@ export default function FarmPoolInfo({
                                 : token1 == '0xbEEf3bB9dA340EbdF0f5bae2E85368140d7D85D0' ? more
                                 : token1 == '0x3C870274f836b456fc823530A74189e541e55D68' ? boy
                                 : token1 == '0xefD766cCb38EaF1dfd701853BFCe31359239F305' ? dai
+                                : token1 == '0x841Cc61E7EDe1404fFe186A713f3AE836130F50a' ? grok
+                                : token1 == '0x0E5E2d2480468561dFF0132317615F7D6C27D397' ? minu
+                                : token1 == '0x8Ce726d39819Afe6b75c30da3c435842aDa5Be00' ? wminu
                                 : afc}
                             mb={3}>
                     </Image>    

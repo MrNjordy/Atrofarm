@@ -128,15 +128,15 @@ export default function TimelockEvents() {
                             <TabPanels>
                                 <TabPanel>
                                     {previousLogs.length == 0 ? <Text mt={5} color={'gray.300'}>Nothing to Display</Text>
-                                        // : <SimpleGrid columns={[1, 2, 3, 3]} spacing={[null, 15, 20]} ml='auto' mr='auto' mt={5}>
-                                        //         {previousLogs.map((item) => {
-                                        //             return (
-                                        //                 <TimeLockInfo key={item.id} {...item}>
-                                        //                 </TimeLockInfo>
-                                        //             )
-                                        //         })}
-                                        //    </SimpleGrid>
-                                        : <Text mt={5} color={'gray.300'}>Nothing to Display.</Text>
+                                        : <SimpleGrid columns={[1, 2, 3, 3]} spacing={[null, 15, 20]} ml='auto' mr='auto' mt={5}>
+                                                {previousLogs.map((item) => {
+                                                    return (
+                                                        <TimeLockInfo key={item.id} {...item}>
+                                                        </TimeLockInfo>
+                                                    )
+                                                })}
+                                           </SimpleGrid>
+                                        // : <Text mt={5} color={'gray.300'}>Nothing to Display.</Text>
                                     }
                                 </TabPanel>
                                 <TabPanel>

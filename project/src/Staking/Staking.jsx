@@ -63,7 +63,7 @@ function Staking() {
                                 size='xl'
                                 ml='auto' mr='auto' mt={20} />
                             
-                            :   <SimpleGrid columns={[1, null, 2]} spacing={[null, 15, 20]} ml='auto' mr='auto' mt= {5} mb={10}>       
+                            :   <SimpleGrid columns={[1, null, 3]} spacing={[null, 15, 20]} ml='auto' mr='auto' mt= {5} mb={10}>       
                                         {poolsInfo.map((item) => {
                                             return (
                                                 <StakePoolInfo key={item.name} {...item} />

@@ -25,7 +25,7 @@ function Farm() {
                 const inactivePools = [];
 
                 for(let i=0; i<farmingPools.length; i++) {
-                    if(farmingPools[i].rewardAlloc == 0) {
+                    if(farmingPools[i].rewardAlloc == 0 || !farmingPools[i].apr) {
                         inactivePools.push(farmingPools[i])
                     }
                     else {

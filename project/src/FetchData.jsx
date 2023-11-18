@@ -158,7 +158,6 @@ generalInfo.plsxPrice = plsxPrice;
             || poolInfo[0] == '0x9928bC26D73F1470043637f50898908AB80379a3'
             || poolInfo[0] == '0xc0a705bF4F57780Bd48B2bf25394ecA5Feb96746'
             || poolInfo[0] == '0x05E981a0Fa6afDe3043187d44B7E09b6aa38f1ee'
-            || poolInfo[0] == '0xb6895dc33f2c286f2f81f200f9c25628b930c27e'
             ) {
             continue
         }

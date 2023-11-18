@@ -442,6 +442,11 @@ generalInfo.plsxPrice = plsxPrice;
                             abi: lpAbi,
                             functionName: 'getReserves',
                         },
+                        {
+                            address: '0xa995397733D2a6D5a51ec5D0Cc378c63E486CbD1', //GGC/wPLS
+                            abi: lpAbi,
+                            functionName: 'getReserves',
+                        },
                     ]
                 })
 
@@ -449,10 +454,12 @@ generalInfo.plsxPrice = plsxPrice;
             const totalStaked = data[1].result;
             const allowance = data[2].result;
             const megaReserve = data[3].result;
+            const ggcReserve = data[4].result;
 
             const AtrofaPriceUsd = (parseInt(tokenPriceEth[1].toString())/parseInt(tokenPriceEth[0].toString()) * pulsePrice).toString();
             const megaPrice = (parseInt(megaReserve[0].toString())/parseInt(megaReserve[1].toString()) / 10**12 * wethPrice).toString();
-            
+            const ggcPrice = (parseInt(ggcReserve[1].toString())/parseInt(ggcReserve[0].toString()) * pulsePrice).toString();
+
             let tokenPriceUsd;
             let totalStakedUsd;
             let Apr =0 ;
@@ -463,6 +470,10 @@ generalInfo.plsxPrice = plsxPrice;
             else if (poolInfo[0] == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D') {
                 tokenPriceUsd = megaPrice;
                 totalStakedUsd = (parseInt(totalStaked.toString()) / 10**6) * tokenPriceUsd;
+            }
+            else if (poolInfo[0] == '0x393672F3D09E7fC18E90b6113DCe8958e8B3A13b') {
+                tokenPriceUsd = ggcPrice;
+                totalStakedUsd = (parseInt(totalStaked.toString()) / 10**18) * tokenPriceUsd;
             }
 
             if (totalStakedUsd == 0) {

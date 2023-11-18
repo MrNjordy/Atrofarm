@@ -5,6 +5,7 @@ import { masterContract, tokenAbi } from "../data";
 import { useState } from "react";
 import atrofa from '../assets/FarmIcons/0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17.png'
 import mega from '../assets/FarmIcons/0x8eDb13CE75562056DFf2221D193557Fb4A05770D.png';
+import ggc from '../assets/FarmIcons/ggc.png'
 
 
 export default function StakePoolInfo({
@@ -129,6 +130,7 @@ export default function StakePoolInfo({
     <HStack>
         <Image src={token == '0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17' ? atrofa 
                     : token == '0x8eDb13CE75562056DFf2221D193557Fb4A05770D' ? mega
+                    : token == '0x393672F3D09E7fC18E90b6113DCe8958e8B3A13b' ? ggc
                     : atrofa}
                 mb={3}>
         </Image>    

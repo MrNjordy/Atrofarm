@@ -1,4 +1,5 @@
 import {  parseAbiItem, decodeEventLog, decodeFunctionData, transactionType } from 'viem';
+import { fetchBlockNumber } from '@wagmi/core'
 import { useState, useEffect } from 'react'
 import { pulsechain } from 'wagmi/chains'
 import { createPublicClient, http } from 'viem';
@@ -28,8 +29,10 @@ export default function TimelockEvents() {
                 fromBlock: 'earliest',
                 toBlock: 'latest'
             })
+            const blockN = await fetchBlockNumber();
 
-            console.log(logs)
+            console.log(blockN)
+                
 
             for(let i=0; i<logs.length; i++) {
                 const scheduledTx = {};
@@ -74,7 +77,6 @@ export default function TimelockEvents() {
                     functionName: 'isOperationDone',
                     args: [logs[i].args.id]
                 })
-                console.log(isExecuted)
 
 
                 scheduledTx.ca = logs[i].transactionHash;;

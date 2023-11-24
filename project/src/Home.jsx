@@ -1,7 +1,7 @@
 import { useContractWrite } from "wagmi";
 import { readContracts } from 'wagmi/actions'
 import { useWeb3Modal } from "@web3modal/wagmi/react";
-import { Box, Button, Center, Flex, HStack, VStack, Text, SimpleGrid, Image, Link, Tooltip, useClipboard, IconButton } from "@chakra-ui/react";
+import { Box, Button, Center, Flex, HStack, VStack, Text, SimpleGrid, Image, Link, Tooltip, useClipboard, IconButton, GenericAvatarIcon } from "@chakra-ui/react";
 import { useAccount } from "wagmi";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
@@ -31,6 +31,14 @@ function Home() {
     const [userTotalStaked, setUserTotalStaked] = useState();
     const [dailyEarnings, setDailyEarnings] = useState();
     const [burned, setBurned] = useState();
+    const [ggcPrice, setGgcPrice] = useState();
+    const [ggcTotalSupply, setGgcTotalSupply] = useState();
+    const [ggcMarketCap, setGgcMarketCap] = useState();
+    const[ggcBurn, setGgcBurn] = useState();
+    const [ggcReflections, setGgcReflections] = useState();
+    const [ggcReflectionsUsd, setGgcReflectionsUsd] = useState();
+    const [ggcReflectionsUser, setGgcReflectionsUser] = useState();
+    const [ggcReflectionsUserUsd, setGgcReflectionsUserUsd] = useState();
 
     const { address, isConnected } = useAccount();
     const { data, isLoading, isSuccess, write } = useContractWrite({
@@ -98,9 +106,9 @@ function Home() {
         const daiTvl = data[0].result;
         const plsTvl = data[1].result;
         const plsxTvl = data[2].result;
-        const daiStaked = data[3].result[0];
-        const plsStaked = data[4].result[0];
-        const plsxStaked = data[5].result[0];
+        const daiStaked = address ? data[3].result[0] : 0;
+        const plsStaked = address? data[4].result[0] : 0;
+        const plsxStaked = address? data[5].result[0] : 0;
 
         function wait() {
 
@@ -115,6 +123,14 @@ function Home() {
                 const burned = allPools.generalInfo[0].burned;
                 const daiPrice = allPools.generalInfo[0].daiPrice;
                 const plsxPrice = allPools.generalInfo[0].plsxPrice;
+                const ggcPrice = allPools.generalInfo[0].ggcPrice
+                const ggcTotalSupply = allPools.generalInfo[0].ggcTotalSupply;
+                const ggcMarketCap = ggcPrice * ggcTotalSupply;
+                const ggcBurn = allPools.generalInfo[0].ggcBurn;
+                const ggcReflections = allPools.generalInfo[0].ggcReflections;
+                const ggcReflectionsUsd = allPools.generalInfo[0].ggcReflectionsUsd;
+                const ggcReflectionsUser = isConnected ? allPools.generalInfo[0].ggcReflectionsUser : 0;
+                const ggcReflectionsUserUsd = isConnected ? allPools.generalInfo[0].ggcReflectionsUserUsd : 0;
 
                 const daiTvlUsd = parseInt(daiTvl.toString()) * daiPrice / 10**18
                 const plsTvlUsd = parseInt(plsTvl.toString()) * pulsePrice / 10**18
@@ -160,6 +176,14 @@ function Home() {
                 setAverageApr(averageApr);
                 setUserTotalStaked(userTotalStaked);
                 setDailyEarnings(sumEarnings);
+                setGgcPrice(ggcPrice);
+                setGgcBurn(ggcBurn);
+                setGgcMarketCap(ggcMarketCap);
+                setGgcTotalSupply(ggcTotalSupply);
+                setGgcReflections(ggcReflections);
+                setGgcReflectionsUsd(ggcReflectionsUsd);
+                setGgcReflectionsUser(ggcReflectionsUser);
+                setGgcReflectionsUserUsd(ggcReflectionsUserUsd);
             }
           }
           wait();
@@ -204,34 +228,93 @@ function Home() {
          return(
             <Box minHeight='100vh'>
                 <Box bgGradient='linear(to-bl, yellow.400, yellow.700)' width='100%' height={[120, 130, 150,200]}>
-                        <Center height={[120, 130, 150,200]}>
-                            <Box>
+                    <Center height={[120, 130, 150,200]}>
+                        <Box>
                             <Text fontFamily='heading' fontWeight='bold' fontSize={[15, 20, 25, 30, 35]} color='black' ml={[10,20,30,40]} mr={[10,20,30,40]} mn='auto' align='center'>
                                 Liquidity Hub of PulseChain Communities
                             </Text>  
                             <Center>      
-                            <Text fontSize={[10, 15,20, 25, 30]} fontFamily='fantasy' fontWeight='semibold'>
-                                Yield farming powered by $Atrofa
-                            </Text> 
+                                <Text fontSize={[10, 15,20, 25, 30]} fontFamily='fantasy' fontWeight='semibold'>
+                                    Yield farming powered by $Atrofa
+                                </Text> 
                             </Center>  
-                            </Box>                     
-                        </Center>                  
+                        </Box>                     
+                    </Center>                  
                 </Box>
                 <Flex>
-                <SimpleGrid columns={[1, null, null, 2]} spacing={[8, 15, 30, 40]} ml='auto' mr='auto' mt={[45, 50, 70, 75]}>
-                <Box  bgColor='gray.900' padding={3} width={[300, 350, 400, 450]} fontSize={[null, 18, 20, 20]} color='gray.300'>
-                        <HStack>
-                            <Text mb={3} fontWeight='semibold' fontSize={[null, 20, 25, 25]} ml={2}>
-                                $Atrofa
-                            </Text>
+                    <SimpleGrid columns={[1, null, null, 2]} spacing={[8, 15, 30, 40]} ml='auto' mr='auto' mt={[45, 50, 70, 75]}>
+                        <Box  bgColor='gray.900' padding={3} width={[300, 350, 400, 450]} fontSize={[null, 18, 20, 20]} color='gray.300'>
+                            <HStack>
+                                <Text mb={3} fontWeight='semibold' fontSize={[null, 20, 25, 25]} ml={2}>
+                                    $Atrofa
+                                </Text>
+                                <HStack ml='auto' mr={2}>
+                                    <Tooltip label="View on PulseScan">
+                                        <Link href="https://scan.pulsechain.com/address/0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17" isExternal>
+                                            <Image src={pulseChain} alt='dex' boxSize={[6,7,8,9]} mb={3}></Image>
+                                        </Link>
+                                    </Tooltip>
+                                    <Tooltip label="Dexscreener">
+                                        <Link href="https://dexscreener.com/pulsechain/0x772d497bcdeb51fdf38bd7d097a4cb38cf7420a7" isExternal>
+                                            <Image src={dexscreener} alt='dex' boxSize={[5,5,6,7]} mb={3}></Image>
+                                        </Link>
+                                    </Tooltip>
+                                </HStack>
+                            </HStack>
+                            <HStack mb={1}>
+                                <Flex fontFamily='heading' ml={2} mr='auto'>
+                                    Price:
+                                </Flex>
+                                <Flex ml='auto' mr={2} fontWeight='semibold'>
+                                    ${nativeTokenPrice}
+                                </Flex>
+                            </HStack>
+                            <HStack mb={1}>
+                                <Flex fontFamily='heading' ml={2} mr='auto'>
+                                    Market Cap:
+                                </Flex>
+                                <Flex ml='auto' mr={2} fontWeight='semibold'>
+                                    ${marketCap}
+                                </Flex>
+                            </HStack>
+                            <HStack mb={1}>
+                                <Flex fontFamily='heading' ml={2} mr='auto'>
+                                    Total Supply:
+                                </Flex>
+                                <Flex ml='auto' mr={2} fontWeight='semibold'>
+                                    {totalSupply}
+                                </Flex>
+                            </HStack>
+                            <HStack mb={1}>
+                                <Flex fontFamily='heading' ml={2} mr='auto'>
+                                    Daily Inflation:
+                                </Flex>
+                                <Flex ml='auto' mr={2} fontWeight='semibold'>
+                                    {parseInt(inflation)}
+                                </Flex>
+                            </HStack>
+                            <HStack mb={1}>
+                                <Flex fontFamily='heading' ml={2} mr='auto'>
+                                    Buy & Burn:
+                                </Flex>
+                                <Flex ml='auto' mr={2} fontWeight='semibold'>
+                                    {parseInt(burned)}
+                                </Flex>
+                            </HStack>
+                        </Box>
+                        <Box  bgColor='gray.900' padding={3} width={[300, 350, 400, 450]} fontSize={[null, 18, 20, 20]} color='gray.300'>
+                            <HStack>
+                                <Text mb={3} fontWeight='semibold' fontSize={[null, 20, 25, 25]} ml={2}>
+                                    $GGC
+                                </Text>
                             <HStack ml='auto' mr={2}>
                                 <Tooltip label="View on PulseScan">
-                                    <Link href="https://scan.pulsechain.com/address/0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17" isExternal>
+                                    <Link href="https://scan.pulsechain.com/address/0x393672F3D09E7fC18E90b6113DCe8958e8B3A13b" isExternal>
                                         <Image src={pulseChain} alt='dex' boxSize={[6,7,8,9]} mb={3}></Image>
                                     </Link>
                                 </Tooltip>
                                 <Tooltip label="Dexscreener">
-                                    <Link href="https://dexscreener.com/pulsechain/0x772d497bcdeb51fdf38bd7d097a4cb38cf7420a7" isExternal>
+                                    <Link href="https://dexscreener.com/pulsechain/0xa995397733D2a6D5a51ec5D0Cc378c63E486CbD1" isExternal>
                                         <Image src={dexscreener} alt='dex' boxSize={[5,5,6,7]} mb={3}></Image>
                                     </Link>
                                 </Tooltip>
@@ -242,7 +325,7 @@ function Home() {
                                 Price:
                             </Flex>
                             <Flex ml='auto' mr={2} fontWeight='semibold'>
-                                ${nativeTokenPrice}
+                                ${parseFloat(ggcPrice).toFixed(4)}
                             </Flex>
                         </HStack>
                         <HStack mb={1}>
@@ -250,7 +333,7 @@ function Home() {
                                 Market Cap:
                             </Flex>
                             <Flex ml='auto' mr={2} fontWeight='semibold'>
-                                ${marketCap}
+                                ${parseInt(ggcMarketCap)}
                             </Flex>
                         </HStack>
                         <HStack mb={1}>
@@ -258,25 +341,28 @@ function Home() {
                                 Total Supply:
                             </Flex>
                             <Flex ml='auto' mr={2} fontWeight='semibold'>
-                                {totalSupply}
+                                {parseInt(ggcTotalSupply)}
                             </Flex>
                         </HStack>
                         <HStack mb={1}>
                             <Flex fontFamily='heading' ml={2} mr='auto'>
-                                Daily Inflation:
+                                Burnt:
                             </Flex>
                             <Flex ml='auto' mr={2} fontWeight='semibold'>
-                                {parseInt(inflation)}
+                                {parseInt(ggcBurn)}
                             </Flex>
                         </HStack>
                         <HStack mb={1}>
                             <Flex fontFamily='heading' ml={2} mr='auto'>
-                                Buy & Burn:
+                                $GOAT distributed:
                             </Flex>
                             <Flex ml='auto' mr={2} fontWeight='semibold'>
-                                {parseInt(burned)}
+                                {parseInt(ggcReflections)}
                             </Flex>
                         </HStack>
+                        <Flex justify='right' mr={1} mt={-1} fontSize='smaller' fontWeight='light'>
+                            ${parseInt(ggcReflectionsUsd).toFixed(2)}
+                        </Flex>
                 </Box>
                 {isConnected ? 
                 <Box padding={2} ml='auto' mr='auto' bgColor='gray.900' color='gray.300' width={[300, 350, 400, 450]} fontSize={[null, 18, 20, 20]}> 
@@ -321,6 +407,17 @@ function Home() {
                     </HStack>
                     <HStack mb={1}>
                         <Flex fontFamily='heading' ml={2} mr='auto'>
+                            Total $GOAT earned:
+                        </Flex>
+                        <Flex fontFamily='heading' mr={2} ml={'auto'}>
+                            {parseInt(ggcReflectionsUser)}
+                        </Flex>
+                    </HStack>
+                    <Flex justify='right' mr={1} mt={-1} fontSize='smaller' fontWeight='light'>
+                            ${parseInt(ggcReflectionsUserUsd).toFixed(2)}
+                       </Flex>
+                    <HStack mb={1}>
+                        <Flex fontFamily='heading' ml={2} mr='auto'>
                             $Atrofa to claim:
                         </Flex>
                         <Flex fontFamily='heading' mr={2} ml={'auto'}>
@@ -342,27 +439,27 @@ function Home() {
                 </Box>
                 :   <Box padding={2} ml='auto' mr='auto' bgColor='gray.900' color='gray.300' width={[300, 350, 400, 450]} fontSize={[null, 18, 20, 20]} h={[200, 200, 200, 250]}>
                        <Center h={[200, 200, 200, 250]}>
-                        <Flex>
-                            <Button width={[150, 150, 175, 200]} height={50} fontSize={15} paddingTop={2} paddingBottom={2} bgColor='gray.500' color='gray.200' onClick={() => open()}> 
-                                {isConnected ? address.substring(0,5) + '...' + address.substring(address.length - 5) : "Connect Wallet" }
-                            </Button>
-                        </Flex>
+                            <Flex>
+                                <Button width={[150, 150, 175, 200]} height={50} fontSize={15} paddingTop={2} paddingBottom={2} bgColor='gray.500' color='gray.200' onClick={() => open()}> 
+                                    {isConnected ? address.substring(0,5) + '...' + address.substring(address.length - 5) : "Connect Wallet" }
+                                </Button>
+                            </Flex>
                         </Center>
                     </Box>
                 }
+                    <Box fontFamily='heading' ml='auto' mr='auto' mt={[5, null, null, 10]} padding={2} width={[300, 350, 400, 450]} bgColor='gray.900' color='gray.300'>
+                        <VStack fontSize={[null, 15, 20, 25]} fontWeight='semibold'>
+                            <Flex fontFamily='heading' ml='auto' mr='auto'>
+                                TVL:
+                            </Flex>
+                            <Flex ml='auto' mr='auto'>
+                                ${tvl}
+                            </Flex>
+                        </VStack>
+                    </Box> 
                 </SimpleGrid> 
                 </Flex>
-                <Box fontFamily='heading' ml='auto' mr='auto' mt={[5, null, null, 10]} padding={2} width={[300, 350, 400, 450]} bgColor='gray.900' color='gray.300'>
-                    <VStack fontSize={[null, 15, 20, 25]} fontWeight='semibold'>
-                        <Flex fontFamily='heading' ml='auto' mr='auto'>
-                            TVL:
-                        </Flex>
-                        <Flex ml='auto' mr='auto'>
-                        ${tvl}
-                        </Flex>
-                    </VStack>
-                </Box> 
-             </Box>
+            </Box>
         ) 
 }
 

@@ -1,6 +1,6 @@
 import { fetchBlockNumber, fetchToken, readContract, readContracts } from 'wagmi/actions'
 import { getAccount } from "wagmi/actions";
-import { tokenAbi, masterContract, lpAbi, vaultAbi } from "./data";
+import { tokenAbi, masterContract, lpAbi, vaultAbi, distributorAbi } from "./data";
 import axios from 'axios';
 import { etherUnits } from 'viem';
 
@@ -88,7 +88,36 @@ const data = await readContracts({
             abi: lpAbi,
             functionName: 'getReserves',
         
-        },      
+        },  
+        {//Getting GGC.PLS reserves to calculate GGC price
+            address: '0xa995397733D2a6D5a51ec5D0Cc378c63E486CbD1',
+            abi: lpAbi,
+            functionName: 'getReserves',
+        
+        }, 
+        {//Getting burn address GGC balance
+            address: '0x393672F3D09E7fC18E90b6113DCe8958e8B3A13b',
+            abi: tokenAbi,
+            functionName: 'balanceOf',
+            args: ['0x0000000000000000000000000000000000000369'],
+        },
+        {//Getting total reflection distributed
+            address: '0xa58dD79C1051e5FF5C9045E8Aa58bBC12a6b5364',
+            abi: distributorAbi,
+            functionName: 'totalDistributed',
+        },  
+        {//Getting Goat/PLS reserves to calculate Goat price
+            address: '0x64A34EFfab883d001eB006F3EAd1c90AC1D6Fb54',
+            abi: lpAbi,
+            functionName: 'getReserves',
+        
+        }, 
+        {//Getting total reflection distributed
+            address: '0xa58dD79C1051e5FF5C9045E8Aa58bBC12a6b5364',
+            abi: distributorAbi,
+            functionName: 'shares',
+            args: [address],
+        },  
     ]
 });
 
@@ -110,6 +139,17 @@ const nativeTokenPriceUsd = (parseInt(data[0].result[1].toString())/parseInt(dat
 const nativeToken = await fetchToken({ address: import.meta.env.VITE_TOKEN })
 const nativeTokenSupply = nativeToken.totalSupply.formatted;
 
+const ggcPrice = (parseInt(data[14].result[1].toString())/parseInt(data[14].result[0].toString()) * pulsePrice).toString();
+const goatPrice = (parseInt(data[17].result[0].toString())/parseInt(data[17].result[1].toString()) * pulsePrice).toString();
+const ggcToken = await fetchToken( {address: '0x393672F3D09E7fC18E90b6113DCe8958e8B3A13b'})
+const ggcBurn = parseInt(data[15].result.toString()) / 10**18;
+const ggcTotalSupply = ggcToken.totalSupply.formatted - ggcBurn;
+const ggcReflections = parseInt(data[16].result.toString()) / 10**18;
+const ggcReflectionsUsd = ggcReflections * goatPrice;
+const ggcReflectionsUser = parseInt(data[18].result[2].toString()) / 10**18;
+const ggcReflectionsUserUsd = ggcReflectionsUser * goatPrice;
+console.log(ggcReflectionsUserUsd)
+
 const numberOfPool = parseInt((data[1].result).toString());
 const tokenMintedPerBlock = data[2].result;
 const tokenMintedPerDay = parseInt(tokenMintedPerBlock.toString()) / (10**18) * 6 * 60 * 24;
@@ -125,6 +165,13 @@ generalInfo.burned = burnedAtrofa;
 generalInfo.pulsePrice = pulsePrice;
 generalInfo.daiPrice = daiPrice;
 generalInfo.plsxPrice = plsxPrice;
+generalInfo.ggcPrice = ggcPrice;
+generalInfo.ggcTotalSupply = ggcTotalSupply;
+generalInfo.ggcBurn = ggcBurn;
+generalInfo.ggcReflections = ggcReflections;
+generalInfo.ggcReflectionsUsd = ggcReflectionsUsd;
+generalInfo.ggcReflectionsUser = ggcReflectionsUser;
+generalInfo.ggcReflectionsUserUsd = ggcReflectionsUserUsd;
 
 
 

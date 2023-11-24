@@ -33,6 +33,8 @@ import wminu from '../assets/FarmIcons/wminu.png'
 import anon from '../assets/FarmIcons/anon.png'
 import ggc from '../assets/FarmIcons/ggc.png'
 import goat from '../assets/FarmIcons/goat.png'
+import impls from '../assets/FarmIcons/impls.png'
+
 
 
 
@@ -192,6 +194,7 @@ export default function FarmPoolInfo({
                                 : token0 == '0x075F7F657AEAD0e698EDb4E0A47d1DEF869536B4' ? anon
                                 : token0 == '0x393672F3D09E7fC18E90b6113DCe8958e8B3A13b' ? ggc
                                 : token0 == '0xF5D0140B4d53c9476DC1488BC6d8597d7393f074' ? goat
+                                : token0 == '0xA1077a294dDE1B09bB078844df40758a5D0f9a27' ? impls
                                 : afc} 
                             mb={3}>
                     </Image>  
@@ -222,6 +225,7 @@ export default function FarmPoolInfo({
                                 : token1 == '0x075F7F657AEAD0e698EDb4E0A47d1DEF869536B4' ? anon
                                 : token1 == '0x393672F3D09E7fC18E90b6113DCe8958e8B3A13b' ? ggc
                                 : token1 == '0xF5D0140B4d53c9476DC1488BC6d8597d7393f074' ? goat
+                                : token1 == '0xA1077a294dDE1B09bB078844df40758a5D0f9a27' ? impls
                                 : afc}
                             mb={3}>
                     </Image>    

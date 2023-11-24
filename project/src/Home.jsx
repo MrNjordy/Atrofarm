@@ -361,7 +361,7 @@ function Home() {
                             </Flex>
                         </HStack>
                         <Flex justify='right' mr={1} mt={-1} fontSize='smaller' fontWeight='light'>
-                            ${parseInt(ggcReflectionsUsd).toFixed(2)}
+                            ${parseFloat(ggcReflectionsUsd).toFixed(2)}
                         </Flex>
                 </Box>
                 {isConnected ? 
@@ -414,7 +414,7 @@ function Home() {
                         </Flex>
                     </HStack>
                     <Flex justify='right' mr={1} mt={-1} fontSize='smaller' fontWeight='light'>
-                            ${parseInt(ggcReflectionsUserUsd).toFixed(2)}
+                            ${parseFloat(ggcReflectionsUserUsd).toFixed(2)}
                        </Flex>
                     <HStack mb={1}>
                         <Flex fontFamily='heading' ml={2} mr='auto'>

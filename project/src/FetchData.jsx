@@ -146,9 +146,8 @@ const ggcBurn = parseInt(data[15].result.toString()) / 10**18;
 const ggcTotalSupply = ggcToken.totalSupply.formatted - ggcBurn;
 const ggcReflections = parseInt(data[16].result.toString()) / 10**18;
 const ggcReflectionsUsd = ggcReflections * goatPrice;
-const ggcReflectionsUser = parseInt(data[18].result[2].toString()) / 10**18;
+const ggcReflectionsUser = isConnected? parseInt(data[18].result[2].toString()) / 10**18 : 0;
 const ggcReflectionsUserUsd = ggcReflectionsUser * goatPrice;
-console.log(ggcReflectionsUserUsd)
 
 const numberOfPool = parseInt((data[1].result).toString());
 const tokenMintedPerBlock = data[2].result;

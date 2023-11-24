@@ -447,7 +447,8 @@ function Home() {
                         </Center>
                     </Box>
                 }
-                    <Box fontFamily='heading' ml='auto' mr='auto' mt={[5, null, null, 10]} padding={2} width={[300, 350, 400, 450]} bgColor='gray.900' color='gray.300'>
+                    <Box fontFamily='heading' ml='auto' mr='auto'  padding={2} width={[300, 350, 400, 450]} bgColor='gray.900' color='gray.300'>
+                        <Center height={300}>
                         <VStack fontSize={[null, 15, 20, 25]} fontWeight='semibold'>
                             <Flex fontFamily='heading' ml='auto' mr='auto'>
                                 TVL:
@@ -456,6 +457,7 @@ function Home() {
                                 ${tvl}
                             </Flex>
                         </VStack>
+                        </Center>
                     </Box> 
                 </SimpleGrid> 
                 </Flex>

@@ -81,7 +81,7 @@ function Portfolio () {
                     address: searchedAddress,
                     })
                 }
-                
+
             const pulseBalance = pulseBalanceRaw.value;
             const tokenList = response.data;
             
@@ -110,6 +110,7 @@ function Portfolio () {
                     tokenList[i].name = tokenList[i].token.name
                     tokenList[i].symbol = tokenList[i].token.symbol
                     tokenList[i].decimals = tokenList[i].token.decimals
+                    tokenList[i].contractAddress = tokenList[i].token.address;
                     // const token = await fetchToken({ address: tokenList[i].contractAddress });
                     // console.log(token);
                 //    if (tokenList[i].contractAddress = '0xA1077a294dDE1B09bB078844df40758a5D0f9a27') { //wPLS

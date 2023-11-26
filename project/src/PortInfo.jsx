@@ -34,7 +34,7 @@ export default function PortInfo({
                                         <IconButton variant='unstyled' color='gray.300' mr={-3} icon={hasCopiedContract ? <CheckIcon /> : <CopyIcon />} onClick={onCopyContract}></IconButton>
                                     </Tooltip>
                                     <Tooltip hideBelow={'sm'} label="View on PulseScan">
-                                        <Link mb={-1} href={`https://scan.pulsechain.com/address/${contractAddress}`} isExternal>
+                                        <Link mb={-1} href={`https://bafybeicjuszlj6w3gg5mfszvo7z6ux4iaafhw62vfyfw27nm65bexodov4.ipfs.dweb.link/#/address/${contractAddress}`} isExternal>
                                             <Image src={pulseChain} alt='dex' boxSize={[4,6,6,7]}></Image>
                                         </Link>
                                     </Tooltip>

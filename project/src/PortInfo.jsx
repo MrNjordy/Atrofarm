@@ -10,7 +10,7 @@ export default function PortInfo({
     contractAddress,
     name,
     symbol,
-    balance,
+    value,
     priceInPulse,
     priceInUsd,
     balanceValueUsd,
@@ -52,10 +52,10 @@ export default function PortInfo({
                             <Center h={70} justifyContent='left'>
                                 <Box>
                                     <Text>
-                                        {(parseInt(balance.toString())/10**decimals) < 0.001 ? (parseInt(balance.toString())/10**decimals).toExponential(2)
-                                            : (parseInt(balance.toString())/10**decimals) > 10000000 ? (parseInt(balance.toString())/10**decimals).toExponential(2)
-                                            : (parseInt(balance.toString())/10**decimals) < 100000 ? (parseInt(balance.toString())/10**decimals).toFixed(2)
-                                            : (parseInt(balance.toString())/10**decimals).toFixed(0) }
+                                        {(parseInt(value)/10**decimals) < 0.001 ? (parseInt(value.toString())/10**decimals).toExponential(2)
+                                            : (parseInt(value)/10**decimals) > 10000000 ? (parseInt(value)/10**decimals).toExponential(2)
+                                            : (parseInt(value)/10**decimals) < 100000 ? (parseInt(value)/10**decimals).toFixed(2)
+                                            : (parseInt(value)/10**decimals).toFixed(0) }
                                     </Text>
                                     <Text fontFamily='fantasy'>
                                         {symbol}
@@ -111,10 +111,10 @@ export default function PortInfo({
                                 <Center h={20} justifyContent='left'>
                                     <Box>
                                         <Text>
-                                            {(parseInt(balance.toString())/10**decimals) < 0.001 ? (parseInt(balance.toString())/10**decimals).toExponential(2)
-                                            : (parseInt(balance.toString())/10**decimals) > 10000000 ? (parseInt(balance.toString())/10**decimals).toExponential(2)
-                                            : (parseInt(balance.toString())/10**decimals) < 100000 ? (parseInt(balance.toString())/10**decimals).toFixed(2)
-                                            : (parseInt(balance.toString())/10**decimals).toFixed(0) }
+                                            {(parseInt(value)/10**decimals) < 0.001 ? (parseInt(value)/10**decimals).toExponential(2)
+                                            : (parseInt(value)/10**decimals) > 10000000 ? (parseInt(value)/10**decimals).toExponential(2)
+                                            : (parseInt(value)/10**decimals) < 100000 ? (parseInt(value)/10**decimals).toFixed(2)
+                                            : (parseInt(value)/10**decimals).toFixed(0) }
                                         </Text>
                                         <Text fontFamily='fantasy'>
                                             {symbol}

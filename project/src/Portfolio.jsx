@@ -55,10 +55,10 @@ function Portfolio () {
             while (retries <= maxRetries && !success) {
                 try {
                     if(isConnected && !hasSearched) {
-                    response = await axios.get(`https://scan.pulsechain.com/api?module=account&action=tokenlist&address=${address}`)
+                    response = await axios.get(`https://api.scan.pulsechain.com/api/v2/addresses/${address}/token-balances`)
                     }
                     else if ((isConnected && hasSearched) || (!isConnected && hasSearched)) {
-                    response = await axios.get(`https://scan.pulsechain.com/api?module=account&action=tokenlist&address=${searchedAddress}`) 
+                    response = await axios.get(`https://api.scan.pulsechain.com/api/v2/addresses/${searchedAddress}/token-balances`) 
                     }
                     success = true;
                     console.log("Axios success")
@@ -83,7 +83,7 @@ function Portfolio () {
                 }
                 
             const pulseBalance = pulseBalanceRaw.value;
-            const tokenList = response.data.result;
+            const tokenList = response.data;
             
 
             const contractsData = await readContract({
@@ -98,7 +98,7 @@ function Portfolio () {
             plsInfo.contractAddress = null;
             plsInfo.name = "Pulse";
             plsInfo.symbol = "PLS";
-            plsInfo.balance = pulseBalance;
+            plsInfo.value = pulseBalance;
             plsInfo.priceInUsd = pulsePrice;
             plsInfo.balanceValueUsd = parseInt(pulseBalance)/10**18 * pulsePrice; 
             plsInfo.decimals = 18;
@@ -106,7 +106,10 @@ function Portfolio () {
             plsInfoArr.push(plsInfo);
 
             for(let i=0; i<tokenList.length; i++) {
-                if(tokenList[i].type == "ERC-20") {
+                if(tokenList[i].token.type == "ERC-20") {
+                    tokenList[i].name = tokenList[i].token.name
+                    tokenList[i].symbol = tokenList[i].token.symbol
+                    tokenList[i].decimals = tokenList[i].token.decimals
                     // const token = await fetchToken({ address: tokenList[i].contractAddress });
                     // console.log(token);
                 //    if (tokenList[i].contractAddress = '0xA1077a294dDE1B09bB078844df40758a5D0f9a27') { //wPLS
@@ -122,13 +125,13 @@ function Portfolio () {
                                 address: '0x29eA7545DEf87022BAdc76323F373EA1e707C523', //Pulsex facotry V2
                                 abi: factoryAbi,
                                 functionName: 'getPair',
-                                args: [tokenList[i].contractAddress, wPls],
+                                args: [tokenList[i].token.address, wPls],
                             },
                             {
                                 address: '0x1715a3E4A142d8b698131108995174F37aEBA10D', //Pulsex facotry V1
                                 abi: factoryAbi,
                                 functionName: 'getPair',
-                                args: [tokenList[i].contractAddress, wPls],
+                                args: [tokenList[i].token.address, wPls],
                             }
                         ]   
                     })
@@ -202,10 +205,10 @@ function Portfolio () {
                         priceInPulse = parseInt(getReserve[0].result[1].toString()) / parseInt(getReserve[0].result[0].toString())
                     }
                     
-                    priceInUsd = (priceInPulse * pulsePrice) / 10**(18-tokenList[i].decimals) ;
+                    priceInUsd = (priceInPulse * pulsePrice) / 10**(18-tokenList[i].token.decimals) ;
                     tokenList[i].priceInPulse = priceInPulse;
                     tokenList[i].priceInUsd = priceInUsd;
-                    tokenList[i].balanceValueUsd = parseInt(tokenList[i].balance.toString())/(10**tokenList[i].decimals) * priceInUsd
+                    tokenList[i].balanceValueUsd = parseInt(tokenList[i].value)/(10**tokenList[i].token.decimals) * priceInUsd
                     totalPort += tokenList[i].balanceValueUsd;
                 }
                 if(tokenList[i].balanceValueUsd && tokenList[i].balanceValueUsd != 0) {
@@ -233,6 +236,10 @@ function Portfolio () {
             })
             for(let i=0; i<lowList.length; i++) {
                 lowAssetsTvl += lowList[i].balanceValueUsd;
+            }
+            for(let i=0; i<valueList.length; i++) {
+                console.log("v", valueList[i])
+                
             }
         setPulseInfo(plsInfoArr);
         setTokenList(finalList)

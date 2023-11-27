@@ -238,10 +238,6 @@ function Portfolio () {
             for(let i=0; i<lowList.length; i++) {
                 lowAssetsTvl += lowList[i].balanceValueUsd;
             }
-            for(let i=0; i<valueList.length; i++) {
-                console.log("v", valueList[i])
-                
-            }
         setPulseInfo(plsInfoArr);
         setTokenList(finalList)
         setValueTokenList(valueList)

@@ -234,11 +234,17 @@ export default function FarmPoolInfo({
                     </Flex>   
                 </HStack>                  
                 <Center borderBottom='2px' borderColor='yellow.500'></Center>
-                <Flex fontSize='small' fontWeight='light'>
-                    <Link ml='auto' mr='auto' isExternal href={isV1 ? `https://app.pulsex.com/add/V1/${token0}/${token1}` : `https://app.pulsex.com/add/V2/${token0}/${token1}`} alt='Pulsex LP' >
-                        Get LP tokens on PulseX 
+                <Flex fontSize='medium' fontWeight='light'>
+                    {address == '0x9BA85cF77FCf07A0816b81aC03c21Ca5F57Cc95c' 
+                    ? <Link ml='auto' mr='auto' isExternal href={`https://swap.9mm.pro/add/${token0}/${token1}`} alt='Pulsex LP' >
+                        9MM LP - Get LP tokens
                         <ExternalLinkIcon ml={1}></ExternalLinkIcon>
                     </Link>
+                    : <Link ml='auto' mr='auto' isExternal href={isV1 ? `https://bafybeibipuiolkqrndbqtjjyaw4knl7vc3grbqr2rthdgja74eebpjor2u.ipfs.dweb.link/#/add/V1/${token0}/${token1}` : `https://bafybeibipuiolkqrndbqtjjyaw4knl7vc3grbqr2rthdgja74eebpjor2u.ipfs.dweb.link/#/add/V2/${token0}/${token1}`} alt='Pulsex LP' >
+                        PulseX LP - Get LP Tokens 
+                        <ExternalLinkIcon ml={1}></ExternalLinkIcon>
+                    </Link>
+                    }
                 </Flex>
                 <HStack mb={-3} mt={3}> 
                     <Flex ml={1} mr='auto' fontSize='smaller'>

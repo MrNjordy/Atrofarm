@@ -170,7 +170,7 @@ function DualStaking() {
                             address: '0x536c730d891bE8d573248939a5B6806b9f4716FA',
                             abi: lpAbi,
                             functionName:'allowance',
-                            args: [address, '0x5726f36e62cf761332F5c655b68bc2E5D55ED083'],
+                            args: [address, '0x7bBDd4605A99071ff057bdCbb32971e50c2cE2aF'],
                         },
                     ]
                 })

@@ -1,12 +1,12 @@
 import { useContractWrite } from "wagmi";
-import { readContracts } from 'wagmi/actions'
+import { readContracts, writeContract, readContract } from 'wagmi/actions'
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { Box, Button, Center, Flex, HStack, VStack, Text, SimpleGrid, Image, Link, Tooltip, useClipboard, IconButton, GenericAvatarIcon } from "@chakra-ui/react";
 import { useAccount } from "wagmi";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { InfoContext } from "./App";
-import { lpAbi, masterAbi } from "./data";
+import { dualAbi, lpAbi, masterAbi, vaultAbi } from "./data";
 import { usePublicClient } from "wagmi";
 import { CopyIcon, CheckIcon } from '@chakra-ui/icons'
 import dexscreener from './assets/dexscreener.png'
@@ -48,6 +48,36 @@ function Home() {
       })
 
     const { onCopy, value, setValue, hasCopied } = useClipboard(address);
+    
+    const poolsToClaim = [{address:import.meta.env.VITE_MASTER, abi: masterAbi},
+                    {address: '0x5726f36e62cf761332F5c655b68bc2E5D55ED083', abi: vaultAbi},
+                    {address: '0xc4d4fb6cAD2931e65C0BF44b2A3fA9C598ADd37B', abi: vaultAbi},
+                    {address: '0x8615545328F1F6c8cefe8b48ad48c231731433ea', abi: vaultAbi},
+                    {address: '0x7bBDd4605A99071ff057bdCbb32971e50c2cE2aF', abi: dualAbi}
+                    ]
+    
+    async function claimAll() {
+        for(let i=0; i<poolsToClaim.length; i++) {
+            let pending;
+            if(i != 0){
+                pending = await readContract({
+                address: poolsToClaim[i].address,
+                abi: poolsToClaim[i].abi,
+                functionName: 'pendingRewards',
+                args: [address]
+            })
+            }
+            if((i==0 && totalRewards>0) || (i!=0 && pending.actualRewards>0) || (i!=0 && pending.atrofaRewards>0)) {
+                const { hash } = await writeContract({
+                    address: poolsToClaim[i].address,
+                    abi: poolsToClaim[i].abi,
+                    functionName: i==0 ? 'claimAll' : 'deposit',
+                    args: i==0 ? null : [0],
+                })
+            }
+        }
+    }
+
     useEffect(() => {
         async function getData() {
         let protocolPools = [];
@@ -434,7 +464,7 @@ function Home() {
                     </HStack>
                     <HStack>
                             <Flex ml='auto' mr='auto'>
-                                <Button mt='auto' mb={1} onClick={write} isLoading={isLoading} width={[100, 100, 150, 150]} height={[10,35,45, 50]} paddingBottom={2} paddingTop={2} fontSize={[null, 15, 20, 20]} bgGradient='linear(to-bl, yellow.400, yellow.700)' color='black' _hover={{ bgColor: 'gray.600'}}>
+                                <Button mt='auto' mb={1} onClick={claimAll} isLoading={isLoading} width={[100, 100, 150, 150]} height={[10,35,45, 50]} paddingBottom={2} paddingTop={2} fontSize={[null, 15, 20, 20]} bgGradient='linear(to-bl, yellow.400, yellow.700)' color='black' _hover={{ bgColor: 'gray.600'}}>
                                     Claim
                                 </Button>
                             </Flex>

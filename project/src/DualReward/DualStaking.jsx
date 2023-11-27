@@ -181,7 +181,7 @@ function DualStaking() {
                 const lpAllowance = lpData[3].result;
 
                 const userLpStaked = userLpInfo[0];
-                const userLpStakedUsd = parseInt(userLpStaked.toString()) * lpPrice;            
+                const userLpStakedUsd = parseInt(userLpStaked.toString()) * lpPriceUsd;            
                 const lpAtrofaRewards = parseFloat((lpRewards.atrofaRewards).toString());
                 const lpAtrofaRewardsUsd = (lpAtrofaRewards * nativeTokenPriceUsd);
                 const lpDualRewards = parseFloat((lpRewards.dualRewards).toString());

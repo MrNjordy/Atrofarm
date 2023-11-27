@@ -232,10 +232,13 @@ function Home() {
                         <Box>
                             <Text fontFamily='heading' fontWeight='bold' fontSize={[15, 20, 25, 30, 35]} color='black' ml={[10,20,30,40]} mr={[10,20,30,40]} mn='auto' align='center'>
                                 Liquidity Hub of PulseChain Communities
-                            </Text>  
+                            </Text>
+                            <Text fontFamily='heading' fontWeight='bold' fontSize={[15, 20, 25, 30, 35]} color='black' ml={[10,20,30,40]} mr={[10,20,30,40]} mn='auto' align='center'>
+                                and Home of the Good Goat Coin
+                            </Text> 
                             <Center>      
                                 <Text fontSize={[10, 15,20, 25, 30]} fontFamily='fantasy' fontWeight='semibold'>
-                                    Yield farming powered by $Atrofa
+                                    Yield farming powered by $Atrofa, supported by $GGC
                                 </Text> 
                             </Center>  
                         </Box>                     

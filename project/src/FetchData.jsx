@@ -205,6 +205,7 @@ generalInfo.ggcReflectionsUserUsd = ggcReflectionsUserUsd;
             || poolInfo[0] == '0xc0a705bF4F57780Bd48B2bf25394ecA5Feb96746'
             || poolInfo[0] == '0x05E981a0Fa6afDe3043187d44B7E09b6aa38f1ee'
             || poolInfo[0] == '0x0A849f780CAf3b9b8E74034F3ECd4e93d228246A'
+            || poolInfo[0] == '0x9BA85cF77FCf07A0816b81aC03c21Ca5F57Cc95c'
 
             ) {
             continue

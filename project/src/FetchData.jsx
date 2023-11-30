@@ -117,7 +117,13 @@ const data = await readContracts({
             abi: distributorAbi,
             functionName: 'shares',
             args: [address],
-        },  
+        },
+        {//Getting Anon/PLS reserves to calculate Anon price
+            address: '0x9Dc200603860Ef1Ce33943920796139B470C6018',
+            abi: lpAbi,
+            functionName: 'getReserves',
+        
+        },   
     ]
 });
 
@@ -130,6 +136,7 @@ const burnedAtrofa = parseInt(data[9].result.toString()) / 10**18;
 const daiPrice = parseInt(data[11].result[0].toString())/parseInt(data[11].result[1].toString()) * pulsePrice
 const plsxPrice = parseInt(data[12].result[1].toString())/parseInt(data[12].result[0].toString()) * pulsePrice
 const minuPrice =  parseInt(data[13].result[1].toString())/parseInt(data[13].result[0].toString()) * daiPrice;
+const anonPrice =  parseInt(data[19].result[1].toString())/parseInt(data[19].result[0].toString()) * pulsePrice;
 
 const plsReserve = parseInt(data[10].result[1].toString())/10**18
 const plsbReserve = parseInt(data[10].result[0].toString())/10**12
@@ -362,6 +369,22 @@ generalInfo.ggcReflectionsUserUsd = ggcReflectionsUserUsd;
             else if (token1Name.address == '0x0E5E2d2480468561dFF0132317615F7D6C27D397'){ //MINU
                 const lpPriceEth = (parseInt(getLpReserves[1].toString()) * 2) / (parseInt(lpTotalSupply.toString()));
                 lpPriceUsd = (lpPriceEth * minuPrice).toString();
+            } 
+            else if(token0Name.address == '0x393672F3D09E7fC18E90b6113DCe8958e8B3A13b'){ //GGC
+                const lpPriceEth = (parseInt(getLpReserves[0].toString()) * 2) / (parseInt(lpTotalSupply.toString()));
+                lpPriceUsd = (lpPriceEth * ggcPrice).toString();
+            }
+            else if (token1Name.address == '0x393672F3D09E7fC18E90b6113DCe8958e8B3A13b'){ //GGC
+                const lpPriceEth = (parseInt(getLpReserves[1].toString()) * 2) / (parseInt(lpTotalSupply.toString()));
+                lpPriceUsd = (lpPriceEth * ggcPrice).toString();
+            }
+            else if(token0Name.address == '0x075F7F657AEAD0e698EDb4E0A47d1DEF869536B4'){ //GGC
+                const lpPriceEth = (parseInt(getLpReserves[0].toString()) * 2) / (parseInt(lpTotalSupply.toString()));
+                lpPriceUsd = (lpPriceEth * anonPrice).toString();
+            }
+            else if (token1Name.address == '0x075F7F657AEAD0e698EDb4E0A47d1DEF869536B4'){ //GGC
+                const lpPriceEth = (parseInt(getLpReserves[1].toString()) * 2) / (parseInt(lpTotalSupply.toString()));
+                lpPriceUsd = (lpPriceEth * anonPrice).toString();
             }        
             if (token0Name.symbol == 'Atrofa' || token1Name.symbol == 'Atrofa') {
                 isAtrofa = true;

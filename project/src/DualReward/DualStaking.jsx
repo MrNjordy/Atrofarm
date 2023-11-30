@@ -1,5 +1,5 @@
 import { useAccount } from "wagmi";
-import { fetchToken, readContracts, fetchBlockNumber } from 'wagmi/actions';
+import { fetchToken, readContracts, fetchBlockNumber, writeContract } from 'wagmi/actions';
 import { useEffect, useState } from "react";
 import { Flex, HStack, Box, Center, Button, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, FormControl, FormLabel, Input, useNumberInput, Spinner, Text, Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, VStack, Image, SimpleGrid } from "@chakra-ui/react"
 import { useContext } from "react";

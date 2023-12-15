@@ -31,7 +31,8 @@ function Profile() {
             }
           }
           wait();
-    },[address,allPools])
+    // },[address,allPools])
+},[])
 
     // useEffect(() => {
 

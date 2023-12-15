@@ -131,7 +131,8 @@ function Farm() {
             }
           }
           wait();
-    }, [address, allPools]);
+    // }, [address, allPools]);
+}, []);
 
     function onlyStakedDiplayed() {
         const farmingPools = allPools.farmingPools;

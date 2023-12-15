@@ -60,7 +60,8 @@ function App() {
     }
     getData();
     timeInterval();
-  },[counter])
+  // },[counter])
+},[counter])
 
   return (
     <WagmiConfig config={wagmiConfig}>

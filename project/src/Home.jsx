@@ -219,7 +219,8 @@ function Home() {
           wait();
         }
         getData();
-    },[address, allPools])
+    // },[address, allPools])
+},[])
 
         // async function displayData() {
             // const allPools = await fetchData();

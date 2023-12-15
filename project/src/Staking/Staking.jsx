@@ -32,7 +32,8 @@ function Staking() {
         //     setPools(stakingPools)
         // }   
         // getToken();
-    }, [address, allPools]);
+    // }, [address, allPools]);
+}, [address, allPools]);
 
     return(
         <Box minHeight='100vh'>

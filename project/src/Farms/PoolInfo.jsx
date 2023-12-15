@@ -248,7 +248,7 @@ export default function FarmPoolInfo({
                      || address == '0x58eA4aF823c4fE352fC99e265a4963f5b4F84F0F'
                      || address == '0x9795CC78E5c70B5A5213481A381B1B6c0998A734' 
                      || address == '0x69dD180aBee5301C06fDC0A5Ff7E155832C8962e'
-                     || address == '0x72C3924E7f603ce9BAa7D85ca25aF28151350FC7' 
+                     || address == '0x7824E9940AD6d3C7c633B28160C5Ab6F2847ED8F' 
                     ? <Link ml='auto' mr='auto' isExternal href={`https://swap.9mm.pro/add/${token0}/${token1}`} alt='Pulsex LP' >
                         9MM LP - Get LP tokens
                         <ExternalLinkIcon ml={1}></ExternalLinkIcon>

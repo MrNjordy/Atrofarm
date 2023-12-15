@@ -123,14 +123,13 @@ const data = await readContracts({
             abi: lpAbi,
             functionName: 'getReserves',
         
-        },
+        }, 
         {//Getting DegenG/PLS reserves to calculate Anon price
             address: '0x65B9fDbcB865522Cc036A9298331d77f628977A2',
             abi: lpAbi,
             functionName: 'getReserves',
         
-        },
-          
+        },  
     ]
 });
 
@@ -393,13 +392,6 @@ generalInfo.ggcReflectionsUserUsd = ggcReflectionsUserUsd;
             else if (token1Name.address == '0x075F7F657AEAD0e698EDb4E0A47d1DEF869536B4'){ //GGC
                 const lpPriceEth = (parseInt(getLpReserves[1].toString()) * 2) / (parseInt(lpTotalSupply.toString()));
                 lpPriceUsd = (lpPriceEth * anonPrice).toString();
-            else if(token0Name.address == '0x72C3924E7f603ce9BAa7D85ca25aF28151350FC7'){ //GGC
-                const lpPriceEth = (parseInt(getLpReserves[0].toString()) * 2 / 10**8) / (parseInt(lpTotalSupplyI.toString()) / 10**18);
-                lpPriceUsd = (lpPriceEth * degengPice).toString();
-            }
-            else if (token1Name.address == '0x72C3924E7f603ce9BAa7D85ca25aF28151350FC7'){ //GGC
-                const lpPriceEth = (parseInt(getLpReserves[1].toString()) * 2 / 10**8) / (parseInt(lpTotalSupplyI.toString()) / 10**18);
-                lpPriceUsd = (lpPriceEth * degengPice).toString();
             }        
             if (token0Name.symbol == 'Atrofa' || token1Name.symbol == 'Atrofa') {
                 isAtrofa = true;
@@ -646,4 +638,4 @@ generalInfo.ggcReflectionsUserUsd = ggcReflectionsUserUsd;
     allPools.stakingPools = stakingPools;
 
     return allPools
-}}
+}

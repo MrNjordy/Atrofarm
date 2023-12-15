@@ -123,7 +123,13 @@ const data = await readContracts({
             abi: lpAbi,
             functionName: 'getReserves',
         
-        },   
+        }, 
+        {//Getting DegenG/PLS reserves to calculate Anon price
+            address: '0x65B9fDbcB865522Cc036A9298331d77f628977A2',
+            abi: lpAbi,
+            functionName: 'getReserves',
+        
+        },  
     ]
 });
 
@@ -137,6 +143,7 @@ const daiPrice = parseInt(data[11].result[0].toString())/parseInt(data[11].resul
 const plsxPrice = parseInt(data[12].result[1].toString())/parseInt(data[12].result[0].toString()) * pulsePrice
 const minuPrice =  parseInt(data[13].result[1].toString())/parseInt(data[13].result[0].toString()) * daiPrice;
 const anonPrice =  parseInt(data[19].result[1].toString())/parseInt(data[19].result[0].toString()) * pulsePrice;
+const degengPice = parseInt(data[20].result[1].toString())/parseInt(data[20].result[0].toString()) * pulsePrice / 10**10;
 
 const plsReserve = parseInt(data[10].result[1].toString())/10**18
 const plsbReserve = parseInt(data[10].result[0].toString())/10**12

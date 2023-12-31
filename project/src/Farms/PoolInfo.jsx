@@ -36,6 +36,8 @@ import goat from '../assets/FarmIcons/goat.png'
 import impls from '../assets/FarmIcons/impls.png'
 import anonin from '../assets/FarmIcons/anonin.png'
 import pulp from '../assets/FarmIcons/pulp.png'
+import lusd from '../assets/FarmIcons/lusd.png'
+
 
 
 
@@ -201,7 +203,10 @@ export default function FarmPoolInfo({
                                 : token0 == '0x5f63BC3d5bd234946f18d24e98C324f629D9d60e' ? impls
                                 : token0 == '0x9dfCc52f07C697b9E63bC84bCB588A124A439862' ? anonin
                                 : token0 == '0xfEEcE42559F9B539B8df1e93777BfF24561c6141' ? pulp
-                                : afc} 
+                                : token0 == '0x5f98805A4E8be255a32880FDeC7F6728C6568bA0' ? lusd
+                                // : token0 == '0xc4bdA2F680f57f3F15B771994dE1C63221f3340C' ? hhs
+                                // : token0 == '0x1f32a7bAE9294Cc51adc98F029cF57EECaB43cC0' ? hdz
+                                : atrofa} 
                             mb={3}>
                     </Image>  
                     <Image src={token1 == '0x303f764A9c9511c12837cD2D1ECF13d4a6F99E17' ? atrofa 
@@ -234,7 +239,10 @@ export default function FarmPoolInfo({
                                 : token1 == '0x5f63BC3d5bd234946f18d24e98C324f629D9d60e' ? impls
                                 : token1 == '0x9dfCc52f07C697b9E63bC84bCB588A124A439862' ? anonin
                                 : token1 == '0xfEEcE42559F9B539B8df1e93777BfF24561c6141' ? pulp
-                                : afc}
+                                : token1 == '0x5f98805A4E8be255a32880FDeC7F6728C6568bA0' ? lusd
+                                // : token1 == '0xc4bdA2F680f57f3F15B771994dE1C63221f3340C' ? hhs
+                                // : token1 == '0x1f32a7bAE9294Cc51adc98F029cF57EECaB43cC0' ? hdz
+                                : atrofa}
                             mb={3}>
                     </Image>    
                     <Flex mb={3} mr={1} ml='auto'>

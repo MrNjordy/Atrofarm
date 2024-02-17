@@ -1,4 +1,4 @@
-import { useWeb3Modal } from "@web3modal/wagmi/react";
+// import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { useAccount } from "wagmi";
 import { readContract, readContracts, fetchBalance } from 'wagmi/actions'
 import { useEffect, useState } from "react";
@@ -12,7 +12,7 @@ import pulseChain from './assets/pulse.png'
 
 function Portfolio () {
 
-    const { open } = useWeb3Modal()
+    // const { open } = useWeb3Modal()
     const { address, isConnected } = useAccount();
     const [tokenList, setTokenList] = useState([]);
     const [valueTokenList, setValueTokenList] = useState([]);
@@ -424,9 +424,11 @@ function Portfolio () {
 
         : <Box mt={20} color='gray.300'>                        
             <Flex ml='auto' mr='auto'>
-                <Button ml='auto' mr='auto' mb={5} width={[150, 150, 175, 200]} height={50} fontSize={15} paddingTop={2} paddingBottom={2} bgColor='gray.500' color='gray.200' onClick={() => open()}> 
+            <ConnectButton fontSize={[null, 11, 14, 17]} height={[null,31,null,42]} paddingTop={2} paddingBottom={2} bgColor='gray.500' color='gray.200'> 
+                    {isConnected ? address.substring(0,5) + '...' + address.substring(address.length - 5) : "Connect Wallet" }</ConnectButton>
+                {/* <Button ml='auto' mr='auto' mb={5} width={[150, 150, 175, 200]} height={50} fontSize={15} paddingTop={2} paddingBottom={2} bgColor='gray.500' color='gray.200' onClick={() => open()}> 
                     {isConnected ? address.substring(0,5) + '...' + address.substring(address.length - 5) : "Connect Wallet" }
-                </Button>
+                </Button> */}
             </Flex>
             <Center>
             <Flex>

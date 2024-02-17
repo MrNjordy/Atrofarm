@@ -11,12 +11,13 @@ import telegram from './assets/telegram.png'
 import atroc from './assets/Atrofarm.png'
 import piteas from './assets/Piteas.png'
 import { ExternalLinkIcon, HamburgerIcon } from "@chakra-ui/icons";
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 
 function Profile() {
     const allPools = useContext(InfoContext);
 
-    const { open } = useWeb3Modal()
+    // const { open } = useWeb3Modal()
     const { address, isConnected } = useAccount()
     // const [allPools, setAllPools] = useState();
     const [atropaPrice, setAtropaPrice] = useState(0);
@@ -32,7 +33,7 @@ function Profile() {
           }
           wait();
     // },[address,allPools])
-},[])
+},[address, allPools])
 
     // useEffect(() => {
 
@@ -118,9 +119,11 @@ function Profile() {
                         </>
                     )}
                 </Menu>
-                <Button fontSize={[null, 11, 14, 17]} height={[null,31,null,42]} paddingTop={2} paddingBottom={2} bgColor='gray.500' color='gray.200' onClick={() => open()}> 
+                <ConnectButton fontSize={[null, 11, 14, 17]} height={[null,31,null,42]} paddingTop={2} paddingBottom={2} bgColor='gray.500' color='gray.200'> 
+                    {isConnected ? address.substring(0,5) + '...' + address.substring(address.length - 5) : "Connect Wallet" }</ConnectButton>
+                {/* <Button fontSize={[null, 11, 14, 17]} height={[null,31,null,42]} paddingTop={2} paddingBottom={2} bgColor='gray.500' color='gray.200' onClick={() => open()}> 
                     {isConnected ? address.substring(0,5) + '...' + address.substring(address.length - 5) : "Connect Wallet" }
-                </Button>
+                </Button> */}
             </HStack>
             <Center>
             <HStack ml={2} mr='auto' display={{ base: "flex", sm: "none" }} spacing={[1, 3, 4, 5]}>

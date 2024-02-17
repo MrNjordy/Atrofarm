@@ -132,7 +132,7 @@ function Farm() {
           }
           wait();
     // }, [address, allPools]);
-}, []);
+}, [address, allPools, onlyNative, onlyStaked, searchValue]);
 
     function onlyStakedDiplayed() {
         const farmingPools = allPools.farmingPools;

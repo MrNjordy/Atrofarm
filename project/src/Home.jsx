@@ -18,7 +18,7 @@ import gitBook from './assets/gitbook.svg'
 
 function Home() {
     const allPools = useContext(InfoContext);
-    const { open } = useWeb3Modal()
+    // const { open } = useWeb3Modal()
     const [totalRewards, setTotalRewards] = useState();
     const [totalRewardsUsd, setTotalRewardsUsd] = useState();
     const [tvl, setTvl] = useState();

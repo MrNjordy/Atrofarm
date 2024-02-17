@@ -131,10 +131,7 @@ function App() {
           <Route path ='/Farms' Component={Farm} />
           <Route path = '/Staking' Component={Staking} />
           <Route path ='/Pools' Component={Pools} />
-          
-          <Route path ='/Portfolio' Component={Portfolio} />
-          
-          
+          <Route path ='/dePulse' Component={Portfolio} />
         </Routes>
       </BrowserRouter>
      

@@ -32,8 +32,8 @@ function Profile() {
             }
           }
           wait();
-    // },[address,allPools])
-},[])
+    },[address,allPools])
+// },[])
 
     // useEffect(() => {
 
@@ -202,7 +202,7 @@ function Profile() {
             </Center>
             <HStack mr={2} ml='auto' display={{ base: "flex", sm: "none" }} spacing={3} mt={4} mb={4}>
             <Flex fontSize={[15]}>
-                <Text>${parseFloat(nativeTokenPrice).toFixed(3)}</Text>
+                <Text>${parseFloat(nativeTokenPrice).toFixed(4)}</Text>
             </Flex>
             <Flex>
                 <Button width={130} fontSize={15} paddingTop={2} paddingBottom={2} bgColor='gray.500' color='gray.200' onClick={() => open()}> 

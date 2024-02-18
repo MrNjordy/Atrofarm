@@ -111,11 +111,14 @@ generalInfo.ggcReflectionsUserUsd = ggcReflectionsUserUsd;
     let farmTokens = [];
     let stakingTokens = [];
     for(let i=0; i<numberOfPool; i++) {
+        poolInfo[i].push(i);
         if(tokenInfo[i].symbol == 'PLP' || tokenInfo[i].symbol == '9mm-LP') {
             farmTokens.push(poolInfo[i]);
         }
         else { stakingTokens.push(poolInfo[i]) }
     }
+    console.log("stak", stakingTokens)
+
 
     let promisesTwo = [];
     let promiseStaking = [];
@@ -146,16 +149,19 @@ generalInfo.ggcReflectionsUserUsd = ggcReflectionsUserUsd;
     let promisesThreeStaking = [];
     if(isConnected) {
         for( let i=0; i<farmTokens.length; i++) {
-            let tmpPromiseThree = loopThree(farmTokens[i][0], i, address);
+            let tmpPromiseThree = loopThree(farmTokens[i][0], farmTokens[i][5], address);
             promisesThree.push(tmpPromiseThree);
         }
         for( let i=0; i<stakingTokens.length; i++) {
-            let tmpPromiseThree = loopThree(stakingTokens[i][0], i, address);
-            promisesThreeStaking.push(tmpPromiseThree);
+            let tmpPromiseThreeStake = loopThree(stakingTokens[i][0], stakingTokens[i][5], address);
+            promisesThreeStaking.push(tmpPromiseThreeStake);
         }
     }
     let loopThreeResults = await Promise.all(promisesThree)
     let loopThreeStakingR = await Promise.all(promisesThreeStaking)
+
+    console.log("farm", loopThreeResults);
+    console.log('stake', loopThreeStakingR);
 
 //=============================================================================
 //=======================   NEXT: USE THE INFO COLLECTED =====================
@@ -353,7 +359,7 @@ generalInfo.ggcReflectionsUserUsd = ggcReflectionsUserUsd;
                 const token0staked = token0Amount * (parseInt(userStaked) / 10**token0Name.decimals)
                 const token1staked = token1Amount * (parseInt(userStaked) / 10**token1Name.decimals)
 
-                allInfo.id = i;
+                allInfo.id = farmTokens[i][5];
                 allInfo.name = lpName;
                 allInfo.userStaked = userStaked.toString();
                 allInfo.userStakedUsd = userStakedUsd;
@@ -480,7 +486,7 @@ generalInfo.ggcReflectionsUserUsd = ggcReflectionsUserUsd;
                 const userShare = parseInt(userStaked.toString()) / (parseInt(totalStaked.toString()));
                 const userShareUsdPerYear = rewardPerShareUsd * userShare;
         
-                allInfo.id = i;
+                allInfo.id = stakingTokens[i][5];
                 allInfo.name = stakingTokensInfo[i].symbol
                 allInfo.userStaked = userStaked.toString();
                 allInfo.userStakedUsd = userStakedUsd

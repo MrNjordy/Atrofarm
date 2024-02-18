@@ -205,9 +205,11 @@ function Profile() {
                 <Text>${parseFloat(nativeTokenPrice).toFixed(4)}</Text>
             </Flex>
             <Flex>
-                <Button width={130} fontSize={15} paddingTop={2} paddingBottom={2} bgColor='gray.500' color='gray.200' onClick={() => open()}> 
+            <ConnectButton fontSize={[null, 11, 14, 17]} height={[null,31,null,42]} paddingTop={2} paddingBottom={2} bgColor='gray.500' color='gray.200'> 
+                    {isConnected ? address.substring(0,5) + '...' + address.substring(address.length - 5) : "Connect Wallet" }</ConnectButton>
+                {/* <Button width={130} fontSize={15} paddingTop={2} paddingBottom={2} bgColor='gray.500' color='gray.200' onClick={() => open()}> 
                     {isConnected ? address.substring(0,5) + '...' + address.substring(address.length - 5) : "Connect Wallet" }
-                </Button>
+                </Button> */}
                 </Flex>
             </HStack>
         </Flex>

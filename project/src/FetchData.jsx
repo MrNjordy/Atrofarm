@@ -461,19 +461,19 @@ generalInfo.ggcReflectionsUserUsd = ggcReflectionsUserUsd;
                                     (parseInt(totalStaked.toString()) / 10**6) * tokenPriceUsd :
                                     (parseInt(totalStaked.toString()) / 10**18) * tokenPriceUsd;
             console.log("staked", totalStakedUsd)
+
+            let Apr =0;
+            if (totalStakedUsd == 0) {
+                Apr = poolRewardPerYearUsd / 1 * 100
+            }
+            else {Apr = poolRewardPerYearUsd / totalStakedUsd * 100 }
+            if (Apr > 10000000) {Apr = 1000000}
             if(isConnected) {
 
                 const userBalance = loopThreeStakingR[i][0].result;
                 const userInfo = loopThreeStakingR[i][1].result;
                 const rewards = loopThreeStakingR[i][2].result;
                 const decimals = loopThreeStakingR[i][3].result;
-
-                let Apr =0;
-                if (totalStakedUsd == 0) {
-                    Apr = poolRewardPerYearUsd / 1 * 100
-                }
-                else {Apr = poolRewardPerYearUsd / totalStakedUsd * 100 }
-                if (Apr > 10000000) {Apr = 1000000}
 
 
                 const pendingRewards = (parseFloat(rewards.toString()) / 10**18)
